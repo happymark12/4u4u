@@ -75,6 +75,12 @@ public class EventBean implements Serializable{
 		this.applicationFormEventId = applicationFormEventId;
 	}
 	
+	public Blob getImage() {
+		return image;
+	}
+	public void setImage(Blob image) {
+		this.image = image;
+	}
 	public Integer getEventId() {
 		return eventId;
 	}
