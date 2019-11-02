@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,8 @@ public class EventBean implements Serializable{
 	private String eventTitle;
 	private Date date;
 	private String imageName;
-//	private Blob image;
+	@Column(columnDefinition = "LONGBLOB")
+	private Blob image;
 	private String address;
 	private String detail;
 	private Integer totalPeopleCountLimit;
