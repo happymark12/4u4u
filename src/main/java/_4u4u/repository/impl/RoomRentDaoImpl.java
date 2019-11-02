@@ -33,13 +33,12 @@ import _4u4u_init.util.ConvertTableUtil;
 @Repository
 public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int pageNo = 1; // 存放目前顯示頁面的編號
 	private int recordsPerPage = 6;// 每頁顯示六則廣告
 	private int totalPages = -1;
 	SessionFactory factory;
-	
-	
+
 	@Autowired
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
@@ -113,8 +112,21 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 	public List<RoomRentBean> getAjaxSearchResultByPage(Map<String, String> conditionMap) {
 		Session session = factory.getCurrentSession();
 		StringBuffer hqlBuffer = new StringBuffer();
-		hqlBuffer.append("FROM RoomRentBean r WHERE r.adState = true");
 		Set<String> conditionKeys = conditionMap.keySet();
+		if (conditionKeys.contains("sortOption")) {
+			if (conditionMap.get("sortOption").contentEquals("1")||conditionMap.get("sortOption").contentEquals("2")) {
+				hqlBuffer.append("FROM RoomRentBean  r  JOIN  RoomBean  j " + " on   j.roomAd.adId = r.adId "
+						+ "WHERE r.adState = true ");
+			}
+		
+			if (!conditionMap.get("sortOption").contentEquals("2")
+					&& !conditionMap.get("sortOption").contentEquals("1")) {
+				hqlBuffer.append("FROM RoomRentBean r WHERE r.adState = true");
+			}
+		} else {
+			hqlBuffer.append("FROM RoomRentBean r WHERE r.adState = true");
+
+		}
 		if (conditionKeys.contains("smoke")) {
 			hqlBuffer.append(" AND r.adFutureSmoke = " + conditionMap.get("smoke"));
 		}
@@ -219,6 +231,12 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 					+ priceMin + " AND " + priceMax + ")");
 		}
 		if (conditionKeys.contains("sortOption")) {
+			if (conditionMap.get("sortOption").contentEquals("1")) {
+				hqlBuffer.append(" group by r.adId  ORDER BY Max(j.rentPrice) ");
+			}
+			if (conditionMap.get("sortOption").contentEquals("2")) {
+				hqlBuffer.append(" group by r.adId  ORDER BY Max(j.rentPrice) DESC");
+			}
 			if (conditionMap.get("sortOption").contentEquals("3")) {
 				hqlBuffer.append(" ORDER BY r.adCreateDate DESC");
 			}
@@ -227,13 +245,45 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 			}
 		}
 //		System.out.println(hqlBuffer.toString());
-		List<RoomRentBean> list = null;
+		List<RoomRentBean> list = new ArrayList<RoomRentBean>();
+		List<Object[]> ojbArrayList = null;
 		if (conditionKeys.contains("rentType0") || conditionKeys.contains("rentType1")
 				|| conditionKeys.contains("rentType2") || conditionKeys.contains("rentType3")) {
+			if (conditionKeys.contains("sortOption")) {
+				if (conditionMap.get("sortOption").contentEquals("1")||conditionMap.get("sortOption").contentEquals("2")) {
+					
+					ojbArrayList =  session.createQuery(hqlBuffer.toString()).setParameterList("rentTypeList", rentTypeList)
+							.setFirstResult((Integer.parseInt(conditionMap.get("curPage").trim()) - 1) * 6)
+							.setMaxResults(6).getResultList();
+					for(Object[] objArray: ojbArrayList) {
+						for(Object obj :objArray) {
+							if(obj instanceof RoomRentBean) {
+								RoomRentBean bean = (RoomRentBean)obj;
+								list.add(bean);
+							}
+							
+							
+							
+						}
+						
+					}
+				
+				}
+				
 
-			list = session.createQuery(hqlBuffer.toString()).setParameterList("rentTypeList", rentTypeList)
-					.setFirstResult((Integer.parseInt(conditionMap.get("curPage").trim()) - 1) * 6).setMaxResults(6)
-					.getResultList();
+				if (!conditionMap.get("sortOption").contentEquals("2")
+						&& !conditionMap.get("sortOption").contentEquals("1")) {
+					list = session.createQuery(hqlBuffer.toString()).setParameterList("rentTypeList", rentTypeList)
+							.setFirstResult((Integer.parseInt(conditionMap.get("curPage").trim()) - 1) * 6)
+							.setMaxResults(6).getResultList();
+
+				}
+
+			} else {
+				list = session.createQuery(hqlBuffer.toString()).setParameterList("rentTypeList", rentTypeList)
+						.setFirstResult((Integer.parseInt(conditionMap.get("curPage").trim()) - 1) * 6).setMaxResults(6)
+						.getResultList();
+			}
 
 		} else {
 
@@ -430,19 +480,19 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 
 		hql += sbf;
 		list = (List<WantedRoomBean>) session.createQuery(hql).getResultList();
-		
+
 		Iterator<WantedRoomBean> it = list.iterator();
 		while (it.hasNext()) {
 			@SuppressWarnings("unused")
 			boolean flag = false;
 			String[] areaCodes = it.next().getAreaCode().trim().split(",");
-			for(String areaCode : areaCodes) {
-				if(areaCode.equals(roomRentBean.getAdAreacode())) {
+			for (String areaCode : areaCodes) {
+				if (areaCode.equals(roomRentBean.getAdAreacode())) {
 					flag = true;
 				}
 			}
-			
-			if(flag = false) {
+
+			if (flag = false) {
 				it.remove();
 			}
 		}
@@ -454,21 +504,21 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 	public List<RoomRentBean> getAjaxSavedAdsByPage(MemberBean mb, Integer curPage, String sortOption) {
 		Session session = factory.getCurrentSession();
 		StringBuffer hqlBuffer = new StringBuffer();
-		hqlBuffer.append("SELECT s.savedAdForRoomAdAdId FROM SavedAdForRoomAdBean  s WHERE s.savedAdForRoomAdMemId = :mb "
-				+ "AND s.savedAdForRoomAdAdId.adState = true");
-		
+		hqlBuffer.append(
+				"SELECT s.savedAdForRoomAdAdId FROM SavedAdForRoomAdBean  s WHERE s.savedAdForRoomAdMemId = :mb "
+						+ "AND s.savedAdForRoomAdAdId.adState = true");
+
 		if (sortOption.contentEquals("3")) {
 			hqlBuffer.append(" ORDER BY s.savedAdForRoomAdAdId.adCreateDate DESC");
 		}
 		if (sortOption.contentEquals("4")) {
 			hqlBuffer.append(" ORDER BY s.savedAdForRoomAdAdId.adUpdateDate DESC");
 		}
-		
+
 		List<RoomRentBean> list = null;
 
-		list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb)
-				.setFirstResult((curPage - 1) * 6).setMaxResults(6)
-				.getResultList();
+		list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb).setFirstResult((curPage - 1) * 6)
+				.setMaxResults(6).getResultList();
 
 		return list;
 
@@ -481,10 +531,9 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 		StringBuffer hqlBuffer = new StringBuffer();
 		hqlBuffer.append("SELECT COUNT(*) FROM SavedAdForRoomAdBean  s WHERE s.savedAdForRoomAdMemId = :mb "
 				+ "AND s.savedAdForRoomAdAdId.adState = true");
-		
+
 		List<Long> list = null;
-		list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb)
-				.getResultList();
+		list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb).getResultList();
 
 		Integer totoalPages = (int) Math.ceil(list.get(0) / 6.0);
 		return totoalPages;
@@ -499,34 +548,31 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 				+ " AND exists(FROM WantedRoomBean b WHERE b.adState=true "
 				+ " AND b.wantedRoomAdMemId = i.interestedAdForRoomAdMemId)";
 		String hql2 = "FROM WantedRoomBean WHERE wantedRoomAdMemId = :mb AND adState=true";
-		List<List<Object>> objList= new ArrayList<List<Object>>();
+		List<List<Object>> objList = new ArrayList<List<Object>>();
 		List<InterestedAdForRoomAdBean> list = null;
 
-		list = session.createQuery(hql).setParameter("mb", mb)
-				.setFirstResult((curPage - 1) * 6).setMaxResults(6)
+		list = session.createQuery(hql).setParameter("mb", mb).setFirstResult((curPage - 1) * 6).setMaxResults(6)
 				.getResultList();
-		
-		if(list!=null && list.size()>0) {
-			for(InterestedAdForRoomAdBean bean : list) {
-				List<Object> objListElement= new ArrayList<Object>();
+
+		if (list != null && list.size() > 0) {
+			for (InterestedAdForRoomAdBean bean : list) {
+				List<Object> objListElement = new ArrayList<Object>();
 				MemberBean memberBean = bean.getInterestedAdForRoomAdMemId();
-				WantedRoomBean wantedBean = (WantedRoomBean) session.createQuery(hql2)
-											.setParameter("mb", memberBean).getResultList().get(0);
+				WantedRoomBean wantedBean = (WantedRoomBean) session.createQuery(hql2).setParameter("mb", memberBean)
+						.getResultList().get(0);
 				objListElement.add(wantedBean);
 				objListElement.add(bean.getInterestedAdForRoomAdAdId().getAdTitle());
 				objListElement.add(bean.getId());
 				objList.add(objListElement);
 			}
 		}
-		
-		
-		
+
 		return objList;
 	}
 
 	@Override
 	public Integer getAjaxInterestedAdsTotalPages(MemberBean mb) {
-		
+
 		Session session = factory.getCurrentSession();
 		String hql = "SELECT count(*) FROM InterestedAdForRoomAdBean  i WHERE i.interestedAdForRoomAdAdId.adState=true"
 				+ " AND i.interestedAdForRoomAdAdId.roomRentMemId = :mb"
@@ -534,14 +580,12 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 				+ " AND b.wantedRoomAdMemId = i.interestedAdForRoomAdMemId)";
 		Long count = null;
 
-		count = (Long) session.createQuery(hql)
-						.setParameter("mb", mb)
-						.getSingleResult();
+		count = (Long) session.createQuery(hql).setParameter("mb", mb).getSingleResult();
 
 		Integer totoalPages = (int) Math.ceil(count / 6.0);
 		return totoalPages;
 	}
-	
+
 	@Override
 	public int getPageNo() {
 		return pageNo;
@@ -563,13 +607,13 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 	}
 
 	@Override
-	 public int getMyAdTotalPagesByFk(MemberBean roomRentMemId) {
-	  totalPages = (int) (Math.ceil(getMyAdRecordCountsByFk(roomRentMemId) / (double) recordsPerPage));
-	  if(totalPages <= 0) {
-	   totalPages = 1;
-	  }
-	  return totalPages;
-	 }
+	public int getMyAdTotalPagesByFk(MemberBean roomRentMemId) {
+		totalPages = (int) (Math.ceil(getMyAdRecordCountsByFk(roomRentMemId) / (double) recordsPerPage));
+		if (totalPages <= 0) {
+			totalPages = 1;
+		}
+		return totalPages;
+	}
 
 	@Override
 	public void setTotalPages(int totalPages) {
@@ -581,9 +625,7 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 		Long count = 0L; // 必須使用 long 型態
 		String hql = "SELECT count(*) FROM RoomRentBean WHERE roomRentMemId = :roomRentMemId";
 		Session session = factory.getCurrentSession();
-		count = (Long) session.createQuery(hql)
-				.setParameter("roomRentMemId", roomRentMemId)
-				.getSingleResult();
+		count = (Long) session.createQuery(hql).setParameter("roomRentMemId", roomRentMemId).getSingleResult();
 		return count;
 	}
 
@@ -630,16 +672,13 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RoomRentBean> getPageAdByFk(int pageNo , MemberBean roomRentMemId) {
+	public List<RoomRentBean> getPageAdByFk(int pageNo, MemberBean roomRentMemId) {
 		List<RoomRentBean> list = null;
 		Session session = factory.getCurrentSession();
 		String hql = "FROM RoomRentBean WHERE roomRentMemId = :roomRentMemId";
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		list = session.createQuery(hql)
-				.setParameter("roomRentMemId", roomRentMemId)
-				.setFirstResult(startRecordNo)
-				.setMaxResults(recordsPerPage)
-				.getResultList();
+		list = session.createQuery(hql).setParameter("roomRentMemId", roomRentMemId).setFirstResult(startRecordNo)
+				.setMaxResults(recordsPerPage).getResultList();
 		// 解決lazyloading 讓他繼續往roomItems找
 		for (RoomRentBean bean : list) {
 			Iterator<RoomBean> iterator = bean.getRoomItems().iterator();

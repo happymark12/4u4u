@@ -42,6 +42,5 @@
 		<mapping class="_4u4u.model.MessagesBean" />
 		<mapping class="_4u4u.model.SavedAdForRoomAdBean" />
 		<mapping class="_4u4u.model.SavedAdForWantedRoomAdBean" />
-		<!-- <mapping class="ch01.model.Employee"/> -->
 	</session-factory>
 </hibernate-configuration>

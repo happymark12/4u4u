@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -113,8 +112,6 @@ public class RoomRentServiceImpl implements Serializable, RoomRentService {
 		List<FinalJsonObject> vipList = new ArrayList<FinalJsonObject>();
 		List<FinalJsonObject> resultList = new ArrayList<FinalJsonObject>();
 		// for rentPrice 排序
-		Map<Integer, FinalJsonObject> sortMap = new HashMap<Integer, FinalJsonObject>();
-		List<List<Object>> sortList = new ArrayList<List<Object>>(); //1st element rentPrice 2nd element FinalJsonObject
 		if (list.size() == 0) {
 			;
 		} else {
@@ -250,40 +247,31 @@ public class RoomRentServiceImpl implements Serializable, RoomRentService {
 					
 					
 					if (sortOption != null) {
-						if (sortOption.contentEquals("1") || sortOption.contentEquals("2")) {
-							sortMap.put(rentPriceList.get(rentPriceList.size() - 1), finalBean);
-							
-						}
-						if (sortOption.contentEquals("3") || sortOption.contentEquals("4")) {
+						if (!sortOption.contentEquals("0") ) {
 							resultList.add(finalBean);
 						}
+						if (sortOption.contentEquals("0")){
+							if (bean.getRoomRentMemId().getState().contentEquals("1")) {
+
+								normalList.add(finalBean);
+							} else {
+								vipList.add(finalBean);
+							}
+						}
+						
+					}else {
+						if (bean.getRoomRentMemId().getState().contentEquals("1")) {
+
+							normalList.add(finalBean);
+						} else {
+							vipList.add(finalBean);
+						}
 					}
 
-					if (bean.getRoomRentMemId().getState().contentEquals("1")) {
-
-						normalList.add(finalBean);
-					} else {
-						vipList.add(finalBean);
-					}
+					
 				} // for loop end
 				if (sortOption != null) {
-					if (sortOption.contentEquals("1")) {
-
-						ArrayList<Integer> keysList = new ArrayList<Integer>(sortMap.keySet());
-						Collections.sort(keysList);
-
-						for (Integer i : keysList) {
-							resultList.add(sortMap.get(i));
-						}
-
-					} else if (sortOption.contentEquals("2")) {
-						ArrayList<Integer> keysList = new ArrayList<Integer>(sortMap.keySet());
-						Collections.sort(keysList);
-						Collections.reverse(keysList);
-						for (Integer i : keysList) {
-							resultList.add(sortMap.get(i));
-						}
-					} else if (sortOption.contentEquals("0")) {
+						if (sortOption.contentEquals("0")) {
 					
 						for(FinalJsonObject vipObj:vipList) {
 							resultList.add(vipObj);
@@ -309,7 +297,6 @@ public class RoomRentServiceImpl implements Serializable, RoomRentService {
 		
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(resultList);
-//		System.out.println(jsonStr);
 		return jsonStr;
 	}
 
