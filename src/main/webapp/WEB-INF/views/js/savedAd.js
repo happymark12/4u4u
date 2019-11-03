@@ -5,7 +5,7 @@
 				history.replaceState({ url: defaultURL }, "", defaultURL);
 				sessionStorage.clear();
 				sessionStorage.setItem('adStyle','0');
-				sessionStorage.setItem('curPage','1');
+//				sessionStorage.setItem('curPage','1');
 				sessionStorage.setItem('sortOption','0');
 				window.setTimeout(getSavedRoomRentAdsAJAX,100);
 			}else {
@@ -88,6 +88,12 @@
 					if($(this).attr('href')==preAdStyle){
 						return;
 					}
+					$('#selectAllButton').prop('checked',false);
+					let tempCurPage = sessionStorage.curPage;
+					sessionStorage.removeItem("curPage");
+					let  tempPageURL = window.location.href;
+					tempPageURL = tempPageURL.replace('curPage='+$.trim(tempCurPage), 'curPage=1');
+				    history.replaceState({ url: tempPageURL }, "", tempPageURL);
 					sessionStorage.setItem('adStyle',$(this).attr('href'));
 					let  tempURL = window.location.href;
 					let  postAdStyle = $(this).attr('href');
@@ -177,26 +183,80 @@
 							$(this).remove();
 						})
 						if(data.length==0){
-							totalPages = 0;	
+							if(sessionStorage.curPage==null){
+							totalPages = 1;	
+							}
 							$('#emptyDiv').show();
+							if(sessionStorage.curPage!=null&& sessionStorage.curPage!=1 ){
+								
+							let tmpCurPage = parseInt(sessionStorage.getItem('curPage'));
+							let tmpTotalPages = parseInt(sessionStorage.totalPages)-1;
+							
+							if(tmpCurPage > tmpTotalPages){
+								sessionStorage.setItem('curPage',tmpTotalPages);
+								if(tmpTotalPages>=5){
+									sessionStorage.setItem('rangeEnd',tmpTotalPages);
+									sessionStorage.setItem('rangeStart',tmpTotalPages-4);
+								}
+								let  tempURL = window.location.href;
+								tempURL = tempURL.replace('curPage='+$.trim(tmpCurPage), 'curPage='+tmpTotalPages);
+							    history.replaceState({ url: tempURL }, "", tempURL);
+							    getSavedRoomRentAdsAJAX();
+							    
+							    return;
+							}
+							}
 						}else{
 							$('#emptyDiv').hide();
 							totalPages = data[0].totalPages;
 						}
 						
 						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
-						for(let i = 1;i<=totalPages;i++){
-							if(i==1){
-								pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
-								continue;
-							}
-							if(i>5){
-							pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+						 if(sessionStorage.rangeEnd!=null){
+								let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
+								
+								if(tempRangeEnd>5){
+									 for(let i = tempRangeEnd-4;i<=totalPages;i++){
+											
+											if(i>tempRangeEnd){
+											pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+											}else{
+											pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+						
+											}
+											
+										}
+								}else{
+									for(let i = 1;i<=totalPages;i++){
+										if(i==1){
+											pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+											continue;
+										}
+										if(i>5){
+										pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+										}else{
+										pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+					
+										}
+										
+										}
+									
+								}						
+								
 							}else{
-							pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
-		
-							}
-							
+							 for(let i = 1;i<=totalPages;i++){
+								if(i==1){
+									pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+									continue;
+								}
+								if(i>5){
+								pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+								}else{
+								pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+			
+								}
+								
+								}
 							}
 						
 						pageHtml+=	`<li id="totalPage"><a  onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
@@ -214,10 +274,8 @@
 							sessionStorage.totalPages=totalPages;
 						}
 						
-						if(sessionStorage.curPage!=1){
 							$('#pagination li').removeClass('active');
 							$('#page'+sessionStorage.curPage).addClass('active');
-						}
 						
 						$('#pagination li').not('#totalPage').on('click',function(e){
 							e.preventDefault();
@@ -225,10 +283,10 @@
 							let rangeStart = parseInt(sessionStorage.rangeStart);
 							let rangeEnd = parseInt(sessionStorage.rangeEnd);
 							
-							if(parseInt(sessionStorage.totalPages)<1){
+							if(parseInt(sessionStorage.totalPages)<=1){
 								return;
 							}
-
+							$('#selectAllButton').prop('checked',false);
 							if($(this).attr('id')=='previousPage' && sessionStorage.curPage!=1){
 								if(curPage==rangeStart){
 									$('#pagination li').removeClass('active');
@@ -390,25 +448,80 @@
 						})
 						
 						if(data.length==0){
-							totalPages = 0;	
-							$('#emptyDiv').show();
+							if(sessionStorage.curPage==null){
+								totalPages = 1;	
+								}
+								$('#emptyDiv').show();
+								if(sessionStorage.curPage!=null&& sessionStorage.curPage!=1 ){
+									
+								let tmpCurPage = parseInt(sessionStorage.getItem('curPage'));
+								let tmpTotalPages = parseInt(sessionStorage.totalPages)-1;
+								
+								if(tmpCurPage > tmpTotalPages){
+									sessionStorage.setItem('curPage',tmpTotalPages);
+									if(tmpTotalPages>=5){
+										sessionStorage.setItem('rangeEnd',tmpTotalPages);
+										sessionStorage.setItem('rangeStart',tmpTotalPages-4);
+									}
+									let  tempURL = window.location.href;
+									tempURL = tempURL.replace('curPage='+$.trim(tmpCurPage), 'curPage='+tmpTotalPages);
+								    history.replaceState({ url: tempURL }, "", tempURL);
+								    getSavedWantedRoomAdsAJAX();
+								    
+								    return;
+								}
+								}
 						}else{
-							totalPages = data[0].totalPages;
 							$('#emptyDiv').hide();
+							totalPages = data[0].totalPages;
+							
 						}
 						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
-						for(let i = 1;i<=totalPages;i++){
-							if(i==1){
-								pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
-								continue;
-							}
-							if(i>5){
-							pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+						 if(sessionStorage.rangeEnd!=null){
+								let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
+								
+								if(tempRangeEnd>5){
+									 for(let i = tempRangeEnd-4;i<=totalPages;i++){
+											
+											if(i>tempRangeEnd){
+											pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+											}else{
+											pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+						
+											}
+											
+										}
+								}else{
+									for(let i = 1;i<=totalPages;i++){
+										if(i==1){
+											pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+											continue;
+										}
+										if(i>5){
+										pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+										}else{
+										pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+					
+										}
+										
+										}
+									
+								}						
+								
 							}else{
-							pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
-		
-							}
-							
+							 for(let i = 1;i<=totalPages;i++){
+								if(i==1){
+									pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+									continue;
+								}
+								if(i>5){
+								pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+								}else{
+								pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+			
+								}
+								
+								}
 							}
 						
 						pageHtml+=	`<li id="totalPage"><a onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
@@ -426,19 +539,18 @@
 							sessionStorage.totalPages=totalPages;
 						}
 						
-						if(sessionStorage.curPage!=1){
 							$('#pagination li').removeClass('active');
 							$('#page'+sessionStorage.curPage).addClass('active');
-						}
 						$('#pagination li').not('#totalPage').on('click',function(e){
 							e.preventDefault();
 							let curPage = parseInt(sessionStorage.curPage);
 							let rangeStart = parseInt(sessionStorage.rangeStart);
 							let rangeEnd = parseInt(sessionStorage.rangeEnd);
 							
-							if(parseInt(sessionStorage.totalPages)<1){
+							if(parseInt(sessionStorage.totalPages)<=1){
 								return;
 							}
+							$('#selectAllButton').prop('checked',false);
 
 							if($(this).attr('id')=='previousPage' && sessionStorage.curPage!=1){
 								if(curPage==rangeStart){

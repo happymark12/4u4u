@@ -249,7 +249,7 @@ border-bottom: 5px solid orange;
 						<!-- Start properties content body -->
 						<div class="aa-properties-content-body" >
 
-							<ul class="aa-properties-nav interested" id="targetAds">
+							<ul class="aa-properties-nav interested" id="targetAds" style="width:100%;">
 	
 
 

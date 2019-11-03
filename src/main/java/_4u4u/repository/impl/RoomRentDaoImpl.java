@@ -22,6 +22,7 @@ import _4u4u.model.InterestedAdForRoomAdBean;
 import _4u4u.model.MemberBean;
 import _4u4u.model.RoomBean;
 import _4u4u.model.RoomRentBean;
+import _4u4u.model.SavedAdForRoomAdBean;
 import _4u4u.model.WantedRoomBean;
 import _4u4u.repository.RoomRentDao;
 import _4u4u_init.util.ConvertTableUtil;
@@ -504,10 +505,30 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 	public List<RoomRentBean> getAjaxSavedAdsByPage(MemberBean mb, Integer curPage, String sortOption) {
 		Session session = factory.getCurrentSession();
 		StringBuffer hqlBuffer = new StringBuffer();
-		hqlBuffer.append(
-				"SELECT s.savedAdForRoomAdAdId FROM SavedAdForRoomAdBean  s WHERE s.savedAdForRoomAdMemId = :mb "
-						+ "AND s.savedAdForRoomAdAdId.adState = true");
+		
+		if (sortOption.contentEquals("1")||sortOption.contentEquals("2")) {
+			hqlBuffer.append("FROM SavedAdForRoomAdBean  s JOIN RoomBean r on " + 
+					"s.savedAdForRoomAdAdId = r.roomAd " + 
+					" WHERE  s.savedAdForRoomAdMemId = :mb AND s.savedAdForRoomAdAdId.adState = true  group by s.savedAdForRoomAdMemId, " + 
+					" s.savedAdForRoomAdAdId ");
+		}
+	
+		if (!sortOption.contentEquals("2")
+				&& !sortOption.contentEquals("1")) {
+			hqlBuffer.append(
+					"SELECT s.savedAdForRoomAdAdId FROM SavedAdForRoomAdBean  s WHERE s.savedAdForRoomAdMemId = :mb "
+							+ "AND s.savedAdForRoomAdAdId.adState = true");
+		}
 
+		
+		if (sortOption.contentEquals("1")) {
+			hqlBuffer.append(" ORDER BY Max(r.rentPrice) ");
+		}
+		if (sortOption.contentEquals("2")) {
+			hqlBuffer.append(" ORDER BY Max(r.rentPrice) DESC");
+		}
+		
+		
 		if (sortOption.contentEquals("3")) {
 			hqlBuffer.append(" ORDER BY s.savedAdForRoomAdAdId.adCreateDate DESC");
 		}
@@ -515,10 +536,31 @@ public class RoomRentDaoImpl implements Serializable, RoomRentDao {
 			hqlBuffer.append(" ORDER BY s.savedAdForRoomAdAdId.adUpdateDate DESC");
 		}
 
-		List<RoomRentBean> list = null;
-
-		list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb).setFirstResult((curPage - 1) * 6)
-				.setMaxResults(6).getResultList();
+		List<RoomRentBean> list = new ArrayList<RoomRentBean>();
+		List<Object[]> objArraylist = null;
+		if (sortOption.contentEquals("1")||sortOption.contentEquals("2")) {
+			objArraylist = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb).setFirstResult((curPage - 1) * 6)
+					.setMaxResults(6).getResultList();
+			for(Object[] objArray : objArraylist) {
+				for(Object obj : objArray) {
+					if(obj instanceof SavedAdForRoomAdBean) {
+						SavedAdForRoomAdBean bean = (SavedAdForRoomAdBean)obj;
+						RoomRentBean rrb = bean.getSavedAdForRoomAdAdId();
+						list.add(rrb);
+						
+					}
+				}
+			}	
+		
+		}
+	
+		if (!sortOption.contentEquals("2")
+				&& !sortOption.contentEquals("1")) {
+		
+			list = session.createQuery(hqlBuffer.toString()).setParameter("mb", mb).setFirstResult((curPage - 1) * 6)
+					.setMaxResults(6).getResultList();
+		}
+		
 
 		return list;
 

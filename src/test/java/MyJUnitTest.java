@@ -12,6 +12,7 @@ import org.junit.Test;
 import _4u4u.model.InterestedAdForRoomAdBean;
 import _4u4u.model.MemberBean;
 import _4u4u.model.RoomRentBean;
+import _4u4u.model.SavedAdForRoomAdBean;
 import _4u4u_init.util.HibernateUtils;
 
 public class MyJUnitTest {
@@ -42,17 +43,21 @@ public class MyJUnitTest {
 	@Test
 	public void test() {
 	try {
-	String hql ="FROM RoomRentBean  r  JOIN  RoomBean  j "
-			+ " on   j.roomAd.adId = r.adId "
-			+ "WHERE r.adState = true  group by r.adId ORDER BY Max(j.rentPrice) DESC";
+	MemberBean mb = session.get(MemberBean.class, 2);
+	String hql ="FROM SavedAdForRoomAdBean  s JOIN RoomBean r on  "
+			+ "s.savedAdForRoomAdAdId = r.roomAd"
+			+ " WHERE  s.savedAdForRoomAdMemId = :mb AND s.savedAdForRoomAdAdId.adState = true  group by s.savedAdForRoomAdMemId,"
+			+ " s.savedAdForRoomAdAdId ORDER BY Max(r.rentPrice) DESC";
 	List<Object[]> list = null;
-	list = session.createQuery(hql).getResultList();	
+	list = session.createQuery(hql).setParameter("mb", mb).getResultList();	
 	for(Object[] objArray : list) {
 		System.out.println("start");
 		for(Object obj : objArray) {
-			if(obj instanceof RoomRentBean) {
-				RoomRentBean bean = (RoomRentBean)obj;
-				System.out.println(bean.getAdId());
+			System.out.println(obj);
+			if(obj instanceof SavedAdForRoomAdBean) {
+				SavedAdForRoomAdBean bean = (SavedAdForRoomAdBean)obj;
+				RoomRentBean rrb = bean.getSavedAdForRoomAdAdId();
+				System.out.println(rrb.getAdId());
 				
 			}
 		}

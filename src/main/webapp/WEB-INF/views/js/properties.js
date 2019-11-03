@@ -450,14 +450,46 @@
 							$(this).remove();
 						})
 						if(data.length==0){
-							totalPages = 0;	
+							totalPages = 1;	
 						}else{
 							totalPages = data[0].totalPages;
 						}
 						
 // if(totalPages=="0")
 						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
-						for(let i = 1;i<=totalPages;i++){
+						if(sessionStorage.rangeEnd!=null){
+							let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
+							
+							if(tempRangeEnd>5){
+								 for(let i = tempRangeEnd-4;i<=totalPages;i++){
+										
+										if(i>tempRangeEnd){
+										pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+										}else{
+										pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+					
+										}
+										
+									}
+							}else{
+								for(let i = 1;i<=totalPages;i++){
+									if(i==1){
+										pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+										continue;
+									}
+									if(i>5){
+									pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+									}else{
+									pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+				
+									}
+									
+									}
+								
+							}						
+							
+						}else{
+						 for(let i = 1;i<=totalPages;i++){
 							if(i==1){
 								pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
 								continue;
@@ -470,7 +502,7 @@
 							}
 							
 							}
-						
+						}
 						pageHtml+=	`<li id="totalPage"><a  onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
 						pageHtml+=	`<li id="nextPage" ><a href="#" aria-label="Next" onclick="return false;"> <span aria-hidden="true">&raquo;</span></a></li>`;
 //	 					
@@ -486,10 +518,8 @@
 							sessionStorage.totalPages=totalPages;
 						}
 						
-						if(sessionStorage.curPage!=1){
 							$('#pagination li').removeClass('active');
 							$('#page'+sessionStorage.curPage).addClass('active');
-						}
 						
 						$('#pagination li').not('#totalPage').on('click',function(e){
 							e.preventDefault();
@@ -757,23 +787,56 @@
 						})
 						
 						if(data.length==0){
-							totalPages = 0;	
+							totalPages = 1;	
 						}else{
 							totalPages = data[0].totalPages;
 						}
 						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
-						for(let i = 1;i<=totalPages;i++){
-							if(i==1){
-								pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
-								continue;
-							}
-							if(i>5){
-							pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+						 if(sessionStorage.rangeEnd!=null){
+								let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
+								
+								if(tempRangeEnd>5){
+									 for(let i = tempRangeEnd-4;i<=totalPages;i++){
+											
+											if(i>tempRangeEnd){
+											pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+											}else{
+											pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+						
+											}
+											
+										}
+								}else{
+									for(let i = 1;i<=totalPages;i++){
+										if(i==1){
+											pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+											continue;
+										}
+										if(i>5){
+										pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+										}else{
+										pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+					
+										}
+										
+										}
+									
+								}						
+								
 							}else{
-							pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
-		
-							}
-							
+							 for(let i = 1;i<=totalPages;i++){
+								if(i==1){
+									pageHtml+=	'<li id="page'+i+'" class="active"><a href="#" >'+i+'</a></li>';
+									continue;
+								}
+								if(i>5){
+								pageHtml+= '<li id="page'+i+'" style="display:none"><a href="#" >'+i+'</a></li>';
+								}else{
+								pageHtml+= '<li id="page'+i+'" ><a href="#" >'+i+'</a></li>';
+			
+								}
+								
+								}
 							}
 						
 						pageHtml+=	`<li id="totalPage"><a onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
@@ -791,11 +854,10 @@
 							sessionStorage.totalPages=totalPages;
 						}
 						
-						if(sessionStorage.curPage!=1){
 							$('#pagination li').removeClass('active');
 							$('#page'+sessionStorage.curPage).addClass('active');
-						}
-						$('#pagination li').not('#totalPage').on('click',function(e){
+					
+							$('#pagination li').not('#totalPage').on('click',function(e){
 							e.preventDefault();
 							let curPage = parseInt(sessionStorage.curPage);
 							let rangeStart = parseInt(sessionStorage.rangeStart);

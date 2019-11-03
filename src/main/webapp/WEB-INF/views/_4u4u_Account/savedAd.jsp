@@ -265,7 +265,7 @@ border-bottom: 5px solid orange;
 						<!-- Start properties content body -->
 						<div class="aa-properties-content-body" style="margin-left: 0px">
 
-							<ul class="aa-properties-nav saved" id="targetAds">
+							<ul class="aa-properties-nav saved" id="targetAds" style="width:100%;">
 	
 
 
