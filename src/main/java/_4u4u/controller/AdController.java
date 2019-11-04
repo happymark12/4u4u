@@ -2092,8 +2092,8 @@ public class AdController {
 		Integer findRoomId = null;
 		Integer sendMail = 0; // 本日已寄出幾封email
 		Date emailDate = new Date(System.currentTimeMillis()); // 要寄信日期
-		Timestamp adCreateDate = new Timestamp(System.currentTimeMillis()); // 要寄信日期
-		Timestamp adUpdateDate = adCreateDate; // 要寄信日期
+		Timestamp adCreateDate = wantedRoomBean.getAdCreateDate(); // 創建日期永不更動
+		Timestamp adUpdateDate = new Timestamp(System.currentTimeMillis());; // 更新日期
 		Boolean adStyle = true; // 廣告類型
 		String areaStrToCode = null;
 		String county = null;
@@ -2792,8 +2792,8 @@ public class AdController {
 		Integer emailMax = null;
 		Integer sendMail = 0;
 		Date emailDate = new Date(System.currentTimeMillis()); // 要寄信日期
-		Timestamp adCreateDate = new Timestamp(System.currentTimeMillis()); // 要寄信日期
-		Timestamp adUpdateDate = adCreateDate; // 要寄信日期
+		Timestamp adCreateDate = roomRentBean.getAdCreateDate(); // 創建日期(不更動)取得之前的創建日期
+		Timestamp adUpdateDate = new Timestamp(System.currentTimeMillis()); // 更新日期
 		Boolean adStyle = false;
 		String county = null;
 //		Set<RoomBean> roomItems = null;
