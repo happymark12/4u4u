@@ -3763,7 +3763,7 @@ if (rrb != null) {
 	model.addAttribute("phone", phone);
 	// acceptCouple
 	Boolean acceptCouple = rrb.getAdFutureCoupleAccept();
-	System.out.println("是否接受情侶"+acceptCouple);
+//	System.out.println("是否接受情侶"+acceptCouple);
 	model.addAttribute("acceptCouple", acceptCouple);
 	// Cpet
 	Boolean cPet = rrb.getAdCurHasPet();
