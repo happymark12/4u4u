@@ -1576,7 +1576,7 @@ public class AdController {
 
 			///////////// 判斷會員狀態可否發文 ///////////////////
 			String memberState = memberService.memberState(mb);
-			boolean isExistAd = wantedRoomService.isExistAd(mb);
+			boolean isExistAd = wantedRoomService.isExistAd(mb);		
 
 			if (!memberState.equals("1") && !memberState.equals("2")) {
 				throw new CantCreateAdException("不是一般會員也不是VIP會員");
@@ -3917,6 +3917,8 @@ if (adStyle.equals("0")) {
 	public String ChangeAdState(Model model, HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String errorMsg = null;
 		String strAdStyle = request.getParameter("adStyle").trim();
 		Integer adStyle = null;
 		if (strAdStyle != null) {
@@ -3924,7 +3926,7 @@ if (adStyle.equals("0")) {
 		}
 		String strAdId = request.getParameter("adId").trim();
 		Integer adId = null;
-//		Boolean RoomRentAdState = null;
+		Boolean RoomRentAdState = null;
 //		Boolean WantedRoomAdState = null;
 		if (strAdId != null) {
 			adId = Integer.parseInt(strAdId);
@@ -3940,18 +3942,27 @@ if (adStyle.equals("0")) {
 //			MemberService mereberService = new MemberServiceImpl();
 			MemberBean memberBean = memberService.queryMemberById(memId);
 //			RoomRentService service = new RoomRentServiceImpl();
-			RoomRentBean roomRentBean = roomRentService.getAdById(adId);
-//			RoomRentAdState = roomRentBean.getAdState();
+			RoomRentBean roomRentBean = roomRentService.getAdById(adId);			
+			RoomRentAdState = roomRentBean.getAdState();			
+			if(RoomRentAdState == false) {
+				Boolean hasExistEffectiveAd = roomRentService.isExistEffectiveAd(memberBean);
+				System.out.println(hasExistEffectiveAd);
+				System.out.println(memberBean.getState());
+				if(hasExistEffectiveAd ==  true && memberBean.getState().equals("1")) {
+					errorMsg = "<Font color='red'>已經有1則或是1則以上的租房廣告存在</Font>";
+					session.setAttribute("errorMsg", errorMsg);
+				}
+			}
 //			System.out.println("修改前的租房廣告的State=" + RoomRentAdState);
 			roomRentService.changeAdState(roomRentBean, memberBean);
 //			RoomRentAdState = roomRentBean.getAdState();
 //			System.out.println("修改後的租房廣告的State=" + RoomRentAdState);
-		} else if (adStyle == 1) {
+		} else if (adStyle == 1) {			
 //			WantedRoomService service = new WantedRoomServiceImpl();
 			WantedRoomBean wantedRoomBean = wantedRoomService.getAdById(adId);
 //			WantedRoomAdState = wantedRoomBean.getAdState();
-//			System.out.println("修改前的找房廣告的AdState=" + WantedRoomAdState);
-			wantedRoomService.changeAdState(wantedRoomBean);
+//			System.out.println("修改前的找房廣告的AdState=" + WantedRoomAdState);			;			
+			wantedRoomService.changeAdState(wantedRoomBean);			
 //			WantedRoomAdState = wantedRoomBean.getAdState();
 //			System.out.println("修改後的找房廣告的AdState=" + WantedRoomAdState);
 		}
