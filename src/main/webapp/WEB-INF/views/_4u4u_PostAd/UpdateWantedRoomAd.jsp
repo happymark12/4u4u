@@ -270,15 +270,51 @@ button {
                           <fieldset>
                                   <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">關於您</legend><br>
                                   <!-- 當性別人數為單數時 年齡選擇只有單數 ,複數時 則是複數選擇 -->
-                                  性別人數:
-                                  <select name="peopleNum_gender" id="peopleNum_gender" onchange="selectGenderToAge(this[selectedIndex].value)" required>
+                                  性別人數:			
+                                  <c:if test="${! empty peopleNumGender}">
+                                  	<select name="peopleNum_gender" id="peopleNum_gender" onchange="selectGenderToAge(this[selectedIndex].value)" required>
+                                      <c:if test="${peopleNumGender == '一男'}">
+                                      	<option value="1男" selected>1男</option>                                      
+                                      </c:if>
+                                      <c:if test="${peopleNumGender != '一男'}">
+                                      	<option value="1男">1男</option>
+                                      </c:if>                        
+                                      <c:if test="${peopleNumGender == '1女'}">
+                                      	<option value="1女" selected>1女</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender != '1女'}">
+                                      	<option value="1女">1女</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender == '1男1女'}">
+                                      	<option value="1男1女" selected>1男1女</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender != '1男1女'}">
+                                      	 <option value="1男1女">1男1女</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender == '2男'}">
+                                      	<option value="2男" selected>2男</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender != '2男'}">
+                                      	<option value="2男">2男</option>
+                                      </c:if>
+                                      <c:if test="${peopleNumGender == '2女'}">
+                                      	<option value="2女" selected>2女</option> 
+                                      </c:if>
+                                      <c:if test="${peopleNumGender != '2女'}">
+                                      	<option value="2女">2女</option> 
+                                      </c:if>                                            
+                                  	</select><br><br>                                  	
+                                  </c:if>
+                                  <c:if test="${empty  peopleNumGender}">
+                                  	<select name="peopleNum_gender" id="peopleNum_gender" onchange="selectGenderToAge(this[selectedIndex].value)" required>
                                       <option value="">請選擇您的性別...</option>                        
                                       <option value="1男">1男</option>
                                       <option value="1女">1女</option>
                                       <option value="1男1女">1男1女</option>
                                       <option value="2男">2男</option>
                                       <option value="2女">2女</option>        
-                                  </select><br><br>
+                                  	</select><br><br>
+                                  </c:if>                                  
                                   房間類型:
                                   <select name="severalSuites" id="severalSuites" required>
                                       <option value="">-</option>
@@ -288,8 +324,15 @@ button {
                                   </select>間雅房
                                   <br><br>
                                   <!-- 當合租意願選擇不願意時 合租額外描述動態消失-->
-                                  合租意願:
-                                  <input type="checkbox" id="agreeShare" name="agreeShare" value="agree">願意
+                                  合租意願:			
+                                  <c:if test="${! empty agreeShare}">
+                                  	<c:if test="${agreeShare == true}">
+                                  		<input type="checkbox" id="agreeShare" name="agreeShare" value="agree" checked>願意
+                                  	</c:if>
+                                  	<c:if test="${agreeShare == false}">
+                                  		<input type="checkbox" id="agreeShare" name="agreeShare" value="agree">願意
+                                  	</c:if>
+                                  </c:if>                                  
                                   <br><br>
                                   <div id="addressPart" class="form-row city-selector-set">
                                   想要居住的地區 : 
@@ -305,30 +348,178 @@ button {
                                   可入住日期:
                                   <input type="date" name="checkInDate" id="checkInDate" value="${checkInDate}"><br><br>
                                   居住時間:
-                                  <select name="liveTime" id="livetime">                
+                                  <c:if test="${! empty liveTime}">
+                                  	<select name="liveTime" id="livetime">
+                                  		<c:if test="${liveTime == '小於3個月'}">
+                                  			<option value="小於3個月" selected>小於3個月</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime != '小於3個月'}">
+                                  			<option value="小於3個月">小於3個月</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime == '3個月'}">
+                                  			<option value="3個月" selected>3個月</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime != '3個月'}">
+                                  			<option value="3個月">3個月</option>
+                                  		</c:if>	
+                                  		<c:if test="${liveTime == '半年'}">
+                                  			<option value="半年" selected>半年(6個月)</option>   
+                                  		</c:if>
+                                  		<c:if test="${liveTime != '半年'}">
+                                  			<option value="半年">半年(6個月)</option>   
+                                  		</c:if>
+                                  		<c:if test="${liveTime == '1年'}">
+                                  			<option value="1年" selected>1年</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime != '1年'}">
+                                  			<option value="1年">1年</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime == '2年'}">
+                                  			<option value="2年" selected>2年</option>
+                                  		</c:if>
+                                  		<c:if test="${liveTime != '2年'}">
+                                  			<option value="2年">2年</option>
+                                  		</c:if>                                                 
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${empty liveTime}">
+                                  	<select name="liveTime" id="livetime">                
                                       <option value="小於3個月">小於3個月</option>            
                                       <option value="3個月">3個月</option>            
                                       <option value="半年">半年(6個月)</option>           
                                       <option value="1年">1年</option>                    
                                       <option value="2年">2年</option>                
-                                  </select><br><br>
-                                  想要的設施:
-                                  <input type="checkbox" name="hasWashingMachine" value="true">洗衣機
-                                  <input type="checkbox" name="hasRefrigerator" value="true">冰箱
-                                  <input type="checkbox" name="hasTV" value="true">電視
-                                  <input type="checkbox" name="hasAirConditioning" value="true">冷氣
-                                  <input type="checkbox" name="hasWaterHeater" value="true">熱水器
-                                  <input type="checkbox" name="hasInternet" value="true">網路
-                                  <input type="checkbox" name="hasFourthTV" value="true">第四台                
-                                  <input type="checkbox" name="hasGas" value="true">天然瓦斯
-                                  <input type="checkbox" name="hasWardrobe" value="true">衣櫃
-                                  <input type="checkbox" name="hasSofa" value="true">沙發
-                                  <input type="checkbox" name="hasTable" value="true">桌子
-                                  <input type="checkbox" name="hasChair" value="true">椅子
-                                  <input type="checkbox" name="hasParking" value="true">停車位
-                                  <input type="checkbox" name="hasBalcony" value="true">陽台
-                                  <input type="checkbox" name="hasSingleBed" value="true">單人床
-                                  <input type="checkbox" name="hasDoubleBed" value="true">雙人床   
+                                  	</select><br><br>
+                                  </c:if>                                  
+                                  想要的設施:		
+                                  <c:if test="${! empty washMachine}">
+                                  	<c:if test="${washMachine == true}">
+                                  		<input type="checkbox" name="hasWashingMachine" value="true" checked>洗衣機
+                                  	</c:if>
+                                  	<c:if test="${washMachine == false}">
+                                  		<input type="checkbox" name="hasWashingMachine" value="true">洗衣機
+                                  	</c:if>
+                                  </c:if>	
+                                  <c:if test="${! empty refrigerator}">
+                                  	<c:if test="${refrigerator == true}">
+                                  		<input type="checkbox" name="hasRefrigerator" value="true" checked>冰箱
+                                  	</c:if>
+                                  	<c:if test="${refrigerator == false}">
+                                  		<input type="checkbox" name="hasRefrigerator" value="true">冰箱
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty TV}">
+                                  	<c:if test="${TV == true}">
+                                  		<input type="checkbox" name="hasTV" value="true" checked>電視
+                                  	</c:if>
+                                  	<c:if test="${TV == false}">
+                                  		<input type="checkbox" name="hasTV" value="true">電視
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty airConditioning}">
+                                  	<c:if test="${airConditioning == true}">
+                                  		<input type="checkbox" name="hasAirConditioning" value="true" checked>冷氣
+                                  	</c:if>
+                                  	<c:if test="${airConditioning == false}">
+                                  		<input type="checkbox" name="hasAirConditioning" value="true">冷氣
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty waterHeater}">
+                                  	<c:if test="${waterHeater == true}">
+                                  		<input type="checkbox" name="hasWaterHeater" value="true" checked>熱水器
+                                  	</c:if>
+                                  	<c:if test="${waterHeater == false}">
+                                  		<input type="checkbox" name="hasWaterHeater" value="true">熱水器
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty internet}">
+                                  	<c:if test="${internet == true}">
+                                  		<input type="checkbox" name="hasInternet" value="true" checked>網路
+                                  	</c:if>
+                                  	<c:if test="${internet == false}">
+                                  		<input type="checkbox" name="hasInternet" value="true">網路
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty fourthTV}">
+                                  	<c:if test="${fourthTV == true}">
+                                  		<input type="checkbox" name="hasFourthTV" value="true" checked>第四台
+                                  	</c:if>
+                                  	<c:if test="${fourthTV == false}">
+                                  		<input type="checkbox" name="hasFourthTV" value="true">第四台
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty gas}">
+                                  	<c:if test="${gas == true}">	
+                                  		<input type="checkbox" name="hasGas" value="true" checked>天然瓦斯
+                                  	</c:if>
+                                  	<c:if test="${gas == false}">
+                                  		<input type="checkbox" name="hasGas" value="true">天然瓦斯
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty wardrobe}">
+                                  	<c:if test="${wardrobe == true}">
+                                  		<input type="checkbox" name="hasWardrobe" value="true" checked>衣櫃
+                                  	</c:if>
+                                  	<c:if test="${wardrobe == false}">
+                                  		<input type="checkbox" name="hasWardrobe" value="true">衣櫃
+                                  	</c:if>
+                                  </c:if>                
+                                  <c:if test="${! empty sofa}">
+                                  	<c:if test="${sofa == true}">
+                                  		<input type="checkbox" name="hasSofa" value="true" checked>沙發
+                                  	</c:if>
+                                  	<c:if test="${sofa == false}">
+                                  		<input type="checkbox" name="hasSofa" value="true">沙發
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty table}">
+                                  	<c:if test="${table == true}">
+                                  		<input type="checkbox" name="hasTable" value="true" checked>桌子
+                                  	</c:if>
+                                  	<c:if test="${table == false}">
+                                  		<input type="checkbox" name="hasTable" value="true">桌子
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty chair}">
+	                                <c:if test="${chair == true}">
+	                                  	<input type="checkbox" name="hasChair" value="true" checked>椅子
+                                  	</c:if>
+                                  	<c:if test="${chair == false}">
+                                  		<input type="checkbox" name="hasChair" value="true">椅子
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty parking}">
+                                  	<c:if test="${parking == true}">
+                                  		<input type="checkbox" name="hasParking" value="true" checked>停車位
+                                  	</c:if>
+                                  	<c:if test="${parking == false}">
+                                  		<input type="checkbox" name="hasParking" value="true">停車位
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty balcony}">
+                                  	<c:if test="${balcony == true}">
+                                  		<input type="checkbox" name="hasBalcony" value="true" checked>陽台
+                                  	</c:if>
+                                  	<c:if test="${balcony == false}">
+                                  		<input type="checkbox" name="hasBalcony" value="true">陽台
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty singleBed}">
+                                  	<c:if test="${singleBed == true}">
+                                  		<input type="checkbox" name="hasSingleBed" value="true" checked>單人床
+                                  	</c:if>
+                                  	<c:if test="${singleBed == false}">
+                                  		<input type="checkbox" name="hasSingleBed" value="true">單人床
+                                  	</c:if>
+                                  </c:if>
+                                  <c:if test="${! empty doubleBed}">
+                                  	<c:if test="${doubleBed == true}">
+                                  		<input type="checkbox" name="hasDoubleBed" value="true" checked>雙人床   
+                                  	</c:if>
+                                  	<c:if test="${doubleBed == false}">
+                                  		<input type="checkbox" name="hasDoubleBed" value="true">雙人床   
+                                  	</c:if>
+                                  </c:if>                                 
                                   <br><br>
                                   是否想開火:
                                   <select name="allowCook" id="useFire">
@@ -351,32 +542,135 @@ button {
                                               </select>歲
                                   </span>          
                                   <br><br> 
-                                  職業:
-                                  <select name="job" id="job">
+                                  職業:				
+                                  <c:if test="${! empty job}">
+                                  	<select name="job" id="job">
+                                  		<c:if test="${job == '學生'}">
+                                  			<option value="學生" selected>學生</option>
+                                  		</c:if>
+                                  		<c:if test="${job != '學生'}">
+                                  			<option value="學生">學生</option>
+                                  		</c:if>
+                                  		<c:if test="${job == '上班族'}">
+                                  			<option value="上班族" selected>上班族</option>  
+                                  		</c:if>
+                                  		<c:if test="${job != '上班族'}">
+                                  			<option value="上班族">上班族</option>  
+                                  		</c:if>
+                                  		<c:if test="${job == '混合'}">
+                                  			<option value="混合" selected>混合</option>
+                                  		</c:if>	
+                                  		<c:if test="${job != '混合'}">
+                                  			<option value="混合">混合</option>
+                                  		</c:if>
+                                  		<c:if test="${job == '其他'}">
+                                  			<option value="其他" selected>其他</option>
+                                  		</c:if>
+                                  		<c:if test="${job != '其他'}">
+                                  			<option value="其他">其他</option>
+                                  		</c:if>                                   
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${empty job}">
+                                  	<select name="job" id="job">
                                       <option value="學生">學生</option>
                                       <option value="上班族">上班族</option>                       
                                       <option value="混合">混合</option>
                                       <option value="其他">其他</option>
-                                  </select><br><br>
-                                 是否抽菸:
-                                  <select name="allowSmoke" id="allowSmoke">                  
+                                  	</select><br><br>
+                                  </c:if>                                  
+                                 是否抽菸:				
+                                 <c:if test="${! empty smoke}">
+                                 	<select name="allowSmoke" id="allowSmoke">
+                                 		<c:if test="${smoke == true}">
+                                 			<option value="true" selected>是</option>
+                                 			<option value="false">否</option>
+                                 		</c:if>
+                                 		<c:if test="${smoke == false}">
+                                 			<option value="true" >是</option>
+                                 			<option value="false" selected>否</option>
+                                 		</c:if>                              
+                                  	</select><br><br>
+                                 </c:if>
+                                 <c:if test="${empty smoke}">
+                                 	<select name="allowSmoke" id="allowSmoke">                  
                                       <option value="false">否</option>
                                       <option value="true">是</option>
-                                  </select><br><br>
-                                  是否養寵物:
-                                  <select name="allowPet" id="allowPet">
+                                  	</select><br><br>
+                                 </c:if>                                  
+                                  是否養寵物:		
+                                  <c:if test="${! empty pet}">
+                                  	<select name="allowPet" id="allowPet">
+                                  		<c:if test="${pet == true}">
+                                  			<option value="false">否</option>
+                                      		<option value="true" selected>是</option>
+                                  		</c:if>
+                                      	<c:if test="${pet == false}">
+                                  			<option value="false" selected>否</option>
+                                      		<option value="true" >是</option>
+                                  		</c:if>
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${empty pet}">
+                                  	<select name="allowPet" id="allowPet">
                                       <option value="false">否</option>
                                       <option value="true">是</option>
-                                  </select><br><br>
+                                  	</select><br><br>
+                                  </c:if>                                  
                                   性向:
-                                  <select name="sexualOrientation" id="sexualOrientation">
+                                  <c:if test="${! empty sexOrient}">
+                                  	<select name="sexualOrientation" id="sexualOrientation">
+                                  		<c:if test="${sexOrient == '不透漏'}">
+                                  			<option value="不透漏" selected>不透漏</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient != '不透漏'}">
+                                  			<option value="不透漏">不透漏</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient == '異性戀'}">
+                                  			  <option value="異性戀" selected>異性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient != '異性戀'}">
+                                  			  <option value="異性戀">異性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient == '同性戀'}">
+                                  			<option value="同性戀" selected>同性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient != '同性戀'}">
+                                  			<option value="同性戀">同性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient == '雙性戀'}">
+                                  			<option value="雙性戀" selected>雙性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient != '雙性戀'}">
+                                  			<option value="雙性戀">雙性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient == '混合'}">
+                                  			<option value="混合" selected>混合</option>
+                                  		</c:if>
+                                  		<c:if test="${sexOrient != '混合'}">
+                                  			<option value="混合">混合</option>
+                                  		</c:if> 
+                                  	</select>
+                                  </c:if>
+                                  <c:if test="${empty sexOrient}">
+                                  	<select name="sexualOrientation" id="sexualOrientation">
                                       <option value="不透漏">不透漏</option>
                                       <option value="異性戀">異性戀</option>
                                       <option value="同性戀">同性戀</option>
                                       <option value="雙性戀">雙性戀</option>
                                       <option value="混合">混合</option>
-                                  </select>
-                                  <input type="checkbox" name="agreeAdCondition" >是否同意成為廣告的搜索條件<br><br>
+                                  	</select>
+                                  </c:if>
+                                  
+                                  <c:if test="${! empty agreeAdCondition}">
+                                  	<c:if test="${agreeAdCondition == true}">
+                                  		<input type="checkbox" name="agreeAdCondition" value="true" checked>是否同意成為廣告的搜索條件<br><br>
+                                  	</c:if>
+                                  	<c:if test="${agreeAdCondition == false}">
+                                  		<input type="checkbox" name="agreeAdCondition" value="true">是否同意成為廣告的搜索條件<br><br>
+                                  	</c:if>
+                                  </c:if>
+                                  
                               </fieldset>   <br>     
                   </td>
               </tr>
@@ -386,11 +680,36 @@ button {
                           <fieldset id="wantedRoommates">
                                   <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">您希望的室友</legend><br>                  
                                   性別:
-                                  <select name="wantedRoommatesGender" id="wantedRoommatesGender">
+                                  <c:if test="${! empty flatmateGender}">
+                                  	<select name="wantedRoommatesGender" id="wantedRoommatesGender">
+                                  		<c:if test="${flatmateGender == '不介意'}">
+                                  			<option value="不介意" selected>不介意</option>  
+                                  		</c:if>
+                                  		<c:if test="${flatmateGender != '不介意'}">
+                                  			<option value="不介意">不介意</option>  
+                                  		</c:if>
+                                  		<c:if test="${flatmateGender == '男'}">
+                                  			<option value="男" selected>男</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateGender != '男'}">
+                                  			<option value="男">男</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateGender == '女'}">
+                                  			<option value="女" selected>女</option> 
+                                  		</c:if>
+                                  		<c:if test="${flatmateGender != '女'}">
+                                  			<option value="女">女</option> 
+                                  		</c:if>
+                                  	</select><br><br> 
+                                  </c:if>
+                                  <c:if test="${empty flatmateGender}">
+                                  	<select name="wantedRoommatesGender" id="wantedRoommatesGender">
                                       <option value="不介意">不介意</option>                                    
                                       <option value="男">男</option>                       
                                       <option value="女">女</option>  
-                                  </select><br><br>                       
+                                  	</select><br><br> 
+                                  </c:if>
+                                                        
                                   年齡:
                                   <select name="roommatesAgeMin" id="roommatesAgeMin">
                                       <option value="default">-</option>
@@ -400,29 +719,120 @@ button {
                                   </select>歲
                                   <br><br> 
                                   職業:
-                                  <select name="wantedRoommatesJob" id="wantedRoommatesJob" >
+                                  <c:if test="${! empty flatmateJob}">
+                                  	<select name="wantedRoommatesJob" id="wantedRoommatesJob" >
+                                      <c:if test="${flatmateJob == '學生'}">
+                                      	<option value="學生" selected>學生</option>
+                                      </c:if>
+                                      <c:if test="${flatmateJob != '學生'}">
+                                      	<option value="學生">學生</option>
+                                      </c:if>
+                                      <c:if test="${flatmateJob == '上班族'}">
+                                      	<option value="上班族" selected>上班族</option>  
+                                      </c:if>
+                                      <c:if test="${flatmateJob != '上班族'}">
+                                      	<option value="上班族">上班族</option>  
+                                      </c:if>
+                                      <c:if test="${flatmateJob == '不介意'}">
+                                      	<option value="不介意" selected>不介意</option>
+                                      </c:if>
+                                      <c:if test="${flatmateJob != '不介意'}">
+                                      	<option value="不介意">不介意</option>
+                                      </c:if>
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${ empty flatmateJob}">
+                                  	<select name="wantedRoommatesJob" id="wantedRoommatesJob" >
                                       <option value="學生">學生</option>
                                       <option value="上班族">上班族</option>          
                                       <option value="不介意">不介意</option>
-                                  </select><br><br>
-                                  是否抽菸:
-                                  <select name="wantedRoommatesSmoke" id="wantedRoommatesSmoke">
+                                  	</select><br><br>
+                                  </c:if>
+                                  
+                                  是否抽菸:			
+                                  <c:if test="${! empty flatmateSmoke}">
+                                  	<select name="wantedRoommatesSmoke" id="wantedRoommatesSmoke">
+                                      <c:if test="${flatmateSmoke == true}">
+                                      	<option value="false">否</option>
+                                      	<option value="true" selected>是</option>
+                                      </c:if>
+                                      <c:if test="${flatmateSmoke == false}">
+                                      	<option value="false" selected>否</option>
+                                      	<option value="true">是</option>
+                                      </c:if>                                      
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${empty flatmateSmoke}">
+                                  	<select name="wantedRoommatesSmoke" id="wantedRoommatesSmoke">
                                       <option value="false">否</option>
                                       <option value="true">是</option>
-                                  </select><br><br>
-                                  是否養寵物:
-                                  <select name="wantedRoommatesPet" id="wantedRoommatesPet">
+                                  	</select><br><br>
+                                  </c:if>                                  
+                                  是否養寵物:		
+                                  <c:if test="${! empty flatmatePet}">
+                                  	<select name="wantedRoommatesPet" id="wantedRoommatesPet">
+                                      <c:if test="${flatmatePet == true}">
+                                      	<option value="false">否</option>
+                                      	<option value="true" selected>是</option>
+                                      </c:if>
+                                      <c:if test="${flatmatePet == false}">
+                                      	<option value="false" selected>否</option>
+                                      	<option value="true">是</option>
+                                      </c:if>                                      
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${empty flatmatePet}">
+                                  	<select name="wantedRoommatesPet" id="wantedRoommatesPet">
                                       <option value="false">否</option>
                                       <option value="true">是</option>
-                                  </select><br><br>
+                                  	</select><br><br>
+                                  </c:if>
+                                  
                                   性向:
-                                  <select name="wantedRoommatesSex" id="wantedRoommatesSex">
+                                  <c:if test="${! empty flatmateSexOrient}">
+                                  	<select name="wantedRoommatesSex" id="wantedRoommatesSex">
+                                  		<c:if test="${flatmateSexOrient == '不介意'}">
+                                  			<option value="不介意" selected>不介意</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient != '不介意'}">
+                                  			<option value="不介意">不介意</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient == '異性戀'}">
+                                  			<option value="異性戀" selected>異性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient != '異性戀'}">
+                                  			<option value="異性戀">異性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient == '同性戀'}">
+                                  			<option value="同性戀" selected>同性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient != '同性戀'}">
+                                  			<option value="同性戀">同性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient == '雙性戀'}">
+                                  			<option value="雙性戀" selected>雙性戀</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient != '雙性戀'}">
+                                  			<option value="雙性戀">雙性戀</option>
+                                  		</c:if>	
+                                  		<c:if test="${flatmateSexOrient == '混合'}">
+                                  			<option value="混合" selected>混合</option>
+                                  		</c:if>
+                                  		<c:if test="${flatmateSexOrient != '混合'}">
+                                  			<option value="混合">混合</option>
+                                  		</c:if>
+                                  	</select><br><br>
+                                  </c:if>
+                                  <c:if test="${ empty flatmateSexOrient}">
+                                  	<select name="wantedRoommatesSex" id="wantedRoommatesSex">
                                       <option value="不介意">不介意</option>
                                       <option value="異性戀">異性戀</option>
                                       <option value="同性戀">同性戀</option>
                                       <option value="雙性戀">雙性戀</option>
                                       <option value="混合">混合</option>
-                                  </select><br><br>
+                                  	</select><br><br>
+                                  </c:if>
+                                  
                               </fieldset><br>
                   </td>
               </tr>

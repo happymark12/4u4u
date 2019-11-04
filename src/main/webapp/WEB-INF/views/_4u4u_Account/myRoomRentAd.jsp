@@ -325,44 +325,7 @@
 												</div>
 												<div class="aa-properties-item-content">
 													<div class="aa-properties-info">
-														<%--                         <span>地區: ${roomRentAd.adDetailaddress}</span> --%>
-														<span>${roomRentAd.adRentType}</span> <span>${roomRentAd.adCurAge}</span>
-														<%--                     <c:choose> --%>
-														<%--                     <c:when test="${roomRentAd.adRentType=='整層出租'}"> --%>
-														<%--                     	<c:if test="${empty roomRentAd.adTotalArea}"> --%>
-														<!--                     		<span>坪數 : 0</span>  -->
-														<%--                     	</c:if> --%>
-														<%--                     	<c:if test="${! empty roomRentAd.adTotalArea}"> --%>
-														<%--                     		<span>坪數 : ${roomRentAd.adTotalArea}</span>  --%>
-														<%--                     	</c:if> --%>
-														<%--                     </c:when> --%>
-														<%--                     <c:otherwise> --%>
-														<%--                     	<c:forEach var="room" items="${roomRentAd.roomItems}"> --%>
-														<%--                     		<c:if test="${! empty room.area}"> --%>
-														<%--                     			<span>坪數 : ${room.area}</span>  --%>
-														<%--                     		</c:if> --%>
-														<%--                     		<c:if test="${empty room.area}"> --%>
-														<!--                     			<span>坪數 : 0</span> -->
-														<%--                     		</c:if> --%>
-														<%--                     	</c:forEach>                        --%>
-														<%--                     </c:otherwise> --%>
-														<%--                     </c:choose>                    --%>
-														<%--                     <c:forEach var="room" items="${roomRentAd.roomItems}"> --%>
-														<%--                     	<c:choose> --%>
-														<%--                     		<c:when test="${! empty room.rentFloor && ! empty room.rentTotalFloor}"> --%>
-														<%--                     			<span>樓層：${room.rentFloor}/${room.rentTotalFloor}</span> --%>
-														<%--                     		</c:when> --%>
-														<%--                     		<c:otherwise> --%>
-														<!--                     			<span>樓層：po房者未填寫</span> -->
-														<%--                     		</c:otherwise> --%>
-														<%--                     		<c:when test="${empty room.rentFloor}"> --%>
-														<%--                     			<span>樓層：0/${room.rentTotalFloor}</span> --%>
-														<%--                     		</c:when> --%>
-														<%--                     		<c:when test="${empty room.rentTotalFloor}"> --%>
-														<%--                     			<span>樓層：${room.rentFloor}/0</span> --%>
-														<%--                     		</c:when> --%>
-														<%--                     	</c:choose>                 	 --%>
-														<%--                     </c:forEach> --%>
+														<span>${roomRentAd.adRentType}</span> <span>${roomRentAd.adCurAge}</span>														
 													</div>
 													<div class="aa-properties-about  text-center">
 														<h3>

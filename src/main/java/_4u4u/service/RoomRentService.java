@@ -34,6 +34,6 @@ public interface RoomRentService {
 
 	List<RoomRentBean> getPageAdByFk(int pageNo ,MemberBean roomRentMemId); // 依會員自己的id查詢自己的廣告 進行增刪改查
 
-	int getMyAdTotalPagesByFk(MemberBean roomRentMemId); // 得到 我的廣告 總頁數
+	int getMyAdTotalPagesByFk(MemberBean roomRentMemId); // 得到一頁的租房廣告 
 
 }

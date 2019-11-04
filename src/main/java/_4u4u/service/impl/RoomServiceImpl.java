@@ -1,12 +1,14 @@
 package _4u4u.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import _4u4u.model.RoomBean;
+import _4u4u.model.RoomRentBean;
 import _4u4u.repository.RoomDao;
 import _4u4u.service.RoomService;
 @Transactional
@@ -36,6 +38,16 @@ public class RoomServiceImpl implements Serializable, RoomService {
 		dao.saveRoom(roomBean);
 		
 		return 0;
+	}
+
+	@Override
+	public List<RoomBean> getRoomsByFk(RoomRentBean roomAd) {		
+		return dao.getRoomsByFk(roomAd);
+	}
+
+	@Override
+	public int updateRoom(RoomBean bean) {
+		return dao.updateRoom(bean);
 	}
 
 	

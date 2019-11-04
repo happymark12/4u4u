@@ -236,8 +236,8 @@ button {
 						<!--帳戶管理-->
 						<li class="active"><a href="<c:url value='/account' />">帳戶管理</a></li>
 						<!--發佈廣告-->
-						<li class="dropdown"><a class="dropdown-toggle">發佈廣告
-								<span class="caret"></span>
+						<li class="dropdown"><a class="dropdown-toggle">發佈廣告 <span
+								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<c:url value='/PostRoomRentAd' />">出租廣告</a></li>
@@ -311,10 +311,11 @@ button {
 						<br> <br id="houseCountBr">
 
 						<div id="houseCountDiv">
-							房間數量 : <select id="houseCount" name="houseCount" required disabled="disabled">
+							房間數量 : <select id="houseCount" name="houseCount" required
+								disabled="disabled">
 								<option value="room-${adRoomNum}">${adRoomNum}間房</option>
 							</select>
-							<!--                                   <option value="">請選擇...</option> --> 							
+							<!--                                   <option value="">請選擇...</option> -->
 							<!--                               <select id="houseCount" name="houseCount" required> -->
 							<!--                                   <option value="">請選擇...</option> -->
 							<%--                                   <option value="room-${adRoomNum}">${adRoomNum}間房</option> --%>
@@ -359,8 +360,7 @@ button {
 						</div>
 						<br id="peopleCountBr"> 住宅種類 : <input type="text"
 							name="propertyType" id="propertyType" value="${adHouseType}"
-							readonly="readonly"><br>
-						<br>
+							readonly="readonly"><br> <br>
 						<!--                           	住宅種類 : <select name="propertyType"> -->
 						<!--                               <option value="default">請選擇...</option> -->
 						<!--                               <option value="0">公寓</option> -->
@@ -374,14 +374,58 @@ button {
 								id="address" name="address" required value="${detailAddr}"
 								readonly="readonly">
 						</div>
-						<br> 汽車車位數量 : <select name="parkingNum">
-							<option value="0">0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-						</select> <br> <br id="parkingBr"> 電梯 : <input type="radio"
-							name="elevator" value="true">有 <input type="radio"
-							name="elevator" value="false" checked>無 <br> <br>
+						<br> 汽車車位數量 : 
+						<c:if test="${! empty adParkingCount}">
+							<select name="parkingNum">
+								<c:if test="${adParkingCount == '0'}">
+									<option value="0" selected>0</option>
+								</c:if>
+								<c:if test="${adParkingCount != '0'}">
+									<option value="0">0</option>
+								</c:if>
+								<c:if test="${adParkingCount == '1'}">
+									<option value="1" selected>1</option>
+								</c:if>
+								<c:if test="${adParkingCount != '1'}">
+									<option value="1">1</option>
+								</c:if>
+								<c:if test="${adParkingCount == '2'}">
+									<option value="2" selected>2</option>
+								</c:if>
+								<c:if test="${adParkingCount != '2'}">
+									<option value="2">2</option>
+								</c:if>
+								<c:if test="${adParkingCount == '3'}">
+									<option value="3" selected>3</option>
+								</c:if>
+								<c:if test="${adParkingCount != '3'}">
+									<option value="3">3</option>
+								</c:if>	
+							</select> <br><br id="parkingBr"> 
+						</c:if>
+						<c:if test="${empty adParkingCount}">
+							<select name="parkingNum">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select> <br> <br id="parkingBr"> 
+						</c:if>						
+						電梯 : 
+						<c:if test="${! empty adHasElevator}">
+							<c:if test="${adHasElevator == true}">
+								<input type="radio" name="elevator" value="true" checked>有 
+								<input type="radio" name="elevator" value="false">無 <br><br>
+							</c:if>
+							<c:if test="${adHasElevator == false}">
+								<input type="radio" name="elevator" value="true">有 
+								<input type="radio" name="elevator" value="false" checked>無 <br><br>
+							</c:if>						
+						</c:if>
+						<c:if test="${empty adHasElevator}">
+							<input type="radio" name="elevator" value="true">有 
+							<input type="radio" name="elevator" value="false" checked>無 <br><br>
+						</c:if>												
 						額外費用(不包含在租金內) : <input type="text" style="width: 600px;"
 							name="extraCost" value="${adExtraCost}"> <br> <br
 							id="wholePropertyBr">
@@ -421,8 +465,17 @@ button {
 								<td>
 									<fieldset>
 										<legend style="color: #59abe3; font-weight: bold;">
-											房間${vs.index+1}<input name="adState" type="checkbox"
-												value="false">已出租
+											房間${vs.index+1}
+											<c:if test="${! empty roomState[vs.index]}">
+												<c:if test="${roomState[vs.index] == false}">
+													<input name="roomState${vs.index+1}" type="checkbox"
+														value="false" checked>已出租
+												</c:if>
+												<c:if test="${roomState[vs.index] == true}">
+													<input name="roomState${vs.index+1}" type="checkbox"
+														value="false">已出租
+												</c:if>
+											</c:if>
 										</legend>
 										<div class="roomTypeDiv">
 											房屋現況 : <input type="text" id="roomType${vs.index+1}"
@@ -430,44 +483,151 @@ button {
 												readonly="readonly"><br> <br>
 										</div>
 										出租樓層 : <input name="floor${vs.index+1}"
-											name="floor${vs.index}" value="${room.rentFloor}"
-											style="width: 30px;" readonly="readonly">
-										&nbsp;&nbsp; 總樓層 : <input type="text"
-											name="totalFloor${vs.index}" value="${room.rentTotalFloor}"
+											value="${room.rentFloor}" style="width: 30px;" readonly="readonly">
+										&nbsp;&nbsp; 總樓層 : 
+										<input type="text" name="totalFloor${vs.index+1}" value="${room.rentTotalFloor}"
 											style="width: 30px;" readonly="readonly"><br> <br>
 										<span class="cookSelect"> 可否開伙 : <select
 											name="canCook${vs.index+1}">
 												<option value="true">可</option>
 												<option value="false">不可</option>
 										</select>
-										</span> <br class="cookBr"> <br class="cookBr"> 格局 : <input
-											type="checkbox" name="balcony${vs.index+1}" value="true">有陽台
-										<input type="checkbox" name="duplexApartment${vs.index+1}"
-											value="true">樓中樓 <br> <br> 坪數 : <input
-											type="text" name="area`+i+`" style="width: 80px;"
-											value="${room.area}" readonly="readonly">坪(請填寫室內實際使用坪數) <br> <br>
-										房間設備 : <input type="checkbox" name="wash${vs.index+1}"
-											value="true">洗衣機 <input type="checkbox"
-											name="icebox${vs.index+1}" value="true">冰箱 <input
-											type="checkbox" name="four${vs.index+1}" value="true">第四台
-										<input type="checkbox" name="gas${vs.index+1}" value="true">天然瓦斯
-										<input type="checkbox" name="tv${vs.index+1}" value="true">電視
-										<input type="checkbox" name="wardrobe${vs.index+1}"
-											value="true">衣櫃 <input type="checkbox"
-											name="sofa${vs.index+1}" value="true">沙發 <input
-											type="checkbox" name="heater${vs.index+1}" value="true">熱水器
-										<input type="checkbox" name="broadband${vs.index+1}"
-											value="true">網路 <input type="checkbox"
-											name="desk${vs.index+1}" value="true">桌子 <input
-											type="checkbox" name="chair${vs.index+1}" value="true">椅子
-										<input type="checkbox" name="singlebed${vs.index+1}"
-											value="true">單人床 <input type="checkbox"
-											name="doublebed${vs.index+1}" value="true">雙人床 <input
-											type="checkbox" name="coldair${vs.index+1}" value="true">冷氣
-										<br> <br> 租金 : <input type="number" min="0"
-											name="roomRentPrice${vs.index+1}" style="width: 80px;" required
-											value="${room.rentPrice}" readonly="readonly"> 元/月 &nbsp;&nbsp;押金: <select
-											name="roomDeposit${vs.index+1}" disabled="disabled" id="roomDeposit${vs.index+1}">
+										</span> <br class="cookBr"> <br class="cookBr"> 格局 :
+										<c:if test="${! empty balcony[vs.index]}">
+											<c:if test="${balcony[vs.index] == true}">
+												<input type="checkbox" name="balcony${vs.index+1}" value="true" checked>有陽台
+											</c:if>
+											<c:if test="${balcony[vs.index] == false}">
+												<input type="checkbox" name="balcony${vs.index+1}" value="true">有陽台
+											</c:if>
+										</c:if>
+										<c:if test="${! empty duplex[vs.index]}">
+											<c:if test="${duplex[vs.index] == true}">
+												<input type="checkbox" name="duplexApartment${vs.index+1}" value="true" checked>樓中樓 <br><br>
+											</c:if>
+											<c:if test="${duplex[vs.index] == false}">
+												<input type="checkbox" name="duplexApartment${vs.index+1}" value="true">樓中樓 <br><br>
+											</c:if>
+										</c:if> 										
+										 坪數 : <input type="text" name="area${vs.index+1}" style="width: 80px;" value="${room.area}" readonly="readonly">坪(請填寫室內實際使用坪數)
+										<br><br> 房間設備 : 
+										<c:if test="${! empty wash[vs.index]}">
+											<c:if test="${wash[vs.index] == true}">
+												<input type="checkbox" name="wash${vs.index+1}" value="true" checked>洗衣機
+											</c:if>
+											<c:if test="${wash[vs.index] == false}">
+												<input type="checkbox" name="wash${vs.index+1}" value="true">洗衣機
+											</c:if>
+										</c:if>
+										<c:if test="${! empty icebox[vs.index]}">
+											<c:if test="${icebox[vs.index] == true}">
+												<input type="checkbox" name="icebox${vs.index+1}" value="true" checked>冰箱
+											</c:if>
+											<c:if test="${icebox[vs.index] == false}">
+												<input type="checkbox" name="icebox${vs.index+1}" value="true">冰箱
+											</c:if>
+										</c:if>
+									 	<c:if test="${! empty four[vs.index]}">
+									 		<c:if test="${four[vs.index] == true}">
+												<input type="checkbox" name="four${vs.index+1}" value="true" checked>第四台 		
+									 		</c:if>
+									 		<c:if test="${four[vs.index] == false}">
+									 			<input type="checkbox" name="four${vs.index+1}" value="true">第四台
+									 		</c:if>
+									 	</c:if>
+										<c:if test="${! empty gas[vs.index]}">
+											<c:if test="${gas[vs.index] == true}">
+												<input type="checkbox" name="gas${vs.index+1}" value="true" checked>天然瓦斯
+											</c:if>
+											<c:if test="${gas[vs.index] == false}">
+												<input type="checkbox" name="gas${vs.index+1}" value="true">天然瓦斯
+											</c:if>
+										</c:if>
+										<c:if test="${! empty tv[vs.index]}">
+											<c:if test="${tv[vs.index] == true}">
+												<input type="checkbox" name="tv${vs.index+1}" value="true" checked>電視
+											</c:if>
+											<c:if test="${tv[vs.index] == false}">
+												<input type="checkbox" name="tv${vs.index+1}" value="true">電視
+											</c:if>
+										</c:if>
+										<c:if test="${! empty wardrobe[vs.index]}">
+											<c:if test="${wardrobe[vs.index] == true}">
+												<input type="checkbox" name="wardrobe${vs.index+1}" value="true" checked>衣櫃 
+											</c:if>
+											<c:if test="${wardrobe[vs.index] == false}">
+												<input type="checkbox" name="wardrobe${vs.index+1}" value="true">衣櫃 
+											</c:if>
+										</c:if>
+										<c:if test="${! empty sofa[vs.index]}">
+											<c:if test="${sofa[vs.index] == true}">
+												<input type="checkbox" name="sofa${vs.index+1}" value="true" checked>沙發 
+											</c:if>
+											<c:if test="${sofa[vs.index] == false}">
+												<input type="checkbox" name="sofa${vs.index+1}" value="true">沙發 
+											</c:if>
+										</c:if>
+										<c:if test="${! empty heater[vs.index]}">
+											<c:if test="${heater[vs.index] == true}">
+												<input type="checkbox" name="heater${vs.index+1}" value="true" checked>熱水器
+											</c:if>
+											<c:if test="${heater[vs.index] == false}">
+												<input type="checkbox" name="heater${vs.index+1}" value="true">熱水器
+											</c:if>
+										</c:if>
+										<c:if test="${! empty broadband[vs.index]}">
+											<c:if test="${broadband[vs.index] == true}">
+												<input type="checkbox" name="broadband${vs.index+1}" value="true" checked>網路 
+											</c:if>
+											<c:if test="${broadband[vs.index] == false}">
+												<input type="checkbox" name="broadband${vs.index+1}" value="true">網路 
+											</c:if>
+										</c:if>
+										<c:if test="${! empty desk[vs.index]}">
+											<c:if test="${desk[vs.index] == true}">
+												<input type="checkbox" name="desk${vs.index+1}" value="true" checked>桌子
+											</c:if>
+											<c:if test="${desk[vs.index] == false}">
+												<input type="checkbox" name="desk${vs.index+1}" value="true">桌子
+											</c:if>
+										</c:if>
+										<c:if test="${! empty chair[vs.index]}">
+											<c:if test="${chair[vs.index] == true}">
+												<input type="checkbox" name="chair${vs.index+1}" value="true" checked>椅子
+											</c:if>
+											<c:if test="${chair[vs.index] == false}">
+												<input type="checkbox" name="chair${vs.index+1}" value="true">椅子
+											</c:if>
+										</c:if>
+										<c:if test="${! empty singlebed[vs.index]}">
+											<c:if test="${singlebed[vs.index] == true}">
+												<input type="checkbox" name="singlebed${vs.index+1}" value="true" checked>單人床
+											</c:if>
+											<c:if test="${singlebed[vs.index] == false}">
+												<input type="checkbox" name="singlebed${vs.index+1}" value="true">單人床
+											</c:if>
+										</c:if>
+										<c:if test="${! empty doublebed[vs.index]}">
+											<c:if test="${doublebed[vs.index] == true}">
+												<input type="checkbox" name="doublebed${vs.index+1}" value="true" checked>雙人床
+											</c:if>
+											<c:if test="${doublebed[vs.index] == false}">
+												<input type="checkbox" name="doublebed${vs.index+1}" value="true">雙人床
+											</c:if>
+										</c:if>
+										<c:if test="${! empty coldair[vs.index]}">
+											<c:if test="${coldair[vs.index] == true}">
+												<input type="checkbox" name="coldair${vs.index+1}" value="true" checked>冷氣
+											</c:if>
+											<c:if test="${coldair[vs.index] == false}">
+												<input type="checkbox" name="coldair${vs.index+1}" value="true">冷氣
+											</c:if>
+										</c:if>									
+										<br><br> 租金 : <input type="number" min="0"
+											name="roomRentPrice${vs.index+1}" style="width: 80px;"
+											required value="${room.rentPrice}" readonly="readonly">
+										元/月 &nbsp;&nbsp;押金: <select name="roomDeposit${vs.index+1}"
+											disabled="disabled" id="roomDeposit${vs.index+1}">
 											<option value="2">二個月</option>
 											<option value="0">面議</option>
 											<option value="1">一個月</option>
@@ -486,23 +646,27 @@ button {
 						<legend
 							style="font-weight: bold; font-size: 30px; color: #59ABE3;">希望的房客
 						</legend>
-						<br> 可否抽菸 : <select name="Fsmoke">
+						<br> 可否抽菸 : 
+						<select name="Fsmoke">
 							<option value="true">沒有偏好</option>
 							<option value="false">否</option>
-
-						</select><br> <br> 職業 : <select name="Fjob">
-							<option value="4">沒有偏好</option>
-							<option value="0">學生</option>
-							<option value="1">上班族</option>
-
-						</select><br> <br> 可否養寵物 : <select name="Fpet">
+						</select>
+						<br> <br> 職業 :
+							<select name="Fjob">
+								<option value="4">沒有偏好</option>
+								<option value="0">學生</option>
+								<option value="1">上班族</option>
+							</select>
+						<br> <br> 可否養寵物 : 
+						<select name="Fpet">
 							<option value="false">不可</option>
 							<option value="true">可</option>
-						</select><br> <br>性別 : <select name="Fgender">
+						</select>
+						<br> <br>性別 : 
+						<select name="Fgender">
 							<option value="2">沒有偏好</option>
 							<option value="0">男</option>
 							<option value="1">女</option>
-
 						</select><br>
 
 
@@ -511,10 +675,22 @@ button {
 								<option value="default">-</option>
 							</select><br> <br> 最大年齡 : <select id="maxAge" name="Fmaxage">
 								<option value="default">-</option>
-							</select><br> <br> 可否接受情侶 : <input type="radio" name="couple"
-								value="false">不接受 <input type="radio" name="couple"
-								value="true">接受
-
+							</select>
+							<br><br> 可否接受情侶 : 
+							<c:if test="${! empty acceptCouple }">
+								<c:if test="${acceptCouple == true}">
+									<input type="radio" name="couple" value="false">不接受 
+									<input type="radio" name="couple" value="true" checked>接受
+								</c:if>
+								<c:if test="${acceptCouple == false}">
+									<input type="radio" name="couple" value="false" checked>不接受 
+									<input type="radio" name="couple" value="true" >接受
+								</c:if>								
+							</c:if>
+							<c:if test="${empty acceptCouple }">
+								<input type="radio" name="couple" value="false">不接受 
+								<input type="radio" name="couple" value="true">接受
+							</c:if>							
 						</div>
 
 					</fieldset>
@@ -526,22 +702,67 @@ button {
 						<legend
 							style="font-weight: bold; font-size: 30px; color: #59ABE3;">目前的房客
 						</legend>
-						<br> 是否養寵物 : <select name="Cpet">
-							<option value="false">沒有養寵物</option>
-							<option value="true">有養寵物</option>
-
-						</select><br> <br> 是否有人抽菸 : <select name="Csmoke">
-							<option value="false">沒有</option>
-							<option value="true">有</option>
-
-						</select><br> <br> 性向 : <select name="CsexOrient">
+						<br> 是否養寵物 : 
+						<c:if test="${! empty Cpet}">
+							<select name="Cpet">
+								<c:if test="${Cpet == true}">
+									<option value="false">沒有養寵物</option>
+									<option value="true" selected>有養寵物</option>
+								</c:if>
+								<c:if test="${Cpet == false}">
+									<option value="false" selected>沒有養寵物</option>
+									<option value="true" >有養寵物</option>
+								</c:if>
+							</select>
+						</c:if>
+						<c:if test="${empty Cpet}">
+							<select name="Cpet">
+								<option value="false">沒有養寵物</option>
+								<option value="true">有養寵物</option>
+							</select>
+						</c:if>						
+						<br> <br> 是否有人抽菸 : 
+						<c:if test="${! empty CSmoke}">
+							<select name="Csmoke">
+								<c:if test="${CSmoke == true}">
+									<option value="false">沒有</option>
+									<option value="true" selected>有</option>
+								</c:if>
+								<c:if test="${CSmoke == false}">
+									<option value="false" selected>沒有</option>
+									<option value="true" >有</option>
+								</c:if>								
+							</select>
+						</c:if>
+						<c:if test="${ empty CSmoke}">
+							<select name="Csmoke">
+								<option value="false">沒有</option>
+								<option value="true">有</option>
+							</select>
+						</c:if>						
+						<br> <br> 性向 : 
+						<select name="CsexOrient">
 							<option value="0">不透漏</option>
 							<option value="2">同性戀</option>
 							<option value="1">異性戀</option>
 							<option value="3">雙性戀</option>
 							<option value="4">混合</option>
-						</select> <input type="checkbox" value="true" name="allowSexOrentSearch">
-						願意將性向公開給其他人搜尋(勾選代表願意) <br> <br> 性別 : <select
+						</select>
+						<c:if test="${! empty allowSexOrentSearch}">
+							<c:if test="${allowSexOrentSearch ==  true}">
+								<input type="checkbox" value="true" name="allowSexOrentSearch" checked>
+								願意將性向公開給其他人搜尋(勾選代表願意) <br> <br>
+							</c:if>
+							<c:if test="${allowSexOrentSearch ==  false}">
+								<input type="checkbox" value="true" name="allowSexOrentSearch">
+								願意將性向公開給其他人搜尋(勾選代表願意) <br> <br>
+							</c:if>							
+						</c:if>
+						<c:if test="${empty allowSexOrentSearch }">
+							<input type="checkbox" value="true" name="allowSexOrentSearch">
+							願意將性向公開給其他人搜尋(勾選代表願意) <br> <br>
+						</c:if> 
+						 性別 : <select
 							id="genderOption" name="Cgender">
 							<option>請選擇</option>
 							<option>男</option>

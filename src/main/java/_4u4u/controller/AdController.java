@@ -48,6 +48,7 @@ import _4u4u.model.WantedRoomBean;
 import _4u4u.service.EmailService;
 import _4u4u.service.MemberService;
 import _4u4u.service.RoomRentService;
+import _4u4u.service.RoomService;
 import _4u4u.service.WantedRoomService;
 import _4u4u_init.ude.CantCreateAdException;
 import _4u4u_init.util.ConvertTableUtil;
@@ -62,6 +63,7 @@ public class AdController {
 	RoomRentService roomRentService;
 	MemberService memberService;
 	EmailService emailService;
+	RoomService roomService;
 	
 //  修改廣告功能會用到下面兩個	
 	WantedRoomBean wantedRoomBean;
@@ -87,6 +89,11 @@ public class AdController {
 	@Autowired
 	public void setEmailService(EmailService emailService) {
 		this.emailService = emailService;
+	}
+	
+	@Autowired
+	public void setRoomService(RoomService roomService) {
+		this.roomService = roomService;
 	}
 
 	@RequestMapping(value = { "/_4u4u/findRoomDetail", "/_4u4u/roomRentDetail" }, method = RequestMethod.GET)
@@ -2788,9 +2795,9 @@ public class AdController {
 		Timestamp adCreateDate = new Timestamp(System.currentTimeMillis()); // 要寄信日期
 		Timestamp adUpdateDate = adCreateDate; // 要寄信日期
 		Boolean adStyle = false;
-		Set<RoomBean> roomItems = null;
 		String county = null;
-		String district = null;
+//		Set<RoomBean> roomItems = null;
+//		String district = null;
 
 		Collection<Part> parts = request.getParts();
 		GlobalService.exploreParts(parts, request);
@@ -2865,7 +2872,15 @@ public class AdController {
 						adCurrentPeopleNum = value.trim();
 					} else if (fldName.equalsIgnoreCase("propertyType")) {
 						if (!value.trim().equals("default")) {
-							adHouseType = value.trim();
+							if (value.trim().equals("公寓")) {
+								adHouseType = "0";
+							} else if (value.trim().equals("透天厝")) {
+								adHouseType = "1";
+							} else if (value.trim().equals("電梯大樓")) {
+								adHouseType = "2";
+							} else if (value.trim().equals("華廈")) {
+								adHouseType = "3";
+							}
 						}
 					} else if (fldName.equalsIgnoreCase("county")) {
 						if (value == null || value.trim().length() == 0) {
@@ -2873,16 +2888,7 @@ public class AdController {
 						} else {
 							county = value.trim();
 						}
-					} 
-//					else if (fldName.equalsIgnoreCase("district")) {
-//						if (value == null || value.trim().length() == 0) {
-//							errorMessage.put("address", "地址欄位必填");
-//						} else {
-//							district = value.trim();
-//						}
-//
-//					} 
-					else if (fldName.equalsIgnoreCase("address")) {
+					} else if (fldName.equalsIgnoreCase("address")) {
 						if (value == null || value.trim().length() == 0) {
 							errorMessage.put("address", "地址欄位必填");
 						} else {
@@ -3059,12 +3065,6 @@ public class AdController {
 
 		} // if bracket end
 
-		if (!errorMessage.isEmpty()) {
-//			RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_PostAd/UpdateRoomRentAd.jsp");
-//			rd.forward(request, response);
-			return "/_4u4u_PostAd/UpdateRoomRentAd";
-		}
-
 		if (parts != null) { // 如果這是一個上傳資料的表單
 			if (!new File("d:\\images\\roomRentAd").exists()) {
 				new File("d:\\images\\roomRentAd").mkdirs();
@@ -3113,6 +3113,187 @@ public class AdController {
 				adImages, adCook, adCurHasPet, adCurSmoke, adCurSexOrientation, adCurAllowedSearchbySexOrient,
 				adCurGender, adCurAge, adFutureSmoke, adFutureJobType, adFuturePet, adFutureGender, adFutureAge,
 				adFutureCoupleAccept, adUpdateDate, adCreateDate, adState, emailMax, sendMail, emailDate, adStyle, mb);
+
+		if (parts != null && adRoomNum != 0) { // 如果這是一個上傳資料的表單
+			List<RoomBean> roomList = roomService.getRoomsByFk(roomRentBean);// 得到此則廣告含有幾間房間
+//			System.out.println("一則租房廣告有幾間房間:" + roomList.size() + "間"); 
+			int i = 1;
+			for (Iterator<RoomBean> iterator = roomList.iterator(); iterator.hasNext();) {
+				RoomBean rb = (RoomBean) iterator.next();				
+				Boolean roomState = null;// 有效為true 失效為false
+				String roomType = null;
+				Boolean balcony = null;
+				Boolean duplexApartment = null;
+				Boolean wash = null;
+				Boolean icebox = null;
+				Boolean four = null;
+				Boolean gas = null;
+				Boolean tv = null;
+				Boolean wardrobe = null;
+				Boolean sofa = null;
+				Boolean heater = null;
+				Boolean broadband = null;
+				Boolean desk = null;
+				Boolean chair = null;
+				Boolean singlebed = null;
+				Boolean doublebed = null;
+				Boolean coldair = null;
+				for (Part p : parts) {
+					String fldName = p.getName();
+					String value = null;
+					value = request.getParameter(fldName);
+					// 1. 讀取使用者輸入資料
+					if (p.getContentType() == null) {
+						if (fldName.equalsIgnoreCase("roomState" + i)) {
+							roomState = Boolean.parseBoolean(value.trim());
+							rb.setRoomState(roomState);
+						} else if (fldName.equalsIgnoreCase("roomType" + i)) {
+							if (value.trim().equals("套房")) {
+								roomType = "0";
+							} else {
+								roomType = "1";
+							}
+							rb.setRoomType(roomType);
+						} else if (fldName.equalsIgnoreCase("floor" + i)) {
+							if (value != null && value.trim().length() != 0) {
+								rb.setRentFloor(value.trim());
+							} else {
+								rb.setRentFloor(null);
+							}
+						} else if (fldName.equalsIgnoreCase("totalFloor" + i)) {
+							if (value != null && value.trim().length() != 0) {
+								rb.setRentTotalFloor(value.trim());
+							} else {
+								rb.setRentTotalFloor(null);
+							}
+						} else if (fldName.equalsIgnoreCase("area" + i)) {
+							if (value != null && value.trim().length() != 0) {
+								rb.setArea(value.trim());
+							} else {
+								rb.setArea(null);
+							}
+						} else if (fldName.equalsIgnoreCase("roomRentPrice" + i)) {
+							if (value != null && value.trim().length() != 0) {
+								rb.setRentPrice(Integer.parseInt(value.trim()));
+							} else {
+								errorMessage.put("rentPrice", "租金欄位不能空白");
+							}
+						} else if (fldName.equalsIgnoreCase("roomDeposit" + i)) {
+							rb.setDeposit(value.trim());
+						} else if (fldName.equalsIgnoreCase("canCook" + i)) {
+							rb.setAllowCook(Boolean.parseBoolean(value.trim()));
+						} else if (fldName.equalsIgnoreCase("balcony" + i)) {
+							balcony = Boolean.parseBoolean(value.trim());
+							rb.setHasBalcony(balcony);
+						} else if (fldName.equalsIgnoreCase("duplexApartment" + i)) {
+							duplexApartment = Boolean.parseBoolean(value.trim());
+							rb.setHasDuplex(duplexApartment);
+						} else if (fldName.equalsIgnoreCase("wash" + i)) {
+							wash = Boolean.parseBoolean(value.trim());
+							rb.setHasWash(wash);
+						} else if (fldName.equalsIgnoreCase("icebox" + i)) {
+							icebox = Boolean.parseBoolean(value.trim());
+							rb.setHasIceBox(icebox);
+						} else if (fldName.equalsIgnoreCase("four" + i)) {
+							four = Boolean.parseBoolean(value.trim());
+							rb.setHas4(four);
+						} else if (fldName.equalsIgnoreCase("gas" + i)) {
+							gas = Boolean.parseBoolean(value.trim());
+							rb.setHasGas(gas);
+						} else if (fldName.equalsIgnoreCase("tv" + i)) {
+							tv = Boolean.parseBoolean(value.trim());
+							rb.setHasTV(tv);
+						} else if (fldName.equalsIgnoreCase("wardrobe" + i)) {
+							wardrobe = Boolean.parseBoolean(value.trim());
+							rb.setHasWardrobe(wardrobe);
+						} else if (fldName.equalsIgnoreCase("sofa" + i)) {
+							sofa = Boolean.parseBoolean(value.trim());
+							rb.setHasSofa(sofa);
+						} else if (fldName.equalsIgnoreCase("heater" + i)) {
+							heater = Boolean.parseBoolean(value.trim());
+							rb.setHasHeater(heater);
+						} else if (fldName.equalsIgnoreCase("broadband" + i)) {
+							broadband = Boolean.parseBoolean(value.trim());
+							rb.setHasBroadBand(broadband);
+						} else if (fldName.equalsIgnoreCase("desk" + i)) {
+							desk = Boolean.parseBoolean(value.trim());
+							rb.setHasDesk(desk);
+						} else if (fldName.equalsIgnoreCase("chair" + i)) {
+							chair = Boolean.parseBoolean(value.trim());
+							rb.setHasChair(chair);
+						} else if (fldName.equalsIgnoreCase("singlebed" + i)) {
+							singlebed = Boolean.parseBoolean(value.trim());
+							rb.setHasSingleBed(singlebed);
+						} else if (fldName.equalsIgnoreCase("doublebed" + i)) {
+							doublebed = Boolean.parseBoolean(value.trim());
+							rb.setHasDoubleBed(doublebed);
+						} else if (fldName.equalsIgnoreCase("coldair" + i)) {
+							coldair = Boolean.parseBoolean(value.trim());
+							rb.setHasColdAir(coldair);
+						}
+					} // if bracket end
+
+				} // for loop end
+				if (balcony == null) {
+					rb.setHasBalcony(false);
+				}
+				if (duplexApartment == null) {
+					rb.setHasDuplex(false);
+				}
+				if (wash == null) {
+					rb.setHasWash(false);
+				}
+				if (icebox == null) {
+					rb.setHasIceBox(false);
+				}
+				if (four == null) {
+					rb.setHas4(false);
+				}
+				if (gas == null) {
+					rb.setHasGas(false);
+				}
+				if (tv == null) {
+					rb.setHasTV(false);
+				}
+				if (wardrobe == null) {
+					rb.setHasWardrobe(false);
+				}
+				if (sofa == null) {
+					rb.setHasSofa(false);
+				}
+				if (heater == null) {
+					rb.setHasHeater(false);
+				}
+				if (broadband == null) {
+					rb.setHasBroadBand(false);
+				}
+				if (desk == null) {
+					rb.setHasDesk(false);
+				}
+				if (chair == null) {
+					rb.setHasChair(false);
+				}
+				if (singlebed == null) {
+					rb.setHasSingleBed(false);
+				}
+				if (doublebed == null) {
+					rb.setHasDoubleBed(false);
+				}
+				if (coldair == null) {
+					rb.setHasColdAir(false);
+				}
+				if (roomState == null) {
+					rb.setRoomState(true);
+				}
+				roomService.updateRoom(rb);// 修改房間
+				i++;
+			} // for loop end
+		} // if loop end
+
+		if (!errorMessage.isEmpty()) {
+			return "_4u4u_PostAd/UpdateRoomRentAd";
+		}
+		
 		try {
 //			RoomRentService service = new RoomRentServiceImpl();
 //			MemberService memberService = new MemberServiceImpl();
@@ -3121,14 +3302,12 @@ public class AdController {
 			///////////// 失效廣告也能修改故不判斷 ///////////////////
 			String memberState = memberService.memberState(mb);
 //			boolean isExistEffectiveAd = service.isExistEffectiveAd(mb);
-
 			if (!memberState.equals("1") && !memberState.equals("2")) {
 				throw new CantCreateAdException("不是一般會員也不是VIP會員");
 			}
 //			else if(isExistEffectiveAd && memberState.equals("1")) {
 //				throw new CantCreateAdException("已達到發佈廣告上限，請升級成VIP享有發佈多則廣告的功能");
 //			}
-			////////////////////////////////////////////////////////
 			Integer iAdStyle = null;
 			if (adStyle == false) {
 				iAdStyle = 0;
@@ -3138,15 +3317,32 @@ public class AdController {
 			if (strMemId != null) {
 				memId = Integer.parseInt(strMemId);
 			}
-
+//			String strPageNo = request.getParameter("pageNo");
+//			Integer pageNo = null;
+//			if(strPageNo == null) {
+//				pageNo = 1;
+//			}
+//			if(strPageNo != null) {
+//				pageNo = Integer.parseInt(strPageNo);
+//			}
+			/////////////////////// 修改廣告///////////////////////
 			int n = roomRentService.updateRoomRentAd(roomRentAd);
+			emailService.sendMatchEmail(roomRentAd); // 寄出符合信
+
+			////////////////// 印出符合的信件 ////////////////////
+			List<WantedRoomBean> list = roomRentService.findingMatchWantedRoomAd(roomRentAd);
+			for (WantedRoomBean wantedRoomBean : list) {
+				System.err.println("找到以下符合廣告的信件");
+				System.err.println(
+						"廣告編號為： " + wantedRoomBean.getFindRoomId() + "   廣告標題為： " + wantedRoomBean.getAdTitle());
+			}
+			////////////////////////////////////////////////////////
 			if (n == 1) {
 				msgOK.put("UpdateOK", "<Font color='red'>修改成功</Font>");
 //				response.sendRedirect(response.encodeRedirectURL("/4u4u/_4u4u/MyAdServlet?memId="+memId+"&adStyle="+iAdStyle+"&adId="+adId));
 				return "redirect:/_4u4u/MyAdServlet?memId=" + memId + "&adStyle=" + iAdStyle + "&adId=" + adId;
 			} else {
 				errorMessage.put("errorUpdate", "修改此筆資料有誤(ProcessRoomRentAd)");
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -3207,381 +3403,478 @@ public class AdController {
 	 }
 	
 	@RequestMapping(value = { "/_4u4u/ProcessUpdateWantedRoomAd",
-			"/_4u4u/ProcessUpdateRoomRentAd" }, method = RequestMethod.GET)
-	public String ProcessUpdateAd(Model model, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-//			response.sendRedirect(request.getContextPath() + "/index.jsp");
-			return "redirect:/index";
+	"/_4u4u/ProcessUpdateRoomRentAd" }, method = RequestMethod.GET)
+public String ProcessUpdateAd(Model model, HttpServletRequest request, HttpServletResponse response)
+	throws IOException {
+request.setCharacterEncoding("UTF-8");
+HttpSession session = request.getSession(false);
+if (session == null) {
+//	response.sendRedirect(request.getContextPath() + "/index.jsp");
+	return "redirect:/index";
+}
+String adStyle = request.getParameter("adStyle").trim();
+String strAdId = request.getParameter("adId").trim();		
+Integer adId = null;
+if (strAdId != null) {
+	adId = Integer.parseInt(strAdId);
+}		
+model.addAttribute("adId", adId);		
+WantedRoomBean wrb = null;
+RoomRentBean rrb = null;
+if (adStyle.equals("0")) {
+//	RoomRentService roomRentService = new RoomRentServiceImpl();
+	rrb = roomRentService.getAdById(adId);
+} else {
+//	WantedRoomService wantedRoomService = new WantedRoomServiceImpl();
+	wrb = wantedRoomService.getAdById(adId);
+}
+model.addAttribute("adStyle", adStyle);
+
+if (wrb != null) {
+	session.setAttribute("findRoomAd", wrb); // findRoomAd
+
+	// 幾間套房幾間雅房
+	if (wrb.getSuiteQuantity() == 0 && wrb.getRoomQuantity() != 0) {
+		model.addAttribute("wantedRoom", "想要" + wrb.getRoomQuantity() + "雅房");
+	} else if (wrb.getRoomQuantity() == 0 && wrb.getSuiteQuantity() != 0) {
+		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房");
+	} else {
+		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房" + wrb.getRoomQuantity() + "雅房");
+
+	}
+	// 性別人數
+	if (wrb.getPeopleNumGender() != null) {
+		String peopleGenderNum = wrb.getPeopleNumGender();
+		model.addAttribute("peopleNumGender", peopleGenderNum);
+	}
+	// 合租意願
+	if (wrb.getAgreeShare() != null) {
+		Boolean agreeShare = wrb.getAgreeShare();
+		model.addAttribute("agreeShare", agreeShare);
+	}
+	// 想要居住地區
+	// looking in
+	if (wrb.getAreaCode() != null && wrb.getAreaCode().length() != 0) {
+		String[] strArray = wrb.getAreaCode().trim().split(",");
+		String lookInArea = "";
+		for (String str : strArray) {
+			lookInArea += ConvertTableUtil.addressCodeToString(str) + ",";
 		}
-		String adStyle = request.getParameter("adStyle").trim();
-		String strAdId = request.getParameter("adId").trim();
-		Integer adId = null;
-		if (strAdId != null) {
-			adId = Integer.parseInt(strAdId);
-		}
-		model.addAttribute("adId", adId);
-		WantedRoomBean wrb = null;
-		RoomRentBean rrb = null;
-		if (adStyle.equals("0")) {
-//			RoomRentService roomRentService = new RoomRentServiceImpl();
-			rrb = roomRentService.getAdById(adId);
+		lookInArea = lookInArea.substring(0, lookInArea.length() - 1);
+		model.addAttribute("lookInArea", lookInArea);
+	}
+	// 租金預算
+	if (wrb.getBudget() != null) {
+		Integer budget = wrb.getBudget();
+		model.addAttribute("budget", budget);
+	}
+	// checkInDate
+	if (wrb.getCheckInDate() != null) {
+		Date date = new Date(wrb.getCheckInDate().getTime());
+		model.addAttribute("checkInDate", date);
+	}
+	// liveTime
+	if (wrb.getLiveTime() != null) {
+		String liveTime = ConvertTableUtil.minimumStayCodeToString(wrb.getLiveTime());
+		model.addAttribute("liveTime", liveTime);
+	}
+	// hasWashMachine
+	if (wrb.getHasWashMachine() != null) {
+		Boolean washMachine = wrb.getHasWashMachine();
+		model.addAttribute("washMachine", washMachine);
+	}
+	// hasRefrigerator
+	if (wrb.getHasRefrigerator() != null) {
+		Boolean refrigerator = wrb.getHasRefrigerator();
+		model.addAttribute("refrigerator", refrigerator);
+	}
+	// hasTV
+	if (wrb.getHasTV() != null) {
+		Boolean tv = wrb.getHasTV();
+		model.addAttribute("TV", tv);
+	}
+	// hasAirConditioning
+	if (wrb.getHasAirConditioning() != null) {
+		Boolean airConditioning = wrb.getHasAirConditioning();
+		model.addAttribute("airConditioning", airConditioning);
+	}
+	// hasWaterHeater
+	if (wrb.getHasWaterHeater() != null) {
+		Boolean waterHeater = wrb.getHasWaterHeater();
+		model.addAttribute("waterHeater", waterHeater);
+	}
+	// hasInternet
+	if (wrb.getHasInternet() != null) {
+		Boolean internet = wrb.getHasInternet();
+		model.addAttribute("internet", internet);
+	}
+	// hasFourthTV
+	if (wrb.getHasFourthTV() != null) {
+		Boolean fourthTV = wrb.getHasFourthTV();
+		model.addAttribute("fourthTV", fourthTV);
+	}
+	// hasGas
+	if (wrb.getHasGas() != null) {
+		Boolean gas = wrb.getHasGas();
+		model.addAttribute("gas", gas);
+	}
+	// hasWardrobe
+	if (wrb.getHasWardrobe() != null) {
+		Boolean wardrobe = wrb.getHasWardrobe();
+		model.addAttribute("wardrobe", wardrobe);
+	}
+	// hasSofa
+	if (wrb.getHasSofa() != null) {
+		Boolean sofa = wrb.getHasSofa();
+		model.addAttribute("sofa", sofa);
+	}
+	// hasTable
+	if (wrb.getHasTable() != null) {
+		Boolean table = wrb.getHasTable();
+		model.addAttribute("table", table);
+	}
+	// hasChair
+	if (wrb.getHasChair() != null) {
+		Boolean chair = wrb.getHasChair();
+		model.addAttribute("chair", chair);
+	}
+	// hasParking
+	if (wrb.getHasParking() != null) {
+		Boolean parking = wrb.getHasParking();
+		model.addAttribute("parking", parking);
+	}
+	// hasBalcony
+	if (wrb.getHasBalcony() != null) {
+		Boolean balcony = wrb.getHasBalcony();
+		model.addAttribute("balcony", balcony);
+	}
+	// hasSingleBed
+	if (wrb.getHasSingleBed() != null) {
+		Boolean singleBed = wrb.getHasSingleBed();
+		model.addAttribute("singleBed", singleBed);
+	}
+	// hasDoubleBed
+	if (wrb.getHasDoubleBed() != null) {
+		Boolean doubleBed = wrb.getHasDoubleBed();
+		model.addAttribute("doubleBed", doubleBed);
+	}
+	// allowCook
+	Boolean cook = wrb.getHasDoubleBed();
+	model.addAttribute("cook", cook);
+	// age
+	if (wrb.getAge() != null) {
+		String age = wrb.getAge().trim().replace(",", " to ");
+		model.addAttribute("age", age);
+	}
+	// job
+	String job = ConvertTableUtil.jobCodeToString(wrb.getJob());
+	model.addAttribute("job", job);
+	// allowSmoke
+	Boolean smoke = wrb.getAllowSmoke();
+	model.addAttribute("smoke", smoke);
+	// allowPet
+	Boolean pet = wrb.getAllowPet();
+	model.addAttribute("pet", pet);
+	// sexOrientation
+	if (wrb.getAgreeAdCondition()) {
+		String sexOrient = ConvertTableUtil.sexOrientCodeToString(wrb.getSexualOrientation());
+		model.addAttribute("sexOrient", sexOrient);
+	}
+	// agreeAdCondition
+	if (wrb.getAgreeAdCondition() != null) {
+		Boolean agreeAdCondition = wrb.getAgreeAdCondition();
+		model.addAttribute("agreeAdCondition", agreeAdCondition);
+	}
+	// 室友偏好
+	// flatmateGender
+	String gender = ConvertTableUtil.genderCodeToString(wrb.getWantedRoommatesGender());
+	model.addAttribute("flatmateGender", gender);
+	// flatmateAge
+	if (wrb.getWantedRoommatesAge() != null && wrb.getWantedRoommatesAge().trim().length() != 0) {
+		String roomMateAge = null;
+		if (wrb.getWantedRoommatesAge().contains(",")) {
+
+			roomMateAge = wrb.getWantedRoommatesAge().trim().replace(",", " to ");
 		} else {
-//			WantedRoomService wantedRoomService = new WantedRoomServiceImpl();
-			wrb = wantedRoomService.getAdById(adId);
+			roomMateAge = wrb.getWantedRoommatesAge().trim();
 		}
-		model.addAttribute("adStyle", adStyle);
-
-		if (wrb != null) {
-			session.setAttribute("findRoomAd", wrb); // findRoomAd
-
-			// 幾間套房幾間雅房
-			if (wrb.getSuiteQuantity() == 0 && wrb.getRoomQuantity() != 0) {
-				model.addAttribute("wantedRoom", "想要" + wrb.getRoomQuantity() + "雅房");
-			} else if (wrb.getRoomQuantity() == 0 && wrb.getSuiteQuantity() != 0) {
-				model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房");
-			} else {
-				model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房" + wrb.getRoomQuantity() + "雅房");
-
+		model.addAttribute("roomMateAge", roomMateAge);
+	}
+	// flatmateJob
+	String flatmateJob = ConvertTableUtil.jobCodeToString(wrb.getWantedRoommatesJob());
+	model.addAttribute("flatmateJob", flatmateJob);
+	// flatmateSmoke
+	Boolean flatmateSmoke = wrb.getWantedRoommatesSmoke();
+	model.addAttribute("flatmateSmoke", flatmateSmoke);
+	// flatmatePet
+	Boolean flatmatePet = wrb.getWantedRoommatesPet();
+	model.addAttribute("flatmatePet", flatmatePet);
+	// flatmatesexOrientation
+	String flatmateSexOrient = ConvertTableUtil.sexOrientCodeToString(wrb.getWantedRoommatesSex());
+	model.addAttribute("flatmateSexOrient", flatmateSexOrient);
+	// 廣告細節
+	// adTitle
+	String adTitle = wrb.getAdTitle();
+	model.addAttribute("adTitle", adTitle);
+	// adDetailContent
+	Clob clob = wrb.getAdDescription();
+	if (clob != null) {
+		try (Reader r = wrb.getAdDescription().getCharacterStream();) {
+			StringBuffer buffer = new StringBuffer();
+			int ch, count = 0;
+			while ((ch = r.read()) != -1) {
+				buffer.append("" + (char) ch);
+				count++;
 			}
-			// 性別人數
-			if (wrb.getPeopleNumGender() != null) {
-				String peopleGenderNum = wrb.getPeopleNumGender();
-				model.addAttribute("peopleNumGender", peopleGenderNum);
+			model.addAttribute("adDescription", buffer.toString());
+			if (count > 45) {
+				model.addAttribute("needReadMore", "yes");
 			}
-			// 合租意願
-			if (wrb.getAgreeShare() != null) {
-				Boolean agreeShare = wrb.getAgreeShare();
-				model.addAttribute("agreeShare", agreeShare);
-			}
-			// 想要居住地區
-			// looking in
-			if (wrb.getAreaCode() != null && wrb.getAreaCode().length() != 0) {
-				String[] strArray = wrb.getAreaCode().trim().split(",");
-				String lookInArea = "";
-				for (String str : strArray) {
-					lookInArea += ConvertTableUtil.addressCodeToString(str) + ",";
-				}
-				lookInArea = lookInArea.substring(0, lookInArea.length() - 1);
-				model.addAttribute("lookInArea", lookInArea);
-			}
-			// 租金預算
-			if (wrb.getBudget() != null) {
-				Integer budget = wrb.getBudget();
-				model.addAttribute("budget", budget);
-			}
-			// checkInDate
-			if (wrb.getCheckInDate() != null) {
-				Date date = new Date(wrb.getCheckInDate().getTime());
-				model.addAttribute("checkInDate", date);
-			}
-			// liveTime
-			if (wrb.getLiveTime() != null) {
-				String liveTime = ConvertTableUtil.minimumStayCodeToString(wrb.getLiveTime());
-				model.addAttribute("liveTime", liveTime);
-			}
-			// hasWashMachine
-			if (wrb.getHasWashMachine() != null) {
-				Boolean washMachine = wrb.getHasWashMachine();
-				model.addAttribute("washMachine", washMachine);
-			}
-			// hasRefrigerator
-			if (wrb.getHasRefrigerator() != null) {
-				Boolean refrigerator = wrb.getHasRefrigerator();
-				model.addAttribute("refrigerator", refrigerator);
-			}
-			// hasTV
-			if (wrb.getHasTV() != null) {
-				Boolean tv = wrb.getHasTV();
-				model.addAttribute("TV", tv);
-			}
-			// hasAirConditioning
-			if (wrb.getHasAirConditioning() != null) {
-				Boolean airConditioning = wrb.getHasAirConditioning();
-				model.addAttribute("airConditioning", airConditioning);
-			}
-			// hasWaterHeater
-			if (wrb.getHasWaterHeater() != null) {
-				Boolean waterHeater = wrb.getHasWaterHeater();
-				model.addAttribute("waterHeater", waterHeater);
-			}
-			// hasInternet
-			if (wrb.getHasInternet() != null) {
-				Boolean internet = wrb.getHasInternet();
-				model.addAttribute("internet", internet);
-			}
-			// hasFourthTV
-			if (wrb.getHasFourthTV() != null) {
-				Boolean fourthTV = wrb.getHasFourthTV();
-				model.addAttribute("fourthTV", fourthTV);
-			}
-			// hasGas
-			if (wrb.getHasGas() != null) {
-				Boolean gas = wrb.getHasGas();
-				model.addAttribute("gas", gas);
-			}
-			// hasWardrobe
-			if (wrb.getHasWardrobe() != null) {
-				Boolean wardrobe = wrb.getHasWardrobe();
-				model.addAttribute("wardrobe", wardrobe);
-			}
-			// hasSofa
-			if (wrb.getHasSofa() != null) {
-				Boolean sofa = wrb.getHasSofa();
-				model.addAttribute("sofa", sofa);
-			}
-			// hasTable
-			if (wrb.getHasTable() != null) {
-				Boolean table = wrb.getHasTable();
-				model.addAttribute("table", table);
-			}
-			// hasChair
-			if (wrb.getHasChair() != null) {
-				Boolean chair = wrb.getHasChair();
-				model.addAttribute("chair", chair);
-			}
-			// hasParking
-			if (wrb.getHasParking() != null) {
-				Boolean parking = wrb.getHasParking();
-				model.addAttribute("parking", parking);
-			}
-			// hasBalcony
-			if (wrb.getHasBalcony() != null) {
-				Boolean balcony = wrb.getHasBalcony();
-				model.addAttribute("balcony", balcony);
-			}
-			// hasSingleBed
-			if (wrb.getHasSingleBed() != null) {
-				Boolean singleBed = wrb.getHasSingleBed();
-				model.addAttribute("singleBed", singleBed);
-			}
-			// hasDoubleBed
-			if (wrb.getHasDoubleBed() != null) {
-				Boolean doubleBed = wrb.getHasDoubleBed();
-				model.addAttribute("doubleBed", doubleBed);
-			}
-			// allowCook
-			Boolean cook = wrb.getHasDoubleBed();
-			model.addAttribute("cook", cook);
-			// age
-			if (wrb.getAge() != null) {
-				String age = wrb.getAge().trim().replace(",", " to ");
-				model.addAttribute("age", age);
-			}
-			// job
-			String job = ConvertTableUtil.jobCodeToString(wrb.getJob());
-			model.addAttribute("job", job);
-			// allowSmoke
-			Boolean smoke = wrb.getAllowSmoke();
-			model.addAttribute("smoke", smoke);
-			// allowPet
-			Boolean pet = wrb.getAllowPet();
-			model.addAttribute("pet", pet);
-			// sexOrientation
-			if (wrb.getAgreeAdCondition()) {
-				String sexOrient = ConvertTableUtil.sexOrientCodeToString(wrb.getSexualOrientation());
-				model.addAttribute("sexOrient", sexOrient);
-			}
-			// agreeAdCondition
-			if (wrb.getAgreeAdCondition() != null) {
-				Boolean agreeAdCondition = wrb.getAgreeAdCondition();
-				model.addAttribute("agreeAdCondition", agreeAdCondition);
-			}
-			// 室友偏好
-			// flatmateGender
-			String gender = ConvertTableUtil.genderCodeToString(wrb.getWantedRoommatesGender());
-			model.addAttribute("flatmateGender", gender);
-			// flatmateAge
-			if (wrb.getWantedRoommatesAge() != null && wrb.getWantedRoommatesAge().trim().length() != 0) {
-				String roomMateAge = null;
-				if (wrb.getWantedRoommatesAge().contains(",")) {
-
-					roomMateAge = wrb.getWantedRoommatesAge().trim().replace(",", " to ");
-				} else {
-					roomMateAge = wrb.getWantedRoommatesAge().trim();
-				}
-				model.addAttribute("roomMateAge", roomMateAge);
-			}
-			// flatmateJob
-			String flatmateJob = ConvertTableUtil.jobCodeToString(wrb.getWantedRoommatesJob());
-			model.addAttribute("flatmateJob", flatmateJob);
-			// flatmateSmoke
-			Boolean flatmateSmoke = wrb.getWantedRoommatesSmoke();
-			model.addAttribute("flatmateSmoke", flatmateSmoke);
-			// flatmatePet
-			Boolean flatmatePet = wrb.getWantedRoommatesPet();
-			model.addAttribute("flatmatePet", flatmatePet);
-			// flatmatesexOrientation
-			String flatmateSexOrient = ConvertTableUtil.sexOrientCodeToString(wrb.getWantedRoommatesSex());
-			model.addAttribute("flatmateSexOrient", flatmateSexOrient);
-			// 廣告細節
-			// adTitle
-			String adTitle = wrb.getAdTitle();
-			model.addAttribute("adTitle", adTitle);
-			// adDetailContent
-			Clob clob = wrb.getAdDescription();
-			if (clob != null) {
-				try (Reader r = wrb.getAdDescription().getCharacterStream();) {
-					StringBuffer buffer = new StringBuffer();
-					int ch, count = 0;
-					while ((ch = r.read()) != -1) {
-						buffer.append("" + (char) ch);
-						count++;
-					}
-					model.addAttribute("adDescription", buffer.toString());
-					if (count > 45) {
-						model.addAttribute("needReadMore", "yes");
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// phone
-			if (wrb.getPhone() != null) {
-				String phone = wrb.getPhone();
-				model.addAttribute("phone", phone);
-			}
-			// image
-			String[] imageFileNames = null;
-			if (wrb.getImages() != null && wrb.getImages().trim().length() != 0) {
-				imageFileNames = wrb.getImages().trim().split(",");
-			}
-			if (imageFileNames != null) {
-				model.addAttribute("images", imageFileNames);
-
-			}
-			// emailMax
-			if (wrb.getEmailMax() != null) {
-				Integer emailMax = wrb.getEmailMax();
-				model.addAttribute("emailMax", emailMax);
-			}
-
-		}
-		if (rrb != null) {
-			model.addAttribute("RoomRentAd", rrb); // RoomRentAd
-			// adRentType
-			String adRentType = ConvertTableUtil.rentCodeToString(rrb.getAdRentType());
-			model.addAttribute("adRentType", adRentType);
-			// adRoomNum
-			Integer adRoomNum = rrb.getAdRoomNum();
-			model.addAttribute("adRoomNum", adRoomNum);
-			// adOwner 廣告者身分
-			// identity
-			String adOwner = ConvertTableUtil.identityCodeToString(rrb.getAdIdentity().trim());
-			model.addAttribute("adOwner", adOwner);
-			// AgentFee 仲介費
-			if (rrb.getAdIdentity().trim().equals("3")) {
-				if (rrb.getAdAgentFee() != null && !rrb.getAdAgentFee().trim().equals("0")) {
-					model.addAttribute("agentFee", rrb.getAdAgentFee());
-				}
-			}			
-			// adCurrentPeopleNum
-			String adCurrentPeopleNum = rrb.getAdCurrentPeopleNum();
-			model.addAttribute("adCurrentPeopleNum", adCurrentPeopleNum);
-			// adHouseType住宅種類
-			if (rrb.getAdHouseType() != null) {
-				String adHouseType = ConvertTableUtil.houseCodeToString(rrb.getAdHouseType());
-				model.addAttribute("adHouseType", adHouseType);
-			}
-			// areaCode
-			if (rrb.getAdAreacode() != null && rrb.getAdAreacode().trim().length() != 0) {
-
-				String area = ConvertTableUtil.addressCodeToString(rrb.getAdAreacode());
-				model.addAttribute("area", area);
-
-				String detailAddr = rrb.getAdDetailaddress();
-//				String strStart = detailAddr.substring(0, 6);
-				String strFinal = detailAddr.substring(area.length());
-				
-//				 String query = String.format("%s",URLEncoder.encode(detailAddr,"UTF-8"));
-//				 System.out.println(detailAddr);
-				model.addAttribute("detailAddr", strFinal);
-			}
-			// adTotalArea 總坪數
-			String adTotalArea = rrb.getAdTotalArea();
-			model.addAttribute("adTotalArea", adTotalArea);
-			// adParkingCount
-			String adParkingCount = rrb.getAdParkingCount();
-			model.addAttribute("adParkingCount", adParkingCount);
-			// adHasElevator
-			Boolean adHasElevator = rrb.getAdHasElevator();
-			model.addAttribute("adHasElevator", adHasElevator);
-			// adExtraCost
-			if (rrb.getAdExtraCost() != null) {
-				String adExtraCost = rrb.getAdExtraCost();
-				model.addAttribute("adExtraCost", adExtraCost);
-			}
-
-			// adMinimumStayLength
-			String adMinimumStayLength = rrb.getAdMinimumStayLength();
-			model.addAttribute("adMinimumStayLength", adMinimumStayLength);
-			// adAvailableDate checkInDate
-			if (rrb.getAdAvailableDate() != null) {
-				Date date = new Date(rrb.getAdAvailableDate().getTime());
-				model.addAttribute("checkInDate", date);
-			}
-			
-			// 室友偏好
-			String Fjob = ConvertTableUtil.jobCodeToString(rrb.getAdFutureJobType());
-			model.addAttribute("Fjob", Fjob);
-			// flatmateGender
-			String gender = ConvertTableUtil.genderCodeToString(rrb.getAdFutureGender());
-			model.addAttribute("flatmateGender", gender);
-
-			// image
-			String[] imageFileNames = null;
-			if (rrb.getAdImages() != null && rrb.getAdImages().trim().length() != 0) {
-				imageFileNames = rrb.getAdImages().trim().split(",");
-			}
-			model.addAttribute("images", imageFileNames);
-
-			String adTitle = rrb.getAdTitle();
-			model.addAttribute("adTitle", adTitle);
-			// adDescription
-			Clob clob = rrb.getAdDetailContent();
-			if (clob != null) {
-				try (Reader r = rrb.getAdDetailContent().getCharacterStream();) {
-					StringBuffer buffer = new StringBuffer();
-					int ch, count = 0;
-					while ((ch = r.read()) != -1) {
-						buffer.append("" + (char) ch);
-						count++;
-					}
-					model.addAttribute("adDescription", buffer.toString());
-					if (count > 45) {
-						model.addAttribute("needReadMore", "yes");
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// phone
-			String phone = rrb.getAdPhone();
-			model.addAttribute("phone", phone);
-//			取出房間資訊 一個廣告可有多個房間 裝room的list
-			Set<RoomBean> roomSet = rrb.getRoomItems();
-			List<String> roomTypeList = new ArrayList<>();
-			for (Iterator<RoomBean> iterator = roomSet.iterator(); iterator.hasNext();) {
-				RoomBean rb = (RoomBean) iterator.next();				
-				
-				String roomType = ConvertTableUtil.roomCodeToString(rb.getRoomType());
-				roomTypeList.add(roomType);			
-			}
-			model.addAttribute("roomType", roomTypeList);			
-		}
-
-		if (adStyle.equals("0")) {
-//			RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_PostAd/UpdateRoomRentAd.jsp");
-//			rd.forward(request, response);
-			return "/_4u4u_PostAd/UpdateRoomRentAd";
-		} else {
-//			RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_PostAd/UpdateWantedRoomAd.jsp");
-//			rd.forward(request, response);
-			return "/_4u4u_PostAd/UpdateWantedRoomAd";
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
+	// phone
+	if (wrb.getPhone() != null) {
+		String phone = wrb.getPhone();
+		model.addAttribute("phone", phone);
+	}
+	// image
+	String[] imageFileNames = null;
+	if (wrb.getImages() != null && wrb.getImages().trim().length() != 0) {
+		imageFileNames = wrb.getImages().trim().split(",");
+	}
+	if (imageFileNames != null) {
+		model.addAttribute("images", imageFileNames);
+
+	}
+	// emailMax
+	if (wrb.getEmailMax() != null) {
+		Integer emailMax = wrb.getEmailMax();
+		model.addAttribute("emailMax", emailMax);
+	}
+
+}
+if (rrb != null) {
+	session.setAttribute("RoomRentAd", rrb); // RoomRentAd
+	// adRentType
+	String adRentType = ConvertTableUtil.rentCodeToString(rrb.getAdRentType());
+	model.addAttribute("adRentType", adRentType);
+	// adRoomNum
+	Integer adRoomNum = rrb.getAdRoomNum();
+	model.addAttribute("adRoomNum", adRoomNum);
+	// adOwner 廣告者身分
+	// identity
+	String adOwner = ConvertTableUtil.identityCodeToString(rrb.getAdIdentity().trim());
+	model.addAttribute("adOwner", adOwner);
+	// AgentFee 仲介費
+	if (rrb.getAdIdentity().trim().equals("3")) {
+		if (rrb.getAdAgentFee() != null && !rrb.getAdAgentFee().trim().equals("0")) {
+			model.addAttribute("agentFee", rrb.getAdAgentFee());
+		}
+	}
+	// adCurrentPeopleNum
+	String adCurrentPeopleNum = rrb.getAdCurrentPeopleNum();
+	model.addAttribute("adCurrentPeopleNum", adCurrentPeopleNum);
+	// adHouseType住宅種類
+	if (rrb.getAdHouseType() != null) {
+		String adHouseType = ConvertTableUtil.houseCodeToString(rrb.getAdHouseType());
+		model.addAttribute("adHouseType", adHouseType);
+	}
+	// areaCode
+	if (rrb.getAdAreacode() != null && rrb.getAdAreacode().trim().length() != 0) {
+
+		String area = ConvertTableUtil.addressCodeToString(rrb.getAdAreacode());
+		model.addAttribute("area", area);
+
+		String detailAddr = rrb.getAdDetailaddress();
+//		String strStart = detailAddr.substring(0, 6);
+		String strFinal = detailAddr.substring(area.length());
+
+//		 String query = String.format("%s",URLEncoder.encode(detailAddr,"UTF-8"));
+//		 System.out.println(detailAddr);
+		model.addAttribute("detailAddr", strFinal);
+	}
+	// adTotalArea 總坪數
+	String adTotalArea = rrb.getAdTotalArea();
+	model.addAttribute("adTotalArea", adTotalArea);
+	// adParkingCount
+	String adParkingCount = rrb.getAdParkingCount();
+	model.addAttribute("adParkingCount", adParkingCount);
+	// adHasElevator
+	Boolean adHasElevator = rrb.getAdHasElevator();
+	model.addAttribute("adHasElevator", adHasElevator);
+	// adExtraCost
+	if (rrb.getAdExtraCost() != null) {
+		String adExtraCost = rrb.getAdExtraCost();
+		model.addAttribute("adExtraCost", adExtraCost);
+	}
+
+	// adMinimumStayLength
+	String adMinimumStayLength = rrb.getAdMinimumStayLength();
+	model.addAttribute("adMinimumStayLength", adMinimumStayLength);
+	// adAvailableDate checkInDate
+	if (rrb.getAdAvailableDate() != null) {
+		Date date = new Date(rrb.getAdAvailableDate().getTime());
+		model.addAttribute("checkInDate", date);
+	}
+
+	// 室友偏好
+	String Fjob = ConvertTableUtil.jobCodeToString(rrb.getAdFutureJobType());
+	model.addAttribute("Fjob", Fjob);
+	// flatmateGender
+	String gender = ConvertTableUtil.genderCodeToString(rrb.getAdFutureGender());
+	model.addAttribute("flatmateGender", gender);
+
+	// image
+	String[] imageFileNames = null;
+	if (rrb.getAdImages() != null && rrb.getAdImages().trim().length() != 0) {
+		imageFileNames = rrb.getAdImages().trim().split(",");
+	}
+	model.addAttribute("images", imageFileNames);
+
+	String adTitle = rrb.getAdTitle();
+	model.addAttribute("adTitle", adTitle);
+	// adDescription
+	Clob clob = rrb.getAdDetailContent();
+	if (clob != null) {
+		try (Reader r = rrb.getAdDetailContent().getCharacterStream();) {
+			StringBuffer buffer = new StringBuffer();
+			int ch, count = 0;
+			while ((ch = r.read()) != -1) {
+				buffer.append("" + (char) ch);
+				count++;
+			}
+			model.addAttribute("adDescription", buffer.toString());
+			if (count > 45) {
+				model.addAttribute("needReadMore", "yes");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// phone
+	String phone = rrb.getAdPhone();
+	model.addAttribute("phone", phone);
+	// acceptCouple
+	Boolean acceptCouple = rrb.getAdFutureCoupleAccept();
+	model.addAttribute("acceptCouple", acceptCouple);
+	// Cpet
+	Boolean cPet = rrb.getAdCurHasPet();
+	model.addAttribute("Cpet", cPet);
+	// Csmoke
+	Boolean cSmoke = rrb.getAdCurSmoke();
+	model.addAttribute("CSmoke", cSmoke);
+	// allowSexOrentSearch
+	Boolean allowSexOrentSearch = rrb.getAdCurAllowedSearchbySexOrient();
+	model.addAttribute("allowSexOrentSearch", allowSexOrentSearch);
+//	取出房間資訊 一個廣告可有多個房間 裝room的list
+	Set<RoomBean> roomSet = rrb.getRoomItems();
+	List<String> roomTypeList = new ArrayList<>();
+	List<Boolean> roomStateList = new ArrayList<>();
+	List<Boolean> balconyList = new ArrayList<>();
+	List<Boolean> duplexList = new ArrayList<>();
+	List<Boolean> washList = new ArrayList<>();
+	List<Boolean> iceboxList = new ArrayList<>();
+	List<Boolean> fourList = new ArrayList<>();
+	List<Boolean> gasList = new ArrayList<>();
+	List<Boolean> tvList = new ArrayList<>();
+	List<Boolean> wardrobeList = new ArrayList<>();
+	List<Boolean> sofaList = new ArrayList<>();
+	List<Boolean> heaterList = new ArrayList<>();
+	List<Boolean> broadbandList = new ArrayList<>();
+	List<Boolean> deskList = new ArrayList<>();
+	List<Boolean> chairList = new ArrayList<>();
+	List<Boolean> singlebedList = new ArrayList<>();
+	List<Boolean> doublebedList = new ArrayList<>();
+	List<Boolean> coldairList = new ArrayList<>();
+	for (Iterator<RoomBean> iterator = roomSet.iterator(); iterator.hasNext();) {
+		RoomBean rb = (RoomBean) iterator.next();
+
+		String roomType = ConvertTableUtil.roomCodeToString(rb.getRoomType());
+		roomTypeList.add(roomType);
+
+		Boolean roomState = rb.getRoomState();
+		roomStateList.add(roomState);
+
+		Boolean balcony = rb.getHasBalcony();
+		balconyList.add(balcony);
+
+		Boolean duplex = rb.getHasDuplex();
+		duplexList.add(duplex);
+
+		Boolean wash = rb.getHasWash();
+		washList.add(wash);
+
+		Boolean icebox = rb.getHasIceBox();
+		iceboxList.add(icebox);
+
+		Boolean four = rb.getHas4();
+		fourList.add(four);
+
+		Boolean gas = rb.getHasGas();
+		gasList.add(gas);
+
+		Boolean tv = rb.getHasTV();
+		tvList.add(tv);
+
+		Boolean wardrobe = rb.getHasWardrobe();
+		wardrobeList.add(wardrobe);
+
+		Boolean sofa = rb.getHasSofa();
+		sofaList.add(sofa);
+
+		Boolean heater = rb.getHasHeater();
+		heaterList.add(heater);
+
+		Boolean broadband = rb.getHasBroadBand();
+		broadbandList.add(broadband);
+
+		Boolean desk = rb.getHasDesk();
+		deskList.add(desk);
+
+		Boolean chair = rb.getHasChair();
+		chairList.add(chair);
+
+		Boolean singlebed = rb.getHasSingleBed();
+		singlebedList.add(singlebed);
+
+		Boolean doublebed = rb.getHasDoubleBed();
+		doublebedList.add(doublebed);
+
+		Boolean coldair = rb.getHasColdAir();
+		coldairList.add(coldair);
+	}
+	model.addAttribute("roomType", roomTypeList);
+	model.addAttribute("roomState", roomStateList);
+	model.addAttribute("balcony", balconyList);
+	model.addAttribute("duplex", duplexList);
+	model.addAttribute("wash", washList);
+	model.addAttribute("icebox", iceboxList);
+	model.addAttribute("four", fourList);
+	model.addAttribute("gas", gasList);
+	model.addAttribute("tv", tvList);
+	model.addAttribute("wardrobe", wardrobeList);
+	model.addAttribute("sofa", sofaList);
+	model.addAttribute("heater", heaterList);
+	model.addAttribute("broadband", broadbandList);
+	model.addAttribute("desk", deskList);
+	model.addAttribute("chair", chairList);
+	model.addAttribute("singlebed", singlebedList);
+	model.addAttribute("doublebed", doublebedList);
+	model.addAttribute("coldair", coldairList);
+}
+
+if (adStyle.equals("0")) {
+//	RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_PostAd/UpdateRoomRentAd.jsp");
+//	rd.forward(request, response);
+	return "/_4u4u_PostAd/UpdateRoomRentAd";
+} else {
+//	RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_PostAd/UpdateWantedRoomAd.jsp");
+//	rd.forward(request, response);
+	return "/_4u4u_PostAd/UpdateWantedRoomAd";
+}
+}
 
 	@RequestMapping(value = { "/_4u4u/ChangeFindRoomAdState",
 			"/_4u4u/ChangeRoomRentAdState" }, method = RequestMethod.GET)
@@ -3595,8 +3888,8 @@ public class AdController {
 		}
 		String strAdId = request.getParameter("adId").trim();
 		Integer adId = null;
-		Boolean RoomRentAdState = null;
-		Boolean WantedRoomAdState = null;
+//		Boolean RoomRentAdState = null;
+//		Boolean WantedRoomAdState = null;
 		if (strAdId != null) {
 			adId = Integer.parseInt(strAdId);
 		}
@@ -3612,19 +3905,19 @@ public class AdController {
 			MemberBean memberBean = memberService.queryMemberById(memId);
 //			RoomRentService service = new RoomRentServiceImpl();
 			RoomRentBean roomRentBean = roomRentService.getAdById(adId);
-			RoomRentAdState = roomRentBean.getAdState();
-			System.out.println("修改前的租房廣告的State=" + RoomRentAdState);
+//			RoomRentAdState = roomRentBean.getAdState();
+//			System.out.println("修改前的租房廣告的State=" + RoomRentAdState);
 			roomRentService.changeAdState(roomRentBean, memberBean);
-			RoomRentAdState = roomRentBean.getAdState();
-			System.out.println("修改後的租房廣告的State=" + RoomRentAdState);
+//			RoomRentAdState = roomRentBean.getAdState();
+//			System.out.println("修改後的租房廣告的State=" + RoomRentAdState);
 		} else if (adStyle == 1) {
 //			WantedRoomService service = new WantedRoomServiceImpl();
 			WantedRoomBean wantedRoomBean = wantedRoomService.getAdById(adId);
-			WantedRoomAdState = wantedRoomBean.getAdState();
-			System.out.println("修改前的找房廣告的AdState=" + WantedRoomAdState);
+//			WantedRoomAdState = wantedRoomBean.getAdState();
+//			System.out.println("修改前的找房廣告的AdState=" + WantedRoomAdState);
 			wantedRoomService.changeAdState(wantedRoomBean);
-			WantedRoomAdState = wantedRoomBean.getAdState();
-			System.out.println("修改後的找房廣告的AdState=" + WantedRoomAdState);
+//			WantedRoomAdState = wantedRoomBean.getAdState();
+//			System.out.println("修改後的找房廣告的AdState=" + WantedRoomAdState);
 		}
 //		判斷adStyle 是0還1 0為租房廣告 1為找房廣告 選擇跳轉頁面
 		if (adStyle == 1) {
