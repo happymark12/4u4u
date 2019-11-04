@@ -3946,8 +3946,8 @@ if (adStyle.equals("0")) {
 			RoomRentAdState = roomRentBean.getAdState();			
 			if(RoomRentAdState == false) {
 				Boolean hasExistEffectiveAd = roomRentService.isExistEffectiveAd(memberBean);
-				System.out.println(hasExistEffectiveAd);
-				System.out.println(memberBean.getState());
+//				System.out.println(hasExistEffectiveAd);
+//				System.out.println(memberBean.getState());
 				if(hasExistEffectiveAd ==  true && memberBean.getState().equals("1")) {
 					errorMsg = "<Font color='red'>已經有1則或是1則以上的租房廣告存在</Font>";
 					session.setAttribute("errorMsg", errorMsg);
