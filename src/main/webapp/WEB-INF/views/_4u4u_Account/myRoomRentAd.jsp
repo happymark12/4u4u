@@ -559,13 +559,14 @@
 									</c:if>
 									<c:if test="${pageNo == totalPages}">
 										<li><a aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-									</c:if>
-									
-								</ul>
-								<p>
-									<a href="<c:url value='/account'/>">帳戶管理</a>
-								</p>
+									</c:if>										
+								</ul>							
 							</nav>
+						</div>
+						<div class="aa-properties-content-bottom">
+							<ul class="pagination">
+								<li><a href="<c:url value='/account'/>">帳戶管理</a></li>
+							</ul>
 						</div>
 						<c:if test="${roomRentAd.size()==0}">
 							<div style="height: 540px;"></div>
