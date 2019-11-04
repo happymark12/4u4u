@@ -105,7 +105,7 @@ button {
 }
     </style>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script type="text/javascript" src="${pageContext.request.contextPath}/js/wantedroom.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/js/updateWantedroom.js"></script>
     <script
     src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.0.2/dist/tw-city-selector.min.js"></script>
  	
@@ -316,13 +316,58 @@ button {
                                   	</select><br><br>
                                   </c:if>                                  
                                   房間類型:
+                                  <c:if test="${! empty suiteQuantity || ! empty roomQuantity}">
+                                  	<select name="severalSuites" id="severalSuites" required>
+                                  		<c:if test="${suiteQuantity == 1}">
+                                  			<option value="">-</option>
+                                     		<option value="1" selected>1</option>
+                                     		<option value="2">2</option>
+                                  		</c:if>
+                                  		<c:if test="${suiteQuantity == 2}">
+                                  			<option value="">-</option>
+                                      		<option value="1">1</option>
+                                      		<option value="2" selected>2</option>
+                                  		</c:if>
+                                  		<c:if test="${suiteQuantity != 1 && suiteQuantity != 2}">
+                                  			<option value="">-</option>
+                                      		<option value="1">1</option>
+                                      		<option value="2">2</option>
+                                  		</c:if>                                     
+                                  	</select>間套房
+                                  <select name="severalRooms" id="severalRooms" required>
+                                  		<c:if test="${roomQuantity == 1}">
+                                  			<option value="">-</option>
+                                      		<option value="1"selected>1</option>
+                                      		<option value="2">2</option>
+                                  		</c:if>
+                                  		<c:if test="${roomQuantity == 2}">
+                                  			<option value="">-</option>
+                                      		<option value="1">1</option>
+                                      		<option value="2" selected>2</option>                                  	
+                                  		</c:if>
+                                  		<c:if test="${roomQuantity != 1 && roomQuantity !=2}">
+                                  			<option value="">-</option>
+                                      		<option value="1">1</option>
+                                      		<option value="2">2</option>
+                                  		</c:if>                                      
+                                  	</select>間雅房
+                                  	<br><br>
+                                  </c:if>
+                                  
+                                  <c:if test="${empty suiteQuantity && empty roomQuantity}">
                                   <select name="severalSuites" id="severalSuites" required>
                                       <option value="">-</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
                                   </select>間套房
                                   <select name="severalRooms" id="severalRooms" required>
-                                          <option value="">-</option>
+                                      <option value="">-</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
                                   </select>間雅房
                                   <br><br>
+                                  </c:if>
+                                  
                                   <!-- 當合租意願選擇不願意時 合租額外描述動態消失-->
                                   合租意願:			
                                   <c:if test="${! empty agreeShare}">

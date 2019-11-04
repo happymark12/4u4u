@@ -22,6 +22,7 @@ import _4u4u_init.util.SystemUtils2018;
 
 public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
+	
 
 	public static void main(String args[]) {
 

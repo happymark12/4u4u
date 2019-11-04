@@ -3434,14 +3434,18 @@ if (wrb != null) {
 	session.setAttribute("findRoomAd", wrb); // findRoomAd
 
 	// 幾間套房幾間雅房
-	if (wrb.getSuiteQuantity() == 0 && wrb.getRoomQuantity() != 0) {
-		model.addAttribute("wantedRoom", "想要" + wrb.getRoomQuantity() + "雅房");
-	} else if (wrb.getRoomQuantity() == 0 && wrb.getSuiteQuantity() != 0) {
-		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房");
-	} else {
-		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房" + wrb.getRoomQuantity() + "雅房");
-
-	}
+//	if (wrb.getSuiteQuantity() == 0 && wrb.getRoomQuantity() != 0) {
+//		model.addAttribute("wantedRoom", "想要" + wrb.getRoomQuantity() + "雅房");
+//	} else if (wrb.getRoomQuantity() == 0 && wrb.getSuiteQuantity() != 0) {
+//		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房");
+//	} else {
+//		model.addAttribute("wantedRoom", "想要" + wrb.getSuiteQuantity() + "套房" + wrb.getRoomQuantity() + "雅房");
+//
+//	}
+	Integer suiteQuantity = wrb.getSuiteQuantity();
+	model.addAttribute("suiteQuantity", suiteQuantity);
+	Integer roomQuantity = wrb.getRoomQuantity();
+	model.addAttribute("roomQuantity", roomQuantity);
 	// 性別人數
 	if (wrb.getPeopleNumGender() != null) {
 		String peopleGenderNum = wrb.getPeopleNumGender();
