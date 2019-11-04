@@ -264,7 +264,7 @@
 								href="/4u4u/_4u4u/MyAdServlet?memId=${LoginOK.memId}&adStyle=0"
 								class="active">房間出租廣告&nbsp; </a> | <a
 								href="/4u4u/_4u4u/MyAdServlet?memId=${LoginOK.memId}&adStyle=1">&nbsp;徵求房間廣告</a></label>
-								<div>${errorMsg}</div>
+								<div>${errorMsg}</div><% session.removeAttribute("errorMsg"); %>
 							<!--
 				<div class="aa-properties-content-head-right">
 				  <label for="">排序</label>
