@@ -1,7 +1,7 @@
     
         $(document).ready(function(){          
             // //年齡範圍(單數)
-            for(var i = 18;i<=100;i++){
+            for(var i = 18;i<=100;i++){            	
                 $('#age').append("<option>"+i+"</option>")  
             }
             // //年齡範圍(複數)
@@ -9,7 +9,7 @@
                 $('#ageMin').append("<option>"+i+"</option>")  
             }
             for(var i = 18;i<=100;i++){
-                $('#ageMax').append("<option>"+i+"</option>")  
+            	$('#ageMax').append("<option>"+i+"</option>")  
             }
             // //想要室友的年齡範圍
             for(var i = 18;i<=100;i++){

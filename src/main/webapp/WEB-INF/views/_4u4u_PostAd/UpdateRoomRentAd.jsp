@@ -669,13 +669,14 @@ button {
 							<option value="1">女</option>
 						</select><br>
 
-
+					<c:if test="${adRentType == '出租房間(有公共空間)'}">
 						<div id="roomForRentDiv">
 							<br> 最小年齡 : <select id="minAge" name="Fminage">
 								<option value="default">-</option>
 							</select><br> <br> 最大年齡 : <select id="maxAge" name="Fmaxage">
 								<option value="default">-</option>
 							</select>
+							
 							<br><br> 可否接受情侶 : 
 							<c:if test="${! empty acceptCouple }">
 								<c:if test="${acceptCouple == true}">
@@ -692,6 +693,7 @@ button {
 								<input type="radio" name="couple" value="true">接受
 							</c:if>							
 						</div>
+					</c:if>
 
 					</fieldset>
 				</td>

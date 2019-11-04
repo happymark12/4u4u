@@ -573,7 +573,7 @@ button {
                                   </select><br><br>
                                   <!-- 當性別人數為單數時,動態出現只有單數(ageDiv)-->
                                   年齡:
-                                  <span id="ageDiv">
+                                 <span id="ageDiv">
                                           <select name="age" id="age">
                                                   <option value="default">-</option>
                                               </select>歲
@@ -585,7 +585,10 @@ button {
                                               </select>歲到<select name="ageMax" id="ageMax">
                                                   <option value="default">-</option>
                                               </select>歲
-                                  </span>          
+                                  </span>   
+                                  
+                                  
+                                  
                                   <br><br> 
                                   職業:				
                                   <c:if test="${! empty job}">
