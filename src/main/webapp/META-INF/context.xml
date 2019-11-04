@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE xml>
+<Context displayName="4u4u Web Application" docBase="4u4u"
+	path="/4u4u" reloadable="true">
+
+	<!-- <Resource name="jdbc/BookDataSQLver" type="javax.sql.DataSource" -->
+	<!-- username="sa" password="sa123456" -->
+	<!-- driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+	<!-- url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=JSPDB" -->
+	<!-- maxTotal="8" -->
+	<!-- maxIdle="4" -->
+	<!-- maxWaitMillis="5000"/> -->
+
+<!-- 	<Resource name="jdbc/4u4uDataMySQL" -->
+<!-- 		type="javax.sql.DataSource" username="root" password="Do!ng123" -->
+<!-- 		driverClassName="com.mysql.cj.jdbc.Driver" url="jdbc:mysql:///4u4u" -->
+<!-- 		connectionProperties="useUnicode=yes;characterEncoding=utf8;useSSL=false;serverTimezone=Asia/Taipei" -->
+<!-- 		maxTotal="8" maxIdle="4" maxWaitMillis="5000" /> -->
+
+	<Manager pathname="">
+		<saveOnRestart>false</saveOnRestart>
+	</Manager>
+</Context>
