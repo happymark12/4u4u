@@ -356,12 +356,12 @@ button {
                                   
                                   <c:if test="${empty suiteQuantity && empty roomQuantity}">
                                   <select name="severalSuites" id="severalSuites" required>
-                                      <option value="">-</option>
+                                      <option value="default">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間套房
                                   <select name="severalRooms" id="severalRooms" required>
-                                      <option value="">-</option>
+                                      <option value="default">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間雅房
@@ -573,22 +573,38 @@ button {
                                   </select><br><br>
                                   <!-- 當性別人數為單數時,動態出現只有單數(ageDiv)-->
                                   年齡:
-                                 <span id="ageDiv">
-                                          <select name="age" id="age">
-                                                  <option value="default">-</option>
-                                              </select>歲
-                                  </span>
-                                  <!-- 當性別人數為複數時,動態出現年齡範圍(ageRange) -->
-                                  <span id="ageRange" style="display: none">
-                                          <select name="ageMin" id="ageMin">
-                                                  <option value="default">-</option>
-                                              </select>歲到<select name="ageMax" id="ageMax">
-                                                  <option value="default">-</option>
-                                              </select>歲
-                                  </span>   
-                                  
-                                  
-                                  
+                                 	<c:choose>                         
+                                 		<c:when test="${peopleNumGender == '1男' || peopleNumGender == '1女'}">
+                                 			<span id="ageDiv">
+                                    			<input type="number" name="age" id="age" value="${age}" style="width: 40px;" min="18" max="99">歲
+                                 			</span>
+                                 		</c:when>
+                                 		<c:otherwise>
+                                 			<c:if test="${peopleNumGender == '1男1女' || peopleNumGender == '2男' || peopleNumGender == '2女' }">
+                                 				<span id="ageDiv" style="display: none">
+                                 				<input type="number" name="age" id="age" style="width: 40px;" min="18" max="99">歲
+                                 				</span>
+                                 			</c:if>           
+                                 		</c:otherwise>
+                                 	</c:choose>
+                                  <!-- 當性別人數為複數時,動態出現年齡範圍(ageRange) -->                                 
+                                  	<c:choose>
+                                  	<c:when test="${peopleNumGender == '1男1女' || peopleNumGender == '2男' || peopleNumGender == '2女'}">
+                                  		<span id="ageRange" >
+                                  			<input type="number" name="ageMin" id="ageMin" value="${ageMin}"  style="width: 40px;">歲到
+                                  			<input type="number" name="ageMax" id="ageMax" value="${ageMax}"  style="width: 40px;">歲
+                                  		</span>
+                                  	</c:when>
+                                  	<c:otherwise>
+                                  		<span id="ageRange" style="display: none">
+                                  			<input type="number" name="ageMin" max="99" min="18" style="width: 40px;">歲到
+                                  			<input type="number" name="ageMax" max="99" min="18" style="width: 40px;">歲	                            		
+                                  		</span>
+                                  	</c:otherwise>
+                                  	</c:choose>
+                                 
+                                   
+                                                                
                                   <br><br> 
                                   職業:				
                                   <c:if test="${! empty job}">
@@ -961,6 +977,9 @@ button {
   <!-- Add fancyBox -->        
   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
   <!-- Custom js -->
-  <script src="${pageContext.request.contextPath}/js/custom.js"></script> 
+  <script src="${pageContext.request.contextPath}/js/custom.js"></script>
+  <script type="text/javascript">
+  	if()
+  </script> 
 </body>
 </html>

@@ -1,9 +1,9 @@
     
         $(document).ready(function(){          
-            // //年齡範圍(單數)
-            for(var i = 18;i<=100;i++){            	
-                $('#age').append("<option>"+i+"</option>")  
-            }
+//            // //年齡範圍(單數)
+//            for(var i = 18;i<=100;i++){            	
+//                $('#age').append("<option>"+i+"</option>")  
+//            }
             // //年齡範圍(複數)
             for(var i = 18;i<=100;i++){
                 $('#ageMin').append("<option>"+i+"</option>")  

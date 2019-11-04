@@ -671,11 +671,16 @@ button {
 
 					<c:if test="${adRentType == '出租房間(有公共空間)'}">
 						<div id="roomForRentDiv">
-							<br> 最小年齡 : <select id="minAge" name="Fminage">
-								<option value="default">-</option>
-							</select><br> <br> 最大年齡 : <select id="maxAge" name="Fmaxage">
-								<option value="default">-</option>
-							</select>
+							<br> 最小年齡 : 
+							<input id="minAge" name="Fminage" type="text" value="${ageMin}" readonly>
+<!-- 							<select id="minAge" name="Fminage"> -->
+<!-- 								<option value="default">-</option> -->
+<!-- 							</select><br> <br>  -->
+							最大年齡 : 
+							<input type="text" id="maxAge" name="Fmaxage" value="${ageMax}" readonly>
+<!-- 							<select id="maxAge" name="Fmaxage"> -->
+<!-- 								<option value="default">-</option> -->
+<!-- 							</select> -->
 							
 							<br><br> 可否接受情侶 : 
 							<c:if test="${! empty acceptCouple }">

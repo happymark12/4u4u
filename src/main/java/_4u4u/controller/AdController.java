@@ -2287,7 +2287,7 @@ public class AdController {
 				county = null;
 			}
 			// user如果没打勾的话
-			// request.getParameterValues("district")会接收到null值
+			// request.getParameterValues("district")会接收到null值			
 			if (districts != null && districts.length > 0) {
 				areaCode = "";
 				for (int i = 0; i < districts.length; i++) {
@@ -2471,10 +2471,10 @@ public class AdController {
 			} else if (peopleNum_gender.trim().equals("1男1女") || peopleNum_gender.trim().equals("2男")
 					|| peopleNum_gender.trim().equals("2女")) {
 
-				if (ageMin.trim().equals("default")) {
+				if (ageMin.trim() == null) {
 					ageMin = null;
 				}
-				if (ageMax.trim().equals("default")) {
+				if (ageMax.trim() == null) {
 					ageMax = null;
 				}
 
@@ -3568,8 +3568,24 @@ if (wrb != null) {
 	model.addAttribute("cook", cook);
 	// age
 	if (wrb.getAge() != null) {
-		String age = wrb.getAge().trim().replace(",", " to ");
-		model.addAttribute("age", age);
+		if(wrb.getAge().contains(",") == true) {
+			String[] ages = wrb.getAge().split(",");		
+			if(ages.length >= 2) {
+				String ageMin = ages[0];
+				model.addAttribute("ageMin", ageMin);
+				String ageMax = ages[1];
+				model.addAttribute("ageMax", ageMax);
+			}else if(ages.length > 0){			
+				model.addAttribute("ageMin", ages[0]);
+				model.addAttribute("ageMax", null);
+			}else {
+				model.addAttribute("ageMin", null);
+				model.addAttribute("ageMax", null);
+			}		
+		}else {
+			String age = wrb.getAge();
+			model.addAttribute("age", age);
+		}		
 	}
 	// job
 	String job = ConvertTableUtil.jobCodeToString(wrb.getJob());
@@ -3737,6 +3753,20 @@ if (rrb != null) {
 		imageFileNames = rrb.getAdImages().trim().split(",");
 	}
 	model.addAttribute("images", imageFileNames);
+	
+	if(rrb.getAdFutureAge() != null) {
+		String[] age = rrb.getAdFutureAge().split(",");
+		if(age.length >= 2) {
+			String ageMin = age[0];
+			model.addAttribute("ageMin", ageMin);
+			String ageMax = age[1];
+			model.addAttribute("ageMax", ageMax);
+		}else {
+			String age1 = rrb.getAdFutureAge();
+			model.addAttribute("ageMin", age1);
+			model.addAttribute("ageMax", null);
+		}		
+	} 
 
 	String adTitle = rrb.getAdTitle();
 	model.addAttribute("adTitle", adTitle);
