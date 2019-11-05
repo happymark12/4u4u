@@ -234,7 +234,8 @@
                     <label for="comment">訊息 <span class="required">*</span></label>
                     <textarea name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
                   </p>                
-                  <p class="form-submit">
+<!--                   <p class="form-submit"> -->
+                  <p class="form-group row">
                     <input type="submit" name="submit" class="aa-browse-btn" value="送出">
                   </p>        
                 </form>

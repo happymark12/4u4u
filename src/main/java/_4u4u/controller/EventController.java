@@ -116,7 +116,7 @@ public class EventController {
 		return "_4u4u_Activity/activity";
 	}
 	
-	@RequestMapping(value = "/_4u4u/activity_details", method = RequestMethod.GET)
+	@RequestMapping(value = "/_4u4u/activity_detail", method = RequestMethod.GET)
 	public String getEvent(Model model, HttpServletRequest request, HttpServletResponse response) {
 //		List<EventBean> list = eventService.getEvents();	//取多筆資料，設<>泛型
 		String strEventId = request.getParameter("eventId");	
@@ -135,6 +135,21 @@ public class EventController {
 //		RequestDispatcher rd = request.getRequestDispatcher("/activity");
 //		rd.forward(request, response);
 
-		return "_4u4u_Activity/activity_details";
+		return "_4u4u_Activity/activity_detail";
+	}
+	@RequestMapping(value = "/activity-success", method = RequestMethod.GET)
+	public String getEventsDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
+//	public String getActivityPage(Model model, HttpServletRequest request, HttpServletResponse response) {
+//		request.setCharacterEncoding("UTF-8");
+//		EventService eventService = new EventServiceImpl();
+//		List<EventBean> list = eventService.getEvents();
+//		request.setAttribute("eventBean", list);
+
+		// 轉換頁面的方法
+//		RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_Activity/activity.jsp");
+//		RequestDispatcher rd = request.getRequestDispatcher("/activity");
+//		rd.forward(request, response);
+
+		return "_4u4u_Activity/activity-success";
 	}
 }
