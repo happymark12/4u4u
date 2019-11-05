@@ -978,8 +978,6 @@ button {
   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
   <!-- Custom js -->
   <script src="${pageContext.request.contextPath}/js/custom.js"></script>
-  <script type="text/javascript">
-  	if()
-  </script> 
+ 
 </body>
 </html>

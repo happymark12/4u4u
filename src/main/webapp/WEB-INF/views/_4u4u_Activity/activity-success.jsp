@@ -207,7 +207,7 @@
                 <!-- <div class="aa-blog-content"> -->
                   <div class="row">
                     <div class="col-md-12">
-                        <article class="aa-blog-single"> 
+<!--                         <article class="aa-blog-single">  -->
                             <br><br><br>
                           <figure class="aa-blog-img">
                     
@@ -219,18 +219,18 @@
                             
                             <p style="font-size: 25px; text-align: center;">
                               您已報名成功<br><br>
-                              <u><a href="<c:url value='/' />" style="font-size: 15px; text-align: center;">
+                              <a href="<c:url value='/' />" style="font-size: 15px; text-align: center;text-decoration:underline;">
                                   &nbsp; 回首頁 &nbsp; | </a>
-                                 <a href="<c:url value='/activity' />"style="font-size: 15px; text-align: center;">&nbsp; 
+                                 <a href="<c:url value='/activity' />"style="font-size: 15px; text-align: center;text-decoration:underline;">&nbsp; 
                                    回活動 &nbsp;</a>
-                             </u>
+                             
                             </p>
 
-                             <br><br><br><br><br><br>
+                             <br><br><br><br><br><br> <br><br><br>
 
      
                           </div> 
-                          </article>
+<!--                           </article> -->
                       </div>
                       
                     </div>    
@@ -248,7 +248,7 @@
 
 	<!-- jQuery library -->
 	<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->

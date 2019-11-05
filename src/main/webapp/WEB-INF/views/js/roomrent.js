@@ -563,9 +563,9 @@ $(document).ready(function(){
        
        let idName = 'Image_'+(new Date().getTime()-(Math.floor((Math.random() * 10000 + 1))));
        
-       $('#dropzone').append(`<div><button id="`+idName+`">delete</button><img src="`+this.result+`" ></div>`);
+       $('#dropzone').append(`<div><Button  id="`+idName+`">delete</Button><img src="`+this.result+`" ></div>`);
         adjustImageDiv();
-       $('#'+idName).click(function(){
+       $('#'+idName).click(function(e){
            $(this).siblings().remove();
            $(this).parent().remove();
            $(this).remove();

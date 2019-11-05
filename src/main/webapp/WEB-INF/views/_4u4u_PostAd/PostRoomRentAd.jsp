@@ -102,10 +102,11 @@ position:relative;
 	text-align: center;
 }
 
-button {
+button{
  	float: left; 
  	position:absolute;
  	top:0px;
+ 
 }
 </style>
 
@@ -542,9 +543,8 @@ button {
           </table>
   
   
-  
-  
       </form>
+      
       <jsp:include page="../footer.jsp"></jsp:include>
 	<script>
             new TwCitySelector({
@@ -555,7 +555,7 @@ button {
             });
         </script>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>   
+     
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>   
   <!-- slick slider -->

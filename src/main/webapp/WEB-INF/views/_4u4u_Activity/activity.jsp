@@ -205,12 +205,14 @@
 							<div class="col-md-12">
 								<!-- <div class="aa-blog-content"> -->
 								<div class="row">
+								<c:forEach var="eventBean" items="${eventBean}" varStatus="vs" begin="0" end="0">
+<%-- 									<c:if test="${vs.index == 0}"> --%>
 									<div class="col-md-12">
 										<article class="aa-blog-single">
 
 											<figure class="aa-blog-img">
-												<img alt="img" src="img/1920_1280-8.jpg">
-												<span class="aa-date-tag">01,December 19</span>
+												<img alt="img" src="${pageContext.request.contextPath}/_4u4u/eventGetImage?id=${eventBean.eventId}&type=EVENT">
+												<span class="aa-date-tag">${eventBean.date}</span>
 											</figure>
 											<div class="aa-blog-single-content">
 												<h2>一季一次的學生聚餐交流活動</h2>
@@ -227,9 +229,11 @@
 												<p>不用擔心變邊緣人!</p>
 											</div>
 										</article>
-										<a href="<c:url value='/activity_detail' />"
+										<a href="<c:url value='/_4u4u/activity_detail?eventId=${eventBean.eventId}' />"
 											class="aa-secondary-btn">了解更多</a>
 									</div>
+<%-- 									</c:if> --%>
+									</c:forEach>
 
 									<div class="col-md-12">
 										<div class="aa-blog-related-post">
@@ -239,19 +243,18 @@
 											</div>
 											<div class="aa-blog-related-post-area">
 												<div class="row">
-													<c:forEach var="eventBean" items="${eventBean}" begin="0"
-														end="6">
+													<c:forEach var="eventBean" items="${eventBean}" begin="1" end="2">
 
 														<div class="col-md-6 col-sm-6">
 															<article class="aa-blog-single">
 																<figure class="aa-blog-img">
-																 <a href="<c:url value='/_4u4u/activity_details?eventId=${eventBean.eventId}' />"><img width="555" src="${pageContext.request.contextPath}/_4u4u/eventGetImage?id=${eventBean.eventId}&type=EVENT" alt="img"></a>
+																 <a href="<c:url value='/_4u4u/activity_detail?eventId=${eventBean.eventId}' />"><img width="555" src="${pageContext.request.contextPath}/_4u4u/eventGetImage?id=${eventBean.eventId}&type=EVENT" alt="img"></a>
                                   <span class="aa-date-tag">${eventBean.date}</span>
 																</figure>
 																  <div class="aa-blog-single-content">
-                                  <h3><a href="<c:url value='/_4u4u/activity_details?eventId=${eventBean.eventId}' />">${eventBean.eventTitle}</a></h3>
+                                  <h3><a href="<c:url value='/_4u4u/activity_detail?eventId=${eventBean.eventId}' />">${eventBean.eventTitle}</a></h3>
                                   <p>${eventBean.detail}</p>
-                                  <a href="<c:url value='/_4u4u/activity_details?eventId=${eventBean.eventId}' />" class="aa-secondary-btn">了解更多</a>
+                                  <a href="<c:url value='/_4u4u/activity_detail?eventId=${eventBean.eventId}' />" class="aa-secondary-btn">了解更多</a>
                                  
                                 </div>           
 															</article>

@@ -64,14 +64,15 @@
 	<div id="aa-preloader-area">
 		<div class="pulse"></div>
 		<div
-			style="font: bold 24px verdana; text-align: center; position:absolute;left:46.5%;top:40%;">
+			style="font: bold 24px verdana; text-align: center; position: absolute; left: 46.5%; top: 40%;">
 			${MsgOK.UpdateOK}${LoginSuccess}</div>
-			
-  </div>
-  
-  <% // 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
-    session.removeAttribute("LoginSuccess");  
- %>
+
+	</div>
+
+	<%
+		// 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
+		session.removeAttribute("LoginSuccess");
+	%>
 	<!-- SCROLL TOP BUTTON -->
 	<a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 	<!-- END SCROLL TOP BUTTON -->
@@ -275,11 +276,11 @@
 										
 								</div>
 -->
-							<c:if test="${LoginOK.state != 2}">
-								<div class="form-group text-center">
-									<input type="submit" value="立即升級" class="btn btn-primary">
-								</div>
-							</c:if>	
+										<c:if test="${LoginOK.state != 2}">
+											<div class="form-group text-center">
+												<input type="submit" value="立即升級" class="btn btn-primary">
+											</div>
+										</c:if>
 
 
 									</div>
@@ -376,7 +377,7 @@
 	<!-- jQuery library -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->
