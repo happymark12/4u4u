@@ -297,7 +297,7 @@
 			<div class="form-group row">
             <label for="inputPhone" class="col-sm-2 col-form-label">手機號碼<span class="required"  style="color:red">*</span></label>
             <div class="col-sm-10">
-              <input type="phone" class="form-control" id="inputPhone3" placeholder="Phone Number">
+              <input type="phone" class="form-control" id="inputPhone3" placeholder="Phone Number" required>
             </div>
           </div>
 			<div class="form-group row">

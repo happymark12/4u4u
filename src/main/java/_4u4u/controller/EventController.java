@@ -125,7 +125,7 @@ public class EventController {
 			eventId = Integer.parseInt(strEventId);
 				} ;					
 		EventBean list = eventService.getEventById(eventId);		//取單筆資料
-		request.setAttribute("eventBean", list);
+		model.addAttribute("eventBean", list);
 		
 //		System.out.println(list.getAddress());
 		

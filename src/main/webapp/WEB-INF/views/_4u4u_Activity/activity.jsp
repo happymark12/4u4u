@@ -243,7 +243,7 @@
 											</div>
 											<div class="aa-blog-related-post-area">
 												<div class="row">
-													<c:forEach var="eventBean" items="${eventBean}" begin="1">
+													<c:forEach var="eventBean" items="${eventBean}" begin="1" end="2">
 
 														<div class="col-md-6 col-sm-6">
 															<article class="aa-blog-single">
