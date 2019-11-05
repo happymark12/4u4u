@@ -356,12 +356,12 @@ button {
                                   
                                   <c:if test="${empty suiteQuantity && empty roomQuantity}">
                                   <select name="severalSuites" id="severalSuites" required>
-                                      <option value="default">-</option>
+                                      <option value="">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間套房
                                   <select name="severalRooms" id="severalRooms" required>
-                                      <option value="default">-</option>
+                                      <option value="">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間雅房

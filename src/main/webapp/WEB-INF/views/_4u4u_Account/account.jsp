@@ -275,10 +275,11 @@
 										
 								</div>
 -->
-										<div class="form-group text-center">
-											<input type="submit" value="立即升級" class="btn btn-primary">
-
-										</div>
+							<c:if test="${LoginOK.state != 2}">
+								<div class="form-group text-center">
+									<input type="submit" value="立即升級" class="btn btn-primary">
+								</div>
+							</c:if>	
 
 
 									</div>
