@@ -273,7 +273,7 @@
          
 			$('#iframeControl').append(`<iframe id="iframe" width="100%" height="450"   style="border:0" src="https://www.google.com.tw/maps?output=embed&q=國立臺北科技大學"></iframe>`)
 
-     },100);	
+     },500);	
 	
 	
 		
