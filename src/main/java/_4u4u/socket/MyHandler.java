@@ -36,7 +36,7 @@ public class MyHandler extends TextWebSocketHandler {
                     sUserMap.put(roomId, mapSession);
                 }
                 mapSession.put(jsonObject.getString("name"), session);
-                session.sendMessage(new TextMessage("當前房间在線人數" + mapSession.size() + "人"));
+                session.sendMessage(new TextMessage("當前房間在線人數" + mapSession.size() + "人"));
                 System.out.println(session);
             }
         }
@@ -49,7 +49,7 @@ public class MyHandler extends TextWebSocketHandler {
             JSONObject jsonobject = new JSONObject(webSocketMessage.getPayload().toString());
             Message message = new Message(jsonobject.toString());
             System.out.println(jsonobject.toString());
-            System.out.println(":来自" + webSocketSession.getAttributes().get(MessageKey.KEY_WEBSOCKET_USERNAME) + "的消息");
+            System.out.println(":來自" + webSocketSession.getAttributes().get(MessageKey.KEY_WEBSOCKET_USERNAME) + "的消息");
             if (message.getName() != null && message.getCommand() != null) {
                 switch (message.getCommand()) {
                     case MessageKey.ENTER_COMMAND:

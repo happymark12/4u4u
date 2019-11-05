@@ -473,4 +473,29 @@ public class MemberDaoImpl implements MemberDao {
 		n++;		
 		return n;
 	}
+
+	@Override
+	public boolean checkAdOwner(MemberBean mb, String adStyle, Integer adId) {
+		Session session = factory.getCurrentSession();
+		boolean checkAdOwner = false;
+		try {
+			String hql = null;
+			if(adStyle.trim().contentEquals("0")) {
+				
+		hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+			}else {
+		hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+		
+			}
+			session.createQuery(hql).setParameter("mb", mb)
+					.setParameter("adId", adId)
+					.getSingleResult();
+			checkAdOwner = true;
+		} catch (NoResultException e) {
+			;
+		}
+		
+		
+		return checkAdOwner;
+	}
 }

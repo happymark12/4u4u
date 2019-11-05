@@ -9,7 +9,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4U4U | 感興趣</title>
+<title>4U4U | 發送訊息</title>
 
 
 <!-- Favicon -->
@@ -18,7 +18,9 @@
 	type="image/x-icon">
 
 <!-- Font awesome -->
-<link href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
 <!-- Bootstrap -->
@@ -51,18 +53,20 @@
 	rel="stylesheet" type="text/css">
 
 <style>
-.demo2 + .tooltip > .tooltip-inner {
-background-color: orange;
-color: #555;
-font-size: 15px;
-padding: 5px 10px;
-box-shadow: 1px 1px 1px #aaa;
+.demo2+.tooltip>.tooltip-inner {
+	background-color: orange;
+	color: #555;
+	font-size: 15px;
+	padding: 5px 10px;
+	box-shadow: 1px 1px 1px #aaa;
 }
-.demo2 + .tooltip.bottom {
-margin-top: 5px;
+
+.demo2+.tooltip.bottom {
+	margin-top: 5px;
 }
-.demo2 + .tooltip.bottom > .tooltip-arrow {
-border-bottom: 5px solid orange;
+
+.demo2+.tooltip.bottom>.tooltip-arrow {
+	border-bottom: 5px solid orange;
 }
 </style>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -108,8 +112,10 @@ border-bottom: 5px solid orange;
 									<c:if test="${ empty LoginOK }">
 										<span style="color: red;">${MsgOK.InsertOK}${AccountBanned}${ActivateAccount}</span>
 								&nbsp;&nbsp;<a href="<c:url value='/register' />"
-											class="aa-register"><i class="fa fa-user-plus" aria-hidden="true"></i>註冊</a>
-										<a href="<c:url value='/login' />" class="aa-login"><i class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
+											class="aa-register"><i class="fa fa-user-plus"
+											aria-hidden="true"></i>註冊</a>
+										<a href="<c:url value='/login' />" class="aa-login"><i
+											class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
 
 									</c:if>
 									<%
@@ -210,63 +216,65 @@ border-bottom: 5px solid orange;
 	<!-- End menu section -->
 
 
- <!-- Start Proerty header  -->
+	<!-- Start Proerty header  -->
 
-  <section id="aa-property-header" class="interest">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-property-header-inner">
-            <h2>誰對你感興趣?</h2>
-            <br>
-<!--            <h3 style="color: #fff">徵求房間廣告</h3>-->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> 
-  <!-- End Proerty header  -->
-
-	<!-- Start Properties  -->
-	<section id="aa-properties">
-		<div class="container saved">
+	<section id="aa-property-header" class="interest">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="aa-properties-content">
-						<!-- start properties content head -->
-						<div class="aa-properties-content-head text-center">
-							<div class="aa-properties-content-head-left">
+					<div class="aa-property-header-inner">
+						<h2>發送訊息</h2>
+						<br>
+						<!--            <h3 style="color: #fff">徵求房間廣告</h3>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Proerty header  -->
+	<!-- Start Properties  -->
+	<section id="aa-properties">
+		<div class="container">
+			<div class="row">
 
-							</div>
+				<div class="col-md-12" id="contentArea">
+					<div class="text-center">
+						<img height='200' width='200'
+							style="border-radius: 50%; margin: 0 auto"
+							src="${pageContext.request.contextPath}/_4u4u/getImage?id=${to.memId}&type=MEMBER">
 
-							<label class="room-ad"><a href="0" class="active" id="roomRentAd" >對您的租房廣告感興趣&nbsp;
-							</a><a href="1" id="wantedRoomAd" >&nbsp;對您的找房廣告感興趣</a></label>
-							<div class="aa-properties-content-head-right">
-							
+					</div>
+					<br>
+					<div class=" text-center ">
 
-							</div>
-						</div>
-						<!-- Start properties content body -->
-						<div class="aa-properties-content-body" >
+					<p style="font-size:35px;color:blue">${ad.adTitle}</p>
 
-							<ul class="aa-properties-nav interested" id="targetAds" style="width:100%;">
-	
+					</div>
+					<div class=" text-center ">
 
+						<textarea  id='LogContainer' placeholder="請輸入您的訊息"
+							style=" resize: none; font-family: 'Courier New'; width: 680px; height: 300px; overflow: auto; border: 1px solid black; margin: 0px auto; font-size: 30px;"></textarea>
 
-							</ul>
-
-						</div>
-						<!-- Start properties content bottom -->
-						<div class="aa-properties-content-bottom">
-							<nav>
-								<ul style="width: 360px;" class="pagination" id="pagination">
+					</div>
+					<br>
+					<div class=" text-center ">
+					<a style="font-size: 30px" class="btn btn-primary " id="sendMessageSocket"
+												href="#">發送訊息</a>
+					</div>
+					<br>
+				</div>
+				 
+				<div class="col-md-12">
+					<!-- Start properties content bottom -->
 						
-								</ul>
+					<div class=" text-center">
 
-							</nav>
-						</div>
-						<div style="height:540px;display:none;" id="emptyDiv"></div>
-						
+						<a href="<c:url value='/' />"
+							style="font-size: 25px; text-align: center; text-decoration: underline;">
+							&nbsp; 回首頁 &nbsp; | </a> <a href="<c:url value='${url}' />"
+							style="font-size: 25px; text-align: center; text-decoration: underline;">&nbsp;
+							回廣告頁面 &nbsp;</a>
+							<div style="height: 80px;display:none" id="emptyDiv"></div>  
 					</div>
 				</div>
 			</div>
@@ -283,8 +291,8 @@ border-bottom: 5px solid orange;
 
 
 	<!-- jQuery library -->
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	
+	<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->
@@ -301,13 +309,98 @@ border-bottom: 5px solid orange;
 		src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
 	<!-- Custom js -->
 	<script src="${pageContext.request.contextPath}/js/custom.js"></script>
-    
-    <script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/whoInterestedMyAd.js"></script>
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
-	
-	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+            type: "GET",
+            url: "/4u4u/loginCheck",
+            data: {},
+            dataType: "json",
+            success: function (response) {
+            	if(response.result=='false'){
+            		return;
+            	}
+            	if(response.result=='true'){
+            		userId  = response.userId;
+ ws = new WebSocket('ws://localhost:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');
+		        
+            	  ws.onopen = WSonOpen;
+                  ws.onmessage = WSonMessage;
+                  ws.onclose = WSonClose;
+            	
+            	}
+            }
+		
+		});
+		
+		 function WSonOpen() {
+	            var msg = JSON.stringify({'command':'enter', 'roomId':'allChannel' , 'name': "all",
+	                'info': userId + " join chatRoom"})
+	            ws.send(msg);
+	        };
+
+	        function WSonMessage(event) {
+	        	if(event.data.includes('悄悄對你說')){
+	        		 setTimeout(() => {
+	 		            $('#myModal').modal('show')
+	 		        }, 100);
+	 		        
+	 		        setTimeout(() => {
+	 		            $('#myModal').modal('hide')
+	 		        }, 3000);
+	        	}else{
+	        		
+	        		console.log(event.data);
+	        	}
+	        };
+
+	        function WSonClose() {
+	        	console.log(userId+"斷線");
+	        };
+
+	        function WSonError() {
+	        };
+
+		
+		$('#emptyDiv').hide();
+		$('#sendMessageSocket').on('click',function(e){
+			e.preventDefault();
+			
+			 if ($.trim($('#LogContainer').val()) == "") {
+				 alert('hello')
+	           return;
+			 }	 
+				 
+				 
+				 var msg = JSON.stringify({'command':'message', 'roomId':'allChannel' ,'name':'${to.email}','info':$('#LogContainer').val()})
+	        
+	                    
+	                    ws.send(msg);
+			
+			
+			
+			$('#contentArea').html(` 
+					<br><br><br>
+
+					<figure class="aa-blog-img">
+                    <img alt="img" src="${pageContext.request.contextPath}/img/success.png" class="aa-blog-img-ss" > 
+                  </figure>
+                  <br>
+                  <div class="aa-blog-single-content">
+                    <p style="font-size: 25px; text-align: center;">
+                      	訊息發送成功,請耐心等待回覆</p>
+                      <br>
+                      	`);
+				
+			$('#emptyDiv').show	();
+		});
+		
+		
+	})
+	</script>
+
+
 
 </body>
 </html>

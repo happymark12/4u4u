@@ -122,4 +122,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.updateMember(mb);
 	}
 
+	@Override
+	public boolean checkAdOwner(MemberBean mb, String adStyle, Integer adId) {
+		return dao.checkAdOwner(mb,adStyle,adId);
+	}
+
 }

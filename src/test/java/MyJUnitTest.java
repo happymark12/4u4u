@@ -9,6 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
+import _4u4u.model.FinalJsonObject;
 import _4u4u.model.InterestedAdForRoomAdBean;
 import _4u4u.model.MemberBean;
 import _4u4u.model.RoomRentBean;
@@ -42,31 +45,11 @@ public class MyJUnitTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void test() {
-	try {
 	MemberBean mb = session.get(MemberBean.class, 2);
-	String hql ="FROM SavedAdForRoomAdBean  s JOIN RoomBean r on  "
-			+ "s.savedAdForRoomAdAdId = r.roomAd"
-			+ " WHERE  s.savedAdForRoomAdMemId = :mb AND s.savedAdForRoomAdAdId.adState = true  group by s.savedAdForRoomAdMemId,"
-			+ " s.savedAdForRoomAdAdId ORDER BY Max(r.rentPrice) DESC";
-	List<Object[]> list = null;
-	list = session.createQuery(hql).setParameter("mb", mb).getResultList();	
-	for(Object[] objArray : list) {
-		System.out.println("start");
-		for(Object obj : objArray) {
-			System.out.println(obj);
-			if(obj instanceof SavedAdForRoomAdBean) {
-				SavedAdForRoomAdBean bean = (SavedAdForRoomAdBean)obj;
-				RoomRentBean rrb = bean.getSavedAdForRoomAdAdId();
-				System.out.println(rrb.getAdId());
-				
-			}
-		}
-		System.out.println("end");
-	}	
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+	FinalJsonObject test = new FinalJsonObject();
+	test.setAdId(mb.getMemId());
+	Gson gson =new Gson();
+	System.out.println(gson.toJson(test));
 	}
 }
 		
