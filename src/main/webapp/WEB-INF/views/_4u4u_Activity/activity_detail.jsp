@@ -284,14 +284,14 @@
 				<label for="inputName3" class="col-sm-2 col-form-label">姓名<span class="required"  style="color:red">*</span></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="inputName3"
-						placeholder="Name">
+						placeholder="Name" required>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">電子郵件<span class="required"  style="color:red">*</span></label>
 				<div class="col-sm-10">
 					<input type="email" class="form-control" id="inputEmail3"
-						placeholder="Email">
+						placeholder="Email" required>
 				</div>
 			</div>
 			<div class="form-group row">
