@@ -28,6 +28,9 @@ public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
 	private static SessionFactory factory = HibernateUtils.getSessionFactory();
 	private static Session session = factory.getCurrentSession();
+	private static String url = "jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
+	private static String user = "root";
+	private static String password = "Do!ng123";
 
 	public static void main(String[] args) {
 		Transaction tx = null;
@@ -35,8 +38,6 @@ public class EDMTableResetHibernate {
 			tx = session.beginTransaction();
 			insertMemberTable();
 			insertWantedRoomAdTable();
-			insertRoomRentAd();
-			insertRoom();
 			insertEvents();
 			tx.commit();
 		} catch (Exception e) {
@@ -44,6 +45,8 @@ public class EDMTableResetHibernate {
 			e.printStackTrace();
 			tx.rollback();
 		}
+		insertRoomRentAd();
+		insertRoom();
 		factory.close();
 	} // main結束
 
@@ -98,9 +101,7 @@ public class EDMTableResetHibernate {
 		) {
 			while ((line = br.readLine()) != null) {
 				try (
-					Connection connection = DriverManager.getConnection(
-						"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-						"root", "Do!ng123");
+					Connection connection = DriverManager.getConnection(url, user, password);
 					PreparedStatement ps = connection.prepareStatement(line);	
 				){					
 					ps.executeUpdate();
@@ -126,9 +127,7 @@ public class EDMTableResetHibernate {
 		) {
 			while ((line = br.readLine()) != null) {
 				try (
-					Connection connection = DriverManager.getConnection(
-								"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-								"root", "Do!ng123");
+					Connection connection = DriverManager.getConnection(url, user, password);
 					PreparedStatement ps = connection.prepareStatement(line);	
 						){					
 					ps.executeUpdate();
