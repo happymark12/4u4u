@@ -24,14 +24,15 @@ public class EDMTableResetHibernate {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
 	private static SessionFactory factory = HibernateUtils.getSessionFactory();
 	private static Session session = factory.getCurrentSession();
+	private static String url = "jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
+	private static String user = "root";
+	private static String password = "root";
 
 	public static void main(String[] args) {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			insertMemberTable();
-			insertRoomRentAd();
-			insertRoom();
+			insertMemberTable();			
 			insertEvents();
 			tx.commit();
 		} catch (Exception e) {
@@ -39,7 +40,9 @@ public class EDMTableResetHibernate {
 			e.printStackTrace();
 			tx.rollback();
 		}
-		factory.close();
+		insertRoomRentAd();
+		insertRoom();
+		factory.close();		
 	} // main結束
 
 //	Member表格
@@ -49,9 +52,11 @@ public class EDMTableResetHibernate {
 		String imageName = "";
 		int count = 0;
 		Timestamp timestamp = null;
-		try (FileInputStream fis = new FileInputStream("data/Member.txt");
-				InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-				BufferedReader br = new BufferedReader(isr0);) {
+		try (	
+			FileInputStream fis = new FileInputStream("data/Member.txt");
+			InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+			BufferedReader br = new BufferedReader(isr0);
+			) {
 			while ((line = br.readLine()) != null) {
 				String[] sa = line.split("\\|");
 				MemberBean memberBean = new MemberBean();
@@ -91,12 +96,11 @@ public class EDMTableResetHibernate {
 				BufferedReader br = new BufferedReader(isr);
 			) {
 			while ((line = br.readLine()) != null) {
-				try {
-					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-							"root", "Do!ng123");
-					PreparedStatement ps = connection.prepareStatement(line);
-					ps.executeUpdate();
+				try (
+					Connection connection = DriverManager.getConnection(url, user, password);
+					PreparedStatement ps = connection.prepareStatement(line);											
+				){
+					ps.executeUpdate();	
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -118,11 +122,10 @@ public class EDMTableResetHibernate {
 				BufferedReader br = new BufferedReader(isr);
 			) {
 			while ((line = br.readLine()) != null) {
-				try {
-					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-							"root", "Do!ng123");
-					PreparedStatement ps = connection.prepareStatement(line);
+				try (
+					Connection connection = DriverManager.getConnection(url, user, password);
+					PreparedStatement ps = connection.prepareStatement(line);	
+					){					
 					ps.executeUpdate();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
