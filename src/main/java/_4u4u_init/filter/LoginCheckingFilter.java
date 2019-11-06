@@ -36,7 +36,7 @@ import _4u4u.model.MemberBean;
 				@WebInitParam(name = "mustLogin1", value = "/PostRoomRentAd"), 
 				@WebInitParam(name = "mustLogin2", value = "/PostWantedRoomAd"), 
 				@WebInitParam(name = "mustLogin3", value = "/account"), 
-			
+				@WebInitParam(name = "mustLogin4", value = "/contact"), 
 							
 		})
 public class LoginCheckingFilter implements Filter {

@@ -220,23 +220,23 @@
                 <form class="contactform">                  
                   <p class="comment-form-author">
                     <label for="author">姓名 <span class="required">*</span></label>
-                    <input type="text" name="author" value="" size="30" required="required">
+                    <input type="text" id="author" name="author" value="" size="30" required="required">
                   </p>
                   <p class="comment-form-email">
                     <label for="email">信箱 <span class="required">*</span></label>
-                    <input type="email" name="email" value="" aria-required="true" required="required">
+                    <input type="email" id="email" name="email" value="" aria-required="true" required="required">
                   </p>
                   <p class="comment-form-url">
                     <label for="subject">標題 <span class="required">*</span></label>
-                    <input type="text" name="subject">  
+                    <input type="text" name="subject" id="subject">  
                   </p>
                   <p class="comment-form-comment">
                     <label for="comment">訊息 <span class="required">*</span></label>
-                    <textarea name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
+                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
                   </p>                
                   <p class="form-submit">
 <!--                   <p class="form-group row"> -->
-                    <input type="submit" name="submit" class="aa-browse-btn" value="送出">
+                    <input type="submit" id="submit" name="submit" class="aa-browse-btn" value="送出" >
                   </p>        
                 </form>
               </div>
@@ -273,13 +273,15 @@
          
 			$('#iframeControl').append(`<iframe id="iframe" width="100%" height="450"   style="border:0" src="https://www.google.com.tw/maps?output=embed&q=國立臺北科技大學"></iframe>`)
 
-     },500);	
-	
-	
-		
-	});
-  
-  
+     },500);
+	 
+	 $('#submit').click(function(){
+		if($('#author').val() != ""&& $("#email").val() != "" 
+				&& $('#subject').val() != "" && $('#comment').val() != ""){
+		 alert("報名成功!");			
+		}		 
+	 })	 
+	});  
 </script>
   </body>
 </html>
