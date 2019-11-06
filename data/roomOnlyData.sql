@@ -1,10 +1,3 @@
-/*
-SQLyog Community v13.1.4  (64 bit)
-MySQL - 8.0.13 
-*********************************************************************
-*/
-/*!40101 SET NAMES utf8 */;
-
 insert into `room` (`roomId`, `allowCook`, `area`, `deposit`, `has4`, `hasBalcony`, `hasBroadBand`, `hasChair`, `hasColdAir`, `hasDesk`, `hasDoubleBed`, `hasDuplex`, `hasGas`, `hasHeater`, `hasIceBox`, `hasSingleBed`, `hasSofa`, `hasTV`, `hasWardrobe`, `hasWash`, `rentFloor`, `rentPrice`, `rentTotalFloor`, `roomState`, `roomType`, `fk_roomAd_adId`) values('1','','30','2','','','','','','','','','','','','','','','','','2','20000','3','','0','1');
 insert into `room` (`roomId`, `allowCook`, `area`, `deposit`, `has4`, `hasBalcony`, `hasBroadBand`, `hasChair`, `hasColdAir`, `hasDesk`, `hasDoubleBed`, `hasDuplex`, `hasGas`, `hasHeater`, `hasIceBox`, `hasSingleBed`, `hasSofa`, `hasTV`, `hasWardrobe`, `hasWash`, `rentFloor`, `rentPrice`, `rentTotalFloor`, `roomState`, `roomType`, `fk_roomAd_adId`) values('2','','15','2','','','','','','','','','','','','','','','','','5','16500','10','','0','2');
 insert into `room` (`roomId`, `allowCook`, `area`, `deposit`, `has4`, `hasBalcony`, `hasBroadBand`, `hasChair`, `hasColdAir`, `hasDesk`, `hasDoubleBed`, `hasDuplex`, `hasGas`, `hasHeater`, `hasIceBox`, `hasSingleBed`, `hasSofa`, `hasTV`, `hasWardrobe`, `hasWash`, `rentFloor`, `rentPrice`, `rentTotalFloor`, `roomState`, `roomType`, `fk_roomAd_adId`) values('3','','12','2','','','','','','','','','','','','','','','','','5','17500','10','','0','2');

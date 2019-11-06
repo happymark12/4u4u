@@ -3,6 +3,10 @@ package _4u4u_init;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import org.hibernate.Session;
@@ -17,12 +21,14 @@ public class EDMTableResetHibernate2 {
 	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
 	private static SessionFactory factory = HibernateUtils.getSessionFactory();
 	private static Session session = factory.getCurrentSession();
-	
+
 	public static void main(String[] args) {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			insertMemberTable();
+//			insertMemberTable();
+//			insertRoomRentAd();
+			insertRoom();
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());
@@ -34,16 +40,14 @@ public class EDMTableResetHibernate2 {
 
 //	Member表格
 	@SuppressWarnings("static-access")
-	private static void insertMemberTable(){
+	private static void insertMemberTable() {
 		String line = "";
 		String imageName = "";
 		int count = 0;
 		Timestamp timestamp = null;
-		try (
-			FileInputStream fis = new FileInputStream("data/Member.txt");
-			InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-			BufferedReader br = new BufferedReader(isr0);
-		) {
+		try (FileInputStream fis = new FileInputStream("data/Member.txt");
+				InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
+				BufferedReader br = new BufferedReader(isr0);) {
 			while ((line = br.readLine()) != null) {
 				String[] sa = line.split("\\|");
 				MemberBean memberBean = new MemberBean();
@@ -56,14 +60,14 @@ public class EDMTableResetHibernate2 {
 				imageName = sa[6].substring(sa[6].lastIndexOf("/") + 1);
 				memberBean.setPicName(imageName);
 				memberBean.setState(sa[7]);
-				if(sa[8].equals("null") == false) {
+				if (sa[8].equals("null") == false) {
 					memberBean.setVipStart(timestamp.valueOf(sa[8]));
 				}
-				if(sa[9].equals("null") == false) {
+				if (sa[9].equals("null") == false) {
 					memberBean.setVipEnd(timestamp.valueOf(sa[9]));
 				}
 				memberBean.setCreatTime(timestamp.valueOf(sa[10]));
-				
+
 				session.save(memberBean);
 				count++;
 				System.out.println("新增 " + count + " 筆記錄: " + sa[5]);
@@ -73,7 +77,55 @@ public class EDMTableResetHibernate2 {
 			ex.printStackTrace();
 		}
 	} // Member結束
-	
-	
-	
+
+	public static void insertRoomRentAd() {
+		String line = "";
+		int count = 0;
+		try (FileInputStream fis = new FileInputStream("data/roomRentAdOnlyData.sql");
+				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+				BufferedReader br = new BufferedReader(isr);) {
+			while ((line = br.readLine()) != null) {
+				try {
+					Connection connection = DriverManager.getConnection(
+							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
+							"root", "Do!ng123");
+					PreparedStatement ps = connection.prepareStatement(line);
+					ps.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				count++;
+				System.out.println(line);
+				System.out.println("新增" + count + "筆紀錄");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void insertRoom() {
+		String line = "";
+		int count = 0;
+		try (FileInputStream fis = new FileInputStream("data/roomOnlyData.sql");
+				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+				BufferedReader br = new BufferedReader(isr);) {
+			while ((line = br.readLine()) != null) {
+				try {
+					Connection connection = DriverManager.getConnection(
+							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
+							"root", "Do!ng123");
+					PreparedStatement ps = connection.prepareStatement(line);
+					ps.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				count++;
+				System.out.println(line);
+				System.out.println("新增" + count + "筆紀錄");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
