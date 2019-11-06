@@ -91,11 +91,12 @@ public class EDMTableResetHibernate {
 				BufferedReader br = new BufferedReader(isr);
 			) {
 			while ((line = br.readLine()) != null) {
-				try {
+				try (
 					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-							"root", "Do!ng123");
-					PreparedStatement ps = connection.prepareStatement(line);
+						"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
+						"root", "841400");
+					PreparedStatement ps = connection.prepareStatement(line);	
+				){					
 					ps.executeUpdate();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -118,11 +119,12 @@ public class EDMTableResetHibernate {
 				BufferedReader br = new BufferedReader(isr);
 			) {
 			while ((line = br.readLine()) != null) {
-				try {
+				try (
 					Connection connection = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
-							"root", "Do!ng123");
-					PreparedStatement ps = connection.prepareStatement(line);
+								"jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei",
+								"root", "841400");
+					PreparedStatement ps = connection.prepareStatement(line);	
+						){					
 					ps.executeUpdate();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
