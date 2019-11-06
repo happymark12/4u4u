@@ -25,7 +25,7 @@ public class EDMTableResetHibernate {
 
 	public static void main(String args[]) {
 
-		String line = "";
+		
 
 //		int count = 0;
 		SessionFactory factory = HibernateUtils.getSessionFactory();
@@ -57,11 +57,12 @@ public class EDMTableResetHibernate {
 //			session.flush();
 //			System.out.println("BookCompany 資料新增成功");
 
-			File file = new File("data/event.dat");
+//			File file = new File(;
 			// 2. 由"data/book.dat"逐筆讀入Event表格內的初始資料，然後依序新增
 			// 到Book表格中
+			String line = "";
 			try (
-				FileInputStream fis = new FileInputStream(file);
+				FileInputStream fis = new FileInputStream("data/event.dat");
 				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
 				BufferedReader br = new BufferedReader(isr);
 			) {
@@ -72,25 +73,16 @@ public class EDMTableResetHibernate {
 						line = line.substring(1);
 					}
 					String[] token = line.split("\\|");
-					EventBean event = new EventBean();
-					
-//					@SuppressWarnings("static-access")
-//					Date date = Date.valueOf(token[0].trim());
-//					event.setDate(date);
+					EventBean event = new EventBean();		
+
 					event.setDate(Date.valueOf(token[0].trim()));
 
 					// 讀取圖片檔
 					Blob blob = SystemUtils2018.fileToBlob(token[1].trim());
 					event.setImage(blob);
 					event.setImageName(SystemUtils2018.extractFileName(token[1].trim()));
-//					event.setAddress(token[1]);
 					event.setAddress((token[2].trim()));
 					event.setDetail(token[3].trim());
-					// event.setCompanyId(Integer.parseInt(token[4].trim()));
-//					int companyId = Integer.parseInt(token[4].trim());
-//					CompanyBean cb = session.get(CompanyBean.class, companyId);
-//					event.setCompanyBean(cb);
-					
 					event.setTotalPeopleCountLimit(Integer.parseInt(token[4].trim()));
 					event.setNeedRoomPeopleCount(Integer.parseInt(token[5].trim()));
 					event.setHaveRoomPelpleCount(Integer.parseInt(token[6].trim()));
@@ -105,44 +97,6 @@ public class EDMTableResetHibernate {
 				System.out.println("Event資料新增成功");
 			}
 
-			// 3. Member表格
-			// 由"data/Input.txt"逐筆讀入Member表格內的初始資料，
-			// 然後依序新增到Member表格中
-//			try (
-//				FileInputStream fis = new FileInputStream("data/Input.txt");
-//				InputStreamReader isr0 = new InputStreamReader(fis, "UTF-8");
-//				BufferedReader br = new BufferedReader(isr0);
-//			) {
-//				while ((line = br.readLine()) != null) {
-//					String[] sa = line.split("\\|");
-//					MemberBean bean = new MemberBean();
-//					bean.setMemberId(sa[0]);
-//					bean.setName(sa[1]);
-//					String pswd = GlobalService.getMD5Endocing(GlobalService.encryptString(sa[2]));
-//					bean.setPassword(pswd);
-//					bean.setAddress(sa[3]);
-//					bean.setEmail(sa[4]);
-//					bean.setTel(sa[5]);
-//					bean.setUserType(sa[6]);
-//					bean.setTotalAmt(Double.parseDouble(sa[7]));
-//					bean.setTs(new java.sql.Timestamp(System.currentTimeMillis()));
-					// --------------處理Blob(圖片)欄位----------------
-//					Blob sb = SystemUtils2018.fileToBlob(sa[8]);
-//					bean.setMemberImage(sb);
-//					String imageFileName = sa[8].substring(sa[8].lastIndexOf("/") + 1);
-//					bean.setFileName(imageFileName);
-//					Clob clob = SystemUtils2018.fileToClob(sa[9]);
-//					bean.setComment(clob);
-//					bean.setUnpaid_amount(0.0);
-//					session.save(bean);
-//					count++;
-//					System.out.println("新增" + count + "筆記錄:" + sa[1]);
-//				}
-//				session.flush();
-//				System.out.println("Member表格資料新增成功");
-//			} catch (Exception ex) {
-//				ex.printStackTrace();
-//			}
             tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());

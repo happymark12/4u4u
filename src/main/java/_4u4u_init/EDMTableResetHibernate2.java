@@ -3,7 +3,9 @@ package _4u4u_init;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import _4u4u.model.EventBean;
 import _4u4u.model.MemberBean;
 import _4u4u_init.util.HibernateUtils;
 import _4u4u_init.util.SystemUtils2018;
@@ -26,9 +29,10 @@ public class EDMTableResetHibernate2 {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-//			insertMemberTable();
-//			insertRoomRentAd();
+			insertMemberTable();
+			insertRoomRentAd();
 			insertRoom();
+			insertEvents();
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());
@@ -81,9 +85,11 @@ public class EDMTableResetHibernate2 {
 	public static void insertRoomRentAd() {
 		String line = "";
 		int count = 0;
-		try (FileInputStream fis = new FileInputStream("data/roomRentAdOnlyData.sql");
+		try (	
+				FileInputStream fis = new FileInputStream("data/roomRentAdOnlyData.sql");
 				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-				BufferedReader br = new BufferedReader(isr);) {
+				BufferedReader br = new BufferedReader(isr);
+			) {
 			while ((line = br.readLine()) != null) {
 				try {
 					Connection connection = DriverManager.getConnection(
@@ -106,9 +112,11 @@ public class EDMTableResetHibernate2 {
 	public static void insertRoom() {
 		String line = "";
 		int count = 0;
-		try (FileInputStream fis = new FileInputStream("data/roomOnlyData.sql");
+		try (	
+				FileInputStream fis = new FileInputStream("data/roomOnlyData.sql");
 				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-				BufferedReader br = new BufferedReader(isr);) {
+				BufferedReader br = new BufferedReader(isr);
+			) {
 			while ((line = br.readLine()) != null) {
 				try {
 					Connection connection = DriverManager.getConnection(
@@ -127,5 +135,44 @@ public class EDMTableResetHibernate2 {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void insertEvents() {
+		String line = "";
+		int count = 0;
+		try (
+			FileInputStream fis = new FileInputStream("data/event.dat");
+			InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+			BufferedReader br = new BufferedReader(isr);
+		) {
+			while ((line = br.readLine()) != null) {
+				System.out.println("line= " + line);
+				// 去除 UTF8_BOM: \uFEFF
+				if (line.startsWith(UTF8_BOM)) {
+					line = line.substring(1);
+				}
+				String[] token = line.split("\\|");
+				EventBean event = new EventBean();	
+				event.setDate(Date.valueOf(token[0].trim()));
+				// 讀取圖片檔
+				Blob blob = SystemUtils2018.fileToBlob(token[1].trim());
+				event.setImage(blob);
+				event.setImageName(SystemUtils2018.extractFileName(token[1].trim()));
+				event.setAddress((token[2].trim()));
+				event.setDetail(token[3].trim());
+				event.setTotalPeopleCountLimit(Integer.parseInt(token[4].trim()));
+				event.setNeedRoomPeopleCount(Integer.parseInt(token[5].trim()));
+				event.setHaveRoomPelpleCount(Integer.parseInt(token[6].trim()));
+				event.setState(Boolean.parseBoolean(token[7].trim()));
+				event.setImageName(token[8].trim());
+				event.setEventTitle(token[9].trim());
+				session.save(event);
+				count++;
+				System.out.println("新增" + count + "筆");
+			}
+			System.out.println("Event資料新增成功");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}		
+	}	
 
 }
