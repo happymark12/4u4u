@@ -436,7 +436,8 @@ public class RoomRentServiceImpl implements Serializable, RoomRentService {
 				if (roomRentdao.isExistEffectiveAd(mb) == false) {
 					n = roomRentdao.changeAdState(roomRentBean);
 				} else {
-					throw new RuntimeException("已經有1則或是1則以上的租房廣告存在");
+					;
+//					throw new RuntimeException("已經有1則或是1則以上的租房廣告存在");
 				}
 			} else {// 有效轉失效
 				n = roomRentdao.changeAdState(roomRentBean);

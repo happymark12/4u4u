@@ -8,7 +8,6 @@ public interface MemberService {
 	
 	public boolean emailExists(String id);
 	public int saveMember(MemberBean mb);
-//	void updateUnpaidOrderAmount(OrderBean ob);
 	public MemberBean queryMemberById(Integer id);
 	public MemberBean queryMemberByEmail(String email);
 	public MemberBean queryAllMembers();
@@ -24,5 +23,6 @@ public interface MemberService {
 	public List<List<String>> getPotentialWholePropertiesList(Integer memberId); //list中 每個元素 有3個  1st roomRentAdId 2nd imageFileName 3rd roomRentAdTitle   
 	public boolean deleteInterestedAdOnly(String adStyle, Integer adId);
 	public int updateMember(MemberBean mb); //修改會員資料
-
+	public boolean checkAdOwner(MemberBean mb,String adStyle, Integer adId);
+	
 }

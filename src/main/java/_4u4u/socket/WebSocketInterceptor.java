@@ -2,6 +2,10 @@ package _4u4u.socket;
 
 
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -9,9 +13,6 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
-
-import javax.servlet.http.HttpSession;
-import java.util.Map;
 @Component
 public class WebSocketInterceptor implements HandshakeInterceptor {
     @Override
@@ -24,7 +25,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
                 JSONObject jsonObject = new JSONObject(INFO);
                 String command = jsonObject.getString("command");
                 if (command != null && MessageKey.ENTER_COMMAND.equals(command)) {
-                    System.out.println("当前session的ID="+ jsonObject.getString("name"));
+                    System.out.println("當前session的ID="+ jsonObject.getString("name"));
                     ServletServerHttpRequest request = (ServletServerHttpRequest) serverHttpRequest;
                     HttpSession session = request.getServletRequest().getSession();
                     map.put(MessageKey.KEY_WEBSOCKET_USERNAME, jsonObject.getString("name"));

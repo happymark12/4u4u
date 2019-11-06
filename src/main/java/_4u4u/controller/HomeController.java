@@ -46,10 +46,6 @@ public class HomeController {
 	public String getQAPage() {
 		return "_4u4u_AboutUs/qa";
 	}
-	@RequestMapping(value = "/activity_detail", method = RequestMethod.GET)
-	public String getActivityDetailPage() {
-		return "_4u4u_Activity/activity_detail";
-	}
 	
 
 	@RequestMapping("/")

@@ -504,14 +504,17 @@ border-bottom: 5px solid orange;
 									</c:if>
 									<c:if test="${pageNo == totalPages}">
 										<li><a aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-									</c:if>
-
+									</c:if>									
+									
 
 								</ul>
-								<p>
-									<a href="<c:url value='/account'/>">帳戶管理</a>
-								</p>
+								
 							</nav>
+						</div>
+						<div class="aa-properties-content-bottom">
+							<ul class="pagination">
+								<li><a href="<c:url value='/account'/>">帳戶管理</a></li>
+							</ul>
 						</div>
 						<c:if test="${wantedRoomAd.size()==0}">
 							<div style="height: 540px;"></div>

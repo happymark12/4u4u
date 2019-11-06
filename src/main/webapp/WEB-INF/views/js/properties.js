@@ -678,7 +678,16 @@
 										            dataType: "text",
 										            success: function (response) {
 										            	if(response=='需要登入'){
-										            		alert('您需要登入，才能儲存廣告喔!!');
+//										            		alert('您需要登入，才能儲存廣告喔!!');
+										            		 setTimeout(() => {
+										            			 $('#modalTitle').text('您需要登入，才能儲存廣告喔!!');
+												 		            $('#myModal').modal('show')
+												 		        }, 100);
+												 		        
+												 		        setTimeout(() => {
+												 		            $('#myModal').modal('hide')
+												 		        }, 3000);
+										            		
 										            		return;
 										            	}
 										            	if(response=='取消儲存廣告'){
@@ -687,13 +696,20 @@
 										            		$('#'+tempId).addClass('active');
 										            	}
 										            	if(response=='同一人'){
-										            		
-										                alert('您為廣告發布人無法使用此功能')
+										            		 setTimeout(() => {
+										            			 $('#modalTitle').text('您為廣告發布人無法使用此功能');
+												 		            $('#myModal').modal('show')
+												 		        }, 100);
+												 		        
+												 		        setTimeout(() => {
+												 		            $('#myModal').modal('hide')
+												 		        }, 3000);
+//										                alert('您為廣告發布人無法使用此功能')
 											            }
 										            	
 										            	if(response=='錯誤'){
 										            		
-										               alert('系統繁忙，請稍後儲存')
+//										               alert('系統繁忙，請稍後儲存')
 										            	}
 										            	
 										            	
@@ -716,7 +732,7 @@
 										            	}
 										            	if(response=='錯誤'){
 										            		
-												             alert('系統繁忙，請稍後取消')
+//												             alert('系統繁忙，請稍後取消')
 												        }
 												            	
 										            }

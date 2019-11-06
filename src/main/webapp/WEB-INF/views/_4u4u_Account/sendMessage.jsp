@@ -5,32 +5,38 @@
 <html>
 <head>
 <meta charset="utf-8">
+
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4U4U | 活動內容</title>
+<title>4U4U | 發送訊息</title>
 
-<!-- Pre Loader -->
-<!-- 4u4uicon -->
+
+<!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/img/icon/4U4U_final.png"
 	type="image/x-icon">
-<!-- Font awesome字型 -->
+
+<!-- Font awesome -->
+<link
+	href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
-<!-- Bootstrap引導 -->
+<!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
 	rel="stylesheet">
-<!-- slick slider光滑滑塊 -->
+<!-- slick slider -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/slick.css">
-<!-- price picker slider價格拖曳功能 -->
+<!-- price picker slider -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/nouislider.css">
-<!-- Fancybox slider燈箱效果-彈出層展示外掛 -->
+<!-- Fancybox slider -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/jquery.fancybox.css"
 	type="text/css" media="screen" />
-<!-- Theme color主題色 -->
+<!-- Theme color -->
 <link id="switcher"
 	href="${pageContext.request.contextPath}/css/theme-color/default-theme.css"
 	rel="stylesheet">
@@ -39,24 +45,50 @@
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
 
+
 <!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Vollkorn'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans'
-	rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Vollkorn"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+	rel="stylesheet" type="text/css">
+
+<style>
+.demo2+.tooltip>.tooltip-inner {
+	background-color: orange;
+	color: #555;
+	font-size: 15px;
+	padding: 5px 10px;
+	box-shadow: 1px 1px 1px #aaa;
+}
+
+.demo2+.tooltip.bottom {
+	margin-top: 5px;
+}
+
+.demo2+.tooltip.bottom>.tooltip-arrow {
+	border-bottom: 5px solid orange;
+}
+</style>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 
 </head>
 <body class="aa-price-range">
+	<!-- Pre Loader -->
 	<div id="aa-preloader-area">
 		<div class="pulse"></div>
-
-
 	</div>
-
 	<!-- SCROLL TOP BUTTON -->
 	<a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 	<!-- END SCROLL TOP BUTTON -->
+
+
+
 
 	<!-- Start header section -->
 	<header id="aa-header">
@@ -153,21 +185,21 @@
 						<!--瀏覽-->
 						<li><a href="<c:url value='/properties' />">搜尋</a></li>
 						<!--帳戶管理-->
-						<li><a href="<c:url value='/account' />">帳戶管理</a></li>
+						<li class="active"><a href="<c:url value='/account' />">帳戶管理</a></li>
 						<!--發佈廣告-->
-						<li class="dropdown "><a class="dropdown-toggle">發佈廣告
-								<span class="caret"></span>
+						<li class="dropdown "><a class="dropdown-toggle">發佈廣告 <span
+								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<c:url value='/PostRoomRentAd' />">出租廣告</a></li>
 								<li><a href="<c:url value='/PostWantedRoomAd' />">找房廣告</a></li>
 							</ul></li>
 						<!--活動-->
-						<li class="active"><a href="<c:url value='/activity' />">活動</a></li>
+						<li><a href="<c:url value='/activity' />">活動</a></li>
 
 						<!--關於我們-->
-						<li class="dropdown"><a class="dropdown-toggle">關於我們
-								<span class="caret"></span>
+						<li class="dropdown"><a class="dropdown-toggle">關於我們 <span
+								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- 								<li><a href="blog-archive.html">使用說明</a></li> -->
@@ -183,130 +215,84 @@
 	</section>
 	<!-- End menu section -->
 
+
 	<!-- Start Proerty header  -->
-	<section id="aa-property-header" class="activity-detail">
+
+	<section id="aa-property-header" class="interest">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="aa-property-header-inner">
-						<h2>活動詳情</h2>
+						<h2>發送訊息</h2>
+						<br>
+						<!--            <h3 style="color: #fff">徵求房間廣告</h3>-->
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- End Proerty header  -->
-
-
-	<section id="aa-blog" style="clear: both">
+	<!-- Start Properties  -->
+	<section id="aa-properties">
 		<div class="container">
 			<div class="row">
+
+				<div class="col-md-12" id="contentArea">
+					<div class="text-center">
+						<img height='200' width='200'
+							style="border-radius: 50%; margin: 0 auto"
+							src="${pageContext.request.contextPath}/_4u4u/getImage?id=${to.memId}&type=MEMBER">
+
+					</div>
+					<br>
+					<div class=" text-center ">
+
+					<p style="font-size:35px;color:blue">${ad.adTitle}</p>
+
+					</div>
+					<div class=" text-center ">
+
+						<textarea  id='LogContainer' placeholder="請輸入您的訊息"
+							style=" resize: none; font-family: 'Courier New'; width: 680px; height: 300px; overflow: auto; border: 1px solid black; margin: 0px auto; font-size: 30px;"></textarea>
+
+					</div>
+					<br>
+					<div class=" text-center ">
+					<a style="font-size: 30px" class="btn btn-primary " id="sendMessageSocket"
+												href="#">發送訊息</a>
+					</div>
+					<br>
+				</div>
+				 
 				<div class="col-md-12">
-					<div class="aa-blog-area">
-						<div class="row">
-							<div class="col-md-12">
-								<!-- <div class="aa-blog-content"> -->
-								<div class="row">
-									<div class="col-md-12">
-										<article class="aa-blog-single">
+					<!-- Start properties content bottom -->
+						
+					<div class=" text-center">
 
-											<figure class="aa-blog-img">
-												<img alt="img" src="${pageContext.request.contextPath}/img/1920_1280-8.jpg">
-											</figure>
-											<div class="aa-blog-single-content">
-
-<!--                               					<h2 style="color: black;">每季一次的學生聚餐交流活動</h2> -->
-												<h2 style="color: black;">${eventBean.eventTitle}</h2>
-												<br>
-												<br>
-												<p style="font-size: 22px;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="40"
-														height="30"> 活動時間<br>
-
-<!-- 					                                <span style="color: grey;">2019-12-01(日) 14:00 ~ 16:30</span> -->
-													<span style="color: grey;">${eventBean.date}</span>
-												</p>
-												<p style="font-size: 22px">
-													<img alt="img" src="${pageContext.request.contextPath}/img/placeholder.png" width="40"
-														height="30"> 活動地點<br> <span
-														style="color: grey;"> ${eventBean.address} <!--                                   (10694)台北市大安區光復南路240巷26號1樓/ 國父紀念館站2號出口 -->
-													</span>
-												</p>
-												<br> <br> <br>
-
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/like.png" width="40" height="30">活動介紹
-												</p>
-												<hr>
-												<p style="font-size: 20px;">
-													${eventBean.detail}
-													<!--                                 本活動參加者需為學生身分，記得帶學生證入場喔!<br> -->
-													<!--                                 <br> -->
-													<!--                                 是一個以共享居住空間為主題的交流聚會，大家可自由交流。 <br> -->
-													<!--                                 <br> -->
-
-													<!--                                 這次邀請了我們人氣最旺的主持人-旺聰哥，將帶領大家一起做互動，認識彼此，且這次我們安排了 -->
-													<!--                               前所未有的互動遊戲，不容錯過！ -->
-
-													<!--                                 現場有提供專屬的需求標籤貼紙，讓其他同伴們一目了然你的需求， 還有提醒參加者們 -->
-													<!--                                 餐廳不提供刷卡服務喔！記得帶現金喔!來這大膽地展現自己吧! -->
-
-												</p>
-												<hr>
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/map-location.png" width="40"
-														height="30">活動地圖
-												</p>
-												<iframe
-													src="https://www.google.com.tw/maps?output=embed&q=${eventBean.address}"
-													width="600" height="450" style="border: 0;"> </iframe>
-												<br> <br>
-
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/user.png" width="40" height="30">活動報名
-												</p>
-												<hr>
-
-											</div>
-										</article>
-									</div>
-								</div>
-							</div>
-						</div>
+						<a href="<c:url value='/' />"
+							style="font-size: 25px; text-align: center; text-decoration: underline;">
+							&nbsp; 回首頁 &nbsp; | </a> <a href="<c:url value='${url}' />"
+							style="font-size: 25px; text-align: center; text-decoration: underline;">&nbsp;
+							回廣告頁面 &nbsp;</a>
+							<div style="height: 80px;display:none" id="emptyDiv"></div>  
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- ==============================我要報名=================================== -->
-		<form class="form-activity">
-			<div class="form-group row">
-				<label for="inputName3" class="col-sm-2 col-form-label">姓名</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputName3"
-						placeholder="Name">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">電子郵件</label>
-				<div class="col-sm-10">
-					<input type="email" class="form-control" id="inputEmail3"
-						placeholder="Email">
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary">我要報名</button>
-				</div>
-			</div>
-		</form>
 	</section>
+
+
+
 
 	<jsp:include page="../footer.jsp"></jsp:include>
 
+
+
+
+
 	<!-- jQuery library -->
-	<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->
@@ -323,6 +309,98 @@
 		src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
 	<!-- Custom js -->
 	<script src="${pageContext.request.contextPath}/js/custom.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+            type: "GET",
+            url: "/4u4u/loginCheck",
+            data: {},
+            dataType: "json",
+            success: function (response) {
+            	if(response.result=='false'){
+            		return;
+            	}
+            	if(response.result=='true'){
+            		userId  = response.userId;
+ ws = new WebSocket('ws://localhost:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');
+		        
+            	  ws.onopen = WSonOpen;
+                  ws.onmessage = WSonMessage;
+                  ws.onclose = WSonClose;
+            	
+            	}
+            }
+		
+		});
+		
+		 function WSonOpen() {
+	            var msg = JSON.stringify({'command':'enter', 'roomId':'allChannel' , 'name': "all",
+	                'info': userId + " join chatRoom"})
+	            ws.send(msg);
+	        };
+
+	        function WSonMessage(event) {
+	        	if(event.data.includes('悄悄對你說')){
+	        		 setTimeout(() => {
+	 		            $('#myModal').modal('show')
+	 		        }, 100);
+	 		        
+	 		        setTimeout(() => {
+	 		            $('#myModal').modal('hide')
+	 		        }, 3000);
+	        	}else{
+	        		
+	        		console.log(event.data);
+	        	}
+	        };
+
+	        function WSonClose() {
+	        	console.log(userId+"斷線");
+	        };
+
+	        function WSonError() {
+	        };
+
+		
+		$('#emptyDiv').hide();
+		$('#sendMessageSocket').on('click',function(e){
+			e.preventDefault();
+			
+			 if ($.trim($('#LogContainer').val()) == "") {
+				 alert('hello')
+	           return;
+			 }	 
+				 
+				 
+				 var msg = JSON.stringify({'command':'message', 'roomId':'allChannel' ,'name':'${to.email}','info':$('#LogContainer').val()})
+	        
+	                    
+	                    ws.send(msg);
+			
+			
+			
+			$('#contentArea').html(` 
+					<br><br><br>
+
+					<figure class="aa-blog-img">
+                    <img alt="img" src="${pageContext.request.contextPath}/img/success.png" class="aa-blog-img-ss" > 
+                  </figure>
+                  <br>
+                  <div class="aa-blog-single-content">
+                    <p style="font-size: 25px; text-align: center;">
+                      	訊息發送成功,請耐心等待回覆</p>
+                      <br>
+                      	`);
+				
+			$('#emptyDiv').show	();
+		});
+		
+		
+	})
+	</script>
+
+
 
 </body>
 </html>

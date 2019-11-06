@@ -235,6 +235,7 @@
                     <textarea name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
                   </p>                
                   <p class="form-submit">
+<!--                   <p class="form-group row"> -->
                     <input type="submit" name="submit" class="aa-browse-btn" value="送出">
                   </p>        
                 </form>
@@ -251,7 +252,7 @@
 
   <!-- jQuery library -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>   
+   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>   
   <!-- slick slider -->
@@ -272,7 +273,7 @@
          
 			$('#iframeControl').append(`<iframe id="iframe" width="100%" height="450"   style="border:0" src="https://www.google.com.tw/maps?output=embed&q=國立臺北科技大學"></iframe>`)
 
-     },100);	
+     },500);	
 	
 	
 		
