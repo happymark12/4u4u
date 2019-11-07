@@ -1452,7 +1452,7 @@ h3 {
 
 											});
 							
-							$('#saveAd').on('click',function(e){
+$('#saveAd').on('click',function(e){
 								
 							    e.preventDefault();
 							 
@@ -1538,7 +1538,7 @@ h3 {
 
 						    	let url = window.location.href;
 						    	let queryStr = url.substr(url.indexOf('?'));
-							    if($(this).text()=="感興趣"){
+							    if($.trim($(this).text())=="感興趣"){
 							    	let passedURL = "/4u4u/showInterest"+$.trim(queryStr);
 							        $.ajax({
 							            type: "GET",
@@ -1683,15 +1683,11 @@ h3 {
 				 		        }, 3000);
 		            		return;
 		            		
-		            	}
-		            	
-		            	if(response.result=='allow'){
+		            	}else if(response.result=='ok'){
 		            		window.location.href = thisUrl;
 // 		            		window.location.replace(thisUrl);
 		            		return;
-		            	}
-		            	
-		            	if(response.result=='forbid'){
+		            	}else if(response.result=='adOwner'){
 		            		 setTimeout(() => {
 		            			 $('#modalTitle').text('您為廣告發佈人，無法使用此功能!!');
 				 		            $('#myModal').modal('show')
@@ -1701,7 +1697,21 @@ h3 {
 				 		            $('#myModal').modal('hide')
 				 		        }, 3000);
 		            		return;
+		            	}else if(response.result=='earlyBird'){
+		            		 setTimeout(() => {
+		            			 $('#modalTitle').html('您無法使用此功能<br>升級為VIP才享有早鳥資格!!');
+				 		            $('#myModal').modal('show')
+				 		        }, 100);
+				 		        
+				 		        setTimeout(() => {
+				 		            $('#myModal').modal('hide')
+				 		        }, 3000);
+		            		return;
 		            	}
+		           
+		            
+		            
+		            
 		            }
 				
 				});
@@ -1714,6 +1724,7 @@ h3 {
 	 
 	 
 	 })
+	 
 	 
 	 
 	 

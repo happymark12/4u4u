@@ -473,63 +473,136 @@ public class MemberDaoImpl implements MemberDao {
 		Session session = factory.getCurrentSession();
 		String checkAdContactStatus = null;
 		//
-		if (mb.getState().trim().contentEquals("2")) {
-			try {
-				String hql = null;
-				if (adStyle.trim().contentEquals("0")) {
-					hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
-
-				} else {
-					hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
-
-				}
-				session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
-				checkAdContactStatus = "adOwner";
-			} catch (NoResultException e) {
-				checkAdContactStatus = "ok";
-			}
-		} else {
-
-			String hql = null;
-			if (adStyle.trim().contentEquals("0")) {
-				RoomRentBean rBean = session.get(RoomRentBean.class, adId);
-				Date createDate = new Date(rBean.getAdCreateDate().getTime());
-				Date now = new Date();
-				long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
-				if (diffDays < 7) {
-					checkAdContactStatus = "earlyBird";
-				} else if (diffDays >= 7) {
-					try {
+		RoomRentBean rBean = null;
+		WantedRoomBean wBean = null;
+		if(adStyle.trim().contentEquals("0")) {
+			 rBean = session.get(RoomRentBean.class, adId);
+		}else {
+		     wBean = session.get(WantedRoomBean.class, adId);
+		}
+		if(rBean!=null) {
+			if (mb.getState().trim().contentEquals("2")|| rBean.getRoomRentMemId().getState().trim().contentEquals("2")) {
+				try {
+					String hql = null;
+					if (adStyle.trim().contentEquals("0")) {
 						hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
-						session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
-						checkAdContactStatus = "adOwner";
-					} catch (NoResultException e) {
-						checkAdContactStatus = "ok";
-					}
-				}
 
+					} else {
+						hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+
+					}
+					session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+					checkAdContactStatus = "adOwner";
+				} catch (NoResultException e) {
+					checkAdContactStatus = "ok";
+				}
 			} else {
 
-				WantedRoomBean wBean = session.get(WantedRoomBean.class, adId);
-				Date createDate = new Date(wBean.getAdCreateDate().getTime());
-				Date now = new Date();
-				long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
-				if (diffDays < 7) {
-					checkAdContactStatus = "earlyBird";
-				} else if (diffDays >= 7) {
-					try {
-						hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
-						session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
-						checkAdContactStatus = "adOwner";
-					} catch (NoResultException e) {
-						checkAdContactStatus = "ok";
+				String hql = null;
+				if (adStyle.trim().contentEquals("0")) {
+					Date createDate = new Date(rBean.getAdCreateDate().getTime());
+					Date now = new Date();
+					long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+					if (diffDays < 7) {
+						checkAdContactStatus = "earlyBird";
+					} else if (diffDays >= 7) {
+						try {
+							hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+							session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+							checkAdContactStatus = "adOwner";
+						} catch (NoResultException e) {
+							checkAdContactStatus = "ok";
+						}
 					}
+
+				} else {
+
+					
+					Date createDate = new Date(wBean.getAdCreateDate().getTime());
+					Date now = new Date();
+					long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+					if (diffDays < 7) {
+						checkAdContactStatus = "earlyBird";
+					} else if (diffDays >= 7) {
+						try {
+							hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+							session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+							checkAdContactStatus = "adOwner";
+						} catch (NoResultException e) {
+							checkAdContactStatus = "ok";
+						}
+					}
+
+
 				}
 
+			}
+			
+			
+			
+		}else {
+			
+			if (mb.getState().trim().contentEquals("2")|| wBean.getWantedRoomAdMemId().getState().trim().contentEquals("2")) {
+				try {
+					String hql = null;
+					if (adStyle.trim().contentEquals("0")) {
+						hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+
+					} else {
+						hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+
+					}
+					session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+					checkAdContactStatus = "adOwner";
+				} catch (NoResultException e) {
+					checkAdContactStatus = "ok";
+				}
+			} else {
+
+				String hql = null;
+				if (adStyle.trim().contentEquals("0")) {
+					Date createDate = new Date(rBean.getAdCreateDate().getTime());
+					Date now = new Date();
+					long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+					if (diffDays < 7) {
+						checkAdContactStatus = "earlyBird";
+					} else if (diffDays >= 7) {
+						try {
+							hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+							session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+							checkAdContactStatus = "adOwner";
+						} catch (NoResultException e) {
+							checkAdContactStatus = "ok";
+						}
+					}
+
+				} else {
+
+					
+					Date createDate = new Date(wBean.getAdCreateDate().getTime());
+					Date now = new Date();
+					long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+					if (diffDays < 7) {
+						checkAdContactStatus = "earlyBird";
+					} else if (diffDays >= 7) {
+						try {
+							hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+							session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+							checkAdContactStatus = "adOwner";
+						} catch (NoResultException e) {
+							checkAdContactStatus = "ok";
+						}
+					}
+
+
+				}
 
 			}
-
+			
+			
+			
 		}
+		
 
 		
 
