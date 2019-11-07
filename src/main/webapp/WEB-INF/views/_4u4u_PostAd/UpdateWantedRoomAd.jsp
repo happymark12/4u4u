@@ -161,7 +161,7 @@ button {
 											<span style="color:white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />">登出</a>
+											<a style="color:white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -169,7 +169,7 @@ button {
 											<span style="color:white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />"> 登出 </a>
+											<a style="color:white" href="<c:url value='/logout' />"> <i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -332,7 +332,7 @@ button {
                                   			<option value="">-</option>
                                       		<option value="1">1</option>
                                       		<option value="2">2</option>
-                                  		</c:if>                                     
+                                  		</c:if>                                                      
                                   	</select>間套房
                                   <select name="severalRooms" id="severalRooms" required>
                                   		<c:if test="${roomQuantity == 1}">
@@ -356,12 +356,12 @@ button {
                                   
                                   <c:if test="${empty suiteQuantity && empty roomQuantity}">
                                   <select name="severalSuites" id="severalSuites" required>
-                                      <option value="">-</option>
+                                      <option value="default">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間套房
                                   <select name="severalRooms" id="severalRooms" required>
-                                      <option value="">-</option>
+                                      <option value="default">-</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
                                   </select>間雅房

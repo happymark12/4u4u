@@ -159,7 +159,7 @@ border-bottom: 5px solid orange;
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35' width='35' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -168,7 +168,7 @@ border-bottom: 5px solid orange;
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+												<i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -334,6 +334,8 @@ border-bottom: 5px solid orange;
 					<h2>精選推薦</h2>
 					<span></span>
 					<p>精選優質好物件，不容錯過!</p>
+					
+					
 				</div>
 				<div class="aa-latest-properties-content">
 					<div class="row" id="indexAds"></div>

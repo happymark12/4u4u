@@ -251,7 +251,7 @@ h3 {
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -260,7 +260,7 @@ h3 {
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -1646,15 +1646,11 @@ h3 {
 				 		        }, 3000);
 		            		return;
 		            		
-		            	}
-		            	
-		            	if(response.result=='allow'){
+		            	}else if(response.result=='ok'){
 		            		window.location.href = thisUrl;
 // 		            		window.location.replace(thisUrl);
 		            		return;
-		            	}
-		            	
-		            	if(response.result=='forbid'){
+		            	}else if(response.result=='adOwner'){
 		            		 setTimeout(() => {
 		            			 $('#modalTitle').text('您為廣告發佈人，無法使用此功能!!');
 				 		            $('#myModal').modal('show')
@@ -1664,7 +1660,21 @@ h3 {
 				 		            $('#myModal').modal('hide')
 				 		        }, 3000);
 		            		return;
+		            	}else if(response.result=='earlyBird'){
+		            		 setTimeout(() => {
+		            			 $('#modalTitle').html('您無法使用此功能<br>升級為VIP才享有早鳥資格!!');
+				 		            $('#myModal').modal('show')
+				 		        }, 100);
+				 		        
+				 		        setTimeout(() => {
+				 		            $('#myModal').modal('hide')
+				 		        }, 3000);
+		            		return;
 		            	}
+		           
+		            
+		            
+		            
 		            }
 				
 				});

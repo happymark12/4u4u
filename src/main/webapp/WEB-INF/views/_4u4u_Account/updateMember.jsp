@@ -216,7 +216,11 @@
 	        };
 
 	        function WSonMessage(event) {
-	        	if(event.data.includes('悄悄對你說')){
+	        	if(event.data.split(':')[2]==''){
+	        		return;
+	        	}
+	        	let url  = window.location.href;
+	        	if(event.data.includes('私訊')&& !url.includes('myMessage')){
 	        		 setTimeout(() => {
 	 		            $('#myModal').modal('show')
 	 		        }, 100);

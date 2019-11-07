@@ -178,7 +178,7 @@ button{
 											<span style="color:white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />">登出</a>
+											<a style="color:white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -186,7 +186,7 @@ button{
 											<span style="color:white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />"> 登出 </a>
+											<a style="color:white" href="<c:url value='/logout' />"> <i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -229,12 +229,12 @@ button{
 						<!--帳戶管理-->
 						<li><a href="<c:url value='/account' />">帳戶管理</a></li>
 						<!--發佈廣告-->
-						<li class="dropdown active"><a class="dropdown-toggle"
-							>發佈廣告 <span
+						<li class="dropdown "><a class="dropdown-toggle active"
+							data-toggle="dropdown" >發佈廣告 <span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a
-									href="<c:url value='/PostRoomRentAd' />">出租廣告</a></li>
+									class="active" href="<c:url value='/PostRoomRentAd' />">出租廣告</a></li>
 								<li><a
 									href="<c:url value='/PostWantedRoomAd' />">找房廣告</a></li>
 							</ul></li>

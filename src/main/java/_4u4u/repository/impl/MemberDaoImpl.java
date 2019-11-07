@@ -161,10 +161,10 @@ public class MemberDaoImpl implements MemberDao {
 		int count = 0;
 		try {
 			if (adStyle.trim().contentEquals("0")) {
-				
+
 				SavedAdForRoomAdBean savedAdForRoomAdBean = new SavedAdForRoomAdBean();
 				RoomRentBean targetBean = session.get(RoomRentBean.class, adId);
-				if(mb.getMemId()==targetBean.getRoomRentMemId().getMemId()) {
+				if (mb.getMemId() == targetBean.getRoomRentMemId().getMemId()) {
 					return -1; // 儲存此廣告與 發佈廣告為同一人
 				}
 				savedAdForRoomAdBean.setCreateTime(ts);
@@ -175,7 +175,7 @@ public class MemberDaoImpl implements MemberDao {
 			} else {
 				SavedAdForWantedRoomAdBean savedAdForWantedRoomAdBean = new SavedAdForWantedRoomAdBean();
 				WantedRoomBean targetBean = session.get(WantedRoomBean.class, adId);
-				if(mb.getMemId()==targetBean.getWantedRoomAdMemId().getMemId()) {
+				if (mb.getMemId() == targetBean.getWantedRoomAdMemId().getMemId()) {
 					return -1; // 儲存此廣告與 發佈廣告為同一人
 				}
 				savedAdForWantedRoomAdBean.setCreateTime(ts);
@@ -275,7 +275,7 @@ public class MemberDaoImpl implements MemberDao {
 		int saveInterestedAdCount = 0;
 		if (adStyle.trim().contentEquals("0")) {
 			RoomRentBean roomrentBean = session.get(RoomRentBean.class, adId);
-			if(mb.getMemId()==roomrentBean.getRoomRentMemId().getMemId()) {
+			if (mb.getMemId() == roomrentBean.getRoomRentMemId().getMemId()) {
 				return -1; // 儲存此廣告與 發佈廣告為同一人
 			}
 			String hql = "FROM SavedAdForRoomAdBean s WHERE s.savedAdForRoomAdMemId = :mb AND s.savedAdForRoomAdAdId = :rrb";
@@ -288,20 +288,20 @@ public class MemberDaoImpl implements MemberDao {
 				savedAdForRoomAdBean.setSavedAdForRoomAdAdId(roomrentBean);
 				session.save(savedAdForRoomAdBean);
 			}
-				session.clear();
-				  MemberBean memberBean = session.get(MemberBean.class, mb.getMemId());
-				  RoomRentBean roomBean = session.get(RoomRentBean.class, adId);
-				InterestedAdForRoomAdBean interestedAdForRoomAdBean = new InterestedAdForRoomAdBean();
-				interestedAdForRoomAdBean.setCreateTime(ts);
-				interestedAdForRoomAdBean.setInterestedAdForRoomAdMemId(memberBean);
-				interestedAdForRoomAdBean.setInterestedAdForRoomAdAdId(roomBean);
-				session.save(interestedAdForRoomAdBean);
-				saveInterestedAdCount++;
+			session.clear();
+			MemberBean memberBean = session.get(MemberBean.class, mb.getMemId());
+			RoomRentBean roomBean = session.get(RoomRentBean.class, adId);
+			InterestedAdForRoomAdBean interestedAdForRoomAdBean = new InterestedAdForRoomAdBean();
+			interestedAdForRoomAdBean.setCreateTime(ts);
+			interestedAdForRoomAdBean.setInterestedAdForRoomAdMemId(memberBean);
+			interestedAdForRoomAdBean.setInterestedAdForRoomAdAdId(roomBean);
+			session.save(interestedAdForRoomAdBean);
+			saveInterestedAdCount++;
 
 		} else {
 
 			WantedRoomBean wantedRoomBean = session.get(WantedRoomBean.class, adId);
-			if(mb.getMemId()==wantedRoomBean.getWantedRoomAdMemId().getMemId()) {
+			if (mb.getMemId() == wantedRoomBean.getWantedRoomAdMemId().getMemId()) {
 				return -1; // 儲存此廣告與 發佈廣告為同一人
 			}
 			String hql = "FROM SavedAdForWantedRoomAdBean s WHERE s.savedAdForWantedRoomAdMemId = :mb AND s.savedAdForWantedRoomAdFindRoomId = :wrb";
@@ -315,15 +315,15 @@ public class MemberDaoImpl implements MemberDao {
 				savedAdForWantedRoomAdBean.setSavedAdForWantedRoomAdFindRoomId(wantedRoomBean);
 				session.save(savedAdForWantedRoomAdBean);
 			}
-			    session.clear();
-			    MemberBean memberBean = session.get(MemberBean.class, mb.getMemId());
-			    WantedRoomBean wantedBean = session.get(WantedRoomBean.class, adId);
-				InterestedAdForWantedRoomAdBean interestedAdForWantedRoomAdBean = new InterestedAdForWantedRoomAdBean();
-				interestedAdForWantedRoomAdBean.setCreateTime(ts);
-				interestedAdForWantedRoomAdBean.setInterestedAdForWantedRoomAdMemId(memberBean);
-				interestedAdForWantedRoomAdBean.setInterestedAdForWantedRoomAdFindRoomId(wantedBean);
-				session.save(interestedAdForWantedRoomAdBean);
-				saveInterestedAdCount++;
+			session.clear();
+			MemberBean memberBean = session.get(MemberBean.class, mb.getMemId());
+			WantedRoomBean wantedBean = session.get(WantedRoomBean.class, adId);
+			InterestedAdForWantedRoomAdBean interestedAdForWantedRoomAdBean = new InterestedAdForWantedRoomAdBean();
+			interestedAdForWantedRoomAdBean.setCreateTime(ts);
+			interestedAdForWantedRoomAdBean.setInterestedAdForWantedRoomAdMemId(memberBean);
+			interestedAdForWantedRoomAdBean.setInterestedAdForWantedRoomAdFindRoomId(wantedBean);
+			session.save(interestedAdForWantedRoomAdBean);
+			saveInterestedAdCount++;
 		}
 		return saveInterestedAdCount;
 	}
@@ -366,33 +366,31 @@ public class MemberDaoImpl implements MemberDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<List<String>>  getPotentailBuddyUps(Integer adId) {
+	public List<List<String>> getPotentailBuddyUps(Integer adId) {
 		Session session = factory.getCurrentSession();
 		List<List<String>> potentailList = new ArrayList<List<String>>();
-		List<InterestedAdForRoomAdBean> interestedAdForRoomAdBeanList  = new ArrayList<InterestedAdForRoomAdBean>();
+		List<InterestedAdForRoomAdBean> interestedAdForRoomAdBeanList = new ArrayList<InterestedAdForRoomAdBean>();
 		RoomRentBean roomRentBean = session.get(RoomRentBean.class, adId);
 		String hql = " FROM InterestedAdForRoomAdBean i WHERE  i.interestedAdForRoomAdAdId = :rrb";
-		interestedAdForRoomAdBeanList = session.createQuery(hql).setParameter("rrb", roomRentBean)
-				.getResultList();
-		for(InterestedAdForRoomAdBean iBean:interestedAdForRoomAdBeanList) {
+		interestedAdForRoomAdBeanList = session.createQuery(hql).setParameter("rrb", roomRentBean).getResultList();
+		for (InterestedAdForRoomAdBean iBean : interestedAdForRoomAdBeanList) {
 			List<WantedRoomBean> wantedRoomBeanList = new ArrayList<WantedRoomBean>();
 			List<String> potentailListElement = new ArrayList<String>();
 			String hql2 = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId = :mb AND w.adState = true AND w.agreeShare = true ORDER BY w.adCreateDate DESC";
-			wantedRoomBeanList = session.createQuery(hql2).setParameter("mb", iBean.getInterestedAdForRoomAdMemId()).getResultList();
-			if(wantedRoomBeanList.size()==0) {
+			wantedRoomBeanList = session.createQuery(hql2).setParameter("mb", iBean.getInterestedAdForRoomAdMemId())
+					.getResultList();
+			if (wantedRoomBeanList.size() == 0) {
 				continue;
-			}else {
+			} else {
 				potentailListElement.add(iBean.getInterestedAdForRoomAdMemId().getMemId().toString());
 				potentailListElement.add(iBean.getInterestedAdForRoomAdMemId().getName());
 				potentailListElement.add(wantedRoomBeanList.get(0).getFindRoomId().toString());
-				
+
 				potentailList.add(potentailListElement);
 			}
-		
+
 		}
-		
-		
-		
+
 		return potentailList;
 	}
 
@@ -401,56 +399,52 @@ public class MemberDaoImpl implements MemberDao {
 	public List<List<String>> getPotentialWholePropertiesList(Integer memberId) {
 		Session session = factory.getCurrentSession();
 		List<List<String>> potentailPropertiesList = new ArrayList<List<String>>();
-		List<InterestedAdForRoomAdBean> interestedAdForRoomAdBeanList  = new ArrayList<InterestedAdForRoomAdBean>();
+		List<InterestedAdForRoomAdBean> interestedAdForRoomAdBeanList = new ArrayList<InterestedAdForRoomAdBean>();
 		MemberBean memberBean = session.get(MemberBean.class, memberId);
 		String hql = " FROM InterestedAdForRoomAdBean i WHERE  i.interestedAdForRoomAdMemId = :mb AND i.interestedAdForRoomAdAdId.adRentType='0'";
-		interestedAdForRoomAdBeanList = session.createQuery(hql).setParameter("mb", memberBean)
-				.getResultList();
-		for(InterestedAdForRoomAdBean iBean:interestedAdForRoomAdBeanList) {
+		interestedAdForRoomAdBeanList = session.createQuery(hql).setParameter("mb", memberBean).getResultList();
+		for (InterestedAdForRoomAdBean iBean : interestedAdForRoomAdBeanList) {
 			List<String> potentailListPropertiesElement = new ArrayList<String>();
 			String imageFileName = null;
 			String imagesString = iBean.getInterestedAdForRoomAdAdId().getAdImages();
-			if(imagesString!=null && imagesString.trim().length()!=0) {
-				imageFileName = "/disksource/roomRentAd/"+imagesString.split(",")[0];
-			}else {
+			if (imagesString != null && imagesString.trim().length() != 0) {
+				imageFileName = "/disksource/roomRentAd/" + imagesString.split(",")[0];
+			} else {
 				imageFileName = "${pageContext.request.contextPath}/img/NoImage.png";
 			}
 			potentailListPropertiesElement.add(iBean.getInterestedAdForRoomAdAdId().getAdId().toString());
 			potentailListPropertiesElement.add(imageFileName);
 			potentailListPropertiesElement.add(iBean.getInterestedAdForRoomAdAdId().getAdTitle());
-				
-				potentailPropertiesList.add(potentailListPropertiesElement);
-			}
-		
+
+			potentailPropertiesList.add(potentailListPropertiesElement);
+		}
+
 		return potentailPropertiesList;
 	}
 
 	@Override
-	public boolean deleteInterestedAdOnly( String adStyle, Integer adId) {
+	public boolean deleteInterestedAdOnly(String adStyle, Integer adId) {
 		Session session = factory.getCurrentSession();
 		if (adStyle.trim().contentEquals("0")) {
-		 
-			
-				try {
-					String hql = "DELETE FROM InterestedAdForRoomAdBean i WHERE i.id = :id";
-					int count = session.createQuery(hql).setParameter("id", adId)
-							.executeUpdate();
-					if (count == 1) {
-						return true;
-					} else {
 
-						return false;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					;
+			try {
+				String hql = "DELETE FROM InterestedAdForRoomAdBean i WHERE i.id = :id";
+				int count = session.createQuery(hql).setParameter("id", adId).executeUpdate();
+				if (count == 1) {
+					return true;
+				} else {
+
+					return false;
 				}
-			
+			} catch (Exception e) {
+				e.printStackTrace();
+				;
+			}
+
 		} else {
 			try {
 				String hql = "DELETE FROM InterestedAdForWantedRoomAdBean i WHERE i.id = :id";
-				int count = session.createQuery(hql).setParameter("id", adId)
-						.executeUpdate();
+				int count = session.createQuery(hql).setParameter("id", adId).executeUpdate();
 				if (count == 1) {
 					return true;
 				} else {
@@ -464,38 +458,81 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int updateMember(MemberBean mb) {
 		Integer n = 0;
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(mb);
-		n++;		
+		n++;
 		return n;
 	}
 
 	@Override
-	public boolean checkAdOwner(MemberBean mb, String adStyle, Integer adId) {
+	public String checkAdContactStatus(MemberBean mb, String adStyle, Integer adId) {
 		Session session = factory.getCurrentSession();
-		boolean checkAdOwner = false;
-		try {
-			String hql = null;
-			if(adStyle.trim().contentEquals("0")) {
-				
-		hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
-			}else {
-		hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
-		
+		String checkAdContactStatus = null;
+		//
+		if (mb.getState().trim().contentEquals("2")) {
+			try {
+				String hql = null;
+				if (adStyle.trim().contentEquals("0")) {
+					hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+
+				} else {
+					hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+
+				}
+				session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+				checkAdContactStatus = "adOwner";
+			} catch (NoResultException e) {
+				checkAdContactStatus = "ok";
 			}
-			session.createQuery(hql).setParameter("mb", mb)
-					.setParameter("adId", adId)
-					.getSingleResult();
-			checkAdOwner = true;
-		} catch (NoResultException e) {
-			;
+		} else {
+
+			String hql = null;
+			if (adStyle.trim().contentEquals("0")) {
+				RoomRentBean rBean = session.get(RoomRentBean.class, adId);
+				Date createDate = new Date(rBean.getAdCreateDate().getTime());
+				Date now = new Date();
+				long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+				if (diffDays < 7) {
+					checkAdContactStatus = "earlyBird";
+				} else if (diffDays >= 7) {
+					try {
+						hql = "FROM RoomRentBean r WHERE r.roomRentMemId=:mb AND r.adId=:adId";
+						session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+						checkAdContactStatus = "adOwner";
+					} catch (NoResultException e) {
+						checkAdContactStatus = "ok";
+					}
+				}
+
+			} else {
+
+				WantedRoomBean wBean = session.get(WantedRoomBean.class, adId);
+				Date createDate = new Date(wBean.getAdCreateDate().getTime());
+				Date now = new Date();
+				long diffDays = (now.getTime() - createDate.getTime()) / (24 * 60 * 60 * 1000);
+				if (diffDays < 7) {
+					checkAdContactStatus = "earlyBird";
+				} else if (diffDays >= 7) {
+					try {
+						hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId=:mb AND w.findRoomId=:adId";
+						session.createQuery(hql).setParameter("mb", mb).setParameter("adId", adId).getSingleResult();
+						checkAdContactStatus = "adOwner";
+					} catch (NoResultException e) {
+						checkAdContactStatus = "ok";
+					}
+				}
+
+
+			}
+
 		}
+
 		
-		
-		return checkAdOwner;
+
+		return checkAdContactStatus;
 	}
 }

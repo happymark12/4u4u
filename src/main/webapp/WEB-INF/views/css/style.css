@@ -1843,6 +1843,18 @@ img {
 /* min-height: 400px;*/
  width: 100%;
 }
+.message{
+  /* 我的訊息的背景圖 */
+  background-image: url("../img/header-bg/message.jpg");
+  background-position: center center;
+ background-size: cover;
+ display: inline;
+ float: left;
+ position: relative;
+ padding-bottom: 0px;
+/* min-height: 400px;*/
+ width: 100%;
+}
 .aa-blog-img-ss {
   display:block; 
   margin:auto;
@@ -1890,7 +1902,7 @@ filter: brightness(40%) blur(2px);
 #aa-property-header .aa-property-header-inner {
   display: inline;
   float: left;
-  padding: 150px 0 50px;
+  padding: 150px 0 30px;
   text-align: center;
   width: 100%;
 }
@@ -3320,11 +3332,14 @@ filter: brightness(40%) blur(2px);
 ====================*/
 
 #aa-footer {
-  background-color: #444;
-  display: inline;
-  float: left;
-  padding: 30px 0;
-  width: 100%;
+	background-color: #444;
+	display: inline;
+	float: left;
+	padding-top: 20px;
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 20px;
+	width: 100%;
 }
 #aa-footer .aa-footer-area {
   display: inline;
@@ -4861,6 +4876,19 @@ background:url(../img/account/cover_bg_3.jpg);
   height:700px;
   margin: 0 auto;
   
+}
+.demo2 + .tooltip > .tooltip-inner {
+background-color: orange;
+color: #555;
+font-size: 15px;
+padding: 5px 10px;
+box-shadow: 1px 1px 1px #aaa;
+}
+.demo2 + .tooltip.bottom {
+margin-top: 5px;
+}
+.demo2 + .tooltip.bottom > .tooltip-arrow {
+border-bottom: 5px solid orange;
 }
 
 

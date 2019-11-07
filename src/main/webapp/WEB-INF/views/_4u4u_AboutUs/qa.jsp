@@ -93,7 +93,7 @@
 											<span style="color:white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />">登出</a>
+											<a style="color:white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -101,7 +101,7 @@
 											<span style="color:white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color:white" href="<c:url value='/logout' />"> 登出 </a>
+											<a style="color:white" href="<c:url value='/logout' />"> <i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -157,15 +157,15 @@
 						<li ><a href="<c:url value='/activity' />">活動</a></li>
 						
 						<!--關於我們-->
-						<li class="dropdown active"><a class="dropdown-toggle"
-							>關於我們 <span
+						<li class="dropdown  "><a class="dropdown-toggle active"
+							 data-toggle="dropdown" >關於我們 <span
 								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 <!-- 								<li><a href="blog-archive.html">使用說明</a></li> -->
 								<li><a href="<c:url value='/whyuse' />">為何使用</a></li>
 <!-- 								<li><a href="blog-single.html">告訴好友</a></li> -->
-								<li><a href="<c:url value='/contact' />">聯絡我們</a></li>   <li><a href="<c:url value='/qa' />">常見問與答</a></li>        
+								<li><a href="<c:url value='/contact' />">聯絡我們</a></li>   <li><a class="active" href="<c:url value='/qa' />">常見問與答</a></li>        
 							</ul></li>
 					</ul>
 				</div>

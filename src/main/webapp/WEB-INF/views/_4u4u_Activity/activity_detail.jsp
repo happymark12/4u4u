@@ -101,7 +101,7 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -110,7 +110,7 @@
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -277,8 +277,7 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- ==============================我要報名=================================== -->
+<!-- ==============================我要報名=================================== -->
 		<form class="form-activity" action="<c:url value="/activity-success"/>">
 			<div class="form-group row">
 				<label for="inputName3" class="col-sm-2 col-form-label">姓名<span class="required"  style="color:red">*</span></label>

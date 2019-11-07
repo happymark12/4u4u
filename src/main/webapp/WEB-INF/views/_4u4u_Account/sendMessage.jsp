@@ -133,7 +133,7 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -142,7 +142,7 @@
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -341,7 +341,11 @@
 	        };
 
 	        function WSonMessage(event) {
-	        	if(event.data.includes('悄悄對你說')){
+	        	if(event.data.split(':')[2]==''){
+	        		return;
+	        	}
+	        	let url  = window.location.href;
+	        	if(event.data.includes('私訊')&& !url.includes('myMessage') &&  !event.data.includes('私訊自己')){
 	        		 setTimeout(() => {
 	 		            $('#myModal').modal('show')
 	 		        }, 100);
@@ -364,16 +368,16 @@
 
 		
 		$('#emptyDiv').hide();
+		
 		$('#sendMessageSocket').on('click',function(e){
 			e.preventDefault();
 			
 			 if ($.trim($('#LogContainer').val()) == "") {
-				 alert('hello')
 	           return;
 			 }	 
 				 
-				 
-				 var msg = JSON.stringify({'command':'message', 'roomId':'allChannel' ,'name':'${to.email}','info':$('#LogContainer').val()})
+				 let adNum= '(#'+'${ad.adStyle?"1":"0"}'+'${ad.adStyle?ad.findRoomId:ad.adId}'+')'
+				 var msg = JSON.stringify({'command':'message', 'roomId':'allChannel' ,'name':'${to.email}','info':$('#LogContainer').val(),'title':'${ad.adTitle}'+adNum});
 	        
 	                    
 	                    ws.send(msg);

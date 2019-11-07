@@ -23,6 +23,6 @@ public interface MemberService {
 	public List<List<String>> getPotentialWholePropertiesList(Integer memberId); //list中 每個元素 有3個  1st roomRentAdId 2nd imageFileName 3rd roomRentAdTitle   
 	public boolean deleteInterestedAdOnly(String adStyle, Integer adId);
 	public int updateMember(MemberBean mb); //修改會員資料
-	public boolean checkAdOwner(MemberBean mb,String adStyle, Integer adId);
+	public String checkAdContactStatus(MemberBean mb,String adStyle, Integer adId);
 	
 }

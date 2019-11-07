@@ -1,8 +1,10 @@
 package _4u4u.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import _4u4u.model.MemberBean;
 import _4u4u.model.RoomRentBean;
 import _4u4u.model.WantedRoomBean;
-import _4u4u.service.LoginService;
 import _4u4u.service.MemberService;
+import _4u4u.service.MessageService;
 import _4u4u.service.RoomRentService;
 import _4u4u.service.WantedRoomService;
 
@@ -30,7 +32,8 @@ public class MessageController {
 	MemberService memberService;
 	WantedRoomService wantedRoomService;
 	RoomRentService roomRentService;
-
+	MessageService messageService;
+	
 	@Autowired
 	public void setWantedRoomService(WantedRoomService wantedRoomService) {
 		this.wantedRoomService = wantedRoomService;
@@ -41,6 +44,10 @@ public class MessageController {
 		this.roomRentService = roomRentService;
 	}
 
+	@Autowired
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
 
 	@Autowired
 	public void setMemberService(MemberService memberService) {
@@ -100,16 +107,21 @@ public class MessageController {
 
 		}else {
 			
-			boolean checkAdOwner = memberService.checkAdOwner(mb, adStyle, adId);
+			String contactStatus = memberService.checkAdContactStatus(mb, adStyle, adId);
 				
 				try (PrintWriter pw = response.getWriter();) {
-					if(checkAdOwner) {
+					if(contactStatus.trim().contentEquals("ok")) {
 					pw.write("{"
-							+ "\"result\":\"forbid\""
+							+ "\"result\":\"ok\""
 							+ "}");
-					}else {
+					}else if(contactStatus.trim().contentEquals("adOwner")){
 					pw.write("{"
-								+ "\"result\":\"allow\""
+								+ "\"result\":\"adOwner\""
+								+ "}");	
+						
+					}else if(contactStatus.trim().contentEquals("earlyBird")){
+					pw.write("{"
+								+ "\"result\":\"earlyBird\""
 								+ "}");	
 						
 					}
@@ -133,11 +145,8 @@ public class MessageController {
 		
 		
 		
-		HttpSession session = request.getSession();
 		MemberBean toMemBean = memberService.queryMemberById(memId);
-		MemberBean fromMemBean = (MemberBean) session.getAttribute("LoginOK");
 		model.addAttribute("to",toMemBean);
-		model.addAttribute("from",fromMemBean);
 		if(adStyle.trim().contentEquals("0")) {
 			RoomRentBean rBean = roomRentService.getAdById(adId);
 			model.addAttribute("ad",rBean);
@@ -153,6 +162,71 @@ public class MessageController {
 		return "_4u4u_Account/sendMessage";
 	}
 
+	@RequestMapping(value = "/myMessage", method = RequestMethod.GET)
+	public String getMyMessagePage(Model model, HttpServletRequest request) {
+		HttpSession session =request.getSession();
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+		List<Map<String, String>> contactsMap = new ArrayList<Map<String,String>>();
+		contactsMap = messageService.getContacts(mb);
+		int num  = contactsMap.size();
+		model.addAttribute("contactsMap",contactsMap);
+		model.addAttribute("totalNum",num);
+		return "_4u4u_Account/myMessage";
+	}
 	
+	@RequestMapping(value = "/historyMessages/{memId}", method = RequestMethod.GET)
+	public void getHistoryMessage(Model model, HttpServletRequest request,HttpServletResponse response,
+			@PathVariable("memId") Integer memId) {
+		response.setCharacterEncoding("UTF-8");
+		HttpSession session =request.getSession();
+		MemberBean targetMb = (MemberBean) session.getAttribute("LoginOK");
+		MemberBean fromMb = memberService.queryMemberById(memId);
+		
+		
+		try (PrintWriter pw = response.getWriter();) {
+			pw.write( messageService.getHistoryMessage(targetMb,fromMb));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ;
+	}
+	
+	@RequestMapping(value = "/getNewMessageCount/{memId}", method = RequestMethod.GET)
+	public void getNewMessageCount(Model model, HttpServletRequest request,HttpServletResponse response,
+			@PathVariable("memId") Integer memId) {
+		response.setCharacterEncoding("UTF-8");
+		HttpSession session =request.getSession();
+		MemberBean targetMb = (MemberBean) session.getAttribute("LoginOK");
+		
+		
+		try (PrintWriter pw = response.getWriter();) {
+			int num = messageService.getNewMessageCount(targetMb, memId);
+			pw.write("{\"result\":\""+num+"\"}");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ;
+	}
+	
+	@RequestMapping(value = "/updateNewMessageCount/{memId}", method = RequestMethod.GET)
+	public void updateNewMessageCount(Model model, HttpServletRequest request,HttpServletResponse response,
+			@PathVariable("memId") Integer memId) {
+		response.setCharacterEncoding("UTF-8");
+		HttpSession session =request.getSession();
+		MemberBean targetMb = (MemberBean) session.getAttribute("LoginOK");
+		
+		
+		try (PrintWriter pw = response.getWriter();) {
+			int num = messageService.updateNewMessageCount(targetMb, memId);
+			if(num>0) {
+				pw.write("{\"result\":\"success\"}");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ;
+	}
 }
 

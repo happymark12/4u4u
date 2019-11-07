@@ -9,17 +9,21 @@
     <div class="modal-content">
       <div class="modal-header text-center">
         <h3 class="modal-title"  id="modalTitle">您有新訊息，記得去查看您的留言喔</h3>
-<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!--           <span aria-hidden="true">&times;</span> -->
-<!--         </button> -->
+<%-- 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+--%>
         <a type="button" class="btn btn-primary" data-dismiss="modal" >確定</a>
       </div>
-<!--       <div class="modal-body text-center"> -->
-<!--        	 <h4 id="modalDetail" >記得去我的留言查看</h4> -->
-<!--       </div> -->
-<!--       <div class="modal-footer"> -->
-<!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-<!--       </div> -->
+<%--       
+       <div class="modal-body text-center"> 
+       	 <h4 id="modalDetail" >記得去我的留言查看</h4> 
+       </div> 
+       <div class="modal-footer"> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+      </div> 
+--%>
     </div>
   </div>
 </div>
@@ -55,7 +59,9 @@
     <script type="text/javascript">
     $(document).ready(function() {
 		let url = window.location.href;
-    	if(!url.includes('sendMessage')){
+		
+		
+    	if(!url.includes('sendMessage') && !url.includes('myMessage')){
 		$.ajax({
             type: "GET",
             url: "/4u4u/loginCheck",
@@ -67,7 +73,8 @@
             	}
             	if(response.result=='true'){
             		userId  = response.userId;
- ws = new WebSocket('ws://localhost:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');
+           			
+            	ws = new WebSocket('ws://localhost:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');	
 		        
             	  ws.onopen = WSonOpen;
                   ws.onmessage = WSonMessage;
@@ -85,8 +92,13 @@
 	        };
 
 	        function WSonMessage(event) {
-	        	if(event.data.includes('悄悄對你說')){
+	        	if(event.data.split(':')[2]==''){
+	        		return;
+	        	}
+	        	let url  = window.location.href;
+	        	if(event.data.includes('私訊')&& !url.includes('myMessage')){
 	        		 setTimeout(() => {
+	        			 $('#modalTitle').text('您有新訊息，記得去查看您的留言喔');
 	 		            $('#myModal').modal('show')
 	 		        }, 100);
 	 		        

@@ -123,8 +123,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean checkAdOwner(MemberBean mb, String adStyle, Integer adId) {
-		return dao.checkAdOwner(mb,adStyle,adId);
+	public String checkAdContactStatus(MemberBean mb, String adStyle, Integer adId) {
+		return dao.checkAdContactStatus(mb,adStyle,adId);
 	}
 
 }

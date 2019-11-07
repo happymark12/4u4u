@@ -1,6 +1,9 @@
-import static org.hamcrest.CoreMatchers.instanceOf;
-
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +14,8 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import _4u4u.model.FinalJsonObject;
-import _4u4u.model.InterestedAdForRoomAdBean;
 import _4u4u.model.MemberBean;
-import _4u4u.model.RoomRentBean;
-import _4u4u.model.SavedAdForRoomAdBean;
+import _4u4u.model.MessagesBean;
 import _4u4u_init.util.HibernateUtils;
 
 public class MyJUnitTest {
@@ -45,11 +45,26 @@ public class MyJUnitTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void test() {
-	MemberBean mb = session.get(MemberBean.class, 2);
-	FinalJsonObject test = new FinalJsonObject();
-	test.setAdId(mb.getMemId());
-	Gson gson =new Gson();
-	System.out.println(gson.toJson(test));
-	}
-}
+		MemberBean tMb =session.get(MemberBean.class, 8);
+		MemberBean fMb =session.get(MemberBean.class, 17);
+		String hql2 = "FROM MessagesBean m WHERE (m.targetMemId= :tmb and "
+				+ " m.sendMemId=:smb) OR (m.targetMemId= :smb and " 
+				+"	 m.sendMemId=:tmb) order by sendTime";
+		List<MessagesBean> list = session.createQuery(hql2)
+				.setParameter("tmb", tMb)
+			    .setParameter("smb", fMb)
+			    .getResultList();
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MM-dd");
 		
+		for(MessagesBean bean : list) {
+			System.out.println(sdf.format(new Date(bean.getSendTime().getTime())));
+			
+			
+		}
+		
+		
+		
+	}
+
+		
+}

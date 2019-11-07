@@ -64,15 +64,14 @@
 	<div id="aa-preloader-area">
 		<div class="pulse"></div>
 		<div
-			style="font: bold 24px verdana; text-align: center; position: absolute; left: 46.5%; top: 40%;">
+			style="font: bold 24px verdana; text-align: center; position:absolute;left:46.5%;top:40%;">
 			${MsgOK.UpdateOK}${LoginSuccess}</div>
-
-	</div>
-
-	<%
-		// 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
-		session.removeAttribute("LoginSuccess");
-	%>
+			
+  </div>
+  
+  <% // 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
+    session.removeAttribute("LoginSuccess");  
+ %>
 	<!-- SCROLL TOP BUTTON -->
 	<a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 	<!-- END SCROLL TOP BUTTON -->
@@ -123,7 +122,7 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
 
 										</c:if>
 
@@ -132,7 +131,7 @@
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
 
 										</c:if>
 
@@ -276,11 +275,10 @@
 										
 								</div>
 -->
-										<c:if test="${LoginOK.state != 2}">
-											<div class="form-group text-center">
-												<input type="submit" value="立即升級" class="btn btn-primary">
-											</div>
-										</c:if>
+										<div class="form-group text-center">
+											<input type="submit" value="立即升級" class="btn btn-primary">
+
+										</div>
 
 
 									</div>
@@ -311,7 +309,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 text-center col-padding animate-box">
-						<a href="#" class="work"
+						<a href="<c:url value='/myMessage' />" class="work"
 							style="background-image: url(img/account/portfolio-1.jpg);">
 							<div class="desc">
 								<h1>我的留言</h1>
@@ -377,7 +375,7 @@
 	<!-- jQuery library -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+	
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->

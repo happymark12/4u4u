@@ -4,23 +4,44 @@ package _4u4u.socket;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import _4u4u.model.MemberBean;
+import _4u4u.service.MemberService;
+import _4u4u.service.MessageService;
 @Component
 public class MyHandler extends TextWebSocketHandler {
 
     private static final Map<String, Map<String, WebSocketSession>> sUserMap = new HashMap<>(3);
+    MessageService messageService;
+    MemberService memberService;
+    
+    
+    @Autowired
+    public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
 
-    @Override
+	@Autowired
+    public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+
+	@Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
     	System.out.println("成功建立連線");
         String INFO = session.getUri().getPath().split("INFO=")[1];
@@ -61,8 +82,31 @@ public class MyHandler extends TextWebSocketHandler {
                                     "說：" + message.getInfo()
                             ));
                         } else {
-                            sendMessageToUser(message.getRoomId(), message.getName(), new TextMessage(getNameFromSession(webSocketSession) +
-                                    "悄悄對你說：" + message.getInfo()));
+                        	try {
+								String to  = null;
+								MemberBean toMb = null;
+								String title = jsonobject.optString("title");
+								String from  = getNameFromSession(webSocketSession);
+								String info = message.getInfo();
+								Timestamp ts = new Timestamp(new Date().getTime());
+								MemberBean fromMb = memberService.queryMemberByEmail(from);
+								
+								if(!message.getName().contains("@")) {
+									toMb = memberService.queryMemberById(Integer.parseInt(message.getName().trim()));
+									to = toMb.getEmail().trim();
+								}else {
+									to  = message.getName();
+								}
+								if(info!=null&&info.trim().length()!=0) {
+									messageService.saveMessage(from, to, info,title,ts);
+								}
+								sendMessageToUser(message.getRoomId(), from, new TextMessage(fromMb.getMemId() +
+								        ":私訊自己:" + info));
+								sendMessageToUser(message.getRoomId(), to, new TextMessage(fromMb.getMemId() +
+								        ":私訊:" + info));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
                         }
                         break;
                     case MessageKey.LEAVE_COMMAND:
@@ -88,7 +132,7 @@ public class MyHandler extends TextWebSocketHandler {
         if (roomId == null || name == null) return false;
         if (sUserMap.get(roomId) == null) return false;
         WebSocketSession session = sUserMap.get(roomId).get(name);
-        if (!session.isOpen()) return false;
+        if (session==null||!session.isOpen()) return false;
         try {
             session.sendMessage(message);
         } catch (IOException e) {

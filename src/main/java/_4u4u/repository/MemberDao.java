@@ -44,6 +44,6 @@ public interface MemberDao {
 
 	public int updateMember(MemberBean mb); //修改會員資料
 
-	public boolean checkAdOwner(MemberBean mb, String adStyle, Integer adId);
+	public String checkAdContactStatus(MemberBean mb, String adStyle, Integer adId);
 
 }

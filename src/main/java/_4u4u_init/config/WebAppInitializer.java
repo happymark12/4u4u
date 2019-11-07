@@ -55,14 +55,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		registration.setMultipartConfig( new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD));
 	}
 
-	
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		super.onStartup(servletContext);
-		servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
-		
-	}
-
 
 	private static final String LOCATION = ""; // Temporary location where files will be stored
 
@@ -73,6 +65,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	private static final int FILE_SIZE_THRESHOLD = 5242880; // 5MB Size threshold after which files will be written to disk
 
 
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
+		
+	}
 	
 	
 }
