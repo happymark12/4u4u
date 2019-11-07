@@ -36,7 +36,7 @@ public class EDMTableResetHibernate {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			insertMemberTable();			
+			insertMemberTable();
 			insertWantedRoomAdTable();
 			insertEvents();
 			tx.commit();
@@ -47,7 +47,7 @@ public class EDMTableResetHibernate {
 		}
 		insertRoomRentAd();
 		insertRoom();
-		factory.close();		
+		factory.close();
 	} // main結束
 
 //	Member表格
@@ -81,7 +81,6 @@ public class EDMTableResetHibernate {
 					memberBean.setVipEnd(timestamp.valueOf(sa[9]));
 				}
 				memberBean.setCreatTime(timestamp.valueOf(sa[10]));
-
 				session.save(memberBean);
 				count++;
 				System.out.println("新增 " + count + " 筆記錄: " + sa[5]);
@@ -96,17 +95,18 @@ public class EDMTableResetHibernate {
 		String line = "";
 		int count = 0;
 		try (	
-				FileInputStream fis = new FileInputStream("data/roomRentAdOnlyData.sql");
-				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-				BufferedReader br = new BufferedReader(isr);
-			) {
+			FileInputStream fis = new FileInputStream("data/roomRentAdOnlyData.sql");
+			InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+			BufferedReader br = new BufferedReader(isr);
+		) {
 			while ((line = br.readLine()) != null) {
 				try (
 					Connection connection = DriverManager.getConnection(url, user, password);
 					PreparedStatement ps = connection.prepareStatement(line);											
-				){
+				){					
 					ps.executeUpdate();	
-				} catch (SQLException e1) {
+				}
+				catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 				count++;
@@ -122,17 +122,18 @@ public class EDMTableResetHibernate {
 		String line = "";
 		int count = 0;
 		try (	
-				FileInputStream fis = new FileInputStream("data/roomOnlyData.sql");
-				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-				BufferedReader br = new BufferedReader(isr);
-			) {
+			FileInputStream fis = new FileInputStream("data/roomOnlyData.sql");
+			InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+			BufferedReader br = new BufferedReader(isr);
+		) {
 			while ((line = br.readLine()) != null) {
 				try (
 					Connection connection = DriverManager.getConnection(url, user, password);
 					PreparedStatement ps = connection.prepareStatement(line);	
-					){					
+				){			
 					ps.executeUpdate();
-				} catch (SQLException e1) {
+				} 
+				catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 				count++;
