@@ -240,7 +240,7 @@ border-bottom: 5px solid orange;
 							</div>
 
 							<label class="room-ad"><a href="0" class="active" id="roomRentAd" >對您的租房廣告感興趣&nbsp;
-							</a><a href="1" id="wantedRoomAd" >&nbsp;對您的找房廣告感興趣</a></label>
+							</a> | <a href="1" id="wantedRoomAd" >&nbsp;對您的找房廣告感興趣</a></label>
 							<div class="aa-properties-content-head-right">
 							
 

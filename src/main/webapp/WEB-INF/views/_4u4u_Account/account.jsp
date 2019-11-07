@@ -18,8 +18,9 @@
 
 
 <!-- Font awesome -->
-<link href="${pageContext.request.contextPath}/css/font-awesome.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet">
+
+<link href="${pageContext.servletContext.contextPath}/css/font-awesome.css" rel="stylesheet">
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
 	rel="stylesheet">
@@ -240,10 +241,10 @@
 												<span>一般會員</span>
 											</c:when>
 											<c:when test="${LoginOK.state==2}">
-												<span>VIP會員</span>
+												<span style=" color: yellow; border-radius: 20px; padding: 15px; background: rgba(255,255,255,0.64)"><i class="fas fa-crown"></i>&nbsp;VIP會員</span>
 											</c:when>
 											<c:when test="${LoginOK.state==5}">
-												<span>管理者</span>
+												<span style="color:green;  border-radius: 20px; padding: 15px; background: rgba(255,255,255,0.64)" ><i class="fas fa-users-cog"></i>&nbsp;管理者</span>
 											</c:when>
 											<c:otherwise>
 												<span>未註冊會員</span>
@@ -275,12 +276,13 @@
 										
 								</div>
 -->
-										<div class="form-group text-center">
-											<input type="submit" value="立即升級" class="btn btn-primary">
+										<c:if test="${LoginOK.state != 2 && LoginOK.state != 5}">
+											<div class="form-group text-center">
+												<input type="submit" value="立即升級" class="btn btn-primary">
+											</div>
+										</c:if>
 
-										</div>
-
-
+									
 									</div>
 
 
@@ -299,7 +301,7 @@
 
 
 		<div id="fh5co-work" class="fh5co-bg-dark">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row animate-box">
 					<!--
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -308,16 +310,17 @@
 -->
 				</div>
 				<div class="row">
-					<div class="col-md-6 text-center col-padding animate-box">
-						<a href="<c:url value='/myMessage' />" class="work"
-							style="background-image: url(img/account/portfolio-1.jpg);">
-							<div class="desc">
-								<h1>我的留言</h1>
+					<div class="col-md-1"></div>
+				<div class="col-md-2 text-center col-padding animate-box">
+					<a href="message.html" class="work" style="background-image: url(img/account/portfolio-1.jpg);">
+						
+						<div class="desc">
+						  <h1>我的訊息</h1>
 								<span>檢查和管理您的最新消息</span>
 							</div>
 						</a>
 					</div>
-					<div class="col-md-6 text-center col-padding animate-box">
+					<div class="col-md-2 text-center col-padding animate-box">
 						<a href="/4u4u/_4u4u/MyAdServlet?memId=${LoginOK.memId}&adStyle=0"
 							class="work"
 							style="background-image: url(img/account/portfolio-2.jpg);">
@@ -327,7 +330,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-4 text-center col-padding animate-box">
+					<div class="col-md-2 text-center col-padding animate-box">
 						<a href="<c:url value='/savedAd' />" class="work"
 							style="background-image: url(img/account/portfolio-5.jpg);">
 							<div class="desc">
@@ -336,7 +339,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-4 text-center col-padding animate-box">
+					<div class="col-md-2 text-center col-padding animate-box">
 						<a href="<c:url value='/interestedAd' />" class="work"
 							style="background-image: url(img/account/portfolio-3.jpg);">
 							<div class="desc">
@@ -345,7 +348,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="col-md-4 text-center col-padding animate-box">
+					<div class="col-md-2 text-center col-padding animate-box">
 						<a
 							href="/4u4u/_4u4u/processUpdateMember?memId=${LoginOK.memId}&state=${LoginOK.state}"
 							class="work"
@@ -356,6 +359,7 @@
 							</div>
 						</a>
 					</div>
+					<div class="col-md-1"></div>
 
 
 

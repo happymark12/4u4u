@@ -249,7 +249,7 @@ border-bottom: 5px solid orange;
 							</div>
 
 							<label class="room-ad"><a href="0" class="active" id="roomRentAd" >房間出租廣告&nbsp;
-							</a><a href="1" id="wantedRoomAd" >&nbsp;徵求房間廣告</a></label>
+							</a> | <a href="1" id="wantedRoomAd" >&nbsp;徵求房間廣告</a></label>
 							<div class="aa-properties-content-head-right">
 								<label for="">排序</label> <select name="sortOption"
 									id="sortOption">

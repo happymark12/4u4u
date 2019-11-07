@@ -878,6 +878,7 @@ img {
 	margin-left: -1px;
 }
 .aa-properties-item:hover {
+	transform: translateY(-10px);
   box-shadow: 1px 6px 20px 5px rgba(98,100,102,0.77);
 }
 .aa-properties-item .aa-properties-item-img {
@@ -1070,6 +1071,11 @@ img {
   float: left;
   width: 100%;
   padding: 10px;
+/*
+	height: 100px;
+  overflow-y:scroll;
+	overflow-x:hidden;
+*/
 	
 }
 .aa-properties-item .aa-properties-item-content .aa-properties-about h3 {
@@ -4680,7 +4686,7 @@ background:url(../img/account/cover_bg_3.jpg);
 
 
 .fh5co-bg-dark {
- background: rgba(63,151,244,0.60);
+ background:#ADD6F1;
 }
 
 
@@ -4695,17 +4701,21 @@ background:url(../img/account/cover_bg_3.jpg);
   overflow: hidden;
   border-radius: 60px;
 }
+.work:hover {
+	 transform: translateY(-10px);
+  box-shadow: 1px 6px 20px 5px rgba(98,100,102,0.77);
+}
 
 .work .desc {
-  display: table-cell;
-  vertical-align: middle;
-  height: 270px;
-  background: rgba(255,255,255,0.74);
-  opacity: 0;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  border-radius: 60px;
+	display: table-cell;
+	vertical-align: middle;
+	height: 270px;
+	background: rgba(255,255,255,0.74);
+	opacity: 0;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+	border-radius: 60px;
 }
 .work .desc h3 {
   font-size: 20px;
@@ -4870,6 +4880,7 @@ background:url(../img/account/cover_bg_3.jpg);
   margin: 0px !important;
  
 }
+
 
 .form-activity{
   width: 800px;

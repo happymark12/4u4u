@@ -75,7 +75,7 @@
 							<form class="contactform" ENCTYPE="multipart/form-data"
 								method="POST" action="<c:url value='/_4u4u/updateMember?memId=${LoginOK.memId}&state=${LoginOK.state}'/>">
 								<div class="aa-single-field">
-									<label for="email">信箱 <span class="required">*</span></label> <input
+									<label for="email">信箱 <span style="color:red;">(信箱已綁定無法修改)</span></label> <input
 										type="email" required="required" aria-required="true"
 										name="eMail" value="${email}" readonly="readonly"> <font size="-1"
 										color="#FF0000">${MsgMap.errorEmailEmpty}${MsgMap.errorIDDup}</font>
