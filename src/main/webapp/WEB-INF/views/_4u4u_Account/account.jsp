@@ -312,7 +312,7 @@
 				<div class="row">
 					<div class="col-md-1"></div>
 				<div class="col-md-2 text-center col-padding animate-box">
-					<a href="message.html" class="work" style="background-image: url(img/account/portfolio-1.jpg);">
+					<a href="<c:url value='/myMessage' />" class="work" style="background-image: url(img/account/portfolio-1.jpg);">
 						
 						<div class="desc">
 						  <h1>我的訊息</h1>

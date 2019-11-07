@@ -22,7 +22,7 @@ public class RootAppConfig {
     public DataSource dataSource() {
         ComboPooledDataSource ds = new ComboPooledDataSource();
         ds.setUser("root");
-        ds.setPassword("elsa8627");
+        ds.setPassword("1qaz2wsx");
         try {
             ds.setDriverClass("com.mysql.cj.jdbc.Driver");
         } catch (Exception e) {

@@ -197,7 +197,7 @@
 
 					if ($(this).attr('type') != 'checkbox') {
 						storage.setItem($(this).attr('name'), $(this).val())
-						if($.trim(storage.getItem($(this).attr('name')))==""&&$(this).attr('name') != 'county' && $(this).attr('name') != 'district'){
+       if($.trim(storage.getItem($(this).attr('name')))==""&&$(this).attr('name') != 'county' && $(this).attr('name') != 'district'){
 							storage.removeItem($(this).attr('name'));
 							
 							let indexStart = currentURL.indexOf($(this).attr('name'));
@@ -214,7 +214,7 @@
 							return;
 							
 							
-						}else if($.trim(storage.getItem($(this).attr('name')))==""&&$(this).attr('name') == 'county'){
+			}else if($.trim(storage.getItem($(this).attr('name')))==""&&$(this).attr('name') == 'county'){
 							sessionStorage.removeItem('district');
 							let indexBegin = currentURL.indexOf('district');
 							if (indexBegin != -1) {
@@ -239,6 +239,24 @@
 
 								currentURL = currentURL.substring(0, indexStart-1);
 							}
+							history.replaceState({ url: currentURL }, "", currentURL);
+							
+							return;
+							
+						}else if($.trim(storage.getItem($(this).attr('name')))==""&&$(this).attr('name') == 'district'){
+							sessionStorage.removeItem('district');
+							let indexBegin = currentURL.indexOf('district');
+							
+								let districtStr = currentURL.substring(indexBegin);
+
+								let tempIndexBegin = districtStr.indexOf('&');
+								if (tempIndexBegin != -1) {
+									currentURL = currentURL.substring(0, indexBegin) + districtStr.substring(tempIndexBegin + 1);
+								} else {
+									currentURL = currentURL.substring(0, indexBegin - 1);
+								}
+							
+						
 							history.replaceState({ url: currentURL }, "", currentURL);
 							
 							return;
