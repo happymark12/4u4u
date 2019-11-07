@@ -333,15 +333,12 @@ button {
 							<!--                               </select> -->
 						</div>
 						<c:if test="${adRentType == '整層住家'}">
-						<br id="whole-property-br">
-						<div id="whole-property-div">
-							
-				 請輸入數量 : 	
-                  				<input type="number" name="wholePropertyToilet"  value="${adToiletNum}" style="width: 50px;" min="1" max="5"> 衛浴
+							<br id="whole-property-br">
+							<div id="whole-property-div">							
+				 請輸入數量 : 		<input type="number" name="wholePropertyToilet"  value="${adToiletNum}" style="width: 50px;" min="1" max="5"> 衛浴
                   				<input type="number" name="wholePropertyLivingRoom" value="${adLivingRoomNum}" style="width: 50px;" min="1" max="5"> 廳
-                  				<input type="number" name="wholePropertyBalcony" value="${adBalconyNum}" style="width: 50px;"  min="1" max="5"> 陽台
-							
-						</div>
+                  				<input type="number" name="wholePropertyBalcony" value="${adBalconyNum}" style="width: 50px;"  min="1" max="5"> 陽台							
+							</div>
 						</c:if>
 						<br> 廣告者身分 : <input type="text" name="adOwner" id="adOwner"
 							value="${adOwner}" readonly="readonly">
