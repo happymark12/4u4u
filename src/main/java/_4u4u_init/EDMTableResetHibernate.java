@@ -36,17 +36,17 @@ public class EDMTableResetHibernate {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-//			insertMemberTable();			
+			insertMemberTable();			
 			insertWantedRoomAdTable();
-//			insertEvents();
+			insertEvents();
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());
 			e.printStackTrace();
 			tx.rollback();
 		}
-//		insertRoomRentAd();
-//		insertRoom();
+		insertRoomRentAd();
+		insertRoom();
 		factory.close();		
 	} // main結束
 
