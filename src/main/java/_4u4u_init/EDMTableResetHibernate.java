@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -11,12 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.sql.rowset.serial.SerialClob;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import _4u4u.model.EventBean;
 import _4u4u.model.MemberBean;
+import _4u4u.model.WantedRoomBean;
 import _4u4u_init.util.HibernateUtils;
 import _4u4u_init.util.SystemUtils2018;
 
@@ -32,16 +36,17 @@ public class EDMTableResetHibernate {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			insertMemberTable();			
-			insertEvents();
+//			insertMemberTable();			
+			insertWantedRoomAdTable();
+//			insertEvents();
 			tx.commit();
 		} catch (Exception e) {
 			System.err.println("新建表格時發生例外: " + e.getMessage());
 			e.printStackTrace();
 			tx.rollback();
 		}
-		insertRoomRentAd();
-		insertRoom();
+//		insertRoomRentAd();
+//		insertRoom();
 		factory.close();		
 	} // main結束
 
@@ -176,6 +181,79 @@ public class EDMTableResetHibernate {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}		
-	}	
+	}
+	
+	// WantedRoomAd表格
+	private static void insertWantedRoomAdTable() {
+		String line = "";
+		int count = 0;
+		try (
+			FileInputStream fis = new FileInputStream("data/WantedRoomAd.txt");
+			InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+			BufferedReader bfr = new BufferedReader(isr);
+		) {
+			while ((line = bfr.readLine()) != null) {
+				String[] s = line.split("\\|");
+				WantedRoomBean wantedRoomBean = new WantedRoomBean();
+				wantedRoomBean.setPeopleNumGender(s[1]);
+				wantedRoomBean.setSuiteQuantity(Integer.valueOf(s[2]));
+				wantedRoomBean.setRoomQuantity(Integer.valueOf(s[3]));
+				wantedRoomBean.setAgreeShare(Boolean.valueOf(s[4]));
+				wantedRoomBean.setAreaCode(s[5]);
+				wantedRoomBean.setBudget(Integer.valueOf(s[6]));
+				wantedRoomBean.setCheckInDate(new Date(System.currentTimeMillis()));
+				wantedRoomBean.setLiveTime(s[8]);
+				wantedRoomBean.setHasWashMachine(Boolean.valueOf(s[9]));
+				wantedRoomBean.setHasRefrigerator(Boolean.valueOf(s[10]));
+				wantedRoomBean.setHasTV(Boolean.valueOf(s[11]));
+				wantedRoomBean.setHasAirConditioning(Boolean.valueOf(s[12]));
+				wantedRoomBean.setHasWaterHeater(Boolean.valueOf(s[13]));
+				wantedRoomBean.setHasInternet(Boolean.valueOf(s[14]));
+				wantedRoomBean.setHasFourthTV(Boolean.valueOf(s[15]));
+				wantedRoomBean.setHasGas(Boolean.valueOf(s[16]));
+				wantedRoomBean.setHasWardrobe(Boolean.valueOf(s[17]));
+				wantedRoomBean.setHasSofa(Boolean.valueOf(s[18]));
+				wantedRoomBean.setHasTable(Boolean.valueOf(s[19]));
+				wantedRoomBean.setHasChair(Boolean.valueOf(s[20]));
+				wantedRoomBean.setHasParking(Boolean.valueOf(s[21]));
+				wantedRoomBean.setHasBalcony(Boolean.valueOf(s[22]));
+				wantedRoomBean.setHasSingleBed(Boolean.valueOf(s[23]));
+				wantedRoomBean.setHasDoubleBed(Boolean.valueOf(s[24]));
+				wantedRoomBean.setAllowCook(Boolean.valueOf(s[25]));
+				wantedRoomBean.setAge(s[26]);
+				wantedRoomBean.setJob(s[27]);
+				wantedRoomBean.setAllowSmoke(Boolean.valueOf(s[28]));
+				wantedRoomBean.setAllowPet(Boolean.valueOf(s[29]));
+				wantedRoomBean.setSexualOrientation(s[30]);
+				wantedRoomBean.setAgreeAdCondition(Boolean.valueOf(s[31]));
+				wantedRoomBean.setWantedRoommatesGender(s[32]);
+				wantedRoomBean.setWantedRoommatesAge(s[33]);
+				wantedRoomBean.setWantedRoommatesJob(s[34]);
+				wantedRoomBean.setWantedRoommatesSmoke(Boolean.valueOf(s[35]));
+				wantedRoomBean.setWantedRoommatesPet(Boolean.valueOf(s[36]));
+				wantedRoomBean.setWantedRoommatesSex(s[37]);
+				wantedRoomBean.setAdTitle(s[38]);
+				char[] ca = s[39].toCharArray();
+				Clob clob = new SerialClob(ca);
+				wantedRoomBean.setAdDescription(clob);
+				wantedRoomBean.setPhone(s[40]);
+				wantedRoomBean.setImages(s[41]);
+				wantedRoomBean.setEmailMax(Integer.valueOf(s[42]));
+				wantedRoomBean.setAdState(Boolean.valueOf(s[43]));
+				wantedRoomBean.setSendMail(Integer.valueOf(s[44]));
+				wantedRoomBean.setEmailDate(new Date(System.currentTimeMillis()));
+				wantedRoomBean.setAdStyle(Boolean.valueOf(s[46]));
+				wantedRoomBean.setAdCreateDate(new Timestamp(System.currentTimeMillis()));
+				wantedRoomBean.setAdUpdateDate(new Timestamp(System.currentTimeMillis()));
+				wantedRoomBean.setWantedRoomAdMemId(session.get(MemberBean.class, Integer.parseInt(s[49])));
+				session.save(wantedRoomBean);
+				count++;
+				System.out.println("新增 " + count + " 筆記錄: " + s[38]);
+			}
+			System.out.println("WantedRoomAd表格資料新增成功");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	} // WantedRoomAd結束
 
 }
