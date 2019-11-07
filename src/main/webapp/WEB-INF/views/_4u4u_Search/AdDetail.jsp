@@ -251,7 +251,7 @@ h3 {
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
+											<a style="color: white" href="<c:url value='/logout' />">登出</a>
 
 										</c:if>
 
@@ -260,7 +260,7 @@ h3 {
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a style="color: white" href="<c:url value='/logout' />">
-												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
+												登出 </a>
 
 										</c:if>
 
@@ -360,20 +360,21 @@ h3 {
 
 							<div class="aa-properties-info">
 								<div class="row">
-									<div class="col-xs-1 "></div>
-									<div class="col-xs-5 text-left">
-										<!-- <h5>回上一頁</h5> -->
+<!-- 									<div class="col-xs-1 "></div> -->
+									<div class="col-xs-6 text-left">
+										<p style="margin-bottom: 20px;color:black;font-size:30px;font-weight:bold;">${findRoomAd.adTitle}${roomRentAd.adTitle}</p>
 									</div>
-									<div class="col-xs-5 text-right">
-										<h5>
-											<a id="saveAd" href="#">儲存廣告</a>
-										</h5>
+									<div class="col-xs-6 text-right" >
+										<p>
+<!-- 											<a id="saveAd" href="#">儲存廣告</a> -->
+											<a  id="saveAd" class="aa-secondary-btn" href="#" style="font-size:23px">儲存廣告</a>
+										</p>
 									</div>
-									<div class="col-xs-1 "></div>
+<!-- 									<div class="col-xs-1 "></div> -->
 
 
-								</div>
-								<h3 style="margin-bottom: 10px;">${findRoomAd.adTitle}${roomRentAd.adTitle}</h3>
+<!-- 								</div> -->
+								
 
 
 
@@ -515,66 +516,89 @@ h3 {
 
 								<c:if test="${!empty roomRentAd }">
 									<br>
-									<h5>${area}</h5>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/placeholder _use.png" width="20"
+														height="20">
+									   &nbsp;${area}</h3>
 
 									<a id="iframeControl" href=""><span
 										style="color: blue">Google Map 顯示約略地址</span></a>
 									<hr style="height: 10px">
-									<h3>廣告描述</h3>
-									<h5 id="adDetail"
-										style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${adDescription}</h5>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/file.png" width="20"
+														height="20">
+									&nbsp;廣告描述</h3>
+									<p id="adDetail"
+										style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${adDescription}</p>
 									<c:if test="${! empty needReadMore }">
 										<a id="readMore" href="#adDetal"><span style="color: blue">閱讀更多</span></a>
 									</c:if>
 
 									<hr style="height: 10px">
-									<h3>物件類型 :
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/home.png" width="20"
+														height="20">
+									&nbsp;物件類型 :
 										${roomRentAd.adRentType==0?"整層出租":(roomRentAd.adRentType==1?"獨立套房":(roomRentAd.adRentType==2?"分租套房":"出租房間(有公共空間)"))}</h3>
 
 									<c:if test="${roomRentAd.adRentType==0}">
-										<h5>總租金$${roomRentAd.adRentPrice} &nbsp;押金:
+										<p>總租金:$${roomRentAd.adRentPrice} 
+										    <br>      
+										         押金:
 											${roomRentAd.adDeposit==2?"2個月":(roomRentAd.adDeposit==1?"1個月":"面議")}
-										</h5>
-										<h5>
-											格局:
-											<c:if test="${roomRentAd.adRoomNum!=0}">${roomRentAd.adRoomNum}房</c:if>
+										    <br>     
+										         格局:
+										    <c:if test="${roomRentAd.adRoomNum!=0}">${roomRentAd.adRoomNum}房</c:if>
 											<c:if test="${roomRentAd.adToiletNum!=0}">${roomRentAd.adToiletNum}衛</c:if>
 											<c:if test="${roomRentAd.adLivingRoomNum!=0}">${roomRentAd.adLivingRoomNum}廳</c:if>
 											<c:if test="${roomRentAd.adBalconyNum!=0}">${roomRentAd.adBalconyNum}陽台</c:if>
-										</h5>
+										</p>
+<!-- 										<p> -->
+<!-- 											格局: -->
+<%-- 											<c:if test="${roomRentAd.adRoomNum!=0}">${roomRentAd.adRoomNum}房</c:if> --%>
+<%-- 											<c:if test="${roomRentAd.adToiletNum!=0}">${roomRentAd.adToiletNum}衛</c:if> --%>
+<%-- 											<c:if test="${roomRentAd.adLivingRoomNum!=0}">${roomRentAd.adLivingRoomNum}廳</c:if> --%>
+<%-- 											<c:if test="${roomRentAd.adBalconyNum!=0}">${roomRentAd.adBalconyNum}陽台</c:if> --%>
+<!-- 										</p> -->
 										<hr style="height: 10px">
 									</c:if>
 									<c:if test="${roomRentAd.adRentType!=0}">
 										<c:forEach var='room' varStatus='vs'
 											items='${roomRentAd.roomItems}'>
 											<c:if test="${room.roomState==true}">
-												<h5>$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}
-													押金: ${room.deposit==2?"2個月":(room.deposit==1?"1個月":"面議")}</h5>
+												<p>$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}
+													押金: ${room.deposit==2?"2個月":(room.deposit==1?"1個月":"面議")}</p>
 											</c:if>
 											<c:if test="${room.roomState==false}">
-												<h5 style="text-decoration: line-through;">$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</h5>
+												<p style="text-decoration: line-through;">$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</p>
 											</c:if>
 										</c:forEach>
 										<hr style="height: 10px">
 									</c:if>
 
 									<c:if test="${! empty checkInDate  }">
-										<h3>可入住時間</h3>
-										<h5>${checkInDate}</h5>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="20"
+														height="20"> 
+										&nbsp;可入住時間</h3>
+										<p style="color:black;">${checkInDate}</p>
 										<hr style="height: 10px">
 									</c:if>
 									<c:if
 										test="${! empty roomRentAd.adExtraCost || ! empty agentFee }">
 
-										<h3>額外費用</h3>
-										<h5>${roomRentAd.adExtraCost}
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/plus.png" width="20"
+														height="20"> 
+<!-- 										<i class="fa fa-star" aria-hidden="true" style="color:black;"></i> -->
+										
+										&nbsp;額外費用</h3>
+										<p>${roomRentAd.adExtraCost}
 											<c:if test="${! empty agentFee}">	
 									仲介費:${agentFee}
 									</c:if>
-										</h5>
+										</p>
 										<hr style="height: 10px">
 									</c:if>
-									<h3>房間設施</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/bigmirror.png" width="20"
+														height="20"> 
+<!-- 									<i class="fa fa-search-plus" aria-hidden="true" style="color:black"></i> -->
+									&nbsp;房間設施</h3>
 									<div class="row">
 
 										<c:forEach var='room' varStatus='vs'
@@ -583,67 +607,67 @@ h3 {
 
 												<div class="col-md-4 col-sm-3 col-xs-6">
 
-													<h5>房間${vs.count}
-														&nbsp;$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</h5>
+													<p>房間${vs.count}
+														&nbsp;$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</p>
 													<ul>
 														<c:if
 															test="${! empty room.rentFloor && ! empty room.rentTotalFloor}">
-															<li><h5>樓層:
-																	${room.rentFloor}/${room.rentTotalFloor}</h5></li>
+															<li><p>樓層:
+																	${room.rentFloor}/${room.rentTotalFloor}</p></li>
 														</c:if>
 														<c:if test="${! empty room.area }">
-															<li><h5>坪數: ${room.area}坪</h5></li>
+															<li><p>坪數: ${room.area}坪</p></li>
 														</c:if>
 														<c:if test="${room.hasBalcony }">
-															<li><h5>陽台</h5></li>
+															<li><p>陽台</p></li>
 														</c:if>
 														<c:if test="${room.hasDuplex }">
-															<li><h5>樓中樓</h5></li>
+															<li><p>樓中樓</p></li>
 														</c:if>
 														<c:if test="${room.hasWash }">
-															<li><h5>洗衣機</h5></li>
+															<li><p>洗衣機</p></li>
 														</c:if>
 														<c:if test="${room.hasIceBox }">
-															<li><h5>冰箱</h5></li>
+															<li><p>冰箱</p></li>
 														</c:if>
 														<c:if test="${room.has4 }">
-															<li><h5>第四台</h5></li>
+															<li><p>第四台</p></li>
 														</c:if>
 														<c:if test="${room.hasGas }">
-															<li><h5>天然瓦斯</h5></li>
+															<li><p>天然瓦斯</p></li>
 														</c:if>
 														<c:if test="${room.hasTV }">
-															<li><h5>電視</h5></li>
+															<li><p>電視</p></li>
 														</c:if>
 														<c:if test="${room.hasWardrobe }">
-															<li><h5>衣櫃</h5></li>
+															<li><p>衣櫃</p></li>
 														</c:if>
 														<c:if test="${room.hasSofa }">
-															<li><h5>沙發</h5></li>
+															<li><p>沙發</p></li>
 														</c:if>
 														<c:if test="${room.hasHeater }">
-															<li><h5>熱水器</h5></li>
+															<li><p>熱水器</p></li>
 														</c:if>
 														<c:if test="${room.hasBroadBand }">
-															<li><h5>網路</h5></li>
+															<li><p>網路</p></li>
 														</c:if>
 														<c:if test="${room.hasBroadBand }">
-															<li><h5>網路</h5></li>
+															<li><p>網路</p></li>
 														</c:if>
 														<c:if test="${room.hasDesk }">
-															<li><h5>桌子</h5></li>
+															<li><p>桌子</p></li>
 														</c:if>
 														<c:if test="${room.hasChair }">
-															<li><h5>椅子</h5></li>
+															<li><p>椅子</p></li>
 														</c:if>
 														<c:if test="${room.hasSingleBed }">
-															<li><h5>單人床</h5></li>
+															<li><p>單人床</p></li>
 														</c:if>
 														<c:if test="${room.hasDoubleBed }">
-															<li><h5>雙人床</h5></li>
+															<li><p>雙人床</p></li>
 														</c:if>
 														<c:if test="${room.hasColdAir }">
-															<li><h5>冷氣</h5></li>
+															<li><p>冷氣</p></li>
 														</c:if>
 
 													</ul>
@@ -655,94 +679,98 @@ h3 {
 									<hr style="height: 10px">
 									<c:if
 										test="${roomRentAd.adRentType=='3'&&roomRentAd.adCurrentPeopleNum!='0'}">
-										<h3>當前室友狀況</h3>
+										<h3><i class="fa fa-user-o" aria-hidden="true" style="color:black;"></i>
+										&nbsp;當前室友狀況</h3>
 
 										<div class="row">
 											<div class="col-md-4 col-sm-3 col-xs-6">
-												<h5>室友:</h5>
-												<h5>抽菸:</h5>
-												<h5>寵物:</h5>
-												<h5>性別:</h5>
+												<p>室友:</p>
+												<p>抽菸:</p>
+												<p>寵物:</p>
+												<p>性別:</p>
 												<c:if test="${roomRentAd.adCurAllowedSearchbySexOrient}">
-													<h5>性向:</h5>
+													<p>性向:</p>
 												</c:if>
 												<c:if test="${! empty age }">
-													<h5>年齡:</h5>
+													<p>年齡:</p>
 												</c:if>
 
 
 
 											</div>
 											<div class="col-md-4 col-sm-3 col-xs-6">
-												<h5>${roomRentAd.adCurrentPeopleNum}人</h5>
+												<p>${roomRentAd.adCurrentPeopleNum}人</p>
 												<c:if test="${roomRentAd.adCurSmoke}">
-													<h5>有</h5>
+													<p>有</p>
 												</c:if>
 												<c:if test="${!roomRentAd.adCurSmoke}">
-													<h5>沒有</h5>
+													<p>沒有</p>
 												</c:if>
 												<c:if test="${roomRentAd.adCurHasPet}">
-													<h5>有</h5>
+													<p>有</p>
 												</c:if>
 												<c:if test="${!roomRentAd.adCurHasPet}">
-													<h5>沒有</h5>
+													<p>沒有</p>
 												</c:if>
-												<h5>${roomRentAd.adCurGender}</h5>
+												<p>${roomRentAd.adCurGender}</p>
 												<c:if test="${roomRentAd.adCurAllowedSearchbySexOrient}">
-													<h5>${sexOrient}</h5>
+													<p>${sexOrient}</p>
 												</c:if>
 												<c:if test="${! empty age }">
-													<h5>${age}</h5>
+													<p>${age}</p>
 												</c:if>
 											</div>
 
 										</div>
 										<hr style="height: 10px">
 									</c:if>
-									<h3>新房客偏好</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/users.png" width="20"
+														height="20"> 
+ 		
+									&nbsp;新房客偏好</h3>
 
 									<div class="row">
 										<div class="col-md-4 col-sm-3 col-xs-6">
 											<c:if test="${! empty roomRentAd.adFutureCoupleAccept }">
 
-												<h5>情侶:</h5>
+												<p>情侶:</p>
 											</c:if>
-											<h5>性別:</h5>
-											<h5>抽菸:</h5>
-											<h5>寵物:</h5>
-											<h5>職業:</h5>
+											<p>性別:</p>
+											<p>抽菸:</p>
+											<p>寵物:</p>
+											<p>職業:</p>
 											<c:if test="${! empty roomMateAge}">
 
-												<h5>年齡:</h5>
+												<p>年齡:</p>
 											</c:if>
 										</div>
 										<div class="col-md-4 col-sm-3 col-xs-6">
 
 											<c:if
 												test="${! empty roomRentAd.adFutureCoupleAccept && roomRentAd.adFutureCoupleAccept}">
-												<h5>可</h5>
+												<p>可</p>
 											</c:if>
 											<c:if
 												test="${! empty roomRentAd.adFutureCoupleAccept && !roomRentAd.adFutureCoupleAccept}">
-												<h5>不可</h5>
+												<p>不可</p>
 											</c:if>
-											<h5>${flatmateGender}</h5>
+											<p>${flatmateGender}</p>
 											<c:if test="${roomRentAd.adFutureSmoke}">
-												<h5>可</h5>
+												<p>可</p>
 											</c:if>
 											<c:if test="${!roomRentAd.adFutureSmoke}">
-												<h5>不可</h5>
+												<p>不可</p>
 											</c:if>
 											<c:if test="${roomRentAd.adFuturePet}">
-												<h5>可</h5>
+												<p>可</p>
 											</c:if>
 											<c:if test="${!roomRentAd.adFuturePet}">
-												<h5>不可</h5>
+												<p>不可</p>
 											</c:if>
-											<h5>${Fjob}</h5>
+											<p>${Fjob}</p>
 											<c:if test="${! empty roomMateAge}">
 
-												<h5>${roomMateAge}</h5>
+												<p>${roomMateAge}</p>
 											</c:if>
 										</div>
 
@@ -759,7 +787,7 @@ h3 {
 														<img height='80' width='80'
 														src='${pageContext.request.contextPath}/_4u4u/getImage?id=${candidate.get(0)}&type=MEMBER'>
 														<br>
-														<h5>${candidate.get(1)}</h5>
+														<p>${candidate.get(1)}</p>
 													</a>
 												</div>
 											</c:forEach>
@@ -770,7 +798,7 @@ h3 {
 										<div class="col-xs-12 text-center">
 											<img height='100px' width='100px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${roomRentAd.roomRentMemId.memId}&type=MEMBER'>
-											<h5>${adOwner}</h5>
+											<p>${adOwner}</p>
 										</div>
 										<div class="col-xs-12 text-center ">
 											<a class="btn btn-primary sendMessageAjax"
@@ -783,75 +811,75 @@ h3 {
 
 								<c:if test="${!empty findRoomAd }">
 									<br>
-									<h5>${findRoomAd.wantedRoomAdMemId.name}</h5>
-									<h5>${job},&nbsp;${findRoomAd.wantedRoomAdMemId.gender}</h5>
-									<h5>${wantedRoom}&nbsp;${buddyups}</h5>
+									<p>${findRoomAd.wantedRoomAdMemId.name}</p>
+									<p>${job},&nbsp;${findRoomAd.wantedRoomAdMemId.gender}</p>
+									<p>${wantedRoom}&nbsp;${buddyups}</p>
 									<hr style="height: 10px">
 									<h3>總預算: ${findRoomAd.budget}</h3>
 									<hr style="height: 10px">
 									<h3>廣告描述</h3>
-									<h5 id="adDetail"
-										style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${adDescription}</h5>
+									<p id="adDetail"
+										style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${adDescription}</p>
 									<c:if test="${! empty needReadMore }">
 										<a id="readMore" href="#adDetal"><span style="color: blue">閱讀更多</span></a>
 									</c:if>
 									<hr style="height: 10px">
 									<c:if test="${! empty checkInDate  }">
 										<h3>可入住時間</h3>
-										<h5>${checkInDate}</h5>
+										<p>${checkInDate}</p>
 										<hr style="height: 10px">
 									</c:if>
 									<h3>找尋區域:</h3>
-									<h5>${lookInArea}</h5>
+									<p>${lookInArea}</p>
 									<hr style="height: 10px">
 									<h3>想要的設施:</h3>
 									<c:if test="${findRoomAd.hasWashMachine}">
-										<h5>洗衣機</h5>
+										<p>洗衣機</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasRefrigerator}">
-										<h5>冰箱</h5>
+										<p>冰箱</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasTV}">
-										<h5>電視</h5>
+										<p>電視</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasAirConditioning}">
-										<h5>冷氣</h5>
+										<p>冷氣</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasWaterHeater}">
-										<h5>熱水器</h5>
+										<p>熱水器</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasInternet}">
-										<h5>網路</h5>
+										<p>網路</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasFourthTV}">
-										<h5>第四台</h5>
+										<p>第四台</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasGas}">
-										<h5>天然瓦斯</h5>
+										<p>天然瓦斯</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasWardrobe}">
-										<h5>衣櫃</h5>
+										<p>衣櫃</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasSofa}">
-										<h5>沙發</h5>
+										<p>沙發</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasTable}">
-										<h5>桌子</h5>
+										<p>桌子</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasChair}">
-										<h5>椅子</h5>
+										<p>椅子</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasParking}">
-										<h5>停車位</h5>
+										<p>停車位</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasBalcony}">
-										<h5>陽台</h5>
+										<p>陽台</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasSingleBed}">
-										<h5>單人床</h5>
+										<p>單人床</p>
 									</c:if>
 									<c:if test="${findRoomAd.hasDoubleBed}">
-										<h5>雙人床</h5>
+										<p>雙人床</p>
 									</c:if>
 									<hr style="height: 10px">
 									<c:if
@@ -867,14 +895,14 @@ h3 {
 									<div class="row">
 										<div class="col-md-4 col-sm-3 col-xs-6">
 											<c:if test="${! empty age }">
-												<h5>年齡:</h5>
+												<p>年齡:</p>
 											</c:if>
-											<h5>抽菸:</h5>
-											<h5>寵物:</h5>
-											<h5>職業:</h5>
-											<h5>性別:</h5>
+											<p>抽菸:</p>
+											<p>寵物:</p>
+											<p>職業:</p>
+											<p>性別:</p>
 											<c:if test="${findRoomAd.agreeAdCondition}">
-												<h5>性向:</h5>
+												<p>性向:</p>
 											</c:if>
 
 
@@ -882,24 +910,24 @@ h3 {
 										</div>
 										<div class="col-md-4 col-sm-3 col-xs-6">
 											<c:if test="${! empty age }">
-												<h5>${age}</h5>
+												<p>${age}</p>
 											</c:if>
 											<c:if test="${findRoomAd.allowSmoke}">
-												<h5>有</h5>
+												<p>有</p>
 											</c:if>
 											<c:if test="${!findRoomAd.allowSmoke}">
-												<h5>沒有</h5>
+												<p>沒有</p>
 											</c:if>
 											<c:if test="${findRoomAd.allowPet}">
-												<h5>有</h5>
+												<p>有</p>
 											</c:if>
 											<c:if test="${!findRoomAd.allowPet}">
-												<h5>沒有</h5>
+												<p>沒有</p>
 											</c:if>
-											<h5>${job}</h5>
-											<h5>${findRoomAd.peopleNumGender}</h5>
+											<p>${job}</p>
+											<p>${findRoomAd.peopleNumGender}</p>
 											<c:if test="${findRoomAd.agreeAdCondition}">
-												<h5>${sexOrient}</h5>
+												<p>${sexOrient}</p>
 											</c:if>
 
 										</div>
@@ -910,39 +938,39 @@ h3 {
 
 									<div class="row">
 										<div class="col-md-4 col-sm-3 col-xs-6">
-											<h5>性別:</h5>
+											<p>性別:</p>
 											<c:if test="${! empty roomMateAge }">
-												<h5>年齡:</h5>
+												<p>年齡:</p>
 											</c:if>
-											<h5>抽菸:</h5>
-											<h5>寵物:</h5>
-											<h5>職業:</h5>
+											<p>抽菸:</p>
+											<p>寵物:</p>
+											<p>職業:</p>
 
-											<h5>性向:</h5>
+											<p>性向:</p>
 
 
 
 										</div>
 										<div class="col-md-4 col-sm-3 col-xs-6">
-											<h5>${flatmateGender}</h5>
+											<p>${flatmateGender}</p>
 											<c:if test="${! empty roomMateAge }">
-												<h5>${roomMateAge}</h5>
+												<p>${roomMateAge}</p>
 											</c:if>
 											<c:if test="${findRoomAd.wantedRoommatesSmoke}">
-												<h5>可</h5>
+												<p>可</p>
 											</c:if>
 											<c:if test="${!findRoomAd.wantedRoommatesSmoke}">
-												<h5>不可</h5>
+												<p>不可</p>
 											</c:if>
 											<c:if test="${findRoomAd.wantedRoommatesPet}">
-												<h5>可</h5>
+												<p>可</p>
 											</c:if>
 											<c:if test="${!findRoomAd.wantedRoommatesPet}">
-												<h5>不可</h5>
+												<p>不可</p>
 											</c:if>
-											<h5>${Fjob}</h5>
+											<p>${Fjob}</p>
 
-											<h5>${flatmateSexOrient}</h5>
+											<p>${flatmateSexOrient}</p>
 
 
 										</div>
@@ -958,7 +986,7 @@ h3 {
 														href="<c:url value='/_4u4u/roomRentDetail?adStyle=0&adId=${candidate.get(0)}'/>">
 														<img height='80' width='80' src='${candidate.get(1)}'>
 														<br>
-														<h5>${candidate.get(2)}</h5>
+														<p>${candidate.get(2)}</p>
 													</a>
 												</div>
 											</c:forEach>
@@ -969,7 +997,7 @@ h3 {
 										<div class="col-xs-12 text-center">
 											<img height='100px' width='100px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${findRoomAd.wantedRoomAdMemId.memId}&type=MEMBER'>
-											<h5>${findRoomAd.wantedRoomAdMemId.name}</h5>
+											<p>${findRoomAd.wantedRoomAdMemId.name}</p>
 										</div>
 										<div class="col-xs-12 text-center ">
 											<a class="btn btn-primary sendMessageAjax"
@@ -981,16 +1009,25 @@ h3 {
 								</c:if>
 
 
-
+                                
 								<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6851.201919469417!2d-86.11773906635584!3d33.47324776828677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x888bdb60cc49c571%3A0x40451ca6baf275c7!2s36008+AL-77%2C+Talladega%2C+AL+35160%2C+USA!5e0!3m2!1sbn!2sbd!4v1460452919256" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
 								<div class="row">
-									<div class="col-xs-6 ">
-										<h5>
-											<a id="showInterest" href="#">感興趣</a>
-										</h5>
+								<br><br>
+									<div class="col-xs-6 text-left">
+										<p> 
+											 <a id="showInterest" href="#" class="aa-secondary-btn">
+								             <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+											 感興趣</a>
+											
+										</p>
 									</div>
 									<div class="col-xs-6 text-right">
-										<h5>檢舉廣告</h5>
+									
+										<p>
+										 <a id="showInterest" href="#" class="aa-secondary-btn">
+										<i class="fa fa-ban" aria-hidden="true"></i>
+										檢舉廣告</a>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -1646,11 +1683,15 @@ h3 {
 				 		        }, 3000);
 		            		return;
 		            		
-		            	}else if(response.result=='ok'){
+		            	}
+		            	
+		            	if(response.result=='allow'){
 		            		window.location.href = thisUrl;
 // 		            		window.location.replace(thisUrl);
 		            		return;
-		            	}else if(response.result=='adOwner'){
+		            	}
+		            	
+		            	if(response.result=='forbid'){
 		            		 setTimeout(() => {
 		            			 $('#modalTitle').text('您為廣告發佈人，無法使用此功能!!');
 				 		            $('#myModal').modal('show')
@@ -1660,21 +1701,7 @@ h3 {
 				 		            $('#myModal').modal('hide')
 				 		        }, 3000);
 		            		return;
-		            	}else if(response.result=='earlyBird'){
-		            		 setTimeout(() => {
-		            			 $('#modalTitle').html('您無法使用此功能<br>升級為VIP才享有早鳥資格!!');
-				 		            $('#myModal').modal('show')
-				 		        }, 100);
-				 		        
-				 		        setTimeout(() => {
-				 		            $('#myModal').modal('hide')
-				 		        }, 3000);
-		            		return;
 		            	}
-		           
-		            
-		            
-		            
 		            }
 				
 				});

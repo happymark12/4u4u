@@ -220,22 +220,22 @@
 												<br>
 												<br>
 												<p style="font-size: 22px;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="40"
-														height="30"> 活動時間<br>
+													<img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="30"
+														height="30"> &nbsp; 活動時間<br>
 
 <!-- 					                                <span style="color: grey;">2019-12-01(日) 14:00 ~ 16:30</span> -->
 													<span style="color: grey;">${eventBean.date}</span>
 												</p>
 												<p style="font-size: 22px">
-													<img alt="img" src="${pageContext.request.contextPath}/img/placeholder.png" width="40"
-														height="30"> 活動地點<br> <span
+													<img alt="img" src="${pageContext.request.contextPath}/img/placeholder.png" width="30"
+														height="30"> &nbsp;活動地點<br> <span
 														style="color: grey;"> ${eventBean.address} <!--                                   (10694)台北市大安區光復南路240巷26號1樓/ 國父紀念館站2號出口 -->
 													</span>
 												</p>
 												<br> <br> <br>
 
 												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/like.png" width="40" height="30">活動介紹
+													<img alt="img" src="${pageContext.request.contextPath}/img/like.png" width="30" height="30"> &nbsp; 活動介紹
 												</p>
 												<hr>
 												<p style="font-size: 20px;">
@@ -254,8 +254,8 @@
 												</p>
 												<hr>
 												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/map-location.png" width="40"
-														height="30">活動地圖
+													<img alt="img" src="${pageContext.request.contextPath}/img/map-location.png" width="30"
+														height="30"> &nbsp; 活動地圖
 												</p>
 												<iframe
 													src="https://www.google.com.tw/maps?output=embed&q=${eventBean.address}"
@@ -263,7 +263,7 @@
 												<br> <br>
 
 												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/user.png" width="40" height="30">活動報名
+													<img alt="img" src="${pageContext.request.contextPath}/img/user.png" width="30" height="30"> &nbsp; 活動報名
 												</p>
 												<hr>
 
