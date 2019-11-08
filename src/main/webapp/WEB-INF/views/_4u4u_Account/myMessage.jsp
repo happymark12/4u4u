@@ -113,8 +113,7 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />"><i
-												class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -122,9 +121,8 @@
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">
-												<i class="fa fa-sign-out" aria-hidden="true"></i>登出
-											</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">
+												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
 
 										</c:if>
 
@@ -475,18 +473,22 @@
 	        	
 	        	let url  = window.location.href;
 	        
+	             info = event.data.split(':')[2];
 	        	
 	        	if(event.data.includes('私訊')&& url.includes('myMessage')){
 	        		let compareId = $.trim(event.data.split(':')[0]);
-	        		let info = event.data.split(':')[2];
 	        		
 	        		 if($('#comparePart').attr('userId')!=undefined && event.data.includes('私訊自己')){
+	        			 if($.trim(info)==''){
+	        				 return;
+	        			 }
+	        			 
 	        			 let id = $('#comparePart').attr('userId');
 	        			 let queryUrl = "/4u4u/historyMessages/"+id;
 	        	    	$('#messagesUl').children().each(function(){
 	        	    		$(this).remove();
 	        	    	})
-	        	    	$('#messagesUl').text("");
+	        	    	$('#messagesUl').html("");
 	        	    	setTimeout(()=>{
 	        	    		 $.ajax({
 		        		            type: "GET",
@@ -552,6 +554,10 @@
 	        			
 	        			
 	        		}else if($('#comparePart').attr('userId')==undefined){
+	        			 if($.trim(info)==''){
+	        				 return;
+	        			 }
+	        			
 	        			if($('#noTextDiv').length==1){
 	        				setTimeout(() => {
 		            			 $('#modalTitle').text('您有新訊息');
@@ -583,7 +589,9 @@
         		            }
         				});
         			}else if($('#comparePart').attr('userId')!=undefined && $('#comparePart').attr('userId')!=compareId){
-	        			
+	        			if($.trim(info)==""){
+	        				return;
+	        			}
         				let id = $.trim(event.data.split(':')[0]);
 	        			let ajaxUrl = "/4u4u/getNewMessageCount/"+id;
 	        			$.ajax({
@@ -606,6 +614,7 @@
 	        	    		$(this).remove();
 	        	    	})
 	        	    	$('#messagesUl').text("");
+	        			setTimeout(()=>{
 	        	     	 $.ajax({
 	        		            type: "GET",
 	        		            url: queryUrl,
@@ -664,6 +673,7 @@
 	        		             
 	        	    		 } 		
 	        	     	 })
+	        			},300);
 	        	     	if($.trim(info)!=""){
     		        		$('#preview'+compareId).text(info);
     		            	}

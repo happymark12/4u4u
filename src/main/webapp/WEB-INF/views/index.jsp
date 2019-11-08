@@ -154,12 +154,11 @@ border-bottom: 5px solid orange;
 									<c:if test="${! empty LoginOK }">
 
 
-
-										<c:if test="${LoginOK.state==5}">
+<c:if test="${LoginOK.state==5}">
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
-											<img height='35' width='35' style="border-radius: 50%;"
+											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -167,8 +166,8 @@ border-bottom: 5px solid orange;
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">
-												<i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">
+												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
 
 										</c:if>
 

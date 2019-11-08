@@ -251,7 +251,7 @@ h3 {
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">登出</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -259,8 +259,8 @@ h3 {
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">
-												登出 </a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">
+												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
 
 										</c:if>
 
@@ -361,13 +361,16 @@ h3 {
 							<div class="aa-properties-info">
 								<div class="row">
 <!-- 									<div class="col-xs-1 "></div> -->
-									<div class="col-xs-6 text-left">
+									<div class="col-xs-8 text-left">
 										<p style="margin-bottom: 20px;color:black;font-size:30px;font-weight:bold;">${findRoomAd.adTitle}${roomRentAd.adTitle}</p>
 									</div>
-									<div class="col-xs-6 text-right" >
+									<div class="col-xs-4 text-right" >
 										<p>
 <!-- 											<a id="saveAd" href="#">儲存廣告</a> -->
-											<a  id="saveAd" class="aa-secondary-btn" href="#" style="font-size:23px">儲存廣告</a>
+											<a  id="saveAd" class="aa-secondary-btn" href="#" style="font-size:23px">
+            										
+                                                    <i class="fa fa-heart"></i> 
+											儲存廣告</a>
 										</p>
 									</div>
 <!-- 									<div class="col-xs-1 "></div> -->
@@ -648,9 +651,7 @@ h3 {
 														<c:if test="${room.hasHeater }">
 															<li><p>熱水器</p></li>
 														</c:if>
-														<c:if test="${room.hasBroadBand }">
-															<li><p>網路</p></li>
-														</c:if>
+														
 														<c:if test="${room.hasBroadBand }">
 															<li><p>網路</p></li>
 														</c:if>
@@ -811,13 +812,21 @@ h3 {
 
 								<c:if test="${!empty findRoomAd }">
 									<br>
-									<p>${findRoomAd.wantedRoomAdMemId.name}</p>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/avatar.png" width="20"
+														height="20"> &nbsp; ${findRoomAd.wantedRoomAdMemId.name}</h3>
 									<p>${job},&nbsp;${findRoomAd.wantedRoomAdMemId.gender}</p>
 									<p>${wantedRoom}&nbsp;${buddyups}</p>
 									<hr style="height: 10px">
-									<h3>總預算: ${findRoomAd.budget}</h3>
+									<h3 ><img alt="img" src="${pageContext.request.contextPath}/img/money-bag.png" width="20"
+														height="20"> &nbsp;
+									
+									總預算 </h3>
+									<p style="color:black;">$${findRoomAd.budget}</p>
 									<hr style="height: 10px">
-									<h3>廣告描述</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/file.png" width="20"
+														height="20">
+									&nbsp;  廣告描述</h3>
+																
 									<p id="adDetail"
 										style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${adDescription}</p>
 									<c:if test="${! empty needReadMore }">
@@ -825,14 +834,25 @@ h3 {
 									</c:if>
 									<hr style="height: 10px">
 									<c:if test="${! empty checkInDate  }">
-										<h3>可入住時間</h3>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="20"
+														height="20"> 
+										&nbsp;
+										可入住時間</h3>
 										<p>${checkInDate}</p>
 										<hr style="height: 10px">
 									</c:if>
-									<h3>找尋區域:</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/address-findhome.png" width="20"
+														height="20">
+									&nbsp;  找尋區域:</h3>
+									
+									
 									<p>${lookInArea}</p>
 									<hr style="height: 10px">
-									<h3>想要的設施:</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/machine-learning.png" width="20"
+														height="20">
+									&nbsp; 想要的設施:</h3>
+									
+									
 									<c:if test="${findRoomAd.hasWashMachine}">
 										<p>洗衣機</p>
 									</c:if>
@@ -884,11 +904,18 @@ h3 {
 									<hr style="height: 10px">
 									<c:if
 										test="${findRoomAd.peopleNumGender=='1男'||findRoomAd.peopleNumGender=='1女'}">
-										<h3>關於我</h3>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/contacts.png" width="20"
+														height="20">
+									&nbsp; 關於我</h3>
+	
+										
 									</c:if>
 									<c:if
 										test="${findRoomAd.peopleNumGender!='1男'&&findRoomAd.peopleNumGender!='1女'}">
-										<h3>關於我們</h3>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/teamwork.png" width="20"
+														height="20">
+									&nbsp; 關於我們</h3>
+										
 									</c:if>
 
 
@@ -934,7 +961,10 @@ h3 {
 
 									</div>
 									<hr style="height: 10px">
-									<h3>新室友偏好</h3>
+									<h3><img alt="img" src="${pageContext.request.contextPath}/img/care.png" width="25"
+														height="25">
+									&nbsp; 新室友偏好</h3>
+									
 
 									<div class="row">
 										<div class="col-md-4 col-sm-3 col-xs-6">
@@ -978,7 +1008,10 @@ h3 {
 									</div>
 									<c:if test="${! empty buddyups && ! empty potentialList}">
 										<br>
-										<h3>感興趣的合租物件</h3>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/love.png" width="20"
+														height="20">
+									&nbsp; 感興趣的合租物件</h3>
+												
 										<div class="row">
 											<c:forEach var="candidate" items="${potentialList}">
 												<div class=" col-sm-2 col-xs-3 align-center">
@@ -1458,7 +1491,7 @@ $('#saveAd').on('click',function(e){
 							 
 							    	let url = window.location.href;
 							    	let queryStr = url.substr(url.indexOf('?'));
-							    if($(this).text()=="儲存廣告"){
+							    if($.trim($(this).text())=="儲存廣告"){
 							    	let passedURL = "/4u4u/saveAd"+$.trim(queryStr);
 // 							    	alert(passedURL);
 							        $.ajax({
@@ -1584,7 +1617,8 @@ $('#saveAd').on('click',function(e){
 								            	}
 							            	if(response=='取消感興趣'){
 							            		
-							            	$('#showInterest').text('取消感興趣')
+							            	$('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
+							            	取消感興趣`)
 								            	
 								           }
 							            	if(response=='同一人'){
@@ -1616,7 +1650,8 @@ $('#saveAd').on('click',function(e){
 							               
 							            	if(response=='感興趣'){
 							            		
-								                $('#showInterest').text('感興趣');
+								                $('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
+										            	感興趣`);
 								                 $('#saveAd').text('儲存廣告');
 								           }
 
@@ -1646,7 +1681,8 @@ $('#saveAd').on('click',function(e){
 							            		 return;
 							            	}else{
 							            		$('#saveAd').text(response[0]);
-							            		$('#showInterest').text(response[1]);
+							            		$('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
+														 `+response[1]);
 							            	}
 							                
 							            }

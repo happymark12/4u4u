@@ -123,7 +123,7 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />"><i class="fa fa-sign-out" aria-hidden="true"></i>登出</a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -131,10 +131,11 @@
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a style="color: white" href="<c:url value='/logout' />">
-												<i class="fa fa-sign-out" aria-hidden="true"></i>登出 </a>
+											<a href="<c:url value='/logout' />"  class="aa-login ">
+												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
 
 										</c:if>
+										
 
 									</c:if>
 								</div>
@@ -238,14 +239,14 @@
 									<h2>
 										<c:choose>
 											<c:when test="${LoginOK.state==1}">
-												<span>一般會員</span>
-											</c:when>
-											<c:when test="${LoginOK.state==2}">
-												<span style=" color: yellow; border-radius: 20px; padding: 15px; background: rgba(255,255,255,0.64)"><i class="fas fa-crown"></i>&nbsp;VIP會員</span>
-											</c:when>
-											<c:when test="${LoginOK.state==5}">
-												<span style="color:green;  border-radius: 20px; padding: 15px; background: rgba(255,255,255,0.64)" ><i class="fas fa-users-cog"></i>&nbsp;管理者</span>
-											</c:when>
+            <span style="color:#6EB6E6;"><i class="fas fa-user" ></i>&nbsp;一般會員</span>
+           </c:when>
+           <c:when test="${LoginOK.state==2}">
+            <span style=" color: orange;"><i class="fas fa-crown"></i>&nbsp;VIP會員</span>
+           </c:when>
+           <c:when test="${LoginOK.state==5}">
+            <span style="color:#00C000;" ><i class="fas fa-users-cog"></i>&nbsp;管理者</span>
+           </c:when>
 											<c:otherwise>
 												<span>未註冊會員</span>
 											</c:otherwise>
