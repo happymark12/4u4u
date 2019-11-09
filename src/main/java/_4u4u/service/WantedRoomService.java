@@ -40,4 +40,6 @@ public interface WantedRoomService {
 	List<WantedRoomBean> getPageAdByFk(int pageNo ,MemberBean wantedRoomAdMemId); // 依外鍵來查詢會員自己的廣告
 
 	int getMyAdTotalPagesByFk(MemberBean wantedRoomAdMemId); // 得到一頁的找房廣告
+
+	String  getVIPAdsJsonData();
 }

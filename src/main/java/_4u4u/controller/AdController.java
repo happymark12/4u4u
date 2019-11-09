@@ -1626,7 +1626,9 @@ public class AdController {
 	}
 
 	@RequestMapping(value = { "/_4u4u/controller/ProcessSearchAjax.do",
-			"/_4u4u/controller/ProcessSearchIndex.do" }, method = RequestMethod.GET)
+			"/_4u4u/controller/ProcessSearchRoomRentVip.do",
+			"/_4u4u/controller/ProcessSearchFindRoomVip.do"
+			}, method = RequestMethod.GET)
 	public void executeAjaxSearch(Model model, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		response.setCharacterEncoding("UTF-8");
@@ -1663,10 +1665,19 @@ public class AdController {
 			}
 			return;
 		} else if (request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1)
-				.contentEquals("ProcessSearchIndex.do")) {
+				.contentEquals("ProcessSearchRoomRentVip.do")) {
 //			RoomRentService service = new RoomRentServiceImpl();
 			try (PrintWriter pw = response.getWriter();) {
 				pw.write(roomRentService.getVIPAdsJsonData());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		}else if (request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1)
+				.contentEquals("ProcessSearchFindRoomVip.do")) {
+//			RoomRentService service = new RoomRentServiceImpl();
+			try (PrintWriter pw = response.getWriter();) {
+				pw.write(wantedRoomService.getVIPAdsJsonData());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -2803,11 +2814,11 @@ public class AdController {
 				// 1. 讀取使用者輸入資料
 				if (p.getContentType() == null) {
 					if (fldName.equalsIgnoreCase("rentType")) {
-						if (value.equalsIgnoreCase("room-for-rent")) {
+						if (value.equalsIgnoreCase("出租房間(有公共空間)")) {
 							adRentType = "3";
-						} else if (value.equalsIgnoreCase("whole-property")) {
+						} else if (value.equalsIgnoreCase("整層住家")) {
 							adRentType = "0";
-						} else if (value.equalsIgnoreCase("independent-studio")) {
+						} else if (value.equalsIgnoreCase("獨立套房")) {
 							adRentType = "1";
 						} else {
 							adRentType = "2";
@@ -4154,7 +4165,7 @@ public class AdController {
 //			存放 工作職業的屬性物件
 			model.addAttribute("job", jobList);
 //			存放 租房廣告的屬性物件
-			model.addAttribute("wantedRoomAd", wantedRoomAds);
+			model.addAttribute("wantedRoomAd", list);
 //			存放 廣告顯示早鳥或是直接聯繫的屬性物件
 			model.addAttribute("adState", adStateList);
 		} else {
@@ -4360,7 +4371,7 @@ public class AdController {
 			// 廣告細節的屬性物件
 			model.addAttribute("adDetail", adDetailList);
 			// 租房廣告的屬性物件
-			model.addAttribute("roomRentAd", RoomRentAds);
+			model.addAttribute("roomRentAd", list);
 
 		}
 

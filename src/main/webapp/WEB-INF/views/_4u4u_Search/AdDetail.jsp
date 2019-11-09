@@ -62,6 +62,10 @@
 <style>
 h3 {
 	margin-bottom: 20px;
+	font-size:35px;
+}
+p,span{
+	font-size:25px;
 }
 /* jssor slider arrow navigator skin 05 css */
 /*
@@ -248,7 +252,7 @@ h3 {
 
 
 										<c:if test="${LoginOK.state==5}">
-											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
+											<span style="color: white;font-size:15px"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -256,7 +260,7 @@ h3 {
 										</c:if>
 
 										<c:if test="${LoginOK.state==1||LoginOK.state==2}">
-											<span style="color: white"> Hi ${LoginOK.name} </span>
+											<span style="color: white;font-size:15px"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
 											<a href="<c:url value='/logout' />"  class="aa-login ">
@@ -351,8 +355,9 @@ h3 {
 	<section id="aa-properties">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-xs-2">
+				</div>
+				<div class="col-xs-8">
 					<div class="aa-properties-content">
 						<!-- Start properties content body -->
 
@@ -361,10 +366,10 @@ h3 {
 							<div class="aa-properties-info">
 								<div class="row">
 <!-- 									<div class="col-xs-1 "></div> -->
-									<div class="col-xs-8 text-left">
+									<div class="col-md-8 col-xs-7 text-left">
 										<p style="margin-bottom: 20px;color:black;font-size:30px;font-weight:bold;">${findRoomAd.adTitle}${roomRentAd.adTitle}</p>
 									</div>
-									<div class="col-xs-4 text-right" >
+									<div class="col-md-4 col-xs-5 text-right" >
 										<p>
 <!-- 											<a id="saveAd" href="#">儲存廣告</a> -->
 											<a  id="saveAd" class="aa-secondary-btn" href="#" style="font-size:23px">
@@ -373,14 +378,6 @@ h3 {
 											儲存廣告</a>
 										</p>
 									</div>
-<!-- 									<div class="col-xs-1 "></div> -->
-
-
-<!-- 								</div> -->
-								
-
-
-
 
 								<c:if test="${!empty images }">
 									<div id="jssor_1"
@@ -608,67 +605,67 @@ h3 {
 											items='${roomRentAd.roomItems}'>
 											<c:if test="${room.roomState==true}">
 
-												<div class="col-md-4 col-sm-3 col-xs-6">
+												<div class="col-md-4 col-sm-4 col-xs-12">
 
 													<p>房間${vs.count}
 														&nbsp;$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</p>
 													<ul>
 														<c:if
 															test="${! empty room.rentFloor && ! empty room.rentTotalFloor}">
-															<li><p>樓層:
+															<li><p style="display:inline">樓層:
 																	${room.rentFloor}/${room.rentTotalFloor}</p></li>
 														</c:if>
 														<c:if test="${! empty room.area }">
-															<li><p>坪數: ${room.area}坪</p></li>
+															<li><p style="display:inline">坪數: ${room.area}坪</p></li>
 														</c:if>
 														<c:if test="${room.hasBalcony }">
-															<li><p>陽台</p></li>
+															<li><p style="display:inline">陽台</p></li>
 														</c:if>
 														<c:if test="${room.hasDuplex }">
-															<li><p>樓中樓</p></li>
+															<li><p style="display:inline">樓中樓</p></li>
 														</c:if>
 														<c:if test="${room.hasWash }">
-															<li><p>洗衣機</p></li>
+															<li><p style="display:inline">洗衣機</p></li>
 														</c:if>
 														<c:if test="${room.hasIceBox }">
-															<li><p>冰箱</p></li>
+															<li><p style="display:inline">冰箱</p></li>
 														</c:if>
 														<c:if test="${room.has4 }">
-															<li><p>第四台</p></li>
+															<li><p style="display:inline">第四台</p></li>
 														</c:if>
 														<c:if test="${room.hasGas }">
-															<li><p>天然瓦斯</p></li>
+															<li><p style="display:inline">天然瓦斯</p></li>
 														</c:if>
 														<c:if test="${room.hasTV }">
-															<li><p>電視</p></li>
+															<li><p style="display:inline">電視</p></li>
 														</c:if>
 														<c:if test="${room.hasWardrobe }">
-															<li><p>衣櫃</p></li>
+															<li><p style="display:inline">衣櫃</p></li>
 														</c:if>
 														<c:if test="${room.hasSofa }">
-															<li><p>沙發</p></li>
+															<li><p style="display:inline">沙發</p></li>
 														</c:if>
 														<c:if test="${room.hasHeater }">
-															<li><p>熱水器</p></li>
+															<li><p style="display:inline">熱水器</p></li>
 														</c:if>
 														
 														<c:if test="${room.hasBroadBand }">
-															<li><p>網路</p></li>
+															<li><p style="display:inline">網路</p></li>
 														</c:if>
 														<c:if test="${room.hasDesk }">
-															<li><p>桌子</p></li>
+															<li><p style="display:inline">桌子</p></li>
 														</c:if>
 														<c:if test="${room.hasChair }">
-															<li><p>椅子</p></li>
+															<li><p style="display:inline">椅子</p></li>
 														</c:if>
 														<c:if test="${room.hasSingleBed }">
-															<li><p>單人床</p></li>
+															<li><p style="display:inline">單人床</p></li>
 														</c:if>
 														<c:if test="${room.hasDoubleBed }">
-															<li><p>雙人床</p></li>
+															<li><p style="display:inline">雙人床</p></li>
 														</c:if>
 														<c:if test="${room.hasColdAir }">
-															<li><p>冷氣</p></li>
+															<li><p style="display:inline">冷氣</p></li>
 														</c:if>
 
 													</ul>
@@ -684,7 +681,7 @@ h3 {
 										&nbsp;當前室友狀況</h3>
 
 										<div class="row">
-											<div class="col-md-4 col-sm-3 col-xs-6">
+											<div class="col-md-2 col-xs-3">
 												<p>室友:</p>
 												<p>抽菸:</p>
 												<p>寵物:</p>
@@ -699,7 +696,7 @@ h3 {
 
 
 											</div>
-											<div class="col-md-4 col-sm-3 col-xs-6">
+											<div class="col-md-10 col-xs-9">
 												<p>${roomRentAd.adCurrentPeopleNum}人</p>
 												<c:if test="${roomRentAd.adCurSmoke}">
 													<p>有</p>
@@ -731,7 +728,7 @@ h3 {
 									&nbsp;新房客偏好</h3>
 
 									<div class="row">
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-2 col-xs-3">
 											<c:if test="${! empty roomRentAd.adFutureCoupleAccept }">
 
 												<p>情侶:</p>
@@ -745,7 +742,7 @@ h3 {
 												<p>年齡:</p>
 											</c:if>
 										</div>
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-10 col-xs-9">
 
 											<c:if
 												test="${! empty roomRentAd.adFutureCoupleAccept && roomRentAd.adFutureCoupleAccept}">
@@ -803,7 +800,7 @@ h3 {
 										</div>
 										<div class="col-xs-12 text-center ">
 											<a class="btn btn-primary sendMessageAjax"
-												href='<c:url value="/sendMessage/${roomRentAd.roomRentMemId.memId}/0/${roomRentAd.adId}"/>'>發送訊息</a>
+											style="font-size:25px"	href='<c:url value="/sendMessage/${roomRentAd.roomRentMemId.memId}/0/${roomRentAd.adId}"/>'>發送訊息</a>
 
 										</div>
 
@@ -920,7 +917,7 @@ h3 {
 
 
 									<div class="row">
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-2 col-sm-2 col-xs-3">
 											<c:if test="${! empty age }">
 												<p>年齡:</p>
 											</c:if>
@@ -935,7 +932,7 @@ h3 {
 
 
 										</div>
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-10 col-sm-10 col-xs-9">
 											<c:if test="${! empty age }">
 												<p>${age}</p>
 											</c:if>
@@ -967,7 +964,7 @@ h3 {
 									
 
 									<div class="row">
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-2 col-sm-2 col-xs-3">
 											<p>性別:</p>
 											<c:if test="${! empty roomMateAge }">
 												<p>年齡:</p>
@@ -981,7 +978,7 @@ h3 {
 
 
 										</div>
-										<div class="col-md-4 col-sm-3 col-xs-6">
+										<div class="col-md-10 col-sm-10 col-xs-9">
 											<p>${flatmateGender}</p>
 											<c:if test="${! empty roomMateAge }">
 												<p>${roomMateAge}</p>
@@ -1034,7 +1031,7 @@ h3 {
 										</div>
 										<div class="col-xs-12 text-center ">
 											<a class="btn btn-primary sendMessageAjax"
-												href='<c:url value="/sendMessage/${findRoomAd.wantedRoomAdMemId.memId}/1/${findRoomAd.findRoomId}"/>'>發送訊息</a>
+										style="font-size:25px"	href='<c:url value="/sendMessage/${findRoomAd.wantedRoomAdMemId.memId}/1/${findRoomAd.findRoomId}"/>'>發送訊息</a>
 
 										</div>
 
@@ -1064,24 +1061,15 @@ h3 {
 									</div>
 								</div>
 							</div>
-							<!-- Properties social share -->
-							<!-- 							<div class="aa-properties-social"> -->
-							<!-- 								<ul> -->
-							<!-- 									<li>Share</li> -->
-							<!-- 									<li><a href="#"><i class="fa fa-facebook"></i></a></li> -->
-							<!-- 									<li><a href="#"><i class="fa fa-twitter"></i></a></li> -->
-							<!-- 									<li><a href="#"><i class="fa fa-google-plus"></i></a></li> -->
-							<!-- 									<li><a href="#"><i class="fa fa-pinterest"></i></a></li> -->
-							<!-- 								</ul> -->
-							<!-- 							</div> -->
 
 
 						</div>
 					</div>
 				</div>
-				<div class="col-md-2"></div>
-
+				</div>
+			<div class="col-xs-2">
 			</div>
+		</div>
 		</div>
 	</section>
 	<!-- / Properties  -->
@@ -1517,7 +1505,8 @@ $('#saveAd').on('click',function(e){
 							            	}
 							            	if(response=='取消儲存廣告'){
 							            		
-							                $('#saveAd').text('取消儲存廣告')
+							                $('#saveAd').html(`<i class="fa fa-heart"></i> 
+													取消儲存廣告`)
 							            	}
 							            	if(response=='同一人'){
 							            		 setTimeout(() => {
@@ -1553,7 +1542,7 @@ $('#saveAd').on('click',function(e){
 							            	
 							            	if(response=='儲存廣告'){
 							            		
-							                $('#saveAd').text('儲存廣告')
+							                $('#saveAd').html(`<i class="fa fa-heart"></i>儲存廣告`)
 							            	}
 							            	if(response=='錯誤'){
 							            		
@@ -1619,7 +1608,7 @@ $('#saveAd').on('click',function(e){
 							            		
 							            	$('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
 							            	取消感興趣`)
-								            	
+							            	 $('#saveAd').html(`<i class="fa fa-heart"></i>取消儲存廣告`);	
 								           }
 							            	if(response=='同一人'){
 							            		setTimeout(() => {
@@ -1652,7 +1641,7 @@ $('#saveAd').on('click',function(e){
 							            		
 								                $('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
 										            	感興趣`);
-								                 $('#saveAd').text('儲存廣告');
+								                 $('#saveAd').html(`<i class="fa fa-heart"></i>儲存廣告`);
 								           }
 
 							            	if(response=='錯誤'){
@@ -1680,7 +1669,7 @@ $('#saveAd').on('click',function(e){
 							            	if(response==""){
 							            		 return;
 							            	}else{
-							            		$('#saveAd').text(response[0]);
+							            		$('#saveAd').html(`<i class="fa fa-heart"></i>`+response[0]);
 							            		$('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
 														 `+response[1]);
 							            	}

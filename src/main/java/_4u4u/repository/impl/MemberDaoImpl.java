@@ -333,7 +333,7 @@ public class MemberDaoImpl implements MemberDao {
 		Session session = factory.getCurrentSession();
 
 		if (adStyle.trim().contentEquals("0")) {
-			if (cancelSavedAd(mb, adStyle, adId)) {
+				cancelSavedAd(mb, adStyle, adId);
 				RoomRentBean roomrentBean = session.get(RoomRentBean.class, adId);
 
 				String hql = "DELETE FROM InterestedAdForRoomAdBean i WHERE i.interestedAdForRoomAdMemId = :mb AND i.interestedAdForRoomAdAdId = :rrb";
@@ -346,9 +346,9 @@ public class MemberDaoImpl implements MemberDao {
 					return false;
 				}
 
-			}
+			
 		} else {
-			if (cancelSavedAd(mb, adStyle, adId)) {
+			cancelSavedAd(mb, adStyle, adId) ;
 				WantedRoomBean wantedRoomBean = session.get(WantedRoomBean.class, adId);
 				String hql = "DELETE FROM InterestedAdForWantedRoomAdBean i WHERE i.interestedAdForWantedRoomAdMemId = :mb AND i.interestedAdForWantedRoomAdFindRoomId = :wrb";
 				int count = session.createQuery(hql).setParameter("mb", mb).setParameter("wrb", wantedRoomBean)
@@ -359,9 +359,8 @@ public class MemberDaoImpl implements MemberDao {
 					return false;
 				}
 
-			}
+			
 		}
-		return false;
 	}
 
 	@SuppressWarnings("unchecked")

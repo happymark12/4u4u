@@ -233,11 +233,11 @@
 	</section>
 	<!-- End Proerty header  -->
 	<!-- Start Properties  -->
-	<section id="aa-properties">
+	<section id="aa-properties" >
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-12" id="contentArea">
+				<div class="col-md-12" id="contentArea" style="margin-top:35px;">
 					<div class="text-center">
 						<img height='200' width='200'
 							style="border-radius: 50%; margin: 0 auto"
@@ -274,7 +274,7 @@
 							&nbsp; 回首頁 &nbsp; | </a> <a href="<c:url value='${url}' />"
 							style="font-size: 25px; text-align: center; text-decoration: underline;">&nbsp;
 							回廣告頁面 &nbsp;</a>
-							<div style="height: 80px;display:none" id="emptyDiv"></div>  
+							<div style="height: 130px;display:none" id="emptyDiv"></div>  
 					</div>
 				</div>
 			</div>

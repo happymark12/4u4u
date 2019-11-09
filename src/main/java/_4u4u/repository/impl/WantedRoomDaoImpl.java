@@ -735,4 +735,15 @@ public class WantedRoomDaoImpl implements Serializable, WantedRoomDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<WantedRoomBean> getVIPOnlyAds() {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM WantedRoomBean w WHERE w.wantedRoomAdMemId.state='2' AND w.adState = true";
+		List<WantedRoomBean> list = null;
+		list = session.createQuery(hql).getResultList();
+
+		return list;
+	}
+
 }

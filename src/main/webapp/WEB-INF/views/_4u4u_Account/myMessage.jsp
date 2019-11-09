@@ -252,38 +252,21 @@
 
 			<div class="content" style="background-color: #E0E0E0">
 				<div id="chatDiv" class="text-center"
-					style="background-color: #fff; line-height: 498px; font-size: 40px;">
-					<span>開始聊天吧</span>
+					style="background-color: #fff;  font-size: 40px;">
+					<br><br>
+					
+					<img src="${pageContext.request.contextPath}/img/chat.png" width="200" >
+					<br>
+					<div>開始聊天吧</div>
+					<br><br><br><br>
 				</div>
 				<div class="contact-profile">
 					<p id="comparePart">
-						<i class="fas fa-user-circle"></i>黃冠中
 					</p>
 				</div>
 				<div class="messages">
 					<ul id="messagesUl">
-						<li class="sent">
-							<div class="img"
-								style="background: url(${pageContext.request.contextPath}/img/account/user-4.jpg);"></div>
-							<p>嗨嗨~有看到你貼的租房廣告，能約時間了解一下嗎?</p> <span class="time_date">
-								11:01 AM | 11-01 </span>
-						</li>
-						<li class="replies">
-							<div class="row">
-								<div class="col-md-6"></div>
-								<div class="col-md-6 col-sm-12 col-xs-12">
-									<p>當然可以，要約甚麼時候呢?</p>
-									<div class="text-right">
-										<div class="row">
-											<div class="col-md-12 col-sm-12 col-xs-12">
-												<span class="have-read">已讀</span> <span class="time_date ">
-													11:01 AM | 11-01 </span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
+						
 
 					</ul>
 				</div>

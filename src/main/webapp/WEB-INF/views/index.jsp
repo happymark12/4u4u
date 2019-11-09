@@ -21,7 +21,9 @@
 	href="${pageContext.request.contextPath}/img/icon/4U4U_final.png"
 	type="image/x-icon">
 <!-- Font awesome字型 -->
-<link href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fontawesome-free-5.11.2-web/css/all.css"
+	rel="stylesheet">
 
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
@@ -56,56 +58,52 @@
 
 
 <style>
-.demo2 + .tooltip > .tooltip-inner {
-background-color: orange;
-color: #555;
-font-size: 15px;
-padding: 5px 10px;
-box-shadow: 1px 1px 1px #aaa;
+.demo2+.tooltip>.tooltip-inner {
+	background-color: orange;
+	color: #555;
+	font-size: 15px;
+	padding: 5px 10px;
+	box-shadow: 1px 1px 1px #aaa;
 }
-.demo2 + .tooltip.bottom {
-margin-top: 5px;
+
+.demo2+.tooltip.bottom {
+	margin-top: 5px;
 }
-.demo2 + .tooltip.bottom > .tooltip-arrow {
-border-bottom: 5px solid orange;
+
+.demo2+.tooltip.bottom>.tooltip-arrow {
+	border-bottom: 5px solid orange;
 }
 </style>
 </head>
 <body class="aa-price-range">
 	<div id="aa-preloader-area">
 		<div class="pulse"></div>
-		
+
 
 		<c:if test="${! empty MsgOK.InsertOK}">
-		<div
-			style="font: bold 24px verdana; text-align: center; position:absolute;left:37%;top:40%;">
-			
-			${MsgOK.InsertOK}
-			
-			</div>
-		
+			<div
+				style="font: bold 24px verdana; text-align: center; position: absolute; left: 37%; top: 40%;">
+
+				${MsgOK.InsertOK}</div>
+
 		</c:if>
-		<c:if test="${! empty LoginSuccess || ! empty LogoutOK || ! empty MsgOK.InsertAdOK || ! empty validate}">
-		<div
-			style="font: bold 24px verdana; text-align: center; position:absolute;left:46.5%;top:40%;">
-			
-			${LogoutOK}
-			${LoginSuccess}
-			${validate}
-			${MsgOK.InsertAdOK}
-			
-			</div>
-		
+		<c:if
+			test="${! empty LoginSuccess || ! empty LogoutOK || ! empty MsgOK.InsertAdOK || ! empty validate}">
+			<div
+				style="font: bold 24px verdana; text-align: center; position: absolute; left: 46.5%; top: 40%;">
+
+				${LogoutOK} ${LoginSuccess} ${validate} ${MsgOK.InsertAdOK}</div>
+
 		</c:if>
-<!-- 		<div -->
-<!-- 			style="font: bold 24px verdana; text-align: center; position:absolute;left:46.5%;top:40%;"> -->
-			
-<%-- 			${LogoutOK} --%>
-<%-- 			${LoginSuccess} --%>
-			
-<%-- 			${validate}${MsgOK.InsertOK}${MsgOK.InsertAdOK} --%>
-			
-<!-- 			</div> -->
+		<!-- 		<div -->
+		<!-- 			style="font: bold 24px verdana; text-align: center; position:absolute;left:46.5%;top:40%;"> -->
+
+		<%-- 			${LogoutOK} --%>
+		<%-- 			${LoginSuccess} --%>
+
+		<%-- 			${validate}${MsgOK.InsertOK}${MsgOK.InsertAdOK} --%>
+
+		<!-- 			</div> -->
 
 	</div>
 
@@ -141,8 +139,10 @@ border-bottom: 5px solid orange;
 									<c:if test="${ empty LoginOK }">
 										<span style="color: red;">${MsgOK.InsertOK}${AccountBanned}${ActivateAccount}</span>
 										&nbsp;&nbsp;<a href="<c:url value='/register' />"
-											class="aa-register"><i class="fa fa-user-plus" aria-hidden="true"></i>註冊</a>
-										<a href="<c:url value='/login' />" class="aa-login"><i class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
+											class="aa-register"><i class="fa fa-user-plus"
+											aria-hidden="true"></i>註冊</a>
+										<a href="<c:url value='/login' />" class="aa-login"><i
+											class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
 
 									</c:if>
 									<% // 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
@@ -154,11 +154,12 @@ border-bottom: 5px solid orange;
 									<c:if test="${! empty LoginOK }">
 
 
-<c:if test="${LoginOK.state==5}">
+										<c:if test="${LoginOK.state==5}">
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+											<a href="<c:url value='/logout' />" class="aa-login ">登出<i
+												class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -166,8 +167,9 @@ border-bottom: 5px solid orange;
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a href="<c:url value='/logout' />"  class="aa-login ">
-												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
+											<a href="<c:url value='/logout' />" class="aa-login "> 登出<i
+												class="fa fa-sign-out" aria-hidden="true"></i>
+											</a>
 
 										</c:if>
 
@@ -213,8 +215,8 @@ border-bottom: 5px solid orange;
 						<!--帳戶管理-->
 						<li><a href="<c:url value='/account' />">帳戶管理</a></li>
 						<!--發佈廣告-->
-						<li class="dropdown "><a class="dropdown-toggle">發佈廣告
-								<span class="caret"></span>
+						<li class="dropdown "><a class="dropdown-toggle">發佈廣告 <span
+								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<c:url value='/PostRoomRentAd' />">出租廣告</a></li>
@@ -224,8 +226,8 @@ border-bottom: 5px solid orange;
 						<li><a href="<c:url value='/activity' />">活動</a></li>
 
 						<!--關於我們-->
-						<li class="dropdown"><a class="dropdown-toggle">關於我們
-								<span class="caret"></span>
+						<li class="dropdown"><a class="dropdown-toggle">關於我們 <span
+								class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- 								<li><a href="blog-archive.html">使用說明</a></li> -->
@@ -252,7 +254,10 @@ border-bottom: 5px solid orange;
 						alt="img" style="width: 100%;">
 					<!-- Top slider content -->
 					<div class="aa-top-slider-content">
-						<h2 class="aa-top-slider-title"><em class="fa fa-child" aria-hidden="true" style="color: #59ABE3"></em><em class="fa fa-child" style="color: #59ABE3" aria-hidden="true"></em>室友是友</h2>
+						<h2 class="aa-top-slider-title">
+							<em class="fa fa-child" aria-hidden="true" style="color: #59ABE3"></em><em
+								class="fa fa-child" style="color: #59ABE3" aria-hidden="true"></em>室友是友
+						</h2>
 						<hr style="background-color: #555; height: 1px; border: none;">
 						<span class="aa-top-slider-catg">有時，你雖然看到理想的住房，但是自己無法承擔租金。
 							所以尋找其他室友合租可能是最好的解決辦法。這時就要使用4U4U 組隊租屋，
@@ -271,7 +276,9 @@ border-bottom: 5px solid orange;
 						alt="img">
 					<!-- Top slider content -->
 					<div class="aa-top-slider-content">
-						<h2 class="aa-top-slider-title"><i class="fa fa-search" aria-hidden="true" style="color: #59ABE3"></i>搜尋</h2>
+						<h2 class="aa-top-slider-title">
+							<i class="fa fa-search" aria-hidden="true" style="color: #59ABE3"></i>搜尋
+						</h2>
 						<hr style="background-color: #555; height: 1px; border: none;">
 						<span class="aa-top-slider-catg">當你發佈租屋廣告後，是時候開始搜尋，請積極主動的去尋找室友或住房。
 							因為最好的房間和室友是很受歡迎的，慢了可能就錯過機會了。 你可以搜索列表中的篩選工具，提高搜尋效率。</span>
@@ -283,7 +290,10 @@ border-bottom: 5px solid orange;
 						alt="img">
 					<!-- Top slider content -->
 					<div class="aa-top-slider-content">
-						<h2 class="aa-top-slider-title"><i class="fa fa-comments-o fa-lg" aria-hidden="true" style="color: #59ABE3"></i>訊息</h2>
+						<h2 class="aa-top-slider-title">
+							<i class="fa fa-comments-o fa-lg" aria-hidden="true"
+								style="color: #59ABE3"></i>訊息
+						</h2>
 						<hr style="background-color: #555; height: 1px; border: none;">
 						<span class="aa-top-slider-catg">我們內置的訊息系統，讓你可以安心地跟室友／房東聯絡，
 							你的個人訊息將會被保密。不論一般會員或VIP會員， 你都可以透過訊息系統收到來自其他人的訊息。</span>
@@ -295,7 +305,9 @@ border-bottom: 5px solid orange;
 						alt="img">
 					<!-- Top slider content -->
 					<div class="aa-top-slider-content">
-						<h2 class="aa-top-slider-title"><i class="fa fa-users " aria-hidden="true" style="color: #59ABE3"></i>活動</h2>
+						<h2 class="aa-top-slider-title">
+							<i class="fa fa-users " aria-hidden="true" style="color: #59ABE3"></i>活動
+						</h2>
 						<hr style="background-color: #555; height: 1px; border: none;">
 						<span class="aa-top-slider-catg">在合租前多了解剛認識的候選室友，
 							確保大家都可以開心地生活在一起。你可以透過參加活動約出來互相聊天，很快你就會知道，大家是否合得來。</span>
@@ -333,11 +345,12 @@ border-bottom: 5px solid orange;
 					<h2>精選推薦</h2>
 					<span></span>
 					<p>精選優質好物件，不容錯過!</p>
-					
-					
+
+
 				</div>
 				<div class="aa-latest-properties-content">
-					<div class="row" id="indexAds"></div>
+					<div class="row" id="indexAds">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -374,181 +387,11 @@ border-bottom: 5px solid orange;
 							<p>找個好室友，讓您快樂天天有</p>
 						</div>
 						<!-- agents content -->
-						<div class="aa-agents-content">
-							<ul class="aa-agents-slider">
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-1.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">黃冠中</a>
-											</h4>
-											<span>我是楊冪超級粉絲，一起追星吧!</span>
-											<div class="aa-agent-social">
+						<div class="aa-latest-properties-content">
+							<div class="row" id="findHomeAds">
 
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-2.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">邱俊華</a>
-											</h4>
-											<span>歡迎愛貓人士一起生活</span>
-											<div class="aa-agent-social">
 
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-3.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">陳妞妞</a>
-											</h4>
-											<span>我喜歡戶外活動、踏青</span>
-											<div class="aa-agent-social">
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-4.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">吳小玉</a>
-											</h4>
-											<span></span> <span>我是宅女，喜歡安靜的空間</span>
-											<div class="aa-agent-social">
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-5.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">潘學濬</a>
-											</h4>
-											<span>我很隨和</span>
-											<div class="aa-agent-social">
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-6.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">金復強</a>
-											</h4>
-											<span>熱愛健身，一起健起來</span>
-											<div class="aa-agent-social">
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-7.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">宋梓平</a>
-											</h4>
-											<span>想找會一起看JOJO的室友</span>
-											<div class="aa-agent-social">
-												<!--
-                         <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> 
--->
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="aa-single-agents">
-										<div class="aa-agents-img">
-											<img
-												src="${pageContext.request.contextPath}/img/agents/agent-8.jpg"
-												alt="agent member image">
-										</div>
-										<div class="aa-agetns-info">
-											<h4>
-												<a href="#">詹政軒</a>
-											</h4>
-											<span>我是蛇男</span>
-											<div class="aa-agent-social">
-												<!-- <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a> -->
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -564,70 +407,98 @@ border-bottom: 5px solid orange;
 					<div class="aa-client-testimonial-area">
 						<div class="aa-title">
 							<h1>我們的團隊</h1>
-
-
 						</div>
 						<!-- testimonial content -->
-						<div class="aa-testimonial-content">
+						<div class="aa-testimonial-content ">
 							<!-- testimonial slider -->
-							<ul class="aa-testimonial-slider">
+							<ul class="aa-testimonial-slider  ">
 								<li>
-									<div class="aa-testimonial-single">
+									<div class="aa-testimonial-single ">
 										<div class="aa-testimonial-img">
-											<img
-												src="${pageContext.request.contextPath}/img/testimonial-1.png"
+											<img src="${pageContext.request.contextPath}/img/team/1.png"
 												alt="testimonial img">
 										</div>
 										<div class="aa-testimonial-info">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Cupiditate consequuntur ducimus cumque iure modi
-												nesciunt recusandae eligendi vitae voluptatibus, voluptatum
-												tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab
-												natus, dolorem?</p>
+											<p style="font-size: 40px">邱俊華</p>
 										</div>
 										<div class="aa-testimonial-bio">
-											<p>David Muller</p>
-											<span>Web Designer</span>
+											<p style="font-size: 25px">全端大神</p>
+											<span>組長</span>
 										</div>
 									</div>
 								</li>
 								<li>
-									<div class="aa-testimonial-single">
+									<div class="aa-testimonial-single ">
 										<div class="aa-testimonial-img">
-											<img
-												src="${pageContext.request.contextPath}/img/testimonial-3.png"
+											<img src="${pageContext.request.contextPath}/img/team/2.jpg"
 												alt="testimonial img">
 										</div>
 										<div class="aa-testimonial-info">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Cupiditate consequuntur ducimus cumque iure modi
-												nesciunt recusandae eligendi vitae voluptatibus, voluptatum
-												tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab
-												natus, dolorem?</p>
+											<p style="font-size: 40px">陳怡儒</p>
 										</div>
 										<div class="aa-testimonial-bio">
-											<p>David Muller</p>
-											<span>Web Designer</span>
+											<p style="font-size: 25px">前端技術總監</p>
+											<span>組員</span>
 										</div>
 									</div>
 								</li>
 								<li>
-									<div class="aa-testimonial-single">
+									<div class="aa-testimonial-single ">
 										<div class="aa-testimonial-img">
-											<img
-												src="${pageContext.request.contextPath}/img/testimonial-2.png"
+											<img src="${pageContext.request.contextPath}/img/team/3.jpg"
 												alt="testimonial img">
 										</div>
 										<div class="aa-testimonial-info">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Cupiditate consequuntur ducimus cumque iure modi
-												nesciunt recusandae eligendi vitae voluptatibus, voluptatum
-												tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab
-												natus, dolorem?</p>
+											<p style="font-size: 40px">吳玉婷</p>
 										</div>
 										<div class="aa-testimonial-bio">
-											<p>David Muller</p>
-											<span>Web Designer</span>
+											<p style="font-size: 25px">前端執行總監</p>
+											<span>組員</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="aa-testimonial-single ">
+										<div class="aa-testimonial-img">
+											<img src="${pageContext.request.contextPath}/img/team/4.jpg"
+												alt="testimonial img">
+										</div>
+										<div class="aa-testimonial-info">
+											<p style="font-size: 40px">黃冠中</p>
+										</div>
+										<div class="aa-testimonial-bio">
+											<p style="font-size: 25px">後端技術總監</p>
+											<span>組員</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="aa-testimonial-single ">
+										<div class="aa-testimonial-img">
+											<img src="${pageContext.request.contextPath}/img/team/5.jpg"
+												alt="testimonial img">
+										</div>
+										<div class="aa-testimonial-info">
+											<p style="font-size: 40px">潘學濬</p>
+										</div>
+										<div class="aa-testimonial-bio">
+											<p style="font-size: 25px">後端CEO</p>
+											<span>組員</span>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="aa-testimonial-single ">
+										<div class="aa-testimonial-img">
+											<img src="${pageContext.request.contextPath}/img/team/6.jpg"
+												alt="testimonial img">
+										</div>
+										<div class="aa-testimonial-info">
+											<p style="font-size: 40px">金復強</p>
+										</div>
+										<div class="aa-testimonial-bio">
+											<p style="font-size: 25px">後端技術總裁</p>
+											<span>組員</span>
 										</div>
 									</div>
 								</li>
@@ -638,18 +509,19 @@ border-bottom: 5px solid orange;
 			</div>
 		</div>
 	</section>
-	
+
 	<jsp:include page="footer.jsp"></jsp:include>
 
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/slick.js"></script>
 	<!-- Price picker slider -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/nouislider.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/nouislider.js"></script>
 	<!-- mixit slider -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/jquery.mixitup.js"></script>
@@ -659,7 +531,8 @@ border-bottom: 5px solid orange;
 	<!-- Custom js -->
 	<script src="${pageContext.request.contextPath}/js/custom.js"></script>
 	<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/js/index.js"></script>
 </body>
 </html>

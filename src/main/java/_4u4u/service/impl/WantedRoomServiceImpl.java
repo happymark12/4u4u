@@ -2,12 +2,15 @@ package _4u4u.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +93,7 @@ public class WantedRoomServiceImpl implements Serializable, WantedRoomService{
 		return getRoomRentBeanJson(list, "0",totalPages);
 	}
 	
-	private String getWantdRoomBeanJson(List<WantedRoomBean> list, String sortOption,Integer totalPages) {
+	private String getWantdRoomBeanJson(Collection<WantedRoomBean> list, String sortOption,Integer totalPages) {
 		List<FinalJsonObject> normalList = new ArrayList<FinalJsonObject>();
 		List<FinalJsonObject> vipList = new ArrayList<FinalJsonObject>();
 		List<FinalJsonObject> resultList = new ArrayList<FinalJsonObject>();
@@ -446,6 +449,24 @@ public class WantedRoomServiceImpl implements Serializable, WantedRoomService{
 	@Override
 	public int getMyAdTotalPagesByFk(MemberBean wantedRoomAdMemId) {		
 		return dao.getMyAdTotalPagesByFk(wantedRoomAdMemId);
+	}
+
+	@Override
+	public String getVIPAdsJsonData() {
+		List<WantedRoomBean> resultList =  dao.getVIPOnlyAds();
+		Set<WantedRoomBean> list = new LinkedHashSet<WantedRoomBean>();
+		int totalNum  = resultList.size();
+		if(totalNum<=6) {
+			list.addAll(resultList);
+		}else {
+			while(list.size()<6) {
+				int n = (int)(Math.random()*totalNum);
+				list.add(resultList.get(n));
+			}
+			
+		}
+		
+		return getWantdRoomBeanJson(list, "0",1);
 	}
 
 

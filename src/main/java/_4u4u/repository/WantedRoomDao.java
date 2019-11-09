@@ -55,4 +55,6 @@ public interface WantedRoomDao {
 	List<WantedRoomBean> getAllWantedRoomAds(); // 查詢所有的找房廣告
 
 	List<WantedRoomBean> getPageAdByFk(int pageNo , MemberBean wantedRoomAdMemId); // 依fk(會員自己id)查詢自己所有發的廣告
+
+	List<WantedRoomBean> getVIPOnlyAds();
 }
