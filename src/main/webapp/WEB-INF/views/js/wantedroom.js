@@ -94,50 +94,65 @@
 
         //上傳圖片
          $(document).ready(function(){
-                   var imageCount=9;
-                   $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
-                   $('#theFile').change(function(e){
-                      
-                       let fileArray  =this.files;
-                       let uploadImageCount = 0;
-                       uploadImageCount = (fileArray.length>imageCount)?imageCount:(fileArray.length);
-                       for(let i=0;i<uploadImageCount;i++){
-                           let readFile = new FileReader();
-                           readFile.readAsDataURL(fileArray[i]);
-                           readFile.addEventListener('load',parseFile);
-                           
-                       }
-                       
-       
-                   });
-                   function parseFile(e){
-                      
-                    
-                       
-                       let idName = 'Image_'+(new Date().getTime()-(Math.floor((Math.random() * 10000 + 1))));
-                       
-                       $('#dropzone').append(`<div><Button  id="`+idName+`">delete</Button><img src="`+this.result+`" ></div>`);
-                        adjustImageDiv();
-                       $('#'+idName).click(function(e){
-                           $(this).siblings().remove();
-                           $(this).parent().remove();
-                           $(this).remove();
-                           imageCount++;
-                           $('#theFile').show();
-                           $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
-                           adjustImageDiv();
-                           console.log(imageCount);
-                       })
-                       imageCount--;
-                       if(imageCount==0){
-                           $('#uploadSpan').text('你已到達上傳相片的上限')
-                           $('#theFile').hide();
-                       }else{
-                       $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
-                       }
-                       console.log(imageCount);
-                   }
+        //   var imageCount=9;
+        //   $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
+           $('#theFile').change(function(e){
+              
+        	   $('#dropzone').children().each(function(index){
+        		   $(this).remove();
+        	   });
+        	   
+               let fileArray = this.files;
+               if(fileArray.length>9){
+            	   setTimeout(() => {
+          			 $('#modalTitle').text('您最多只能選9張喔');
+        		            $('#myModal').modal('show')
+        		        }, 100);
+        		        
+        		        setTimeout(() => {
+        		            $('#myModal').modal('hide')
+        		        }, 3000);
+          		return;
+               }
+//               let uploadImageCount = 0;
+//               uploadImageCount = (fileArray.length>imageCount)?imageCount:(fileArray.length);
+               for(let i=0;i<fileArray.length;i++){
+                   let readFile = new FileReader();
+                   readFile.readAsDataURL(fileArray[i]);
+                   readFile.addEventListener('load',parseFile);
                    
+               }
+               
+           
+           });
+           function parseFile(e){
+              
+            
+               
+//               let idName = 'Image_'+(new Date().getTime()-(Math.floor((Math.random() * 10000 + 1))));
+               
+               $('#dropzone').append(`<div><img src="`+this.result+`" ></div>`);
+                adjustImageDiv();
+//               $('#'+idName).click(function(e){
+//                   $(this).siblings().remove();
+//                   $(this).parent().remove();
+//                   $(this).remove();
+//                   imageCount++;
+//                   $('#theFile').show();
+//                   $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
+//                   adjustImageDiv();
+//                   console.log(imageCount);
+//               })
+//               imageCount--;
+//               if(imageCount==0){
+//                   $('#uploadSpan').text('你已到達上傳相片的上限')
+//                   $('#theFile').hide();
+//               }else{
+//               $('#uploadSpan').text('可再上傳'+imageCount+'張相片');
+//               }
+//               console.log(imageCount);
+           }
+           
                    function adjustImageDiv(){
                       
                        $('#dropzone').children().each(function(index){

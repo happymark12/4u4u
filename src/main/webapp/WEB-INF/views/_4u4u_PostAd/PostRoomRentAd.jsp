@@ -481,7 +481,7 @@ button{
                               <input type="file" value="upload-photo" id="theFile"
                                   name="imageFile"
                                   accept="image/png, image/jpeg, image/gif, image/jpg" multiple /><span
-                                  id="uploadSpan"></span>
+                                  id="uploadSpan">最多能上傳9張</span>
                           </div>
                           <br style="clear: both">
                           <div id="dropzone"></div>

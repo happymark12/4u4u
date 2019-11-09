@@ -922,7 +922,7 @@ button {
                                   上傳圖片:
                                   <br><br>
                                   <div id="choosePicZone">
-                                          <input type="file" name="imagefile" value="upload-photo" id="theFile" accept="image/png, image/jpeg, image/gif, image/jpg" multiple/><span id="uploadSpan"></span> 
+                                          <input type="file" name="imagefile" value="upload-photo" id="theFile" accept="image/png, image/jpeg, image/gif, image/jpg" multiple/><span id="uploadSpan">最多能上傳9張</span> 
                                           </div>  
                                           <br>
                                           <div id="dropzone"></div>
