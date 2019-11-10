@@ -477,7 +477,7 @@
 						}
 						
 // if(totalPages=="0")
-						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
+						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span class="spanNot" aria-hidden="true">&laquo;</span></a></li>`;
 						if(sessionStorage.rangeEnd!=null){
 							let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
 							
@@ -524,8 +524,8 @@
 							
 							}
 						}
-						pageHtml+=	`<li id="totalPage"><a  onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
-						pageHtml+=	`<li id="nextPage" ><a href="#" aria-label="Next" onclick="return false;"> <span aria-hidden="true">&raquo;</span></a></li>`;
+						pageHtml+=	`<li id="totalPage"><a  onclick="return false;"> <span class="spanNot" aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
+						pageHtml+=	`<li id="nextPage" ><a href="#" aria-label="Next" onclick="return false;"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>`;
 //	 					
 						
 						$('#pagination').append(pageHtml);
@@ -680,7 +680,9 @@
 											</div>
 										</article>
 									</li>`;
-									$('#targetAds').append(apiData)	;	
+									$('#targetAds').append(apiData)	;
+									$('span').not('.spanNot').css('fontSize','20px');
+									$('p').css('fontSize','18px');
 									$('[data-toggle="tooltip"]').tooltip();
 									$(".demo2").tooltip();
 									$('#'+tempId).on('click',function(e){
@@ -826,7 +828,7 @@
 						}else{
 							totalPages = data[0].totalPages;
 						}
-						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span aria-hidden="true">&laquo;</span></a></li>`;
+						 pageHtml =`<li id="previousPage"><a href="#" aria-label="Previous" onclick="return false;"> <span class="spanNot" aria-hidden="true">&laquo;</span></a></li>`;
 						 if(sessionStorage.rangeEnd!=null){
 								let tempRangeEnd= parseInt(sessionStorage.rangeEnd);
 								
@@ -874,8 +876,8 @@
 								}
 							}
 						
-						pageHtml+=	`<li id="totalPage"><a onclick="return false;"> <span aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
-						pageHtml+=	`<li id="nextPage" ><a href="#" aria-label="Next" onclick="return false;"> <span aria-hidden="true">&raquo;</span></a></li>`;
+						pageHtml+=	`<li id="totalPage"><a onclick="return false;"> <span class="spanNot" aria-hidden="true">總頁數:`+totalPages+`</span></a></li>`;
+						pageHtml+=	`<li id="nextPage" ><a href="#" aria-label="Next" onclick="return false;"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>`;
 //	 					
 						
 						$('#pagination').append(pageHtml);
@@ -1041,6 +1043,8 @@
 									</article>
 								</li>`;
 								$('#targetAds').append(apiData)	;	
+								$('span').not('.spanNot').css('fontSize','20px');
+								$('p').css('fontSize','18px');
 								$('[data-toggle="tooltip"]').tooltip();
 								$(".demo2").tooltip();
 								$('#'+tempId).on('click',function(e){

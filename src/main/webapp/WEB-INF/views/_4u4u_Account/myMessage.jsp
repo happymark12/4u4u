@@ -113,7 +113,8 @@
 											<span style="color: white"> 歡迎! 管理者&nbsp; </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a href="<c:url value='/logout' />"  class="aa-login ">登出<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+											<a href="<c:url value='/logout' />" class="aa-login ">登出<i
+												class="fa fa-sign-out" aria-hidden="true"></i></a>
 
 										</c:if>
 
@@ -121,8 +122,9 @@
 											<span style="color: white"> Hi ${LoginOK.name} </span>
 											<img height='35px' width='35px' style="border-radius: 50%;"
 												src='${pageContext.request.contextPath}/_4u4u/getImage?id=${LoginOK.memId}&type=MEMBER'>
-											<a href="<c:url value='/logout' />"  class="aa-login ">
-												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
+											<a href="<c:url value='/logout' />" class="aa-login "> 登出<i
+												class="fa fa-sign-out" aria-hidden="true"></i>
+											</a>
 
 										</c:if>
 
@@ -215,8 +217,11 @@
 	<c:if test='${totalNum==0}'>
 		<div id="noTextDiv" class="text-center"
 			style="height: 500px; clear: both; margin-bottom: 65px;">
+			<div style="color: red; font-size: 200px;">
+				<i class="fas fa-comment-slash"></i>
+			</div>
 			<span
-				style="line-height: 300px; margin: 0 auto; font-size: 40px; color: blue">您目前無任何訊息</span>
+				style="line-height: 100px; margin: 0 auto; font-size: 40px; color: blue">您目前無任何訊息</span>
 		</div>
 	</c:if>
 	<c:if test='${totalNum!=0}'>
@@ -239,7 +244,7 @@
 										<p class="time_date">${map.dateTime}</p>
 										<p class="name" id="name${map.id}">${map.name}</p>
 										<span class="new-message" id="new-message${map.id}">${map.count}</span>
-										
+
 										<p class="preview" id="preview${map.id}">${map.content}</p>
 									</div>
 								</div>
@@ -252,21 +257,23 @@
 
 			<div class="content" style="background-color: #E0E0E0">
 				<div id="chatDiv" class="text-center"
-					style="background-color: #fff;  font-size: 40px;">
-					<br><br>
-					
-					<img src="${pageContext.request.contextPath}/img/chat.png" width="200" >
+					style="background-color: #fff; font-size: 40px;">
+					<br>
+					<br> <img
+						src="${pageContext.request.contextPath}/img/chat.png" width="200">
 					<br>
 					<div>開始聊天吧</div>
-					<br><br><br><br>
+					<br>
+					<br>
+					<br>
+					<br>
 				</div>
 				<div class="contact-profile">
-					<p id="comparePart">
-					</p>
+					<p id="comparePart"></p>
 				</div>
 				<div class="messages">
 					<ul id="messagesUl">
-						
+
 
 					</ul>
 				</div>
@@ -275,7 +282,7 @@
 						<!-- 				置底按鈕 -->
 						<a class="scrollToBottom" href="#"><i
 							class="fa fa-angle-double-down"></i></a> <input type="text"
-							placeholder="輸入訊息..." id="inputArea"/>
+							placeholder="輸入訊息..." id="inputArea" />
 
 						<button class="submit">
 							<i class="fa fa-paper-plane" aria-hidden="true"></i>
@@ -715,61 +722,59 @@
     	  let bottom =   $(document).height()*10000;
     	  $(".messages").animate({ scrollTop: bottom }, "fast");
 
-    <% 	  
- //     	$("#profile-img").click(function() {
-// 			    	 $("#status-options").toggleClass("active");
-// 			    	});
+    <%//     	$("#profile-img").click(function() {
+			// 			    	 $("#status-options").toggleClass("active");
+			// 			    	});
 
-// 			    	$(".expand-button").click(function() {
-// 			    	  $("#profile").toggleClass("expanded");
-// 			    	 $("#contacts").toggleClass("expanded");
-// 			    	});
+			// 			    	$(".expand-button").click(function() {
+			// 			    	  $("#profile").toggleClass("expanded");
+			// 			    	 $("#contacts").toggleClass("expanded");
+			// 			    	});
 
-// 			    	$("#status-options ul li").click(function() {
-// 			    	 $("#profile-img").removeClass();
-// 			    	 $("#status-online").removeClass("active");
-// 			    	 $("#status-away").removeClass("active");
-// 			    	 $("#status-busy").removeClass("active");
-// 			    	 $("#status-offline").removeClass("active");
-// 			    	 $(this).addClass("active");
+			// 			    	$("#status-options ul li").click(function() {
+			// 			    	 $("#profile-img").removeClass();
+			// 			    	 $("#status-online").removeClass("active");
+			// 			    	 $("#status-away").removeClass("active");
+			// 			    	 $("#status-busy").removeClass("active");
+			// 			    	 $("#status-offline").removeClass("active");
+			// 			    	 $(this).addClass("active");
 
-// 			    	 if($("#status-online").hasClass("active")) {
-// 			    	  $("#profile-img").addClass("online");
-// 			    	 } else if ($("#status-away").hasClass("active")) {
-// 			    	  $("#profile-img").addClass("away");
-// 			    	 } else if ($("#status-busy").hasClass("active")) {
-// 			    	  $("#profile-img").addClass("busy");
-// 			    	 } else if ($("#status-offline").hasClass("active")) {
-// 			    	  $("#profile-img").addClass("offline");
-// 			    	 } else {
-// 			    	  $("#profile-img").removeClass();
-// 			    	 };
+			// 			    	 if($("#status-online").hasClass("active")) {
+			// 			    	  $("#profile-img").addClass("online");
+			// 			    	 } else if ($("#status-away").hasClass("active")) {
+			// 			    	  $("#profile-img").addClass("away");
+			// 			    	 } else if ($("#status-busy").hasClass("active")) {
+			// 			    	  $("#profile-img").addClass("busy");
+			// 			    	 } else if ($("#status-offline").hasClass("active")) {
+			// 			    	  $("#profile-img").addClass("offline");
+			// 			    	 } else {
+			// 			    	  $("#profile-img").removeClass();
+			// 			    	 };
 
-// 			    	 $("#status-options").removeClass("active");
-// 			    	});
-//     	function newMessage() {
-//     	 message = $(".message-input input").val();
-//     	 if($.trim(message) == '') {
-//     	  return false;
-//     	 }
-//     	 $('<li class="replies"><p>' + message + '</p></li>').appendTo($('.messages ul'));
-//     	 $('.message-input input').val(null);
-//     	 $('.contact.active .preview').html('<span>You: </span>' + message);
-//     	  let bottom = $(document).height()*10000;
-//     	 $(".messages").animate({ scrollTop: bottom}, "fast");
-//     	};
+			// 			    	 $("#status-options").removeClass("active");
+			// 			    	});
+			//     	function newMessage() {
+			//     	 message = $(".message-input input").val();
+			//     	 if($.trim(message) == '') {
+			//     	  return false;
+			//     	 }
+			//     	 $('<li class="replies"><p>' + message + '</p></li>').appendTo($('.messages ul'));
+			//     	 $('.message-input input').val(null);
+			//     	 $('.contact.active .preview').html('<span>You: </span>' + message);
+			//     	  let bottom = $(document).height()*10000;
+			//     	 $(".messages").animate({ scrollTop: bottom}, "fast");
+			//     	};
 
-//     	$('.submit').click(function() {
-//     	  newMessage();
-//     	});
+			//     	$('.submit').click(function() {
+			//     	  newMessage();
+			//     	});
 
-//     	$(window).on('keydown', function(e) {
-//     	  if (e.which == 13) {
-//     	    newMessage();
-//     	    return false;
-//     	  }
-//     	});
-    	%>  	
+			//     	$(window).on('keydown', function(e) {
+			//     	  if (e.which == 13) {
+			//     	    newMessage();
+			//     	    return false;
+			//     	  }
+			//     	});%>  	
     	
     	$('.scrollToBottom').hide();
     	var scrollTopBegin=0;

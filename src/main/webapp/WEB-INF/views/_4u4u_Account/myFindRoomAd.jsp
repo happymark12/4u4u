@@ -448,11 +448,11 @@ border-bottom: 5px solid orange;
 									<c:if test="${pageNo > 1}">
 										<li><a
 											href="<c:url value='MyAdServlet?pageNo=${pageNo-1}&memId=${LoginOK.memId}&adStyle=1'/>"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
+											aria-label="Previous"> <span class="spanNot" aria-hidden="true">&laquo;</span></a>
 										</li>
 									</c:if>
 									<c:if test="${pageNo == 1}">
-										<li><a aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+										<li><a aria-label="Previous"><span class="spanNot" aria-hidden="true">&laquo;</span></a></li>
 									</c:if>
 
 									<%--中間頁--%>
@@ -500,10 +500,10 @@ border-bottom: 5px solid orange;
 									<c:if test="${pageNo != totalPages}">
 										<li><a
 											href="<c:url value='MyAdServlet?pageNo=${pageNo+1}&memId=${LoginOK.memId}&adStyle=1'/>"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+											aria-label="Next"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>
 									</c:if>
 									<c:if test="${pageNo == totalPages}">
-										<li><a aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+										<li><a aria-label="Next"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>
 									</c:if>									
 									
 
@@ -556,6 +556,9 @@ border-bottom: 5px solid orange;
 	$(function(){
 		$(".demo2").tooltip();
 	});
+	
+	$('span').not('.spanNot').css('fontSize','20px');
+	$('p').css('fontSize','18px');
 	</script>
 
 

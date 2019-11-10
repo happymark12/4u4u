@@ -40,7 +40,9 @@
 									</div>
 								</article>
 							</div>`;
-							$('#indexAds').append(apiData);	
+							$('#indexAds').append(apiData);
+							$('span').css('fontSize','20px');
+							$('p').css('fontSize','18px');
 							$('[data-toggle="tooltip"]').tooltip();
 							$(".demo2").tooltip();
 							$('#'+tempId).on('click',function(e){
@@ -222,6 +224,8 @@
 					</article></div>
 				`;
 				$('#findHomeAds').append(apiData)	;	
+				$('span').css('fontSize','20px');
+				$('p').css('fontSize','18px');
 				$('[data-toggle="tooltip"]').tooltip();
 				$(".demo2").tooltip();
 				$('#'+tempId).on('click',function(e){

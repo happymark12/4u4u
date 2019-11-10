@@ -117,6 +117,9 @@ button {
 	position: absolute;
 	top: 0px;
 }
+fieldset{
+	font-size:25px;
+}
 </style>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -470,8 +473,8 @@ button {
 						(我們不會在4u4u上顯示您的號碼或將其傳遞給任何第三方。如果我們需要就您的帳戶與您聯繫或幫助驗證您的詳細信息，我們需要您的號碼)<br>
 						<br> 上傳圖片: <br>
 						<br>
-						<div id="choosePicZone">
-							<input type="file" name="imagefile" value="upload-photo"
+						<div id="choosePicZone" >
+							<input type="file" name="imagefile" value="upload-photo" style="clear:both;width:200px;"
 								id="theFile"
 								accept="image/png, image/jpeg, image/gif, image/jpg" multiple /><span
 								id="uploadSpan">最多能上傳9張</span>
@@ -495,7 +498,7 @@ button {
 						</select> 封信)<br>
 						<br>
 					</fieldset> <input type="submit" value="發佈廣告"
-					style="width: 120px; height: 40px">
+					style="width: 120px; height: 40px;font-size:25px;">
 					<p>&nbsp;</p>
 					<p>&nbsp;</p>
 

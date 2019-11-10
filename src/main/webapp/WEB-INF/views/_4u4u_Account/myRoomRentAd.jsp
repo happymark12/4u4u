@@ -65,6 +65,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style>
+
+
 .demo2+.tooltip>.tooltip-inner {
 	background-color: orange;
 	color: #555;
@@ -504,11 +506,11 @@
 									<c:if test="${pageNo > 1}">
 										<li><a
 											href="<c:url value='MyAdServlet?pageNo=${pageNo-1}&memId=${LoginOK.memId}&adStyle=0'/>"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
+											aria-label="Previous"> <span class="spanNot" aria-hidden="true">&laquo;</span></a>
 										</li>
 									</c:if>
 									<c:if test="${pageNo == 1}">
-										<li><a aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+										<li><a aria-label="Previous"><span class="spanNot" aria-hidden="true">&laquo;</span></a></li>
 									</c:if>
 
 									<%--中間頁--%>
@@ -556,10 +558,10 @@
 									<c:if test="${pageNo != totalPages}">
 										<li><a
 											href="<c:url value='MyAdServlet?pageNo=${pageNo+1}&memId=${LoginOK.memId}&adStyle=0'/>"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+											aria-label="Next"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>
 									</c:if>
 									<c:if test="${pageNo == totalPages}">
-										<li><a aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+										<li><a aria-label="Next"> <span class="spanNot" aria-hidden="true">&raquo;</span></a></li>
 									</c:if>										
 								</ul>							
 							</nav>
@@ -609,6 +611,9 @@
 		$(function() {
 			$(".demo2").tooltip();
 		});
+		
+		$('span').not('.spanNot').css('fontSize','20px');
+		$('p').css('fontSize','18px');
 	</script>
 </body>
 </html>

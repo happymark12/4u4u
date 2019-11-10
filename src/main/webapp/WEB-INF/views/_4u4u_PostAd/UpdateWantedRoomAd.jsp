@@ -103,6 +103,9 @@ button {
  	position:absolute;
  	top:0px;
 }
+fieldset{
+font-size:25px;
+}
     </style>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/updateWantedroom.js"></script>
@@ -549,13 +552,13 @@ button {
                                  	<c:choose>                         
                                  		<c:when test="${peopleNumGender == '1男' || peopleNumGender == '1女'}">
                                  			<span id="ageDiv">
-                                    			<input type="number" name="age" id="age" value="${age}" style="width: 40px;" min="18" max="99">歲
+                                    			<input type="number" name="age" id="age" value="${age}" style="width: 80px;" min="18" max="99">歲
                                  			</span>
                                  		</c:when>
                                  		<c:otherwise>
                                  			<c:if test="${peopleNumGender == '1男1女' || peopleNumGender == '2男' || peopleNumGender == '2女' }">
                                  				<span id="ageDiv" style="display: none">
-                                 				<input type="number" name="age" id="age" style="width: 40px;" min="18" max="99">歲
+                                 				<input type="number" name="age" id="age" style="width: 80px;" min="18" max="99">歲
                                  				</span>
                                  			</c:if>           
                                  		</c:otherwise>
@@ -564,14 +567,14 @@ button {
                                   	<c:choose>
                                   	<c:when test="${peopleNumGender == '1男1女' || peopleNumGender == '2男' || peopleNumGender == '2女'}">
                                   		<span id="ageRange" >
-                                  			<input type="number" name="ageMin" id="ageMin" value="${ageMin}"  style="width: 40px;">歲到
-                                  			<input type="number" name="ageMax" id="ageMax" value="${ageMax}"  style="width: 40px;">歲
+                                  			<input type="number" name="ageMin" id="ageMin" value="${ageMin}"  style="width: 80px;">歲到
+                                  			<input type="number" name="ageMax" id="ageMax" value="${ageMax}"  style="width: 80px;">歲
                                   		</span>
                                   	</c:when>
                                   	<c:otherwise>
                                   		<span id="ageRange" style="display: none">
-                                  			<input type="number" name="ageMin" max="99" min="18" style="width: 40px;">歲到
-                                  			<input type="number" name="ageMax" max="99" min="18" style="width: 40px;">歲	                            		
+                                  			<input type="number" name="ageMin" max="99" min="18" style="width: 80px;">歲到
+                                  			<input type="number" name="ageMax" max="99" min="18" style="width: 80px;">歲	                            		
                                   		</span>
                                   	</c:otherwise>
                                   	</c:choose>
@@ -748,10 +751,10 @@ button {
                                   </c:if>
                                                         
                                   年齡:
-                                  <select name="roommatesAgeMin" id="roommatesAgeMin">
+                                  <select name="roommatesAgeMin" id="roommatesAgeMin" style="width:80px;">
                                       <option value="default">-</option>
                                    </select>歲到
-                                  <select name="roommatesAgeMax" id="roommatesAgeMax">
+                                  <select name="roommatesAgeMax" id="roommatesAgeMax" style="width:80px;">
                                       <option value="default">-</option>
                                   </select>歲
                                   <br><br> 
@@ -893,8 +896,8 @@ button {
                                   (我們不會在4u4u上顯示您的號碼或將其傳遞給任何第三方。如果我們需要就您的帳戶與您聯繫或幫助驗證您的詳細信息，我們需要您的號碼)<br><br>                
                                   上傳圖片:
                                   <br><br>
-                                  <div id="choosePicZone">
-                                          <input type="file" name="imagefile" value="upload-photo" id="theFile" accept="image/png, image/jpeg, image/gif, image/jpg" multiple/><span id="uploadSpan">最多能上傳9張</span> 
+                                  <div id="choosePicZone" style="clear:both">
+                                          <input type="file"  style="width:200px;" name="imagefile" value="upload-photo" id="theFile" accept="image/png, image/jpeg, image/gif, image/jpg" multiple/><span id="uploadSpan">最多能上傳9張</span> 
                                           </div>  
                                           <br>
                                           <div id="dropzone"></div>
@@ -915,7 +918,7 @@ button {
                                    </select>
                                    封信)<br><br>
                                </fieldset><br>
-                               <input type="submit" id="updateButton" value="修改廣告" style="width:120px;height:40px">
+                               <input type="submit" id="updateButton" value="修改廣告" style="width:120px;height:40px;font-size:25px;">
                       <p>&nbsp;</p>
                       <p>&nbsp;</p>
                              

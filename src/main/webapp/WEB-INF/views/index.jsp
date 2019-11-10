@@ -58,6 +58,7 @@
 
 
 <style>
+
 .demo2+.tooltip>.tooltip-inner {
 	background-color: orange;
 	color: #555;

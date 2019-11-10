@@ -108,6 +108,9 @@ button{
  	top:0px;
  
 }
+fieldset{
+font-size:25px;
+}
 </style>
 
 <script
@@ -477,8 +480,8 @@ button{
                               placeholder="e.g. 0973-345689"> <input type="checkbox"
                               value="true" name="phoneAllowAttachAd"> 是否願意將電話放到廣告上 <br>
                           <br> 上傳圖片 :<br> <br>
-                          <div id="choosePicZone" style="clear: both">
-                              <input type="file" value="upload-photo" id="theFile"
+                          <div id="choosePicZone" >
+                              <input type="file" value="upload-photo" id="theFile" style="clear: both;width:200px;"
                                   name="imageFile"
                                   accept="image/png, image/jpeg, image/gif, image/jpg" multiple /><span
                                   id="uploadSpan">最多能上傳9張</span>
@@ -536,7 +539,7 @@ button{
   
                           </select>封信) <br>
   
-                      </fieldset> <br> <input type="submit" value="發佈廣告" style="width:120px;height:40px">
+                      </fieldset> <br> <input type="submit" value="發佈廣告" style="width:120px;height:40px;font-size:25px;">
                       <p>&nbsp;</p>
                       <p>&nbsp;</p>
                   </td>
