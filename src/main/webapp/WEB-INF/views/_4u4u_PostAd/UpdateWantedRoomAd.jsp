@@ -318,39 +318,11 @@ button {
                                   </c:if>                                  
                                   房間類型:
                                   <c:if test="${! empty suiteQuantity || ! empty roomQuantity}">
-                                  	<select name="severalSuites" id="severalSuites" required>
-                                  		<c:if test="${suiteQuantity == 1}">
-                                  			<option value="">-</option>
-                                     		<option value="1" selected>1</option>
-                                     		<option value="2">2</option>
-                                  		</c:if>
-                                  		<c:if test="${suiteQuantity == 2}">
-                                  			<option value="">-</option>
-                                      		<option value="1">1</option>
-                                      		<option value="2" selected>2</option>
-                                  		</c:if>
-                                  		<c:if test="${suiteQuantity != 1 && suiteQuantity != 2}">
-                                  			<option value="">-</option>
-                                      		<option value="1">1</option>
-                                      		<option value="2">2</option>
-                                  		</c:if>                                                      
+                                  	<select name="severalSuites" id="severalSuites" disabled>
+                                  		<option value="${suiteQuantity}">${suiteQuantity}</option>                         
                                   	</select>間套房
-                                  <select name="severalRooms" id="severalRooms" required>
-                                  		<c:if test="${roomQuantity == 1}">
-                                  			<option value="">-</option>
-                                      		<option value="1"selected>1</option>
-                                      		<option value="2">2</option>
-                                  		</c:if>
-                                  		<c:if test="${roomQuantity == 2}">
-                                  			<option value="">-</option>
-                                      		<option value="1">1</option>
-                                      		<option value="2" selected>2</option>                                  	
-                                  		</c:if>
-                                  		<c:if test="${roomQuantity != 1 && roomQuantity !=2}">
-                                  			<option value="">-</option>
-                                      		<option value="1">1</option>
-                                      		<option value="2">2</option>
-                                  		</c:if>                                      
+                                  <select name="severalRooms" id="severalRooms" disabled>
+                                  		<option value="${roomQuantity}">${roomQuantity}</option>                                
                                   	</select>間雅房
                                   	<br><br>
                                   </c:if>
@@ -943,7 +915,7 @@ button {
                                    </select>
                                    封信)<br><br>
                                </fieldset><br>
-                               <input type="submit" value="修改廣告" style="width:120px;height:40px">
+                               <input type="submit" id="updateButton" value="修改廣告" style="width:120px;height:40px">
                       <p>&nbsp;</p>
                       <p>&nbsp;</p>
                              

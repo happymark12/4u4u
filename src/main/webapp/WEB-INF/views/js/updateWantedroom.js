@@ -5,12 +5,12 @@
 //                $('#age').append("<option>"+i+"</option>")  
 //            }
             // //年齡範圍(複數)
-            for(var i = 18;i<=100;i++){
-                $('#ageMin').append("<option>"+i+"</option>")  
-            }
-            for(var i = 18;i<=100;i++){
-            	$('#ageMax').append("<option>"+i+"</option>")  
-            }
+//            for(var i = 18;i<=100;i++){
+//                $('#ageMin').append("<option>"+i+"</option>")  
+//            }
+//            for(var i = 18;i<=100;i++){
+//            	$('#ageMax').append("<option>"+i+"</option>")  
+//            }
             // //想要室友的年齡範圍
             for(var i = 18;i<=100;i++){
                 $('#roommatesAgeMin').append("<option>"+i+"</option>")  
@@ -22,6 +22,11 @@
             for(var i =1;i<=50;i++){                
                     $('#emailMax').append("<option>"+i+"</option>")                        
             }
+            //按下修改後幾套幾雅的disable要解除
+            $("#updateButton").click(function(){
+        		$("#severalSuites").prop("disabled",false);
+        		$("#severalRooms").prop("disabled",false);
+        	})
 //            //動態新增房間類型(套房幾間)
 //            for(var i =1;i<=2;i++){
 //                $('#severalSuites').append("<option>"+i+"</option>");
@@ -31,31 +36,31 @@
 //                $('#severalRooms').append("<option>"+i+"</option>");
 //            }         
             
-            $('#severalSuites').change(function(){
-            	if($('#severalSuites').val()!=""){
-            		$('#severalRooms').removeAttr('required');
-            		
-            	}
-            	if($('#severalSuites').val()==""&&$('#severalRooms').val()==""){
-            		$('#severalSuites').attr('required',true);
-            		
-            	}
-            	console.log('severalSuites'+$('#severalSuites').attr('required'))
-            	console.log('severalRooms'+$('#severalRooms').attr('required'))
-            })
-            
-            $('#severalRooms').change(function(){
-            	if($('#severalRooms').val()!=""){
-            		$('#severalSuites').removeAttr('required');
-            		
-            	}
-            	if($('#severalSuites').val()==""&&$('#severalRooms').val()==""){
-            		$('#severalSuites').attr('required',true);
-            		
-            	}
-            	console.log('severalSuites'+$('#severalSuites').attr('required'))
-            	console.log('severalRooms'+$('#severalRooms').attr('required'))
-            })
+//            $('#severalSuites').change(function(){
+//            	if($('#severalSuites').val()!=""){
+//            		$('#severalRooms').removeAttr('required');
+//            		
+//            	}
+//            	if($('#severalSuites').val()==""&&$('#severalRooms').val()==""){
+//            		$('#severalSuites').attr('required',true);
+//            		
+//            	}
+//            	console.log('severalSuites'+$('#severalSuites').attr('required'))
+//            	console.log('severalRooms'+$('#severalRooms').attr('required'))
+//            })
+//            
+//            $('#severalRooms').change(function(){
+//            	if($('#severalRooms').val()!=""){
+//            		$('#severalSuites').removeAttr('required');
+//            		
+//            	}
+//            	if($('#severalSuites').val()==""&&$('#severalRooms').val()==""){
+//            		$('#severalSuites').attr('required',true);
+//            		
+//            	}
+//            	console.log('severalSuites'+$('#severalSuites').attr('required'))
+//            	console.log('severalRooms'+$('#severalRooms').attr('required'))
+//            })
             
             //動態選擇=>當合租意願選擇勾願意時才出現合租額外描述
             $("#agreeShare").click(function(){
