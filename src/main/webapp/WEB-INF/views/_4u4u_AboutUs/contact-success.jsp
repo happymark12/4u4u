@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4U4U | 活動內容</title>
+<title>4U4U | 訊息傳送成功</title>
 
 <!-- Pre Loader -->
 <!-- 4u4uicon -->
@@ -79,19 +79,18 @@
 								<div class="aa-header-right">
 									<c:if test="${ empty LoginOK }">
 										<span style="color: red;">${MsgOK.InsertOK}${AccountBanned}${ActivateAccount}</span>
-								&nbsp;&nbsp;<a href="<c:url value='/register' />"
+									&nbsp;&nbsp;<a href="<c:url value='/register' />"
 											class="aa-register"><i class="fa fa-user-plus"
 											aria-hidden="true"></i>註冊</a>
 										<a href="<c:url value='/login' />" class="aa-login"><i
 											class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
 
 									</c:if>
-									<%
-										// 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
-										session.removeAttribute("AccountBanned");
-										session.removeAttribute("ActivateAccount");
-										session.removeAttribute("MsgOK");
-									%>
+									<% // 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
+									    session.removeAttribute("AccountBanned");  
+									    session.removeAttribute("ActivateAccount"); 
+									    session.removeAttribute("MsgOK");
+									 %>
 
 									<c:if test="${! empty LoginOK }">
 
@@ -113,6 +112,7 @@
 												登出<i class="fa fa-sign-out" aria-hidden="true"></i> </a>
 
 										</c:if>
+
 									</c:if>
 								</div>
 							</div>
@@ -182,135 +182,73 @@
 	</section>
 	<!-- End menu section -->
 
-	<!-- Start Proerty header  -->
-	<section id="aa-property-header" class="activity-detail">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="aa-property-header-inner">
-						<h2>活動詳情</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Proerty header  -->
+<!-- Start Proerty header  -->
+  <section id="aa-property-header" class="activity-success">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-property-header-inner">
+              <h2>報名成功</h2>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!-- End Proerty header  -->
+<!-- Start Blog  -->
+  <section id="aa-blog" style="clear: both">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-blog-area">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- <div class="aa-blog-content"> -->
+                  <div class="row">
+                    <div class="col-md-12">
+<!--                         <article class="aa-blog-single">  -->
+                            <br><br><br><br>
+                          <figure class="aa-blog-img">
+                    
+                            <img alt="img" src="${pageContext.request.contextPath}/img/success.png" class="aa-blog-img-ss" > 
+                          </figure>
+                          <div class="aa-blog-single-content">
+                          
+                          
+                            
+                            <p style="font-size: 25px; text-align: center;">
+                              我們已收到您寶貴的建議<br><br>
+                              <a href="<c:url value='/' />" style="font-size: 15px; text-align: center;text-decoration:underline;">
+                                  &nbsp; 回首頁 &nbsp; | </a>
+                                 <a href="<c:url value='/contact' />"style="font-size: 15px; text-align: center;text-decoration:underline;">&nbsp; 
+                                   回聯絡我們 &nbsp;</a>
+                             
+                            </p>
 
+                             <br><br><br><br><br><br> <br><br><br><br>
 
-	<section id="aa-blog" style="clear: both">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="aa-blog-area">
-						<div class="row">
-							<div class="col-md-12">
-								<!-- <div class="aa-blog-content"> -->
-								<div class="row">
-									<div class="col-md-12">
-										<article class="aa-blog-single">
-
-											<figure class="aa-blog-img">
-												<img alt="img" src="${pageContext.request.contextPath}/_4u4u/eventGetImage?id=${eventBean.eventId}&type=EVENT">
-											</figure>
-											<div class="aa-blog-single-content">
-
-<!--                               					<h2 style="color: black;">每季一次的學生聚餐交流活動</h2> -->
-												<h2 style="color: black;">${eventBean.eventTitle}</h2>
-												<br>
-												<br>
-												<p style="font-size: 22px;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/calendar.png" width="30"
-														height="30"> &nbsp; 活動時間<br>
-
-<!-- 					                                <span style="color: grey;">2019-12-01(日) 14:00 ~ 16:30</span> -->
-													<span style="color: grey;">${eventBean.date}</span>
-												</p>
-												<p style="font-size: 22px">
-													<img alt="img" src="${pageContext.request.contextPath}/img/placeholder.png" width="30"
-														height="30"> &nbsp;活動地點<br> <span
-														style="color: grey;"> ${eventBean.address} <!--                                   (10694)台北市大安區光復南路240巷26號1樓/ 國父紀念館站2號出口 -->
-													</span>
-												</p>
-												<br> <br> <br>
-
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/like.png" width="30" height="30"> &nbsp; 活動介紹
-												</p>
-												<hr>
-												<p style="font-size: 20px;">
-													${eventBean.detail}
-													<!--                                 本活動參加者需為學生身分，記得帶學生證入場喔!<br> -->
-													<!--                                 <br> -->
-													<!--                                 是一個以共享居住空間為主題的交流聚會，大家可自由交流。 <br> -->
-													<!--                                 <br> -->
-
-													<!--                                 這次邀請了我們人氣最旺的主持人-旺聰哥，將帶領大家一起做互動，認識彼此，且這次我們安排了 -->
-													<!--                               前所未有的互動遊戲，不容錯過！ -->
-
-													<!--                                 現場有提供專屬的需求標籤貼紙，讓其他同伴們一目了然你的需求， 還有提醒參加者們 -->
-													<!--                                 餐廳不提供刷卡服務喔！記得帶現金喔!來這大膽地展現自己吧! -->
-
-												</p>
-												<hr>
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/map-location.png" width="30"
-														height="30"> &nbsp; 活動地圖
-												</p>
-												<iframe
-													src="https://www.google.com.tw/maps?output=embed&q=${eventBean.address}"
-													width="600" height="450" style="border: 0;"> </iframe>
-												<br> <br>
-
-												<p style="font-size: 22px; font-weight: bold;">
-													<img alt="img" src="${pageContext.request.contextPath}/img/user.png" width="30" height="30"> &nbsp; 活動報名
-												</p>
-												<hr>
-
-											</div>
-										</article>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-<!-- ==============================我要報名=================================== -->
-		<form class="form-activity" action="<c:url value="/activity-success"/>" method="POST">
-			<div class="form-group row">
-				<label for="inputName3" class="col-sm-2 col-form-label">姓名<span class="required"  style="color:red">*</span></label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputName3"
-						placeholder="Name" required>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">電子郵件<span class="required"  style="color:red">*</span></label>
-				<div class="col-sm-10">
-					<input type="email" class="form-control" id="inputEmail3"
-						placeholder="Email" required>
-				</div>
-			</div>
-			<div class="form-group row">
-            <label for="inputPhone" class="col-sm-2 col-form-label">手機號碼<span class="required"  style="color:red">*</span></label>
-            <div class="col-sm-10">
-              <input type="tel" class="form-control" id="inputPhone3" placeholder="Phone Number" required>
+     
+                          </div> 
+<!--                           </article> -->
+                      </div>
+                      
+                    </div>    
+              <!-- </div> -->
             </div>
           </div>
-			<div class="form-group row">
-				<div class="col-sm-10">
-					<input type="submit" class="btn btn-primary" value="我要報名">
-				</div>
-			</div>
-		</form>
-	</section>
+        </div>
+      </div>
+    </div>
+  	</div>
+  </section>
+  <!-- / Blog  -->
 
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 	<!-- jQuery library -->
 	<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<!-- slick slider -->

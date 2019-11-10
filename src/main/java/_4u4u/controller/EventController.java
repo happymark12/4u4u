@@ -137,7 +137,23 @@ public class EventController {
 
 		return "_4u4u_Activity/activity_detail";
 	}
-	@RequestMapping(value = "/activity-success", method = RequestMethod.GET)
+	@RequestMapping(value = "/activity-success", method = RequestMethod.POST)
+	public String processEventsDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
+//	public String getActivityPage(Model model, HttpServletRequest request, HttpServletResponse response) {
+//		request.setCharacterEncoding("UTF-8");
+//		EventService eventService = new EventServiceImpl();
+//		List<EventBean> list = eventService.getEvents();
+//		request.setAttribute("eventBean", list);
+
+		// 轉換頁面的方法
+//		RequestDispatcher rd = request.getRequestDispatcher("/_4u4u_Activity/activity.jsp");
+//		RequestDispatcher rd = request.getRequestDispatcher("/activity");
+//		rd.forward(request, response);
+
+		return "redirect:/activity-successPage";
+	}
+	
+	@RequestMapping(value = "/activity-successPage", method = RequestMethod.GET)
 	public String getEventsDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
 //	public String getActivityPage(Model model, HttpServletRequest request, HttpServletResponse response) {
 //		request.setCharacterEncoding("UTF-8");

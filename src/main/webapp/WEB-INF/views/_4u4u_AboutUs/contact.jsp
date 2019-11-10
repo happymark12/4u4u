@@ -73,11 +73,13 @@
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="aa-header-right">
 									<c:if test="${ empty LoginOK }">
-										<span style="color:red;">${MsgOK.InsertOK}${AccountBanned}${ActivateAccount}</span>
+										<span style="color: red;">${MsgOK.InsertOK}${AccountBanned}${ActivateAccount}</span>
 										&nbsp;&nbsp;<a href="<c:url value='/register' />"
-											class="aa-register"><i class="fa fa-user-plus" aria-hidden="true"></i>註冊</a>
-										<a href="<c:url value='/login' />" class="aa-login"><i class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
-									
+											class="aa-register"><i class="fa fa-user-plus"
+											aria-hidden="true"></i>註冊</a>
+										<a href="<c:url value='/login' />" class="aa-login"><i
+											class="fa fa-sign-in" aria-hidden="true"></i>登入</a>
+
 									</c:if>
 									<% // 顯示MsgOK.InsertOK後，就要立刻移除，以免每次回到首 頁都會顯示新增成功的訊息
 									    session.removeAttribute("AccountBanned");  
@@ -217,28 +219,54 @@
              
               </div>
             <div class="aa-contact-form">
-                <form class="contactform">                  
-                  <p class="comment-form-author">
-                    <label for="author">姓名 <span class="required">*</span></label>
-                    <input type="text" id="author" name="author" value="" size="30" required="required">
-                  </p>
-                  <p class="comment-form-email">
-                    <label for="email">信箱 <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" value="" aria-required="true" required="required">
-                  </p>
-                  <p class="comment-form-url">
-                    <label for="subject">標題 <span class="required">*</span></label>
-                    <input type="text" name="subject" id="subject">  
-                  </p>
-                  <p class="comment-form-comment">
-                    <label for="comment">訊息 <span class="required">*</span></label>
-                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
-                  </p>                
-                  <p class="form-submit">
+            	<c:if test="${empty LoginOK}">
+            		<form class="contactform" method="POST">                  
+                 	<p class="comment-form-author">
+                    	<label for="author">姓名 <span class="required">*</span></label>
+                   		<input type="text" id="author" name="author" value="" size="30" required="required">
+                  	</p>
+                  	<p class="comment-form-email">
+                    	<label for="email">信箱 <span class="required">*</span></label>
+                    	<input type="email" id="email" name="email" value="" aria-required="true" required="required">
+                  	</p>
+                  	<p class="comment-form-url">
+                   	 	<label for="subject">標題 <span class="required">*</span></label>
+                    	<input type="text" name="subject" id="subject">  
+                  	</p>
+                  	<p class="comment-form-comment">
+                    	<label for="comment">訊息 <span class="required">*</span></label>
+                    	<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
+                  	</p>                
+                  	<p class="form-submit">
 <!--                   <p class="form-group row"> -->
-                    <input type="submit" id="submit" name="submit" class="aa-browse-btn" value="送出" >
-                  </p>        
-                </form>
+                    	<input type="submit" id="submit" name="submit" class="aa-browse-btn" value="送出" >
+                  	</p>        
+                	</form>
+            	</c:if>
+            	<c:if test="${! empty LoginOK}">
+               	 	<form class="contactform" action="<c:url value="/contactMessageSuccess"/>" method="POST">                  
+                  	<p class="comment-form-author"> 
+                     	<label for="author">姓名</label>
+                    	<input type="text" id="author" name="author" value="${LoginOK.name}" size="30" readonly>
+                  	</p>
+                  	<p class="comment-form-email">
+                     	<label for="email">信箱 </label>
+                    	<input type="email" id="email" name="email" value="${LoginOK.email}" aria-required="true" readonly>
+                  	</p>
+                  	<p class="comment-form-url">
+                    	<label for="subject">標題 <span class="required">*</span></label>
+                    	<input type="text" name="subject" id="subject" required="required">  
+                  	</p>
+                  	<p class="comment-form-comment">
+                    	<label for="comment">訊息 <span class="required">*</span></label>
+                    	<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea>
+                  	</p>                
+                  	<p class="form-submit">
+<!--                   <p class="form-group row"> -->
+                    	<input type="submit" id="button" name="submit" class="aa-browse-btn" value="送出" >
+                 	</p>        
+               	 </form>
+                </c:if>
               </div>
             </div>
           </div>
@@ -267,22 +295,45 @@
   <script src="${pageContext.request.contextPath}/js/custom.js"></script> 
 	<script type="text/javascript">
 	$(document).ready(function(){
-	$('#iframe').remove();
-		
-	 setTimeout(()=>{
-         
-			$('#iframeControl').append(`<iframe id="iframe" width="100%" height="450"   style="border:0" src="https://www.google.com.tw/maps?output=embed&q=國立臺北科技大學"></iframe>`)
+		$('#iframe').remove();
+			
+		 setTimeout(()=>{
+	         
+				$('#iframeControl').append(`<iframe id="iframe" width="100%" height="450"   style="border:0" src="https://www.google.com.tw/maps?output=embed&q=國立臺北科技大學"></iframe>`)
 
-     },500);
-	 
-	 $('#submit').click(function(){
-		if($('#author').val() != ""&& $("#email").val() != "" 
-				&& $('#subject').val() != "" && $('#comment').val() != ""){
-		 alert("報名成功!");			
-		}		 
-	 })	 
-	});  
-  
+	     },500);
+		 
+		 $('#submit').click(function(){
+// 			if($('#author').val() != "" && $("#email").val() != ""
+// 					&& $('#subject').val() != "" && $('#comment').val() != ""){
+				  setTimeout(() => {
+	                   $('#modalTitle').text('您需要登錄才能聯絡我們哦!! ');
+	                           $('#myModal').modal('show')
+	                       }, 100);
+	                       
+	              setTimeout(() => {
+	                  $('#myModal').modal('hide')
+	                       }, 3000);			 
+// 			}
+				return false;
+	        });
+		 
+// 		 $('#button').click(function(){
+// 	 			if($('#author').val() != "" && $("#email").val() != ""
+// 				&& $('#subject').val() != "" && $('#comment').val() != ""){			 
+// 				  setTimeout(() => {
+// 	                   $('#modalTitle').text('訊息已送出!! ');
+// 	                           $('#myModal').modal('show')
+// 	                       }, 500);
+	                       
+// 	              setTimeout(() => {
+// 	                   $('#myModal').modal('hide')
+// 	                       }, 3000);	              
+// 	              location.href='/redirect:';
+// 	              return false;
+// 	   			}     
+// 			 });		 		 
+	});
 </script>
   </body>
 </html>
