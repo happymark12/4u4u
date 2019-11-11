@@ -162,10 +162,10 @@
 								<li><a href="<c:url value='/PostWantedRoomAd' />">找房廣告</a></li>
 							</ul></li>
 						<!--活動-->
-						<li class="active"><a href="<c:url value='/activity' />">活動</a></li>
+						<li ><a href="<c:url value='/activity' />">活動</a></li>
 
 						<!--關於我們-->
-						<li class="dropdown"><a class="dropdown-toggle">關於我們
+						<li class="dropdown"><a class="dropdown-toggle active">關於我們
 								<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
