@@ -41,7 +41,7 @@
 								</article>
 							</div>`;
 							$('#indexAds').append(apiData);
-							$('span').css('fontSize','20px');
+							$('span').not('.aa-top-slider-catg').css('fontSize','20px');
 							$('p').css('fontSize','18px');
 							$('[data-toggle="tooltip"]').tooltip();
 							$(".demo2").tooltip();
@@ -224,7 +224,7 @@
 					</article></div>
 				`;
 				$('#findHomeAds').append(apiData)	;	
-				$('span').css('fontSize','20px');
+				$('span').not('.aa-top-slider-catg').css('fontSize','20px');
 				$('p').css('fontSize','18px');
 				$('[data-toggle="tooltip"]').tooltip();
 				$(".demo2").tooltip();

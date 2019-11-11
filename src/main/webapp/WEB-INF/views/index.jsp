@@ -296,7 +296,7 @@
 								style="color: #59ABE3"></i>訊息
 						</h2>
 						<hr style="background-color: #555; height: 1px; border: none;">
-						<span class="aa-top-slider-catg">我們內置的訊息系統，讓你可以安心地跟室友／房東聯絡，
+						<span class="aa-top-slider-catg">我們內置的訊息系統，讓你可以安心地跟室友或房東聯絡，
 							你的個人訊息將會被保密。不論一般會員或VIP會員， 你都可以透過訊息系統收到來自其他人的訊息。</span>
 					</div>
 					<!-- / Top slider content -->
