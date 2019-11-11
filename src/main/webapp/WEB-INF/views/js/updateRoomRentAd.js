@@ -86,8 +86,8 @@ $(document).ready(function(){
    
        $("#peopleCount").change(changeAgeGenderOption);
    
-       $('#wholePropertyFieldDiv').hide();
-       $('#wholePropertyBr').hide();
+//       $('#wholePropertyFieldDiv').hide();
+//       $('#wholePropertyBr').hide();
        
        //動態新增房間細節 (當房間數量變動時))
        $("#houseCount").change(function(){
@@ -237,8 +237,8 @@ $(document).ready(function(){
                   
                    
                }else{
-                   $('#wholePropertyFieldDiv').hide();
-                   $('#wholePropertyBr').hide();
+//                   $('#wholePropertyFieldDiv').hide();
+//                   $('#wholePropertyBr').hide();
                    if($('#whole-property-div').length>0){
                        $('#whole-property-div').remove();
                        $('#whole-property-br').remove();
@@ -449,8 +449,8 @@ $(document).ready(function(){
                       $('#wholePropertyTotalRent').attr('required',true);
                        
                    }else{
-                       $('#wholePropertyFieldDiv').hide();
-                       $('#wholePropertyBr').hide();
+//                       $('#wholePropertyFieldDiv').hide();
+//                       $('#wholePropertyBr').hide();
                        if($('#whole-property-div').length>0){
                            $('#whole-property-div').remove();
                            $('#whole-property-br').remove();
