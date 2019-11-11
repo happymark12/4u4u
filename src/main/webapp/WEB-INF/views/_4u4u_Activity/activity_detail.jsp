@@ -256,10 +256,13 @@
 													<img alt="img" src="${pageContext.request.contextPath}/img/map-location.png" width="30"
 														height="30"> &nbsp; 活動地圖
 												</p>
-												<iframe
+												<div id="iframeControl">
+													<iframe id="iframe"
 													src="https://www.google.com.tw/maps?output=embed&q=${eventBean.address}"
 													width="600" height="450" style="border: 0;"> </iframe>
-												<br> <br>
+												</div>
+											
+												<br> 
 
 												<p style="font-size: 22px; font-weight: bold;">
 													<img alt="img" src="${pageContext.request.contextPath}/img/user.png" width="30" height="30"> &nbsp; 活動報名
@@ -295,7 +298,7 @@
 			<div class="form-group row">
             <label for="inputPhone" class="col-sm-2 col-form-label">手機號碼<span class="required"  style="color:red">*</span></label>
             <div class="col-sm-10">
-              <input type="tel" class="form-control" id="inputPhone3" placeholder="Phone Number" required>
+              <input type="tel"  class="form-control" id="inputPhone3" placeholder="format:0917298387"  pattern="[0-9]{10}" required>
             </div>
           </div>
 			<div class="form-group row">
@@ -327,6 +330,17 @@
 		src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
 	<!-- Custom js -->
 	<script src="${pageContext.request.contextPath}/js/custom.js"></script>
+	<script type="text/javascript">
+	$('#iframe').remove();
+	
+	 setTimeout(()=>{
+        
+			$('#iframeControl').append(`<iframe src="https://www.google.com.tw/maps?output=embed&q=${eventBean.address}"
+					width="600" height="450" style="border: 0;"> </iframe>`)
+
+    },500);
+	
+	</script>
 
 </body>
 </html>

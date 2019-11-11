@@ -588,9 +588,9 @@ p,span{
 <!-- 										<i class="fa fa-star" aria-hidden="true" style="color:black;"></i> -->
 										
 										&nbsp;額外費用</h3>
-										<p>${roomRentAd.adExtraCost}
+										<p>$${roomRentAd.adExtraCost}
 											<c:if test="${! empty agentFee}">	
-									仲介費:${agentFee}
+									仲介費:$${agentFee}
 									</c:if>
 										</p>
 										<hr style="height: 10px">
@@ -840,14 +840,14 @@ p,span{
 									</c:if>
 									<h3><img alt="img" src="${pageContext.request.contextPath}/img/address-findhome.png" width="20"
 														height="20">
-									&nbsp;  找尋區域:</h3>
+									&nbsp;  找尋區域</h3>
 									
 									
 									<p>${lookInArea}</p>
 									<hr style="height: 10px">
 									<h3><img alt="img" src="${pageContext.request.contextPath}/img/machine-learning.png" width="20"
 														height="20">
-									&nbsp; 想要的設施:</h3>
+									&nbsp; 想要的設施</h3>
 									
 									
 									<c:if test="${findRoomAd.hasWashMachine}">
@@ -1505,8 +1505,7 @@ $('#saveAd').on('click',function(e){
 							            	}
 							            	if(response=='取消儲存廣告'){
 							            		
-							                $('#saveAd').html(`<i class="fa fa-heart"></i> 
-													取消儲存廣告`)
+							                $('#saveAd').html(`<i class="fa fa-heart"></i>取消儲存廣告`).css('backgroundColor','red');
 							            	}
 							            	if(response=='同一人'){
 							            		 setTimeout(() => {
@@ -1542,7 +1541,7 @@ $('#saveAd').on('click',function(e){
 							            	
 							            	if(response=='儲存廣告'){
 							            		
-							                $('#saveAd').html(`<i class="fa fa-heart"></i>儲存廣告`)
+							                $('#saveAd').html(`<i class="fa fa-heart"></i>儲存廣告`).css('backgroundColor','#59ABE3');
 							            	}
 							            	if(response=='錯誤'){
 							            		
@@ -1672,6 +1671,9 @@ $('#saveAd').on('click',function(e){
 							            		$('#saveAd').html(`<i class="fa fa-heart"></i>`+response[0]);
 							            		$('#showInterest').html(`<i class="fa fa-hand-o-right" aria-hidden="true"></i>
 														 `+response[1]);
+							            		if($('#saveAd').text().includes('取消儲存廣告')){
+							            			$('#saveAd').css('backgroundColor','red');
+							            		}
 							            	}
 							                
 							            }

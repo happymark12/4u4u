@@ -295,7 +295,7 @@ border-bottom: 5px solid orange;
 						<form action="" method="POST" enctype="multipart/form-data"
 							id="searchForm" name="searchForm">
 
-							<h3>過濾條件</h3>
+							<h3>篩選條件</h3>
 							<hr>
 							<span>搜尋類型:</span> <input type="reset" value="重置選項" id="reset"
 								style="margin-left: 30px"> <br> <input type="radio"
@@ -417,7 +417,7 @@ border-bottom: 5px solid orange;
 							<div class="aa-single-advance-search">
 								<!-- 								<input type="submit" id="filterZone" value="過濾" -->
 								<!-- 									style="font-size: 20px; width: 200px; height: 50px; position: fixed; bottom: 20%; background-color: rgba(255, 255, 255, 0.6); display: none;"> -->
-								<input type="submit" id="searchButton" value="Search"
+								<input type="submit" id="searchButton" value="搜尋"
 									name="search" class="aa-search-btn">
 							</div>
 						</form>
