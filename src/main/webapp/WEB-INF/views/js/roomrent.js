@@ -105,7 +105,7 @@ $(document).ready(function(){
             <tr>
             <td>
                 <fieldset>
-                <legend>房間`+i+`</legend><br>
+                <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">房間`+i+`</legend><br>
             <div class="roomTypeDiv">
             房屋現況 : 
             <select name="roomType`+i+`" class="roomTypeSelect" required>
@@ -116,7 +116,7 @@ $(document).ready(function(){
             </select><br><br>
             </div>
             出租樓層 : 
-            <input type="text" name="floor`+i+`" placeholder="-1為地下一樓,+4為4樓為頂加" style="width: 200px;">
+            <input type="text" name="floor`+i+`" placeholder="-1為地下一樓,+4為4樓為頂加" style="width: 350px;">
             總樓層 : 
             <input type="text" style="width: 30px;" name="totalFloor`+i+`"> 樓
             <br><br>
@@ -152,7 +152,7 @@ $(document).ready(function(){
                 <input type="checkbox" name="coldair`+i+`" value="true">冷氣
                 <br><br>
             租金 :
-            <input type="number" min="0" name="roomRentPrice`+i+`" style="width:80px;" required> 元/月  &nbsp;&nbsp;押金:
+            <input type="number" min="0" name="roomRentPrice`+i+`" style="width:120px;" required> 元/月  &nbsp;&nbsp;押金:
             <select name="roomDeposit`+i+`">
                 <option value="2">二個月</option>
                 <option value="0">面議</option>
@@ -181,7 +181,7 @@ $(document).ready(function(){
                $('#CurrentFlatmate').hide();
    
                }else{
-               $('#CurrentFlatmate').show();
+//               $('#CurrentFlatmate').show();
    
                }  
              
@@ -365,7 +365,7 @@ $(document).ready(function(){
             <tr>
             <td>
                 <fieldset>
-                <legend>房間`+i+`</legend><br>
+                <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">房間`+i+`</legend><br>
             <div class="roomTypeDiv">
             房屋現況 : 
             <select name="roomType`+i+`"  class="roomTypeSelect" required>
@@ -376,7 +376,7 @@ $(document).ready(function(){
             </select><br><br>
             </div>
             出租樓層 : 
-            <input type="text" name="floor`+i+`" placeholder="-1為地下一樓,+4為4樓為頂加" style="width: 200px;">
+            <input type="text" name="floor`+i+`" placeholder="-1為地下一樓,+4為4樓為頂加" style="width: 350px;">
             總樓層 : 
             <input type="text" style="width: 30px;" name="totalFloor`+i+`"> 樓
             <br><br>
@@ -412,7 +412,7 @@ $(document).ready(function(){
             <input type="checkbox" name="coldair`+i+`" value="true">冷氣
             <br><br>
             租金 :
-            <input type="number" min="0" name="roomRentPrice`+i+`" style="width:80px;" required> 元/月  &nbsp;&nbsp;押金:
+            <input type="number" min="0" name="roomRentPrice`+i+`" style="width:120px;" required> 元/月  &nbsp;&nbsp;押金:
             <select name="roomDeposit`+i+`">
                 <option value="2">二個月</option>
                 <option value="0">面議</option>

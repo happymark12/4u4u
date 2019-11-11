@@ -677,7 +677,8 @@ p,span{
 									<hr style="height: 10px">
 									<c:if
 										test="${roomRentAd.adRentType=='3'&&roomRentAd.adCurrentPeopleNum!='0'}">
-										<h3><i class="fa fa-user-o" aria-hidden="true" style="color:black;"></i>
+										<h3><img alt="img" src="${pageContext.request.contextPath}/img/curFlatmate.png" width="25"
+														height="25"> 
 										&nbsp;當前室友狀況</h3>
 
 										<div class="row">

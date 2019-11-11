@@ -386,7 +386,7 @@ font-size:25px;
                           </select> <br> <br> <label for="availableDate">可遷入日期 </label> <input
                               type="date" name="availableDate" id="availableDate">
   
-                      </fieldset>
+                      </fieldset><br>
                   </td>
               </tr>
               <tr>
@@ -429,10 +429,10 @@ font-size:25px;
                               </select><br> <br> 可否接受情侶 : <input type="radio" name="couple"
                                   value="false">不接受 <input type="radio" name="couple"
                                   value="true">接受
-  
                           </div>
   
-                      </fieldset>
+  
+                      </fieldset><br>
                   </td>
               </tr>
               <tr id="CurrentFlatmate">
