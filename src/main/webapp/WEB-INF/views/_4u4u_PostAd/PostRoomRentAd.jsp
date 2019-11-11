@@ -123,7 +123,7 @@ font-size:25px;
 
 </head>
 
-<body>
+<body style="background:#F0F0F0;">
 	 
 	 <div id="aa-preloader-area">
     <div class="pulse"></div>
@@ -289,11 +289,12 @@ font-size:25px;
 	 <p>&nbsp;</p>
 	 <form action="/4u4u/_4u4u/controller/ProcessRoomRentAd.do"
           method="post" enctype="multipart/form-data" name="rentForm">
+          <div style="background:#fff;padding:20px;">
           <table id="wholeTable">
               <tr>
                   <td>
                       <fieldset>
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">關於廣告 </legend>
+                            <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">關於廣告 </legend>
                           <br> 出租方式 : <select id="rentType" name="rentType">
                               <option value="room-for-rent" label="出租房間(有公共空間)"></option>
                               <option value="whole-property">整層出租</option>
@@ -383,7 +384,7 @@ font-size:25px;
                               <option value="2">半年</option>
                               <option value="4">2年</option>
   
-                          </select> <br> <br> <label for="availableDate">可遷入日期 </label> <input
+                          </select> <br> <br> <label for="availableDate">可遷入日期 :  </label> <input
                               type="date" name="availableDate" id="availableDate">
   
                       </fieldset><br>
@@ -400,7 +401,7 @@ font-size:25px;
                   <td>
                     <p>&nbsp;</p>
                       <fieldset id="futureFlatmate">
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">希望的房客 </legend>
+                           <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">希望的房客 </legend>
                           <br> 可否抽菸 : <select name="Fsmoke">
                               <option value="true">沒有偏好</option>
                               <option value="false">否</option>
@@ -438,7 +439,7 @@ font-size:25px;
               <tr id="CurrentFlatmate">
                   <td>
                       <fieldset>
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">目前的房客 </legend>
+                           <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">目前的房客 </legend>
                           <br> 是否養寵物 : <select name="Cpet">
                               <option value="false">沒有養寵物</option>
                               <option value="true">有養寵物</option>
@@ -471,13 +472,13 @@ font-size:25px;
                   <td>
                     <p>&nbsp;</p>
                       <fieldset>
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">廣告詳情</legend>
+                           <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">廣告詳情</legend>
                           <br> 廣告標題 : <input type="text" name="adTitle"
                               style="width: 365px;" required><br> <br> 現況描述 :
                           <textarea name="adDescription" cols="50" rows="10" required></textarea>
                           <br> <br> 聯絡手機 : <input type="tel" id="phone"
                               name="phone" pattern="[0-9]{4}[0-9]{6}"
-                              placeholder="e.g. 0973-345689"> <input type="checkbox"
+                              placeholder="e.g. 0973-345689"> <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox"
                               value="true" name="phoneAllowAttachAd"> 是否願意將電話放到廣告上 <br>
                           <br> 上傳圖片 :<br> <br>
                           <div id="choosePicZone" >
@@ -496,7 +497,7 @@ font-size:25px;
               <tr >
                   <td>
                       <fieldset>
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">交通資訊</legend>
+                            <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">交通資訊</legend>
                           <br>
                           <table>
                               <tr class="item1">
@@ -532,23 +533,24 @@ font-size:25px;
                   <td>
                     <p>&nbsp;</p>
                       <fieldset>
-                          <legend style="font-weight:bold;font-size: 30px;color:#59ABE3;">信件提醒設定 </legend>
+                           <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">信件提醒設定 </legend>
                           <br> <label for="instantEmail">立即信件提醒 : </label>
                           當有找房者的廣告符合我的需求時立即寄送email通知 (上限是每天 <select id="maxEmail"
                               name="emailMax">
   
                           </select>封信) <br>
   
-                      </fieldset> <br> <input type="submit" value="發佈廣告" style="width:120px;height:40px;font-size:25px;">
+                      </fieldset> <br>  <input type="submit" value="發佈廣告" style="width: 120px; height: 60px;font-size:22px;padding:0px;font-weight:bold" class="btn btn-warning text-center">
                       <p>&nbsp;</p>
                       <p>&nbsp;</p>
                   </td>
               </tr>
           </table>
-  
+  </div>
   
       </form>
-      
+      <br>
+      <br>
       <jsp:include page="../footer.jsp"></jsp:include>
 	<script>
             new TwCitySelector({

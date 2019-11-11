@@ -76,6 +76,12 @@
 							<form class="contactform" ENCTYPE="multipart/form-data"
 								method="POST" action="<c:url value='/_4u4u/register.do' />">
 								<div class="aa-single-field">
+									<label for="name">姓名 <span class="required">*</span></label> <input
+										type="text" required="required" aria-required="true"
+										name="name" value="${param.name}"> <font color="red"
+										size="-1">${MsgMap.errorName}</font>
+								</div>
+								<div class="aa-single-field">
 									<label for="email">信箱 <span class="required">*</span></label> <input
 										type="email" required="required" aria-required="true"
 										name="eMail" value="${param.eMail}"> <font size="-1"
@@ -91,12 +97,6 @@
 										class="required">*</span></label> <input type="password"
 										name="password2" value="${param.password2}" required> <font
 										color="red" size="-1">${MsgMap.errorPassword2Empty}</font>
-								</div>
-								<div class="aa-single-field">
-									<label for="name">姓名 <span class="required">*</span></label> <input
-										type="text" required="required" aria-required="true"
-										name="name" value="${param.name}"> <font color="red"
-										size="-1">${MsgMap.errorName}</font>
 								</div>
 								<div class="aa-single-field">
 									

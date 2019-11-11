@@ -82,7 +82,7 @@
                 $('select[name="district"]').children().each(function(index){
                     if(index==0){return;}
                     else{
-                        $('#districtSpan').append(`<input type="checkbox" name="districtList" value="`+$(this).val()+`"><span>`+$(this).val()+`</span>`);
+                        $('#districtSpan').append(`<input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="districtList" value="`+$(this).val()+`"><span>`+$(this).val()+`</span>`);
                     }
                     
                

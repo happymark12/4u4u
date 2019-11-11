@@ -540,15 +540,24 @@ p,span{
 
 									<c:if test="${roomRentAd.adRentType==0}">
 										<p>總租金:$${roomRentAd.adRentPrice} 
-										    <br>      
-										         押金:
-											${roomRentAd.adDeposit==2?"2個月":(roomRentAd.adDeposit==1?"1個月":"面議")}
 										    <br>     
 										         格局:
 										    <c:if test="${roomRentAd.adRoomNum!=0}">${roomRentAd.adRoomNum}房</c:if>
 											<c:if test="${roomRentAd.adToiletNum!=0}">${roomRentAd.adToiletNum}衛</c:if>
 											<c:if test="${roomRentAd.adLivingRoomNum!=0}">${roomRentAd.adLivingRoomNum}廳</c:if>
 											<c:if test="${roomRentAd.adBalconyNum!=0}">${roomRentAd.adBalconyNum}陽台</c:if>
+											<c:forEach var='room' varStatus='vs'
+											items='${roomRentAd.roomItems}'>
+											<c:if test="${room.roomState==true}">
+												<br>
+												<span>$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}
+													押金: ${room.deposit==2?"2個月":(room.deposit==1?"1個月":"面議")}</span>
+											</c:if>
+											<c:if test="${room.roomState==false}">
+												<br>
+												<span style="text-decoration: line-through;">$${room.rentPrice}${room.roomType==0?" (套房)":" (雅房)"}</span>
+											</c:if>
+												</c:forEach>
 										</p>
 <!-- 										<p> -->
 <!-- 											格局: -->

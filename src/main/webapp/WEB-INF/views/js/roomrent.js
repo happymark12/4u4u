@@ -129,27 +129,27 @@ $(document).ready(function(){
                                 </span>
             <br class="cookBr"><br class="cookBr">                        
             格局 : 
-                <input type="checkbox" name ="balcony`+i+`" value="true">有陽台
-                <input type="checkbox" name ="duplexApartment`+i+`" value="true">樓中樓
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name ="balcony`+i+`" value="true">有陽台
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name ="duplexApartment`+i+`" value="true">樓中樓
                 <br><br>
                 坪數 :
                 <input type="text" name="area`+i+`" style="width:80px;"> 坪(請填寫室內實際使用坪數) 
                 <br><br>
                 房間設備 :
-                <input type="checkbox" name="wash`+i+`" value="true">洗衣機
-                <input type="checkbox" name="icebox`+i+`" value="true">冰箱
-                <input type="checkbox" name="four`+i+`" value="true">第四台
-                <input type="checkbox" name="gas`+i+`" value="true">天然瓦斯
-                <input type="checkbox" name="tv`+i+`" value="true">電視
-                <input type="checkbox" name="wardrobe`+i+`" value="true">衣櫃
-                <input type="checkbox" name="sofa`+i+`" value="true">沙發
-                <input type="checkbox" name="heater`+i+`" value="true">熱水器
-                <input type="checkbox" name="broadband`+i+`" value="true">網路
-                <input type="checkbox" name="desk`+i+`" value="true">桌子
-                <input type="checkbox" name="chair`+i+`" value="true">椅子
-                <input type="checkbox" name="singlebed`+i+`" value="true">單人床
-                <input type="checkbox" name="doublebed`+i+`" value="true">雙人床
-                <input type="checkbox" name="coldair`+i+`" value="true">冷氣
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="wash`+i+`" value="true">洗衣機
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="icebox`+i+`" value="true">冰箱
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="four`+i+`" value="true">第四台
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="gas`+i+`" value="true">天然瓦斯
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="tv`+i+`" value="true">電視
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="wardrobe`+i+`" value="true">衣櫃
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="sofa`+i+`" value="true">沙發
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="heater`+i+`" value="true">熱水器
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="broadband`+i+`" value="true">網路
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="desk`+i+`" value="true">桌子
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="chair`+i+`" value="true">椅子
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="singlebed`+i+`" value="true">單人床
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="doublebed`+i+`" value="true">雙人床
+                <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="coldair`+i+`" value="true">冷氣
                 <br><br>
             租金 :
             <input type="number" min="0" name="roomRentPrice`+i+`" style="width:120px;" required> 元/月  &nbsp;&nbsp;押金:

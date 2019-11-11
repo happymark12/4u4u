@@ -130,7 +130,7 @@ fieldset{
 
 
 </head>
-<body>
+<body style="background:#F0F0F0;">
 
 	<div id="aa-preloader-area">
 		<div class="pulse"></div>
@@ -298,12 +298,12 @@ fieldset{
 	<form action="/4u4u/_4u4u/controller/ProcessWantedRoomAd.do"
 		id="rentForm" name="rentForm" method="post"
 		enctype="multipart/form-data">
+		<div style="background:#fff;padding:20px;">
 		<table class="PostAd">
 			<tr>
 				<td>
 					<fieldset>
-						<legend
-							style="font-weight: bold; font-size: 30px; color: #59ABE3;">關於您</legend>
+						  <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">關於您</legend>
 						<br>
 						<!-- 當性別人數為單數時 年齡選擇只有單數 ,複數時 則是複數選擇 -->
 						性別人數: <select name="peopleNum_gender" id="peopleNum_gender"
@@ -323,7 +323,7 @@ fieldset{
 						</select>間雅房 <br>
 						<br>
 						<!-- 當合租意願選擇不願意時 合租額外描述動態消失-->
-						合租意願: <input type="checkbox" id="agreeShare" name="agreeShare"
+						合租意願: <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" id="agreeShare" name="agreeShare"
 							value="agree">願意 <br>
 						<br>
 						<div id="addressPart" class="form-row city-selector-set">
@@ -344,23 +344,23 @@ fieldset{
 							<option value="1年">1年</option>
 							<option value="2年">2年</option>
 						</select><br>
-						<br> 想要的設施: <input type="checkbox" name="hasWashingMachine"
-							value="true">洗衣機 <input type="checkbox"
-							name="hasRefrigerator" value="true">冰箱 <input
-							type="checkbox" name="hasTV" value="true">電視 <input
+						<br> 想要的設施: <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="hasWashingMachine"
+							value="true">洗衣機 <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox"
+							name="hasRefrigerator" value="true">冰箱 <input style="width: 30px; height: 20px; vertical-align: sub;"
+							type="checkbox" name="hasTV" value="true">電視 <input style="width: 30px; height: 20px; vertical-align: sub;"
 							type="checkbox" name="hasAirConditioning" value="true">冷氣
-						<input type="checkbox" name="hasWaterHeater" value="true">熱水器
-						<input type="checkbox" name="hasInternet" value="true">網路
-						<input type="checkbox" name="hasFourthTV" value="true">第四台
-						<input type="checkbox" name="hasGas" value="true">天然瓦斯 <input
-							type="checkbox" name="hasWardrobe" value="true">衣櫃 <input
-							type="checkbox" name="hasSofa" value="true">沙發 <input
-							type="checkbox" name="hasTable" value="true">桌子 <input
-							type="checkbox" name="hasChair" value="true">椅子 <input
-							type="checkbox" name="hasParking" value="true">停車位 <input
-							type="checkbox" name="hasBalcony" value="true">陽台 <input
-							type="checkbox" name="hasSingleBed" value="true">單人床 <input
-							type="checkbox" name="hasDoubleBed" value="true">雙人床 <br>
+						<input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="hasWaterHeater" value="true">熱水器
+						<input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="hasInternet" value="true">網路
+						<input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="hasFourthTV" value="true">第四台
+						<input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="hasGas" value="true">天然瓦斯 <input
+						 style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasWardrobe" value="true">衣櫃 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasSofa" value="true">沙發 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasTable" value="true">桌子 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasChair" value="true">椅子 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasParking" value="true">停車位 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasBalcony" value="true">陽台 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasSingleBed" value="true">單人床 <input
+						style="width: 30px; height: 20px; vertical-align: sub;"	type="checkbox" name="hasDoubleBed" value="true">雙人床 <br>
 						<br> 是否想開火: <select name="allowCook" id="useFire">
 							<option value="false">否</option>
 							<option value="true">可</option>
@@ -400,7 +400,7 @@ fieldset{
 							<option value="同性戀">同性戀</option>
 							<option value="雙性戀">雙性戀</option>
 							<option value="混合">混合</option>
-						</select> <input type="checkbox" name="agreeAdCondition">是否同意成為廣告的搜索條件<br>
+						</select> <input style="width: 30px; height: 20px; vertical-align: sub;" type="checkbox" name="agreeAdCondition">是否同意成為廣告的搜索條件<br>
 						<br>
 					</fieldset> <br>
 				</td>
@@ -409,8 +409,7 @@ fieldset{
 				<td>
 
 					<fieldset id="wantedRoommates">
-						<legend
-							style="font-weight: bold; font-size: 30px; color: #59ABE3;">您希望的室友</legend>
+						  <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">您希望的室友</legend>
 						<br> 性別: <select name="wantedRoommatesGender"
 							id="wantedRoommatesGender">
 							<option value="不介意">不介意</option>
@@ -454,8 +453,7 @@ fieldset{
 			<tr>
 				<td>
 					<fieldset id="adTitle">
-						<legend
-							style="font-weight: bold; font-size: 30px; color: #59ABE3;">廣告詳情</legend>
+						  <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">廣告詳情</legend>
 						<br> 廣告標題: <input type="text" name="adTitle" required><br>
 						<br> (簡短的介紹)<br>
 						<br> 現況描述:
@@ -489,16 +487,14 @@ fieldset{
 			<tr>
 				<td>
 					<fieldset id="emailRemind">
-						<legend
-							style="font-weight: bold; font-size: 30px; color: #59ABE3;">電子郵件提醒</legend>
+						  <legend style="font-size: 30px;color:#fff;background:#59ABE3;padding:10px;">電子郵件提醒</legend>
 						<br> <label for="instantEmail">立即郵件提醒:</label>
 						網站上公佈後立即向我發送符合我要求的新房間廣告的電子郵件 (每天最多不超過 <select id="emailMax"
 							name="emailMax">
 							<option value="default">-</option>
 						</select> 封信)<br>
 						<br>
-					</fieldset> <input type="submit" value="發佈廣告"
-					style="width: 120px; height: 40px;font-size:25px;">
+					</fieldset>  <input type="submit" value="發佈廣告" style="width: 120px; height: 60px;font-size:22px;padding:0px;font-weight:bold" class="btn btn-warning text-center">
 					<p>&nbsp;</p>
 					<p>&nbsp;</p>
 
@@ -510,7 +506,10 @@ fieldset{
 
 
 		</table>
+		</div>
 	</form>
+	<br>
+      <br>
 	<jsp:include page="../footer.jsp"></jsp:include>
 	<script>
             new TwCitySelector({

@@ -3739,7 +3739,13 @@ public class AdController {
 				String adExtraCost = rrb.getAdExtraCost();
 				model.addAttribute("adExtraCost", adExtraCost);
 			}
-
+			// adTotalRentPrice
+			if(adRentType == "整層住家") {
+				if(rrb.getAdRentPrice() != null) {
+					Integer adRentPrice = rrb.getAdRentPrice();
+					model.addAttribute("adRentPrice", adRentPrice);
+				}				
+			}
 			// adMinimumStayLength
 			String adMinimumStayLength = rrb.getAdMinimumStayLength();
 			model.addAttribute("adMinimumStayLength", adMinimumStayLength);
