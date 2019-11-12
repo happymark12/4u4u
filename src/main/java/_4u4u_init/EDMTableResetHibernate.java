@@ -30,7 +30,7 @@ public class EDMTableResetHibernate {
 	private static Session session = factory.getCurrentSession();
 	private static String url = "jdbc:mysql://localhost:3306/4u4u?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei";
 	private static String user = "root";
-	private static String password = "Do!ng123";
+	private static String password = "1qaz2wsx";
 
 	public static void main(String[] args) {
 		Transaction tx = null;

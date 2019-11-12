@@ -22,7 +22,7 @@ public class RootAppConfig {
     public DataSource dataSource() {
         ComboPooledDataSource ds = new ComboPooledDataSource();
         ds.setUser("root");
-        ds.setPassword("Do!ng123");
+        ds.setPassword("1qaz2wsx");
         try {
             ds.setDriverClass("com.mysql.cj.jdbc.Driver");
         } catch (Exception e) {
@@ -55,8 +55,8 @@ public class RootAppConfig {
     private Properties additionalProperties() {
         Properties properties=new Properties();
         properties.put("hibernate.dialect", org.hibernate.dialect.MySQL8Dialect.class);
-        properties.put("hibernate.show_sql", Boolean.TRUE);
-        properties.put("hibernate.format_sql", Boolean.TRUE);
+        properties.put("hibernate.show_sql", Boolean.FALSE);
+        properties.put("hibernate.format_sql", Boolean.FALSE);
         properties.put("default_batch_fetch_size", 10);
         properties.put("hibernate.hbm2ddl.auto", "update");
 

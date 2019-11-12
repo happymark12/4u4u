@@ -286,14 +286,14 @@
 
 									<nav style="text-align: center;">
 										<ul class="pagination comments-pagination">
-											<li><a aria-label="Previous" href="#"> <span
-													aria-hidden="true">«</span>
-											</a></li>
-											<li><a href="#">1</a></li>
+<!-- 											<li><a aria-label="Previous" href="#"> <span -->
+<!-- 													aria-hidden="true">«</span> -->
+<!-- 											</a></li> -->
+<!-- 											<li><a href="#">1</a></li> -->
 
-											<li><a aria-label="Next" href="#"> <span
-													aria-hidden="true">»</span>
-											</a></li>
+<!-- 											<li><a aria-label="Next" href="#"> <span -->
+<!-- 													aria-hidden="true">»</span> -->
+<!-- 											</a></li> -->
 										</ul>
 									</nav>
 								</div>

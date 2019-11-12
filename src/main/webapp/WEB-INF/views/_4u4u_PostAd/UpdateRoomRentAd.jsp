@@ -293,10 +293,10 @@ fieldset {
 		</div>
 	</c:if>
 	<p>&nbsp;</p>
-		<div style="background: #fff; padding: 20px;">
 	<form
 		action="/4u4u/_4u4u/UpdateRoomRentAdServlet?adStyle=${adStyle}&adId=${RoomRentAd.adId}"
 		method="post" enctype="multipart/form-data" name="rentForm">
+		<div style="background: #fff; padding: 20px;">
 			<table id="wholeTable">
 				<tr>
 					<td>
@@ -931,8 +931,8 @@ fieldset {
 
 
 
-	</form>
 		</div>
+	</form>
 	<br>
 	<br>
 	<jsp:include page="../footer.jsp"></jsp:include>

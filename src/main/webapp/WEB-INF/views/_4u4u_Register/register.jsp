@@ -55,7 +55,19 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+ 
+ <style>
+   #blah{
+   object-fit: cover;
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+ overflow: hidden;
+ 
+ border: 3px solid #fff;
+   }
+ </style>
 
 </head>
 <body>
@@ -75,12 +87,28 @@
 							</div>
 							<form class="contactform" ENCTYPE="multipart/form-data"
 								method="POST" action="<c:url value='/_4u4u/register.do' />">
+								
+ 					         <div class="text-center">
+        						<div class="aa-single-field">
+        						<img id="blah" class="profile-thumb" src="./img/NoImage.png" alt="your image" />
+									<div>
+									<div><label for="picture">大頭貼照片 </label></div><br>
+									<div style="margin:0 auto;width: 100px;">
+									<label><Input Type="file" name="picture" id="inputGroupFile01"></label>
+									</div>
+										<font color="red" size="-1">${MsgMap.errPicture}</font> 
+									</div>
+								</div>
+								</div>
+								
+								
 								<div class="aa-single-field">
 									<label for="name">姓名 <span class="required">*</span></label> <input
 										type="text" required="required" aria-required="true"
 										name="name" value="${param.name}"> <font color="red"
 										size="-1">${MsgMap.errorName}</font>
 								</div>
+								
 								<div class="aa-single-field">
 									<label for="email">信箱 <span class="required">*</span></label> <input
 										type="email" required="required" aria-required="true"
@@ -98,6 +126,8 @@
 										name="password2" value="${param.password2}" required> <font
 										color="red" size="-1">${MsgMap.errorPassword2Empty}</font>
 								</div>
+								
+								
 								<div class="aa-single-field">
 									
 							<label for="gender">性別<span class="required">*</span></label>
@@ -125,11 +155,9 @@
       								<font color="red" size="-1">${MsgMap.errorGenderEmpty}</font>
 									</c:if>
 								</div>
-								<div class="aa-single-field">
-									<label for="picture">照片&nbsp;&nbsp;  </label> 
-									<label><Input Type="file"    name="picture" ></label>
-										<font color="red" size="-1">${MsgMap.errPicture}</font> 
-								</div>
+								
+								
+	
 								<div class="aa-single-submit">
 									<input type="submit" value="加入會員" name="submit"><br>
 								 <u><a href="<c:url value='/' />">回首頁</a></u>
@@ -143,9 +171,10 @@
 		</div>
 	</section>
 
-
+   
 	<!-- jQuery library -->
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+		
 	<script
 		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -164,6 +193,22 @@
 		src="${pageContext.request.contextPath}/js/jquery.fancybox.pack.js"></script>
 	<!-- Custom js -->
 	<script src="${pageContext.request.contextPath}/js/custom.js"></script>
+	<script>
+  function readURL(input) {
+   if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
+    reader.onload = function(e) {
+     $("#blah").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+   }
+  }
+
+  $("#inputGroupFile01").change(function() {
+   readURL(this);
+  });
+ </script>
 </body>
 </html>

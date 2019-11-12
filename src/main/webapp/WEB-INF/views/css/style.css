@@ -4653,6 +4653,7 @@ background:url(../img/account/cover_bg_3.jpg);
 }
 #fh5co-header .display-tc .profile-thumb,
 .fh5co-cover .display-tc .profile-thumb {
+	
 	background-size: cover !important;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -4665,8 +4666,8 @@ background:url(../img/account/cover_bg_3.jpg);
 	-moz-border-radius: 50%;
 	-ms-border-radius: 50%;
 	border-radius: 50%;
+	border: 3px solid #fff;
 }
-
 
 
 #fh5co-work

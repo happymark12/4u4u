@@ -17,7 +17,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 public class WebSocketInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
-        System.out.println("進来webSocket的beforeHandshake攔截器！");
+//        System.out.println("進来webSocket的beforeHandshake攔截器！");
 
     	if (serverHttpRequest instanceof ServletServerHttpRequest) {
             String INFO = serverHttpRequest.getURI().getPath().split("INFO=")[1];
@@ -38,6 +38,6 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
 
     @Override
     public void afterHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e) {
-        System.out.println("進来webSocket的afterHandshake攔截器！");
+//        System.out.println("進来webSocket的afterHandshake攔截器！");
     }
 }
