@@ -70,7 +70,7 @@ public class MailUtil implements Runnable {
 					"<body>\n" + 
 					"   <h1>此為4u4u會員帳號開通信，開通請點擊下方連結</h1>\n" + 
 					"   <h3>\n" + 
-					"       <a href='http://192.168.43.252:8080/4u4u/ProcessMemberState.do?code="+ 
+					"       <a href='http://localhost:8080/4u4u/ProcessMemberState.do?code="+ 
 					 code + "&email="+email+"'>激活帳戶</a>\n" + 
 					"    </h3>\n" + 
 					"    <p>如果未註冊帳號，請直接忽略此信</p>\n" + 

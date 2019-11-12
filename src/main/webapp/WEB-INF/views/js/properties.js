@@ -1,7 +1,7 @@
 		$(document).ready(function() {
 			
-			if(window.location.href=='http://192.168.43.252:8080/4u4u/properties'){
-				defaultURL = 'http://192.168.43.252:8080/4u4u/properties?searchType=0&rentType3=3&rentType0=0&rentType1=1&rentType2=2&curPage=1';
+			if(window.location.href=='http://localhost:8080/4u4u/properties'){
+				defaultURL = 'http://localhost:8080/4u4u/properties?searchType=0&rentType3=3&rentType0=0&rentType1=1&rentType2=2&curPage=1';
 				history.replaceState({ url: defaultURL }, "", defaultURL);
 				sessionStorage.clear();
 				sessionStorage.setItem('searchType','0');
@@ -40,7 +40,7 @@
 					storage = sessionStorage;
 					if(storage.searchType==null){
 						// 重新定向
-					window.location.replace("http://192.168.43.252:8080/4u4u/properties");
+					window.location.replace("http://localhost:8080/4u4u/properties");
 					return;
 					}
 					
@@ -436,7 +436,7 @@
 					$('#roomforRentDiv').show();
 					$('#roomforRentbr').show();
 					// $('#filterZone').hide();
-					resetURL = 'http://192.168.43.252:8080/4u4u/properties?searchType=0&rentType3=3&rentType0=0&rentType1=1&rentType2=2&curPage=1';
+					resetURL = 'http://localhost:8080/4u4u/properties?searchType=0&rentType3=3&rentType0=0&rentType1=1&rentType2=2&curPage=1';
 					 $("#sortOption option").filter(function() {
 			                return $(this).val() == '0';
 			                }).prop('selected', true);

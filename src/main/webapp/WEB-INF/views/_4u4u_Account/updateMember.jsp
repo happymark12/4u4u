@@ -198,7 +198,7 @@
             	}
             	if(response.result=='true'){
             		userId  = response.userId;
- ws = new WebSocket('ws://192.168.43.252:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');
+ ws = new WebSocket('ws://localhost:8080/4u4u/webSocket/INFO={"command":"enter","name":"'+ userId + '","roomId":"allChannel"}');
 		        
             	  ws.onopen = WSonOpen;
                   ws.onmessage = WSonMessage;

@@ -105,8 +105,8 @@ public class SendMatchMailUtil implements Runnable {
 					message.setSubject("4u4u會員－廣告符合信");
 					// 2.4設定郵件内容
 					for(WantedRoomBean wantedRoomBean : wantedRoomBeanList) {
-						str = "<a href='http://192.168.43.252:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'><img src='cid:wantedRoomBeanimage" + m + "' width='150' height='150'/></a>" +
-							  "<a href='http://192.168.43.252:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'>" + wantedRoomBean.getAdTitle() + "</a>\n";
+						str = "<a href='http://localhost:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'><img src='cid:wantedRoomBeanimage" + m + "' width='150' height='150'/></a>" +
+							  "<a href='http://localhost:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'>" + wantedRoomBean.getAdTitle() + "</a>\n";
 						sbf.append(str + "<br>");
 						m++;
 					}
@@ -151,8 +151,8 @@ public class SendMatchMailUtil implements Runnable {
 					message.setSubject("4u4u會員－廣告符合信");
 					// 2.4設定郵件内容
 					for(RoomRentBean roomRentBean : roomRentBeanList) {
-						str = "<a href='http://192.168.43.252:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'><img src='cid:roomRentBeanimage" + m + "' width='150' height='150'/></a>" +
-							  "<a href='http://192.168.43.252:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'>" + roomRentBean.getAdTitle() + "</a>\n";
+						str = "<a href='http://localhost:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'><img src='cid:roomRentBeanimage" + m + "' width='150' height='150'/></a>" +
+							  "<a href='http://localhost:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'>" + roomRentBean.getAdTitle() + "</a>\n";
 						sbf.append(str + "<br>");
 						m++;
 					}
@@ -216,8 +216,8 @@ public class SendMatchMailUtil implements Runnable {
 							"   <h1>此為4u4u會員廣告符合信，請點擊下方連結</h1>\n" + 
 							"   <h3>\n" + 
 							"                       找到以下符合的廣告<br>"+ 
-							"<a href='http://192.168.43.252:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'><img src='cid:wantedRoomBeanimage' width='150' height='150'/></a>"   +
-							"       <a href='http://192.168.43.252:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'>" + wantedRoomBean.getAdTitle() + "</a>\n" + 
+							"<a href='http://localhost:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'><img src='cid:wantedRoomBeanimage' width='150' height='150'/></a>"   +
+							"       <a href='http://localhost:8080/4u4u/_4u4u/findRoomDetail?adStyle=1&adId=" + wantedRoomBean.getFindRoomId() + "'>" + wantedRoomBean.getAdTitle() + "</a>\n" + 
 							"    </h3>\n" + 
 							"</body>\n" + 
 							"</html>";
@@ -264,8 +264,8 @@ public class SendMatchMailUtil implements Runnable {
 							"   <h1>此為4u4u會員廣告符合信，請點擊下方連結</h1>\n" + 
 							"   <h3>\n" + 
 							"                       找到以下符合的廣告<br>"+ 
-							"<a href='http://192.168.43.252:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'><img src='cid:roomRentBeanimage' width='150' height='150'/></a>"+
-							"<a href='http://192.168.43.252:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'>" + roomRentBean.getAdTitle() + "</a>\n" + 
+							"<a href='http://localhost:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'><img src='cid:roomRentBeanimage' width='150' height='150'/></a>"+
+							"<a href='http://localhost:8080/4u4u/_4u4u/roomRentDetail?adStyle=0&adId=" + roomRentBean.getAdId() + "'>" + roomRentBean.getAdTitle() + "</a>\n" + 
 							"    </h3>\n" + 
 							"</body>\n" + 
 							"</html>";

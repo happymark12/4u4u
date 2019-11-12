@@ -1,7 +1,7 @@
 		$(document).ready(function() {
 			
-			if(window.location.href=='http://192.168.43.252:8080/4u4u/savedAd'){
-				defaultURL = 'http://192.168.43.252:8080/4u4u/savedAd?adStyle=0&curPage=1&sortOption=0';
+			if(window.location.href=='http://localhost:8080/4u4u/savedAd'){
+				defaultURL = 'http://localhost:8080/4u4u/savedAd?adStyle=0&curPage=1&sortOption=0';
 				history.replaceState({ url: defaultURL }, "", defaultURL);
 				sessionStorage.clear();
 				sessionStorage.setItem('adStyle','0');
@@ -17,7 +17,7 @@
 					storage = sessionStorage;
 					if(storage.adStyle==null){
 						// 重新定向
-					window.location.replace("http://192.168.43.252:8080/4u4u/savedAd");
+					window.location.replace("http://localhost:8080/4u4u/savedAd");
 					return;
 					}
 			}
