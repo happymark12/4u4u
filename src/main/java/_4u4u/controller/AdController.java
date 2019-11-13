@@ -1639,8 +1639,11 @@ public class AdController {
 			String[] queryArray = url.substring(url.indexOf("?") + 1).split("&");
 			Map<String, String> conditionMap = new HashMap<String, String>();
 			for (String result : queryArray) {
-				String[] tempArray = result.split("=");
+				String[] tempArray = null;
+			     tempArray = result.split("=");
+			     if(tempArray.length==2) {
 				conditionMap.put(tempArray[0], tempArray[1]);
+				}
 			}
 			if (conditionMap.get("searchType") != null && conditionMap.get("searchType").contentEquals("0")) {
 //				RoomRentService service = new RoomRentServiceImpl();
